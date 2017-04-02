@@ -1,0 +1,13 @@
+{
+  "short_name": "pvt",
+  "name": "Pvt",
+  "icons": [
+    {
+      "src": "favicon180.ico",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./",
+  "display": "fullscreen"
+}
