@@ -5,7 +5,7 @@
   "background_color": "#ff00d6",
   "display": "standalone",
   "Scope": "/",
-  "start_url": "/",
+  "start_url": "/pvt/",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
