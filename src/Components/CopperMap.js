@@ -5,6 +5,7 @@ import {
     Marker,
     Polygon
 } from "react-google-maps";
+
 const outerCoords = [
     {lat: 59.329450, lng: 18.0648328}, // north west
     {lat: 59.3294757, lng: 18.0848350}, // south west
