@@ -3,8 +3,22 @@ import {
     withGoogleMap,
     GoogleMap,
     Marker,
-    Polygon
+    Polygon,
+    Circle
 } from "react-google-maps";
+import canUseDOM from "can-use-dom";
+import raf from "raf";
+
+const geolocation = (
+    canUseDOM && navigator.geolocation ?
+        navigator.geolocation :
+        ({
+            getCurrentPosition(success, failure) {
+                failure(`Your browser doesn't support geolocation.`);
+            },
+        })
+);
+
 
 const outerCoords = [
     {lat: 59.329450, lng: 18.0648328}, // north west
@@ -12,12 +26,18 @@ const outerCoords = [
     {lat: 59.3894812, lng: 18.0648332}, // south east
     {lat: 59.329481, lng: 18.0648406}  // north east
 ];
+
+
+
+
 const GettingStartedGoogleMap = withGoogleMap(props => (
 
+
     <GoogleMap
+        center={props.center}
         ref={props.onMapLoad}
         defaultZoom={13}
-        defaultCenter={{ lat: 59.334591, lng: 18.063240 }}
+        defaultCenter={props.center}
         onClick={props.onMapClick}
     >
         {props.markers.map(marker => (
@@ -28,12 +48,67 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
 
         ))}
         <Polygon path={outerCoords} />
+        <Circle
+            center={props.center}
+            radius={props.radius}
+            options={{
+                fillColor: `red`,
+                fillOpacity: 0.20,
+                strokeColor: `red`,
+                strokeOpacity: 1,
+                strokeWeight: 1,
+            }}
+        />
     </GoogleMap>
 ));
 
 export default class CopperMap extends Component {
+    componentDidMount() {
+        const tick = () => {
+            if (this.isUnmounted) {
+                return;
+            }
+            this.setState({ radius: Math.max(this.state.radius - 20, 0) });
+
+            if (this.state.radius > 100) {
+                raf(tick);
+            }
+        };
+        geolocation.getCurrentPosition((position) => {
+            if (this.isUnmounted) {
+                return;
+            }
+            this.setState({
+                center: {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                },
+                content: `Location found using HTML5.`,
+            });
+
+            raf(tick);
+        }, (reason) => {
+            if (this.isUnmounted) {
+                return;
+            }
+            this.setState({
+                center: {
+                    lat: 60,
+                    lng: 105,
+                },
+                content: `Error: The Geolocation service failed (${reason}).`,
+            });
+        });
+    }
+
+    componentWillUnmount() {
+        this.isUnmounted = true;
+    }
 
     state = {
+        center: null,
+        content: null,
+        radius: 3000,
         markers: [{
             position: {
                 lat: 59.334591,
@@ -43,6 +118,7 @@ export default class CopperMap extends Component {
             defaultAnimation: 2,
         }],
     };
+    isUnmounted = false;
 
 
     handleMapLoad = this.handleMapLoad.bind(this);
@@ -101,6 +177,9 @@ export default class CopperMap extends Component {
                     onMapClick={this.handleMapClick}
                     markers={this.state.markers}
                     onMarkerRightClick={this.handleMarkerRightClick}
+                    center={this.state.center}
+                    content={this.state.content}
+                    radius={this.state.radius}
 
                 />
 
