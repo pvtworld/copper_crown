@@ -8,7 +8,8 @@
     "raf": "^3.3.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-google-maps": "beta"
+    "react-google-maps": "beta",
+    "react-router": "2.8.1"
   },
   "devDependencies": {
     "gh-pages": "^0.12.0",
