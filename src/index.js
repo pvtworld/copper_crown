@@ -10,6 +10,7 @@ const root = document.getElementById('root');
 const routes = <Router history={hashHistory}>
     <Route path="/">
         <Route path="coppermap" component={CopperMap}/>
+        <Route path="main" component={Main}/>
         <IndexRoute component={Login}/>
     </Route>
 </Router>;
