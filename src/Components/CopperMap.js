@@ -164,7 +164,8 @@ export default class CopperMap extends Component {
 
     render() {
         return (
-            <div style={{height: `100%`}}>
+            <div className="overlay">
+                <div style={{height: `100%`}}>
 
                 <GettingStartedGoogleMap
                     containerElement={
@@ -182,7 +183,7 @@ export default class CopperMap extends Component {
                     radius={this.state.radius}
 
                 />
-
+                </div>
             </div>
         );
     }
