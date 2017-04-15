@@ -1,5 +1,5 @@
 import React from 'react';
-let {Link, IndexLink} = require('react-router');
+let {Link} = require('react-router');
 
 
 
