@@ -8,7 +8,7 @@ import Login from './Components/Login'
 
 const root = document.getElementById('root');
 const routes = <Router history={browserHistory}>
-    <Route path="/">
+    <Route path="/pvt/">
         <Route path="coppermap" component={CopperMap}/>
         <Route path="main" component={Main}/>
         <IndexRoute component={Login}/>
