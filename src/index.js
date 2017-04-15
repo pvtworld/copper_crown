@@ -9,8 +9,8 @@ import Login from './Components/Login'
 const root = document.getElementById('root');
 const routes = <Router history={browserHistory}>
     <Route path="/">
-        <Route path="coppermap" component={CopperMap}/>
-        <Route path="main" component={Main}/>
+        <Route path="/pvt/coppermap" component={CopperMap}/>
+        <Route path="/pvt/main" component={Main}/>
         <IndexRoute component={Login}/>
     </Route>
 </Router>;

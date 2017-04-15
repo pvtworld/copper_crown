@@ -13,7 +13,7 @@ class Login extends React.Component{
                 <div>
                  <button type="button" className="btn btn-default navbar-btn">Sign in</button>
                 </div>
-                <Link to="/coppermap" activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>CopperMap</Link>
+                <Link to="/pvt/coppermap" activeClassName="active"  activeStyle={{fontWeight: 'bold'}}>CopperMap</Link>
             </div>
         );
     }
