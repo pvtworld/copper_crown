@@ -8,7 +8,7 @@
 }
 
 .overlay{
-  opacity:0.8;
+  opacity:1;
   background-color:#ccc;
   position:fixed;
   width:100%;
