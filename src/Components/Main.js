@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Main.css';
 import Nav from './Navigation';
-//FOR FUTURE PURPOSE!
 
 class App extends Component {
   render() {

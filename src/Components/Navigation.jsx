@@ -1,8 +1,6 @@
 import React from 'react';
 let {Link, IndexLink} = require('react-router');
 
-//FOR FUTURE PURPOSE!
-
 class Navigation extends React.Component{
     render() {
         return(

@@ -6,7 +6,7 @@ import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 import CopperMap from './Components/CopperMap'
 import Login from './Components/Login'
 
-const app = document.getElementById('root');
+const root = document.getElementById('root');
 const routes = <Router history={hashHistory}>
     <Route path="/">
         <Route path="coppermap" component={CopperMap}/>
@@ -14,4 +14,4 @@ const routes = <Router history={hashHistory}>
     </Route>
 </Router>;
 
-ReactDOM.render(routes, app);
+ReactDOM.render(routes, root);

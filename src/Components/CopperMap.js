@@ -183,6 +183,7 @@ export default class CopperMap extends Component {
                     radius={this.state.radius}
 
                 />
+
                 </div>
             </div>
         );
