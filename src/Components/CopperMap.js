@@ -164,25 +164,25 @@ export default class CopperMap extends Component {
 
     render() {
         return (
-            <div style={{height: `100%`}}>
+            <div className="overlay">
+                <div style={{height: `100%`}}>
+                    <GettingStartedGoogleMap
+                        containerElement={
+                            <div style={{ height: `100%` }} />
+                        }
+                        mapElement={
+                            <div style={{ height: `100%` }} />
+                        }
+                        onMapLoad={this.handleMapLoad}
+                        onMapClick={this.handleMapClick}
+                        markers={this.state.markers}
+                        onMarkerRightClick={this.handleMarkerRightClick}
+                        center={this.state.center}
+                        content={this.state.content}
+                        radius={this.state.radius}
 
-                <GettingStartedGoogleMap
-                    containerElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    mapElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    onMapLoad={this.handleMapLoad}
-                    onMapClick={this.handleMapClick}
-                    markers={this.state.markers}
-                    onMarkerRightClick={this.handleMarkerRightClick}
-                    center={this.state.center}
-                    content={this.state.content}
-                    radius={this.state.radius}
-
-                />
-
+                    />
+                </div>
             </div>
         );
     }
