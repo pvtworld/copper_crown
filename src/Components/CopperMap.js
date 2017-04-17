@@ -93,8 +93,8 @@ export default class CopperMap extends Component {
             }
             this.setState({
                 center: {
-                    lat: 60,
-                    lng: 105,
+                    lat: 59.334591,
+                    lng: 18.063240,
                 },
                 content: `Error: The Geolocation service failed (${reason}).`,
             });
