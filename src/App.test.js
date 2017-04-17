@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './Components/Main';
+import App from './App';
 beforeAll(() => {
     // Clears the database and adds some testing data.
     // Jest will wait for this promise to resolve before running tests.
