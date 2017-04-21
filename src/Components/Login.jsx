@@ -1,9 +1,17 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 class Login extends React.Component{
     render() {
         return (
-            <h1>Login Component!</h1>
+            <div className="well" style={{maxWidth: 400, margin: '0 auto 10px'}}>
+                <div>
+                    <h2>Login with</h2>
+                    <Button bsStyle="primary" bsSize="large" block>Facebook</Button>
+                    <Button bsStyle="default" bsSize="large" block>Github</Button>
+                    <Button bsStyle="danger" bsSize="large" block>Google</Button>
+                </div>
+            </div>
         );
     }
 }
