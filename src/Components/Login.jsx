@@ -1,16 +1,24 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import * as auth from '../Helpers/Auth';
 
 class Login extends React.Component{
+    handleGithubLogin() {
+        auth.githubLogin();
+    }
+    handleFacebookLogin() {
+        auth.facebookLogin();
+    }
+    handleGoogleLogin() {
+        auth.googleLogin();
+    }
     render() {
         return (
-            <div className="well" style={{maxWidth: 400, margin: '40px auto 10px'}}>
-                <div>
-                    <h2>Login with</h2>
-                    <Button bsStyle="default" bsSize="large" block>Github</Button>
-                    <Button bsStyle="primary" bsSize="large" block>Facebook</Button>
-                    <Button bsStyle="danger" bsSize="large" block>Google</Button>
-                </div>
+            <div className="custom" style={{maxWidth: 400, margin: '40px auto 10px'}}>
+                    <h4>Login with</h4>
+                    <Button bsStyle="primary" bsSize="large" block onClick={this.handleFacebookLogin}>Facebook</Button>
+                    <Button bsStyle="default" bsSize="large" block onClick={this.handleGithubLogin}>Github</Button>
+                    <Button bsStyle="danger" bsSize="large" block onClick={this.handleGoogleLogin}>Google</Button>
             </div>
         );
     }
