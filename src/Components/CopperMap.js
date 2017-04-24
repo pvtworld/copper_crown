@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
 import {geolocation} from '../Helpers/GeoHelpers';
 
-const GettingStartedGoogleMap = withGoogleMap(props => (
+const GameMap = withGoogleMap(props => (
 
 
     <GoogleMap
@@ -138,7 +138,7 @@ export default class CopperMap extends Component {
             <div className="overlay">
                 <div style={{height: `100%`}}>
 
-                <GettingStartedGoogleMap
+                <GameMap
                     containerElement={
                         <div style={{ height: `100%` }} />
                     }
