@@ -14,16 +14,44 @@ const GameMap = withGoogleMap(props => (
             mapTypeControl: false,
             streetViewControl: false,
             // zoomControl: false,
+            //draggable: false,
+            //scrollwheel: false,
+            //panControl: false,
+            //maxZoom: 18,
+            //minZoom: 18,
+            //zoom: 18,
         }}
 
     >
         <Circle
+            onClick={(event => (
+                console.log(event.latLng.lat() + " "+ event.latLng.lng())
+            ))
+
+            }
             center={props.center}
             radius={props.radius}
             options={{
                 fillColor: `red`,
                 fillOpacity: 0.90,
                 strokeColor: `red`,
+                strokeOpacity: 0.50,
+                strokeWeight: 2,
+            }}
+        />
+
+        <Circle
+            onClick={(event => (
+                console.log(event.latLng.lat() + " "+ event.latLng.lng())
+            ))
+
+            }
+            center={props.center}
+            radius={100}
+            options={{
+                fillColor: `green`,
+                fillOpacity: 0.10,
+                strokeColor: `black`,
                 strokeOpacity: 0.50,
                 strokeWeight: 2,
             }}
@@ -83,9 +111,9 @@ export default class CopperMap extends Component {
     }
 
     handleMapClick(event) {
-        console.log("Latitude:" + event.latLng.lat());
-        console.log("Longitude:" + event.latLng.lng());
-        console.log();
+        // console.log("Latitude:" + event.latLng.lat());
+        // console.log("Longitude:" + event.latLng.lng());
+        console.log("Click outside circle not allowed");
     }
 
     render() {
