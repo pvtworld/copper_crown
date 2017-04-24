@@ -79,11 +79,16 @@ export default class CopperMap extends Component {
 
     handleMapClick = this.handleMapClick.bind(this);
 
-    componentDidMount() {
+    timer() {
         geolocation.getCurrentPosition((position) => {
             if (this.isUnmounted) {
                 return;
             }
+
+            console.log("Latitude:" + position.coords.latitude);
+            console.log("Longitude:" + position.coords.longitude);
+            console.log();
+
             this.setState({
                 center: {
                     lat: position.coords.latitude,
@@ -103,11 +108,20 @@ export default class CopperMap extends Component {
                 },
                 content: `Error: The Geolocation service failed (${reason}).`,
             });
+
         });
+
+    }
+
+    componentDidMount() {
+        setInterval(this.timer.bind(this), 5000);
+
+
     }
 
     componentWillUnmount() {
         this.isUnmounted = true;
+        clearInterval(this.timer);
     }
 
     handleMapClick(event) {
