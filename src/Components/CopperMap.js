@@ -10,6 +10,12 @@ const GameMap = withGoogleMap(props => (
         defaultZoom={18}
         defaultCenter={props.center}
         onClick={props.onMapClick}
+        options={{
+            mapTypeControl: false,
+            streetViewControl: false,
+            // zoomControl: false,
+        }}
+
     >
         <Circle
             center={props.center}
