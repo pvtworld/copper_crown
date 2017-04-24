@@ -29,6 +29,23 @@ const GameMap = withGoogleMap(props => (
             }}
         />
 
+        <Circle
+            onClick={(event => (
+                console.log(event.latLng.lat() + " "+ event.latLng.lng())
+            ))
+
+            }
+            center={props.center}
+            radius={100}
+            options={{
+                fillColor: `green`,
+                fillOpacity: 0.10,
+                strokeColor: `black`,
+                strokeOpacity: 0.50,
+                strokeWeight: 2,
+            }}
+        />
+
     </GoogleMap>
 ));
 
