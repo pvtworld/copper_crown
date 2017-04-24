@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
-import {geolocation} from '../Helpers/GeoHelpers';
+import {geolocation, checkClickForCopper} from '../Helpers/GeoHelpers';
 
 const GameMap = withGoogleMap(props => (
 
@@ -83,6 +83,7 @@ export default class CopperMap extends Component {
     }
 
     handleMapClick(event) {
+        checkClickForCopper(event.latLng.lng(), event.latLng.lat());
         console.log("Latitude:" + event.latLng.lat());
         console.log("Longitude:" + event.latLng.lng());
         console.log();
