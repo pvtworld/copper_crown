@@ -2,6 +2,7 @@ import React from 'react';
 import * as auth from '../Helpers/AuthHelpers';
 import firebase from '../Firebase/firebase'
 import {Navbar, Nav, NavItem} from 'react-bootstrap'
+import {Link} from 'react-router-dom';
 
 class Dashboard extends React.Component {
     constructor(){
@@ -51,7 +52,8 @@ class Dashboard extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-
+                <p>Signed in as: {this.state.name}</p>
+                <Link to="/coppermap">CopperMap</Link>
             </div>
         )
     };

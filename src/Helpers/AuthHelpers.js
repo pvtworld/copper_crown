@@ -2,9 +2,9 @@ import firebase, {githubProvider, facebookProvider, googleProvider} from '../Fir
 
 export var githubLogin = () => {
         return firebase.auth().signInWithPopup(githubProvider).then((result) => {
-            console.log('Authentication successful', result);
+            ('Authentication successful', result);
         }, (error) => {
-            console.log('Unable to authenticate', error);
+            alert(error);
         });
 };
 
@@ -12,7 +12,7 @@ export var facebookLogin = () => {
     return firebase.auth().signInWithPopup(facebookProvider).then((result) => {
         console.log('Authentication successful', result);
     }, (error) => {
-        console.log('Unable to authenticate', error);
+        alert(error);
     });
 };
 
@@ -20,7 +20,7 @@ export var googleLogin = () => {
     return firebase.auth().signInWithPopup(googleProvider).then((result) => {
         console.log('Authentication successful', result);
     }, (error) => {
-        console.log('Unable to authenticate', error);
+        alert(error);
     });
 };
 
