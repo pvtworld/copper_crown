@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import {
-    withGoogleMap,
-    GoogleMap,
-    Marker,
-    Polygon,
-    Circle
-} from "react-google-maps";
-import canUseDOM from "can-use-dom";
-import raf from "raf";
+import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
+import {geolocation} from '../Helpers/GeoHelpers';
 
 const geolocation = (
     canUseDOM && navigator.geolocation ?
