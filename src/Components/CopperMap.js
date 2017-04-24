@@ -83,9 +83,9 @@ export default class CopperMap extends Component {
     }
 
     handleMapClick(event) {
-        console.log("Latitude:" + event.latLng.lat());
-        console.log("Longitude:" + event.latLng.lng());
-        console.log();
+        // console.log("Latitude:" + event.latLng.lat());
+        // console.log("Longitude:" + event.latLng.lng());
+        console.log("Click outside circle not allowed");
     }
 
     render() {
