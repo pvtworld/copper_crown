@@ -2,17 +2,6 @@ import React, { Component } from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
 import {geolocation} from '../Helpers/GeoHelpers';
 
-
-const outerCoords = [
-    {lat: 59.329450, lng: 18.0648328}, // north west
-    {lat: 59.3294757, lng: 18.0848350}, // south west
-    {lat: 59.3894812, lng: 18.0648332}, // south east
-    {lat: 59.329481, lng: 18.0648406}  // north east
-];
-
-
-
-
 const GettingStartedGoogleMap = withGoogleMap(props => (
 
 
@@ -30,7 +19,6 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
             />
 
         ))}
-        <Polygon path={outerCoords} />
         <Circle
             center={props.center}
             radius={props.radius}
