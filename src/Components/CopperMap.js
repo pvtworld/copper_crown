@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
 import {geolocation} from '../Helpers/GeoHelpers';
 
-const geolocation = (
-    canUseDOM && navigator.geolocation ?
-        navigator.geolocation :
-        ({
-            getCurrentPosition(success, failure) {
-                failure(`Your browser doesn't support geolocation.`);
-            },
-        })
-);
-
 
 const outerCoords = [
     {lat: 59.329450, lng: 18.0648328}, // north west
