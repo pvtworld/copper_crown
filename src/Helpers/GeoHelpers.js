@@ -22,30 +22,27 @@ export function checkClickForCopper(long, lat){
 
     epsgRequest.open('GET', createUrl(googleToSthlmConversionUrlTemplate, long, lat), true);
     epsgRequest.send();
-    epsgRequest.addEventListener('readystatechange', processEpsgCall, false);
-    //epsgRequest.onreadystatechange = processEpsgCall;
+    epsgRequest.addEventListener('readystatechange', processEpsgRequest, false);
 
 
-    function processEpsgCall(e){
+    function processEpsgRequest(e){
         if(epsgRequest.readyState === 4 && epsgRequest.status === 200){
             const response = JSON.parse(epsgRequest.responseText);
-            console.log(response);
+            //console.log(response);
 
             const sthlmRequest = new XMLHttpRequest();
-
-            console.log(response.x);
+            //console.log(response.x);
 
             var x = response.x;
             x +='0000000';
             var y = response.y;
             y += '0000000';
+
             sthlmRequest.open('GET', createUrl(sthlmPointUrlTemplate, x, y), true);
             sthlmRequest.send();
-            sthlmRequest.addEventListener('readystatechange', processSthlmCall, false);
-            //sthlmRequest.onreadystatechange = processSthlmCall;
+            sthlmRequest.addEventListener('readystatechange', processSthlmRequest, false);
 
-
-            function processSthlmCall(e){
+            function processSthlmRequest(e){
                 if(sthlmRequest.readyState === 4 && sthlmRequest.status === 200){
                     var parser = new DOMParser();
                     const xmlResponse = parser.parseFromString(sthlmRequest.responseText, 'text/xml');
@@ -54,7 +51,7 @@ export function checkClickForCopper(long, lat){
                     console.log(dataEntityTag[0].getAttribute('resultRecords'));
                     if(dataEntityTag[0].getAttribute('resultRecords') === '1'){
                         console.log('$$$$$ KOPPARTAK $$$$$\n ID: ' + xmlResponse.getElementsByTagName('id')[0].childNodes[0].nodeValue + '\nArea: ' + xmlResponse.getElementsByTagName('area')[0].childNodes[0].nodeValue);
-                        return xmlResponse.getElementsByTagName('id')[0].childNodes[0].nodeValue;
+                        return {id: xmlResponse.getElementsByTagName('id')[0].childNodes[0].nodeValue, area: xmlResponse.getElementsByTagName('area')[0].childNodes[0].nodeValue};
                     }else{
                         console.log('Sorry, no roof for you.. ;(')
                         return null;
