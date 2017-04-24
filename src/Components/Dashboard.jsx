@@ -1,5 +1,5 @@
 import React from 'react';
-import * as auth from './../Helpers/Auth';
+import * as auth from '../Helpers/AuthHelpers';
 import {Link} from 'react-router-dom';
 import firebase from './../Firebase/index'
 import {Navbar, Nav, NavItem} from 'react-bootstrap'
