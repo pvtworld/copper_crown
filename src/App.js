@@ -3,7 +3,7 @@ import {Route, Redirect, Switch, BrowserRouter} from 'react-router-dom';
 import CopperMap from './Components/CopperMap';
 import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';
-import firebase from './Firebase/index';
+import firebase from './Firebase/firebase';
 import Welcome from './Components/Welcome';
 
 function PrivateRoute ({component: Component, authed, ...rest}) {

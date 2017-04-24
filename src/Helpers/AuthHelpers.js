@@ -1,4 +1,4 @@
-import firebase, {githubProvider, facebookProvider, googleProvider} from '../Firebase/index'
+import firebase, {githubProvider, facebookProvider, googleProvider} from '../Firebase/firebase'
 
 export var githubLogin = () => {
         return firebase.auth().signInWithPopup(githubProvider).then((result) => {
