@@ -18,6 +18,11 @@ const GameMap = withGoogleMap(props => (
 
     >
         <Circle
+            onClick={(event => (
+                console.log(event.latLng.lat() + " "+ event.latLng.lng())
+            ))
+
+            }
             center={props.center}
             radius={props.radius}
             options={{
