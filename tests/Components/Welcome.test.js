@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Welcome from '../src/Components';
+import Welcome from '../../src/Components/Welcome';
 
 beforeAll(() => {
     
 });
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(, div);
+it('Foo Test', () => {
 });

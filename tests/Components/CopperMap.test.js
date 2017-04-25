@@ -1,12 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import CopperMap from '../src/Components/CopperMap';
+import CopperMap from '../../src/Components/CopperMap'
 
 beforeAll(() => {
     
 });
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<CopperMap />, div);
+it('Foo Test', () => {
 });
+
