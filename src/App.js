@@ -1,16 +1,16 @@
 import React from 'react'
 import {Route, Redirect, Switch, BrowserRouter} from 'react-router-dom';
-import CopperMap from './Components/CopperMap';
 import Login from './Components/Login';
 import firebase from './Firebase/firebase';
 import LandingPage from './Components/LandingPage';
-import NotFound from './Components/NotFound'
+import NotFound from './Components/NotFound';
+import GameContainer from './Components/GameContainer';
 
 function PublicRoute ({component: Component, authed, ...rest}) {
     return (
         <Route {...rest} render={(props) => authed === false
             ? <Component {...props} />
-            : <Redirect to='/coppermap' />}
+            : <Redirect to='/game' />}
         />
     )
 }
@@ -56,7 +56,7 @@ export default class App extends React.Component {
                 <Switch>
                     <Route path='/' exact component={LandingPage} />
                     <PublicRoute authed={this.state.authed} path='/login' component={Login} />
-                    <PrivateRoute authed={this.state.authed} path='/coppermap' component={CopperMap} />
+                    <PrivateRoute authed={this.state.authed} path='/game' component={GameContainer} />
                     <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>
