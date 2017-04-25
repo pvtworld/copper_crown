@@ -1,4 +1,4 @@
-import { convertPoint, SWEREFProjection, WGS84Projection } from './CoordinateConverter'
+import { convertPoint } from './CoordinateConverter';
 
 // Get location from device
 export const geolocation = (
@@ -15,7 +15,7 @@ export function checkClickForCopper(long, lat) {
     //lng = x, lat = y
     const sthlmPointUrlTemplate = 'https://crossorigin.me/http://miljodata.stockholm.se/api/koppartak-1997-ytor?Geom=POINT(%longitude%%20%latitude%)';
 
-    var [x,y] = convertPoint(WGS84Projection, SWEREFProjection, [long, lat]);
+    var [x,y] = convertPoint(long, lat);
     
     const sthlmRequest = new XMLHttpRequest();
     //console.log(response.x);
