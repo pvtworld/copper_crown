@@ -1,12 +1,15 @@
 import React from 'react';
-import NavBar from './Component/Navbar';
-
+import NavigationContainer from './NavigationContainer';
+import CopperMap from './CopperMap'´
 
 class GameContainer extends React.Component{
 
     render() {
         return (
-
+            <div>
+                <NavigationContainer/>
+                <CopperMap/>
+            </div>
         );
     }
 }
