@@ -14,8 +14,11 @@ export const geolocation = (
 export function checkClickForCopper(long, lat) {
     //lng = x, lat = y
     const sthlmPointUrlTemplate = 'https://crossorigin.me/http://miljodata.stockholm.se/api/koppartak-1997-ytor?Geom=POINT(%longitude%%20%latitude%)';
+
+    console.log(lat + " " + long);
     
-    var [x,y] = convertPoint(SWEREFProjection, WGS84Projection, [long, lat]);
+    var [x,y] = convertPoint(WGS84Projection, SWEREFProjection, [long, lat]);
+    console.log(y + " " + x);
 
     const sthlmRequest = new XMLHttpRequest();
     //console.log(response.x);
