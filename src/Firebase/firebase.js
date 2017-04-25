@@ -1,17 +1,18 @@
-import firebase from 'firebase'
+import firebase from 'firebase';
+import fb_config from './firebase_config';
 
 try {
     var config = {
-        apiKey: "",
-        authDomain: "",
-        databaseURL: "",
-        projectId: "",
-        storageBucket: "",
-        messagingSenderId: ""
-};
+        apiKey: fb_config.apiKey,
+        authDomain: fb_config.authDomain,
+        databaseURL: fb_config.databaseURL,
+        projectId: fb_config.projectId,
+        storageBucket: fb_config.storageBucket,
+        messagingSenderId: fb_config.messagingSenderId
+    };
     firebase.initializeApp(config);
 } catch(event){
-    console.log(event);
+
 }
 
 export var githubProvider = new firebase.auth.GithubAuthProvider();
