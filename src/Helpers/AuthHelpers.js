@@ -2,7 +2,7 @@ import firebase, {githubProvider, facebookProvider, googleProvider} from '../Fir
 
 export var githubLogin = () => {
         return firebase.auth().signInWithRedirect(githubProvider).then((result) => {
-            ('Authentication successful', result);
+            console.log('Authentication successful', result);
         }, (error) => {
             alert(error);
         });
