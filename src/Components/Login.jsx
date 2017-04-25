@@ -14,7 +14,7 @@ class Login extends React.Component{
     }
     render() {
         return (
-            <div className="custom" style={{maxWidth: 400, margin: '40px auto 10px'}}>
+            <div style={{maxWidth: 400, margin: '40px auto 10px'}}>
                     <h4>Login with</h4>
                     <Button bsStyle="primary" bsSize="large" block onClick={this.handleFacebookLogin}>Facebook</Button>
                     <Button bsStyle="default" bsSize="large" block onClick={this.handleGithubLogin}>Github</Button>

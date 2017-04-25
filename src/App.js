@@ -3,7 +3,8 @@ import {Route, Redirect, Switch, BrowserRouter} from 'react-router-dom';
 import CopperMap from './Components/CopperMap';
 import Login from './Components/Login';
 import firebase from './Firebase/firebase';
-import Welcome from './Components/Welcome';
+import LandingPage from './Components/LandingPage';
+import NotFound from './Components/NotFound'
 
 function PublicRoute ({component: Component, authed, ...rest}) {
     return (
@@ -53,10 +54,10 @@ export default class App extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path='/' exact component={Welcome} />
+                    <Route path='/' exact component={LandingPage} />
                     <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                     <PrivateRoute authed={this.state.authed} path='/coppermap' component={CopperMap} />
-                    <Route render={() => <h3>404 feterror</h3>} />
+                    <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>
         );
