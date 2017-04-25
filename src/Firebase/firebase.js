@@ -2,16 +2,16 @@ import firebase from 'firebase'
 
 try {
     var config = {
-        apiKey: "",
-        authDomain: "",
-        databaseURL: "",
-        projectId: "",
-        storageBucket: "",
-        messagingSenderId: ""
-};
+        apiKey: "AIzaSyBxf-SMmqau97RBu5y4f4a62OQBWLwevUM",
+        authDomain: "coppercrown-a18fd.firebaseapp.com",
+        databaseURL: "https://coppercrown-a18fd.firebaseio.com",
+        projectId: "coppercrown-a18fd",
+        storageBucket: "coppercrown-a18fd.appspot.com",
+        messagingSenderId: "699730349008"
+    };
     firebase.initializeApp(config);
 } catch(event){
-    console.log(event);
+
 }
 
 export var githubProvider = new firebase.auth.GithubAuthProvider();
