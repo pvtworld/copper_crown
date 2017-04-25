@@ -1,7 +1,7 @@
 import firebase, {githubProvider, facebookProvider, googleProvider} from '../Firebase/firebase'
 
 export var githubLogin = () => {
-        return firebase.auth().signInWithPopup(githubProvider).then((result) => {
+        return firebase.auth().signInWithRedirect(githubProvider).then((result) => {
             ('Authentication successful', result);
         }, (error) => {
             alert(error);
@@ -9,7 +9,7 @@ export var githubLogin = () => {
 };
 
 export var facebookLogin = () => {
-    return firebase.auth().signInWithPopup(facebookProvider).then((result) => {
+    return firebase.auth().signInWithRedirect(facebookProvider).then((result) => {
         console.log('Authentication successful', result);
     }, (error) => {
         alert(error);
@@ -17,7 +17,7 @@ export var facebookLogin = () => {
 };
 
 export var googleLogin = () => {
-    return firebase.auth().signInWithPopup(googleProvider).then((result) => {
+    return firebase.auth().signInWithRedirect(googleProvider).then((result) => {
         console.log('Authentication successful', result);
     }, (error) => {
         alert(error);
