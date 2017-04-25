@@ -11,23 +11,23 @@ export const geolocation = (
         })
 );
 
-
 export function checkClickForCopper(long, lat) {
 
     const sthlmPointUrlTemplate = 'https://crossorigin.me/http://miljodata.stockholm.se/api/koppartak-1997-ytor?Geom=POINT(%longitude%%20%latitude%)';
 
     const [x,y] = convertPoint(long, lat);
-    
-    const sthlmRequest = new XMLHttpRequest();
 
-    sthlmRequest.open('GET', createUrl(sthlmPointUrlTemplate, x, y), true);
-    sthlmRequest.send();
-    sthlmRequest.addEventListener('readystatechange', processSthlmRequest, false);
+    const request = new XMLHttpRequest();
 
-    function processSthlmRequest(e) {
-        if (sthlmRequest.readyState === 4 && sthlmRequest.status === 200) {
+    request.open('GET', createUrl(sthlmPointUrlTemplate, x, y), true);
+    request.send();
+    request.addEventListener('readystatechange', processRequest, false);
+
+    function processRequest(e) {
+
+        if (request.readyState === 4 && request.status === 200) {
             const parser = new DOMParser();
-            const response = parser.parseFromString(sthlmRequest.responseText, 'text/xml');
+            const response = parser.parseFromString(request.responseText, 'text/xml');
 
             if (response.getElementsByTagName('dataEntitity')[0].getAttribute('resultRecords') === '1') {
 
@@ -42,10 +42,8 @@ export function checkClickForCopper(long, lat) {
                 console.log('Sorry, no roof for you.. ;(')
                 return null;
             }
-
         }
     }
-
 }
 
 function createUrl(templateURL, long, lat) {
