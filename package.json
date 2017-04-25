@@ -5,6 +5,7 @@
   "dependencies": {
     "can-use-dom": "^0.1.0",
     "firebase": "^3.8.0",
+    "proj4": "^2.4.3",
     "raf": "^3.3.0",
     "react": "^15.5.4",
     "react-bootstrap": "^0.30.9",
