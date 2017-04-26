@@ -1,15 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const Welcome = () => {
-    return(
-        <div>
-            <h1>Welcome to CopperCrown!</h1>
+export default class Welcome extends React.Component {
+    render() {
+        console.log(this.props)
+        return (
             <div>
-                <Link to="/login">Register/Login</Link>
+                <h1>Welcome to CopperCrown!</h1>
+                <div>
+                    <Link to="/login">Register/Login</Link>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 };
-
-export default Welcome;
