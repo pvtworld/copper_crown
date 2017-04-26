@@ -2,30 +2,31 @@ import React, {Component} from 'react';
 import {Button, Tooltip, OverlayTrigger, Grid, Col, Row} from 'react-bootstrap';
 
 const tooltipSteal =(
-    <Tooltip id="tooltipSteal">Steal roof and add value to your account!</Tooltip>
+    <Tooltip id="tooltipSteal">Steal roof and add value to your account</Tooltip>
 );
 
 const tooltipLeave = (
-    <Tooltip id="tooltipLeave">Leave roof alone!</Tooltip>
+    <Tooltip id="tooltipLeave">Leave roof alone</Tooltip>
 );
 
-var callbackFunc;
+
 
 export default class RoofInfo extends Component {
-    constructor(props){
-        super(props)
-        callbackFunc = this.props.callback;
-    }
+
+    steal = this.steal.bind(this);
+    leave = this.leave.bind(this);
 
     steal(){
         console.log('STOLE ROOF!!!');
+        var stealFunc = this.props.stealCallback;
+        stealFunc(this.props.value);
     }
 
     leave(){
-        callbackFunc(null);
+        var leaveFunc = this.props.leaveCallback;
+        leaveFunc(null);
 
     }
-
 
     render() {
 
@@ -34,20 +35,19 @@ export default class RoofInfo extends Component {
             <div className="container" style={{backgroundColor:'#F6BB42'}}>
                 <Grid>
                     <Row className="show-grid">
-                        <Col xs={1} md={1} className="text-right"><strong>Roof ID:</strong></Col>
-                        <Col xs={2} md={5} className="text-left">{this.props.id}</Col>
+                        <Col xs={1} md={3} className="text-right"><h4>RoofID:</h4></Col>
+                        <Col xs={2} md={5} className="text-left"><h4>{this.props.id}</h4></Col>
                     </Row>
 
                     <Row className="show-grid">
-                        <Col xs={1} md={1} className="text-right"><strong>Value:</strong></Col>
-                        <Col xs={2} md={3} className="text-left">{this.props.value}</Col>
+                        <Col xs={1} md={3} className="text-right"><h4>Current value:</h4></Col>
+                        <Col xs={2} md={3} className="text-left"><h4>{this.props.value}</h4></Col>
                     </Row>
 
                     <Row className="show-grid">
-                        <Col xs={1} md={1} className="text-right"><strong>Area:</strong></Col>
-                        <Col xs={2} md={3} className="text-left">{this.props.area}</Col>
+                        <Col xs={1} md={3} className="text-right"><h4>Area:</h4></Col>
+                        <Col xs={2} md={3} className="text-left"><h4>{this.props.area}</h4></Col>
                     </Row>
-
 
                     <Row className="show-grid">
                         <Col md={6} mdPush={6}>

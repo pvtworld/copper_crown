@@ -61,22 +61,9 @@ const GameMap = withGoogleMap(props => (
 
 function BottomPanel(props) {
     if (props.displayRoofInfo) {
-        const area = props.response.area;
-        const value = Math.round(area * 0.00234);
-
-        return (
-            <div style={{height: `15%`, width: `100%`}}>
-                <RoofInfo id={props.response.id} value={value + 'kr'} area={area} callback={props.callback}/>
-            </div>
-        );
-
+        return (<RoofInfo id={props.response.id} value={Math.round(props.response.area * 0.00234) + 'kr'} area={props.response.area} leaveCallback={props.leaveCallback} stealCallback={props.stealCallback}/>);
     }
-    console.log(this.props.state);
-    return (
-        <div style={{height: `15%`, width: `100%`}}>
-            <PlayerInfo state={this.props.state}/>
-        </div>
-    );
+    return (<PlayerInfo state={props.state}/>);
 }
 
 
@@ -100,7 +87,7 @@ export default class CopperMap extends Component {
     handleRoof = this.handleRoof.bind(this);
     handleMapClick = this.handleMapClick.bind(this);
     mapTimer = this.mapTimer.bind(this);
-
+    stealRoof = this.stealRoof.bind(this);
 
 
     mapTimer() {
@@ -138,52 +125,58 @@ export default class CopperMap extends Component {
     }
 
     handleRoof(roof) {
-        if(roof) {
-            console.log(roof.id);
-            console.log(roof.area);
-            this.props.addPoints(roof.area);
+        if (roof) {
             displayRoofInfo = true;
             response = roof;
+            this.render();
         } else {
             console.log("No Copper");
             displayRoofInfo = false;
+            this.render();
 
         }
     }
 
+    stealRoof(points) {
+        this.props.addPoints(points);
+        displayRoofInfo = false;
+        this.render();
+    }
+
     handleMapClick(event) {
-        this.props.addPoints(12)
+        //this.props.addPoints(12)
         console.log("checkForCopper Dispatched")
-        checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof)
+        checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof);
     }
 
     render() {
         return (
-
             <div className="map">
+                <div style={{height: `80%`}}>
 
-                <div style={{height: `100%`}}>
+                    <GameMap
+                        containerElement={
+                            <div style={{height: `100%`}}/>
+                        }
+                        mapElement={
+                            <div style={{height: `100%`}}/>
+                        }
+                        onMapClick={this.handleMapClick}
+                        handleRoof={this.handleRoof}
+                        center={this.state.center}
+                        content={this.state.content}
+                        radius={this.state.radius}
 
-                <GameMap
-                    containerElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    mapElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    onMapClick={this.handleMapClick}
-                    handleRoof={this.handleRoof}
-                    center={this.state.center}
-                    content={this.state.content}
-                    radius={this.state.radius}
-
-                />
+                    />
 
                 </div>
-                <UserScore state={this.props.state}/>
-                <BottomPanel displayRoofInfo={displayRoofInfo} response={response} callback={this.handleRoof} state={this.props.state}/>
+                <div style={{height: `15%`, width: `100%`}}>
+                <BottomPanel displayRoofInfo={displayRoofInfo} response={response} leaveCallback={this.handleRoof}
+                             stealCallback={this.stealRoof}
+                             state={this.props.state}/>
+                </div>
             </div>
-
         );
     }
 }
+
