@@ -1,7 +1,6 @@
 exports[`Rendertests renders loginScreen when user not logged in 1`] = `
 <div>
-  <nav
-    className="login">
+  <nav>
     <h2>
       CopperCrown
     </h2>
@@ -9,17 +8,14 @@ exports[`Rendertests renders loginScreen when user not logged in 1`] = `
       Sign in to play the Game
     </p>
     <button
-      className="github"
       onClick={[Function]}>
       Log In with Github
     </button>
     <button
-      className="facebook"
       onClick={[Function]}>
       Log In with Facebook
     </button>
     <button
-      className="google"
       onClick={[Function]}>
       Log In with Google
     </button>
