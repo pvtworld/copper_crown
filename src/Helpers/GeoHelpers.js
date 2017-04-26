@@ -12,7 +12,7 @@ export const geolocation = (
 
 
 
-export function checkClickForCopper(long, lat){
+export function checkClickForCopper(long, lat, callback){
 
     //lng = x, lat = y
     const googleToSthlmConversionUrlTemplate = 'https://epsg.io/trans?x=%longitude%&y=%latitude%&s_srs=4326&t_srs=3011';
@@ -22,7 +22,8 @@ export function checkClickForCopper(long, lat){
 
     epsgRequest.open('GET', createUrl(googleToSthlmConversionUrlTemplate, long, lat), true);
     epsgRequest.send();
-    epsgRequest.addEventListener('readystatechange', processEpsgRequest, false);
+    return epsgRequest.addEventListener('readystatechange', processEpsgRequest, false);
+
 
 
     function processEpsgRequest(e){
@@ -40,7 +41,7 @@ export function checkClickForCopper(long, lat){
 
             sthlmRequest.open('GET', createUrl(sthlmPointUrlTemplate, x, y), true);
             sthlmRequest.send();
-            sthlmRequest.addEventListener('readystatechange', processSthlmRequest, false);
+            return sthlmRequest.addEventListener('readystatechange', processSthlmRequest, false);
 
             function processSthlmRequest(e){
                 if(sthlmRequest.readyState === 4 && sthlmRequest.status === 200){
@@ -50,11 +51,11 @@ export function checkClickForCopper(long, lat){
                     const dataEntityTag = xmlResponse.getElementsByTagName('dataEntitity');
                     console.log(dataEntityTag[0].getAttribute('resultRecords'));
                     if(dataEntityTag[0].getAttribute('resultRecords') === '1'){
-                        console.log('$$$$$ KOPPARTAK $$$$$\n ID: ' + xmlResponse.getElementsByTagName('id')[0].childNodes[0].nodeValue + '\nArea: ' + xmlResponse.getElementsByTagName('area')[0].childNodes[0].nodeValue);
-                        return {id: xmlResponse.getElementsByTagName('id')[0].childNodes[0].nodeValue, area: xmlResponse.getElementsByTagName('area')[0].childNodes[0].nodeValue};
+                        // console.log('$$$$$ KOPPARTAK $$$$$\n ID: ' + xmlResponse.getElementsByTagName('id')[0].childNodes[0].nodeValue + '\nArea: ' + xmlResponse.getElementsByTagName('area')[0].childNodes[0].nodeValue);
+                        callback({id: xmlResponse.getElementsByTagName('id')[0].childNodes[0].nodeValue, area: xmlResponse.getElementsByTagName('area')[0].childNodes[0].nodeValue});
                     }else{
-                        console.log('Sorry, no roof for you.. ;(')
-                        return null;
+                        //console.log('Sorry, no roof for you.. ;(')
+                        callback(null);
                     }
 
                 }
