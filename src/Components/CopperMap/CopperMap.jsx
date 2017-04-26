@@ -124,18 +124,26 @@ export default class CopperMap extends Component {
         clearInterval(this.timer);
     }
 
-    handleMapClick(event) {
-
-        checkClickForCopper(event.latLng.lng(), event.latLng.lat());
-        // console.log("Latitude:" + event.latLng.lat());
-        // console.log("Longitude:" + event.latLng.lng());
-        console.log("Click outside circle not allowed");
-
+    handleRoof(roof) {
+        if(roof) {
+            console.log(roof.id)
+            console.log(roof.area)
+            this.props.addPoints(roof.area)
+        } else {
+            console.log("No Copper")
+        }
     }
+
+
+    handleMapClick(event) {
+        this.props.addPoints(45)
+        checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof)
+        }
 
     render() {
         return (
-            <div className="overlay">
+            <div>
+            <div className="map">
                 <div style={{height: `100%`}}>
 
                 <GameMap
