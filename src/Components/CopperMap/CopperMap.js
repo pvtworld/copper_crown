@@ -26,7 +26,8 @@ const GameMap = withGoogleMap(props => (
     >
         <Circle
             onClick={(event => (
-                console.log(event.latLng.lat() + " "+ event.latLng.lng())
+                checkClickForCopper(event.latLng.lng(), event.latLng.lat())
+                // console.log(event.latLng.lat() + " "+ event.latLng.lng()
             ))
 
             }
