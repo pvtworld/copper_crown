@@ -1,0 +1,34 @@
+exports[`Render test Renders without crashing 1`] = `
+<div>
+  <div
+    className="map">
+    <div
+      style={
+        Object {
+          "height": "100%",
+        }
+      }>
+      <div
+        style={
+          Object {
+            "height": "100%",
+          }
+        }>
+        <div
+          style={
+            Object {
+              "height": "100%",
+            }
+          } />
+        <div />
+      </div>
+    </div>
+  </div>
+  <div>
+    <h1>
+      User Score is: 
+      0
+    </h1>
+  </div>
+</div>
+`;

@@ -7,5 +7,10 @@ beforeAll(() => {
     
 });
 
-it('Foo Test', () => {
+describe('Render test', ()=> {
+    it('Renders without crashing', () => {
+        const component = renderer.create(<Welcome />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
