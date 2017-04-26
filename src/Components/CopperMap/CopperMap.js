@@ -80,10 +80,11 @@ export default class CopperMap extends Component {
     isUnmounted = false;
     handleRoof = this.handleRoof.bind(this);
     handleMapClick = this.handleMapClick.bind(this);
+    mapTimer = this.mapTimer.bind(this);
 
 
 
-    timer() {
+    mapTimer() {
         geolocation.getCurrentPosition((position) => {
             if (this.isUnmounted) {
                 return;
@@ -118,7 +119,8 @@ export default class CopperMap extends Component {
     }
 
     componentDidMount() {
-        setInterval(this.timer.bind(this), 5000);
+        this.mapTimer();
+        setInterval(this.mapTimer, 5000);
 
 
     }
@@ -139,14 +141,14 @@ export default class CopperMap extends Component {
     }
 
     handleMapClick(event) {
-        this.props.addPoints(45)
+        console.log("checkForCopper Dispatched")
         checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof)
     }
 
     render() {
         return (
             <div>
-            <div className="overlay">
+            <div className="map">
                 <div style={{height: `100%`}}>
 
                 <GameMap
