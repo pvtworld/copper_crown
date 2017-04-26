@@ -1,5 +1,6 @@
 import React from 'react'
 import {Route, Redirect, Switch, BrowserRouter} from 'react-router-dom';
+import base from '../../Firebase/base';
 import CopperMap from '../CopperMap/CopperMap';
 import Login from '../Login';
 import firebase from '../../Firebase/firebase';
