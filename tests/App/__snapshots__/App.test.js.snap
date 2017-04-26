@@ -1,0 +1,48 @@
+exports[`Rendertests renders loginScreen when user not logged in 1`] = `
+<div>
+  <nav
+    className="login">
+    <h2>
+      CopperCrown
+    </h2>
+    <p>
+      Sign in to play the Game
+    </p>
+    <button
+      className="github"
+      onClick={[Function]}>
+      Log In with Github
+    </button>
+    <button
+      className="facebook"
+      onClick={[Function]}>
+      Log In with Facebook
+    </button>
+    <button
+      className="google"
+      onClick={[Function]}>
+      Log In with Google
+    </button>
+  </nav>
+</div>
+`;
+
+exports[`Rendertests renders map when user logged in 1`] = `
+<div>
+  <CopperMap
+    addPoints={[Function]}
+    state={
+      Object {
+        "authed": true,
+        "uid": 1,
+        "userInfo": Object {
+          "points": 0,
+        },
+      }
+    } />
+  <button
+    onClick={[Function]}>
+    Log Out!
+  </button>
+</div>
+`;

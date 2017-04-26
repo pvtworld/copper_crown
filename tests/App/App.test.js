@@ -1,20 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import App from '../../src/Components/App/App';
+
+
 beforeAll(() => {
     // Clears the database and adds some testing data.
     // Jest will wait for this promise to resolve before running tests.
     return stubGoogleAPIS();
 });
+
 describe('Rendertests', () => {
-    it('renders without crashing', () => {
-        const div = document.createElement('div');
-        ReactDOM.render(<App />, div);
-    });
-    it('renders without crashing', () => {
+
+    it('renders loginScreen when user not logged in', () => {
         const component = renderer.create(<App />);
-    });
+
+        expect(component).toMatchSnapshot();
+    })
+
+    it('renders map when user logged in', () => {
+        const component = shallow(<App/>);
+        component.setState({authed : true});
+        component.setState({uid : 1});
+
+        console.log(component.state('authed'));
+        console.log(component.state('uid'));
+        
+        expect(toJson(component)).toMatchSnapshot();
+    })
 })
 
 
