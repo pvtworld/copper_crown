@@ -91,10 +91,6 @@ export default class CopperMap extends Component {
                 return;
             }
 
-            console.log("Latitude:" + position.coords.latitude);
-            console.log("Longitude:" + position.coords.longitude);
-            console.log();
-
             this.setState({
                 center: {
                     lat: position.coords.latitude,
