@@ -1,4 +1,4 @@
-exports[`Render test Renders without crashing 1`] = `
+exports[`Render test renders a GameMap 1`] = `
 <div>
   <div
     className="map">
@@ -8,27 +8,34 @@ exports[`Render test Renders without crashing 1`] = `
           "height": "100%",
         }
       }>
-      <div
-        style={
+      <withGoogleMap(Component)
+        center={
           Object {
-            "height": "100%",
+            "lat": 59.334591,
+            "lng": 18.06324,
           }
-        }>
-        <div
-          style={
-            Object {
-              "height": "100%",
-            }
-          } />
-        <div />
-      </div>
+        }
+        containerElement={
+          <div
+            style={
+              Object {
+                "height": "100%",
+              }
+            } />
+        }
+        content={null}
+        mapElement={
+          <div
+            style={
+              Object {
+                "height": "100%",
+              }
+            } />
+        }
+        onMapClick={[Function]}
+        radius={5} />
     </div>
   </div>
-  <div>
-    <h1>
-      User Score is: 
-      0
-    </h1>
-  </div>
+  <UserScore />
 </div>
 `;
