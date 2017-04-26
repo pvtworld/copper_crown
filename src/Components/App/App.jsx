@@ -64,7 +64,18 @@ export default class App extends React.Component {
     }
     componentWillUnmount () {
         this.removeListener()
+
+    addPoints(newPoints) {
+        console.log("points is:")
+        console.log(newPoints);
+
+        const userInfo= {...this.state.userInfo};
+        userInfo.points += newPoints;
+        // set state
+        this.setState({ userInfo });
     }
+
+
     render() {
         return (
             <BrowserRouter>
