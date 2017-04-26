@@ -41,10 +41,7 @@ export default class App extends React.Component {
                 console.log('User NOT auth');
             }
         })
-
-
     }
-
 
         componentDidMount() {
             base.onAuth((user) => {
@@ -84,10 +81,10 @@ export default class App extends React.Component {
 
     addPoints(newPoints) {
         console.log("points is:")
-        console.log(newPoints);
+        console.log(parseInt(newPoints));
 
         const userInfo= {...this.state.userInfo};
-        userInfo.points += newPoints;
+        userInfo.points += parseInt(newPoints);
         // set state
         this.setState({ userInfo });
     }
