@@ -141,6 +141,7 @@ export default class CopperMap extends Component {
     }
 
     handleMapClick(event) {
+        this.props.addPoints(12)
         console.log("checkForCopper Dispatched")
         checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof)
     }
