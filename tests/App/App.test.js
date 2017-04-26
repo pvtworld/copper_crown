@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../src/Components/App/App';
+import renderer from 'react-test-renderer';
+import App from '../../src/Components/App/App';
 beforeAll(() => {
     // Clears the database and adds some testing data.
     // Jest will wait for this promise to resolve before running tests.
     return stubGoogleAPIS();
 });
-
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-});
+describe('Rendertests', () => {
+    it('renders without crashing', () => {
+        const div = document.createElement('div');
+        ReactDOM.render(<App />, div);
+    });
+    it('renders without crashing', () => {
+        const component = renderer.create(<App />);
+    });
+})
 
 
 
