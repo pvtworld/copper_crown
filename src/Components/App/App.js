@@ -1,6 +1,7 @@
 import React from 'react'
 import CopperMap from '../CopperMap/CopperMap';
 import firebase from '../../Firebase/firebase';
+import base from '../../Firebase/base';
 
 export default class App extends React.Component {
     constructor(){
@@ -44,7 +45,6 @@ export default class App extends React.Component {
 
     componentWillUnmount () {
         this.removeListener()
-        this.removeListener();
         base.removeBinding(this.ref);
 
     }
