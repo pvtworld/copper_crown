@@ -1,7 +1,6 @@
 import React from 'react'
 import base from '../../Firebase/base';
 import CopperMap from '../CopperMap/CopperMap';
-import firebase from '../../Firebase/firebase';
 
 export default class App extends React.Component {
     constructor(){
@@ -14,46 +13,26 @@ export default class App extends React.Component {
     }
 
     state = {
-        authed: false,
+        uid: null,
         userInfo : {
             points: 0,
         }
     }
 
-
-    componentWillMount() {
-        this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({
-                    authed: true
-                });
-
-                this.ref = base.syncState(`users/${user.uid}`, {
-                    context: this,
-                    state: 'userInfo'
-                });
-
-                console.log('User IS auth');
-            } else {
-                this.setState({
-                    authed: false
-                });
-                console.log('User NOT auth');
-            }
-        })
-    }
-
-        componentDidMount() {
+        componentWillMount() {
             base.onAuth((user) => {
                 if(user) {
                     this.authHandler(null, { user });
+                    this.ref = base.syncState(`users/${user.uid}`, {
+                        context: this,
+                        state: 'userInfo'
+                    });
                 }
             });
         }
 
 
     componentWillUnmount () {
-        this.removeListener();
         base.removeBinding(this.ref);
 
     }
@@ -69,7 +48,8 @@ export default class App extends React.Component {
     }
 
     authHandler(err, authData)  {
-        console.log(authData);
+        console.log('current user: ');
+        console.log(authData)
         if (err) {
             console.error(err);
             return;
@@ -80,23 +60,19 @@ export default class App extends React.Component {
         };
 
     addPoints(newPoints) {
-        console.log("points is:")
-        console.log(parseInt(newPoints, 10));
-
         const userInfo= {...this.state.userInfo};
         userInfo.points += parseInt(newPoints, 10);
-        // set state
         this.setState({ userInfo });
     }
 
     renderLogin() {
         return (
-            <nav className="login">
+            <nav>
                 <h2>CopperCrown</h2>
                 <p>Sign in to play the Game</p>
-                <button className="github" onClick={() => this.authenticate('github')}>Log In with Github</button>
-                <button className="facebook" onClick={() => this.authenticate('facebook')} >Log In with Facebook</button>
-                <button className="google" onClick={() => this.authenticate('google')} >Log In with Google</button>
+                <button onClick={() => this.authenticate('github')}>Log In with Github</button>
+                <button onClick={() => this.authenticate('facebook')} >Log In with Facebook</button>
+                <button onClick={() => this.authenticate('google')} >Log In with Google</button>
             </nav>
         )
     }
