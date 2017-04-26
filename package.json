@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "can-use-dom": "^0.1.0",
+    "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
     "firebase": "^3.8.0",
     "proj4": "^2.4.3",
     "raf": "^3.3.0",
