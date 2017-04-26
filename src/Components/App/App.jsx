@@ -31,6 +31,7 @@ export default class App extends React.Component {
         this.state = {
             authed: false,
             points: 0
+        this.addPoints = this.addPoints.bind(this);
 
     state = {
         authed: false,
