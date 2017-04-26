@@ -1,3 +1,5 @@
+import { convertPoint } from './CoordinateConverter';
+
 // Get location from device
 export const geolocation = (
     navigator.geolocation ?
@@ -9,64 +11,42 @@ export const geolocation = (
         })
 );
 
+export function checkClickForCopper(long, lat) {
 
-
-
-export function checkClickForCopper(long, lat){
-
-    //lng = x, lat = y
-    const googleToSthlmConversionUrlTemplate = 'https://epsg.io/trans?x=%longitude%&y=%latitude%&s_srs=4326&t_srs=3011';
     const sthlmPointUrlTemplate = 'https://crossorigin.me/http://miljodata.stockholm.se/api/koppartak-1997-ytor?Geom=POINT(%longitude%%20%latitude%)';
 
-    const epsgRequest = new XMLHttpRequest();
+    const [x,y] = convertPoint(long, lat);
 
-    epsgRequest.open('GET', createUrl(googleToSthlmConversionUrlTemplate, long, lat), true);
-    epsgRequest.send();
-    epsgRequest.addEventListener('readystatechange', processEpsgRequest, false);
+    const request = new XMLHttpRequest();
 
+    request.open('GET', createUrl(sthlmPointUrlTemplate, x, y), true);
+    request.send();
+    request.addEventListener('readystatechange', processRequest, false);
 
-    function processEpsgRequest(e){
-        if(epsgRequest.readyState === 4 && epsgRequest.status === 200){
-            const response = JSON.parse(epsgRequest.responseText);
-            //console.log(response);
+    function processRequest(e) {
 
-            const sthlmRequest = new XMLHttpRequest();
-            //console.log(response.x);
+        if (request.readyState === 4 && request.status === 200) {
+            const parser = new DOMParser();
+            const response = parser.parseFromString(request.responseText, 'text/xml');
 
-            var x = response.x;
-            x +='0000000';
-            var y = response.y;
-            y += '0000000';
+            if (response.getElementsByTagName('dataEntitity')[0].getAttribute('resultRecords') === '1') {
 
-            sthlmRequest.open('GET', createUrl(sthlmPointUrlTemplate, x, y), true);
-            sthlmRequest.send();
-            sthlmRequest.addEventListener('readystatechange', processSthlmRequest, false);
+                console.log('$$$$$ KOPPARTAK $$$$$\n ID: '
+                    + response.getElementsByTagName('id')[0].childNodes[0].nodeValue
+                    + '\nArea: ' + response.getElementsByTagName('area')[0].childNodes[0].nodeValue);
 
-            function processSthlmRequest(e){
-                if(sthlmRequest.readyState === 4 && sthlmRequest.status === 200){
-                    var parser = new DOMParser();
-                    const xmlResponse = parser.parseFromString(sthlmRequest.responseText, 'text/xml');
+                return { id: response.getElementsByTagName('id')[0].childNodes[0].nodeValue,
+                    area: response.getElementsByTagName('area')[0].childNodes[0].nodeValue };
 
-                    const dataEntityTag = xmlResponse.getElementsByTagName('dataEntitity');
-                    console.log(dataEntityTag[0].getAttribute('resultRecords'));
-                    if(dataEntityTag[0].getAttribute('resultRecords') === '1'){
-                        console.log('$$$$$ KOPPARTAK $$$$$\n ID: ' + xmlResponse.getElementsByTagName('id')[0].childNodes[0].nodeValue + '\nArea: ' + xmlResponse.getElementsByTagName('area')[0].childNodes[0].nodeValue);
-                        return {id: xmlResponse.getElementsByTagName('id')[0].childNodes[0].nodeValue, area: xmlResponse.getElementsByTagName('area')[0].childNodes[0].nodeValue};
-                    }else{
-                        console.log('Sorry, no roof for you.. ;(')
-                        return null;
-                    }
-
-                }
+            } else {
+                console.log('Sorry, no roof for you.. ;(')
+                return null;
             }
-
         }
     }
-
 }
 
-
-function createUrl(templateURL, long, lat){
+function createUrl(templateURL, long, lat) {
     var queryURL = templateURL.replace('%longitude%', long);
     queryURL = queryURL.replace('%latitude%', lat);
     return queryURL;
