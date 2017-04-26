@@ -31,6 +31,11 @@ export default class App extends React.Component {
         this.state = {
             authed: false,
             points: 0
+
+    state = {
+        authed: false,
+        userInfo : {
+            points: 0,
         }
     }
     componentDidMount () {
