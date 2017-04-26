@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
 import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
-import UserScore from "../UserScore/UserScore"
+import UserScore from "../UserScore/UserScore";
+import RoofInfo from '../RoofInfo/RoofInfo';
+import PlayerInfo from '../PlayerInfo/PlayerInfo';
 
+var displayRoofInfo = false;
+var response = null;
 const GameMap = withGoogleMap(props => (
 
 
@@ -60,6 +64,26 @@ const GameMap = withGoogleMap(props => (
 
     </GoogleMap>
 ));
+
+function BottomPanel(props) {
+    if (props.displayRoofInfo) {
+        const area = props.response.area;
+        const value = Math.round(area * 0.00234);
+
+        return (
+            <div style={{height: `15%`, width: `100%`}}>
+                <RoofInfo id={props.response.id} value={value + 'kr'} area={area} callback={props.callback}/>
+            </div>
+        );
+
+    }
+    console.log(this.props.state);
+    return (
+        <div style={{height: `15%`, width: `100%`}}>
+            <PlayerInfo state={this.props.state}/>
+        </div>
+    );
+}
 
 
 export default class CopperMap extends Component {
@@ -133,11 +157,15 @@ export default class CopperMap extends Component {
 
     handleRoof(roof) {
         if(roof) {
-            console.log(roof.id)
-            console.log(roof.area)
-            this.props.addPoints(roof.area)
+            console.log(roof.id);
+            console.log(roof.area);
+            this.props.addPoints(roof.area);
+            displayRoofInfo = true;
+            response = roof;
         } else {
-            console.log("No Copper")
+            console.log("No Copper");
+            displayRoofInfo = false;
+
         }
     }
 
@@ -149,28 +177,29 @@ export default class CopperMap extends Component {
 
     render() {
         return (
-            <div>
+
             <div className="map">
-                <div style={{height: `100%`}}>
+                <div style={{height: `85%`}}>
 
-                <GameMap
-                    containerElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    mapElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    onMapClick={this.handleMapClick}
-                    center={this.state.center}
-                    content={this.state.content}
-                    radius={this.state.radius}
+                    <GameMap
+                        containerElement={
+                            <div style={{height: `100%`}}/>
+                        }
+                        mapElement={
+                            <div style={{height: `100%`}}/>
+                        }
+                        onMapClick={this.handleMapClick}
+                        center={this.state.center}
+                        content={this.state.content}
+                        radius={this.state.radius}
 
-                />
+                    />
 
                 </div>
-            </div>
                 <UserScore state={this.props.state}/>
+                <BottomPanel displayRoofInfo={displayRoofInfo} response={response} callback={this.handleRoof} state={this.props.state}/>
             </div>
+
         );
     }
 }
