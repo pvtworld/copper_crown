@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
-import {geolocation, checkClickForCopper} from '../Helpers/GeoHelpers';
+import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
+import UserScore from "../UserScore/UserScore"
 
 const GameMap = withGoogleMap(props => (
 
@@ -25,7 +26,8 @@ const GameMap = withGoogleMap(props => (
     >
         <Circle
             onClick={(event => (
-                console.log(event.latLng.lat() + " "+ event.latLng.lng())
+                checkClickForCopper(event.latLng.lng(), event.latLng.lat())
+                // console.log(event.latLng.lat() + " "+ event.latLng.lng()
             ))
 
             }
@@ -44,7 +46,6 @@ const GameMap = withGoogleMap(props => (
             onClick={(event => (
                 checkClickForCopper(event.latLng.lng(), event.latLng.lat())
             ))
-
             }
             center={props.center}
             radius={100}
@@ -73,13 +74,18 @@ export default class CopperMap extends Component {
             content: null,
             radius: 5
         };
+
+
     }
 
     isUnmounted = false;
-
+    handleRoof = this.handleRoof.bind(this);
     handleMapClick = this.handleMapClick.bind(this);
+    mapTimer = this.mapTimer.bind(this);
 
-    timer() {
+
+
+    mapTimer() {
         geolocation.getCurrentPosition((position) => {
             if (this.isUnmounted) {
                 return;
@@ -114,7 +120,8 @@ export default class CopperMap extends Component {
     }
 
     componentDidMount() {
-        setInterval(this.timer.bind(this), 5000);
+        this.mapTimer();
+        setInterval(this.mapTimer, 5000);
 
 
     }
@@ -124,19 +131,26 @@ export default class CopperMap extends Component {
         clearInterval(this.timer);
     }
 
+    handleRoof(roof) {
+        if(roof) {
+            console.log(roof.id)
+            console.log(roof.area)
+            this.props.addPoints(roof.area)
+        } else {
+            console.log("No Copper")
+        }
+    }
+
     handleMapClick(event) {
-
-        //Only used during development
-        checkClickForCopper(event.latLng.lng(), event.latLng.lat());
-        // console.log("Latitude:" + event.latLng.lat());
-        // console.log("Longitude:" + event.latLng.lng());
-        console.log("Click outside circle not allowed");
-
+        this.props.addPoints(12)
+        console.log("checkForCopper Dispatched")
+        checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof)
     }
 
     render() {
         return (
-            <div className="overlay">
+            <div>
+            <div className="map">
                 <div style={{height: `100%`}}>
 
                 <GameMap
@@ -154,6 +168,8 @@ export default class CopperMap extends Component {
                 />
 
                 </div>
+            </div>
+                <UserScore state={this.props.state}/>
             </div>
         );
     }

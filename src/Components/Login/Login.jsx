@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import * as auth from '../Helpers/AuthHelpers';
+import * as auth from '../../Helpers/AuthHelpers';
 
 class Login extends React.Component{
     handleGithubLogin() {
