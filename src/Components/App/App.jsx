@@ -79,14 +79,6 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <BrowserRouter>
-                <Switch>
-                    <Route path='/' exact component={Welcome} />
-                    <PublicRoute authed={this.state.authed} path='/login' component={Login} />
-                    <PrivateRoute authed={this.state.authed} path='/coppermap' component={CopperMap} />
-                    <Route render={() => <h3>404 feterror</h3>} />
-                </Switch>
-            </BrowserRouter>
         );
     }
 }
