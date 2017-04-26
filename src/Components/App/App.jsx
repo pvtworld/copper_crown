@@ -1,8 +1,6 @@
 import React from 'react'
 import CopperMap from '../CopperMap/CopperMap';
-import Login from '../Login/Login';
 import firebase from '../../Firebase/firebase';
-import Welcome from '../Welcome/Welcome';
 
 export default class App extends React.Component {
     constructor(){
