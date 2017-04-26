@@ -71,13 +71,15 @@ export default class CopperMap extends Component {
                 lng: 18.063240,
             },
             content: null,
-            radius: 5
-        };
+            radius: 5,
+        }
     }
+
 
     isUnmounted = false;
 
     handleMapClick = this.handleMapClick.bind(this);
+    handleRoof = this.handleRoof.bind(this);
 
     timer() {
         geolocation.getCurrentPosition((position) => {
@@ -85,8 +87,6 @@ export default class CopperMap extends Component {
                 return;
             }
 
-            console.log("Latitude:" + position.coords.latitude);
-            console.log("Longitude:" + position.coords.longitude);
             console.log();
 
             this.setState({
@@ -113,7 +113,7 @@ export default class CopperMap extends Component {
 
     }
 
-    componentDidMount() {
+    componenDidMount() {
         setInterval(this.timer.bind(this), 5000);
 
 
