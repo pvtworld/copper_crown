@@ -162,6 +162,9 @@ export default class CopperMap extends Component {
 
                 </div>
             </div>
+
+                <UserScore state={this.props.state}/>
+            </div>
         );
     }
 }
