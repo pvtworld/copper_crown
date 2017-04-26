@@ -81,10 +81,10 @@ export default class App extends React.Component {
 
     addPoints(newPoints) {
         console.log("points is:")
-        console.log(parseInt(newPoints));
+        console.log(parseInt(newPoints, 10));
 
         const userInfo= {...this.state.userInfo};
-        userInfo.points += parseInt(newPoints);
+        userInfo.points += parseInt(newPoints, 10);
         // set state
         this.setState({ userInfo });
     }
