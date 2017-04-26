@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route, Redirect, Switch, BrowserRouter} from 'react-router-dom';
 import CopperMap from './Components/CopperMap';
-import Login from './Components/Login';
+import Login from './Components/LoginContainer';
 import firebase from './Firebase/firebase';
 import Welcome from './Components/Welcome';
 
@@ -50,7 +50,8 @@ export default class App extends React.Component {
         this.removeListener()
     }
     render() {
-        return (
+        return(
+
             <BrowserRouter>
                 <Switch>
                     <Route path='/' exact component={Welcome} />
