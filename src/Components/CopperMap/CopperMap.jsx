@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
-import {geolocation, checkClickForCopper} from '../Helpers/GeoHelpers';
+import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
 
 const GameMap = withGoogleMap(props => (
 

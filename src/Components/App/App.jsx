@@ -1,9 +1,9 @@
 import React from 'react'
 import {Route, Redirect, Switch, BrowserRouter} from 'react-router-dom';
-import CopperMap from './Components/CopperMap';
-import Login from './Components/Login';
-import firebase from './Firebase/firebase';
-import Welcome from './Components/Welcome';
+import CopperMap from '../CopperMap/CopperMap';
+import Login from '../Login';
+import firebase from '../../Firebase/firebase';
+import Welcome from '../Welcome';
 
 function PublicRoute ({component: Component, authed, ...rest}) {
     return (
@@ -28,7 +28,8 @@ export default class App extends React.Component {
     constructor(){
         super();
         this.state = {
-            authed: false
+            authed: false,
+            points: 0
         }
     }
     componentDidMount () {
