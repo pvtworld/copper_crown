@@ -1,12 +1,20 @@
 import { convertPoint } from './CoordinateConverter';
 
 // Get location from device
+
+
 export const geolocation = (
     navigator.geolocation ?
         navigator.geolocation :
         ({
-            getCurrentPosition(success, failure) {
+            getCurrentPosition(success, failure, options) {
+                options({
+                    enableHighAccuracy: true,
+                    maximumAge        : 30000,
+                    timeout           : 500
+                });
                 failure(`Your browser doesn't support geolocation.`);
+                success(`Your browser does support geolocation.`)
             },
         })
 );

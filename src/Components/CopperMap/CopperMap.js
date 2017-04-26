@@ -25,12 +25,6 @@ const GameMap = withGoogleMap(props => (
 
     >
         <Circle
-            onClick={(event => (
-                checkClickForCopper(event.latLng.lng(), event.latLng.lat())
-                // console.log(event.latLng.lat() + " "+ event.latLng.lng()
-            ))
-
-            }
             center={props.center}
             radius={props.radius}
             options={{
@@ -44,7 +38,7 @@ const GameMap = withGoogleMap(props => (
 
         <Circle
             onClick={(event => (
-                checkClickForCopper(event.latLng.lng(), event.latLng.lat())
+                checkClickForCopper(event.latLng.lng(), event.latLng.lat(), props.handleRoof)
             ))
             }
             center={props.center}
@@ -91,10 +85,6 @@ export default class CopperMap extends Component {
                 return;
             }
 
-            console.log("Latitude:" + position.coords.latitude);
-            console.log("Longitude:" + position.coords.longitude);
-            console.log();
-
             this.setState({
                 center: {
                     lat: position.coords.latitude,
@@ -107,14 +97,6 @@ export default class CopperMap extends Component {
             if (this.isUnmounted) {
                 return;
             }
-            this.setState({
-                center: {
-                    lat: 59.334591,
-                    lng: 18.063240,
-                },
-                content: `Error: The Geolocation service failed (${reason}).`,
-            });
-
         });
 
     }
@@ -161,6 +143,7 @@ export default class CopperMap extends Component {
                         <div style={{ height: `100%` }} />
                     }
                     onMapClick={this.handleMapClick}
+                    handleRoof={this.handleRoof}
                     center={this.state.center}
                     content={this.state.content}
                     radius={this.state.radius}
