@@ -1,7 +1,7 @@
 import React from 'react'
+import base from '../../Firebase/base';
 import CopperMap from '../CopperMap/CopperMap';
 import firebase from '../../Firebase/firebase';
-import base from '../../Firebase/base';
 
 export default class App extends React.Component {
     constructor(){
@@ -16,7 +16,8 @@ export default class App extends React.Component {
         }
     }
 
-    componentDidMount() {
+
+    componentWillMount() {
         this.removeListener = firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({
@@ -33,13 +34,19 @@ export default class App extends React.Component {
                 this.setState({
                     authed: false
                 });
-                console.log("User is NOT auth")
+                console.log('User NOT auth');
             }
         })
+
+
     }
 
+    componentDidMount () {
+    }
+
+
     componentWillUnmount () {
-        this.removeListener()
+        this.removeListener();
         base.removeBinding(this.ref);
 
     }
@@ -54,7 +61,9 @@ export default class App extends React.Component {
         this.setState({ userInfo });
     }
 
+
     render() {
+        console.log(this.state)
         return (
             <CopperMap
                 state={this.state}
