@@ -19,37 +19,15 @@ export default class App extends React.Component {
             points: 0,
         }
     }
-
-
-    componentWillMount() {
-        this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({
-                    authed: true
-                });
-
-                this.ref = base.syncState(`users/${user.uid}`, {
-                    context: this,
-                    state: 'userInfo'
-                });
-
-                console.log('User IS auth');
-            } else {
-                this.setState({
-                    authed: false
-                });
-                console.log('User NOT auth');
-            }
-        })
-
-
-    }
-
-
-        componentDidMount() {
+    
+        componentWillMount() {
             base.onAuth((user) => {
                 if(user) {
                     this.authHandler(null, { user });
+                    this.ref = base.syncState(`users/${user.uid}`, {
+                        context: this,
+                        state: 'userInfo'
+                    });
                 }
             });
         }
