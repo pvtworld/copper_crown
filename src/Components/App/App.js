@@ -48,7 +48,8 @@ export default class App extends React.Component {
     }
 
     authHandler(err, authData)  {
-        console.log(authData);
+        console.log('current user: ');
+        console.log(authData)
         if (err) {
             console.error(err);
             return;
