@@ -6,6 +6,10 @@ import firebase from '../../Firebase/firebase';
 export default class App extends React.Component {
     constructor(){
         super();
+        this.renderLogin = this.renderLogin.bind(this);
+        this.authenticate = this.authenticate.bind(this);
+        this.logout = this.logout.bind(this);
+        this.authHandler = this.authHandler.bind(this);
         this.addPoints = this.addPoints.bind(this);
     }
 
@@ -41,8 +45,14 @@ export default class App extends React.Component {
 
     }
 
-    componentDidMount () {
-    }
+
+        componentDidMount() {
+            base.onAuth((user) => {
+                if(user) {
+                    this.authHandler(null, { user });
+                }
+            });
+        }
 
 
     componentWillUnmount () {
@@ -50,6 +60,27 @@ export default class App extends React.Component {
         base.removeBinding(this.ref);
 
     }
+
+    authenticate(provider) {
+        console.log(`Trying to log in with ${provider}`);
+        base.authWithOAuthPopup(provider, this.authHandler);
+    }
+
+    logout() {
+        base.unauth();
+        this.setState({ uid: null });
+    }
+
+    authHandler(err, authData)  {
+        console.log(authData);
+        if (err) {
+            console.error(err);
+            return;
+        }
+            this.setState({
+                uid: authData.user.uid,
+            });
+        };
 
     addPoints(newPoints) {
         console.log("points is:")
@@ -61,13 +92,35 @@ export default class App extends React.Component {
         this.setState({ userInfo });
     }
 
+    renderLogin() {
+        return (
+            <nav className="login">
+                <h2>CopperCrown</h2>
+                <p>Sign in to play the Game</p>
+                <button className="github" onClick={() => this.authenticate('github')}>Log In with Github</button>
+                <button className="facebook" onClick={() => this.authenticate('facebook')} >Log In with Facebook</button>
+                <button className="google" onClick={() => this.authenticate('google')} >Log In with Google</button>
+            </nav>
+        )
+    }
 
     render() {
+        const logout = <button onClick={this.logout}>Log Out!</button>;
+
+        // check if they are no logged in at all
+        if(!this.state.uid) {
+            return <div>{this.renderLogin()}</div>
+        }
+
         return (
-            <CopperMap
-                state={this.state}
-                addPoints={this.addPoints}
-            />
-        );
+            <div>
+                <CopperMap
+                    state={this.state}
+                    addPoints={this.addPoints}
+                />
+                {logout}
+
+            </div>
+        )
     }
 }
