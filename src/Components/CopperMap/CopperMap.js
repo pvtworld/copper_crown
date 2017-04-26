@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
 import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
-import {UserScore} from "../UserScore/UserScore"
+import UserScore from "../UserScore/UserScore"
 
 const GameMap = withGoogleMap(props => (
 
@@ -45,7 +45,6 @@ const GameMap = withGoogleMap(props => (
             onClick={(event => (
                 checkClickForCopper(event.latLng.lng(), event.latLng.lat())
             ))
-
             }
             center={props.center}
             radius={100}
