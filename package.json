@@ -6,6 +6,7 @@
     "can-use-dom": "^0.1.0",
     "firebase": "^3.8.0",
     "raf": "^3.3.0",
+    "re-base": "^2.7.0",
     "react": "^15.5.4",
     "react-bootstrap": "^0.30.9",
     "react-dom": "^15.5.4",
