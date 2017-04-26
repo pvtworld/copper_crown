@@ -42,7 +42,7 @@ const GameMap = withGoogleMap(props => (
 
         <Circle
             onClick={(event => (
-                console.log(event.latLng.lat() + " "+ event.latLng.lng())
+                checkClickForCopper(event.latLng.lng(), event.latLng.lat())
             ))
 
             }
@@ -126,6 +126,7 @@ export default class CopperMap extends Component {
 
     handleMapClick(event) {
 
+        //Only used during development
         checkClickForCopper(event.latLng.lng(), event.latLng.lat());
         // console.log("Latitude:" + event.latLng.lat());
         // console.log("Longitude:" + event.latLng.lng());
