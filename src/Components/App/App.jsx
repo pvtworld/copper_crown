@@ -1,37 +1,13 @@
 import React from 'react'
-import {Route, Redirect, Switch, BrowserRouter} from 'react-router-dom';
 import base from '../../Firebase/base';
 import CopperMap from '../CopperMap/CopperMap';
-import Login from '../Login';
 import firebase from '../../Firebase/firebase';
-import Welcome from '../Welcome';
-
-function PublicRoute ({component: Component, authed, ...rest}) {
-    return (
-        <Route {...rest} render={(props) => authed === false
-            ? <Component {...props} />
-            : <Redirect to='/coppermap' />}
-        />
-    )
-}
-
-function PrivateRoute ({component: Component, authed, ...rest}) {
-    return (
-        <Route
-            {...rest} render={(props) => authed === true
-                ? <Component {...props} />
-                : <Redirect to={{pathname: '/', state: {from: props.location}}} />}
-        />
-    )
-}
 
 export default class App extends React.Component {
     constructor(){
         super();
-        this.state = {
-            authed: false,
-            points: 0
         this.addPoints = this.addPoints.bind(this);
+    }
 
     state = {
         authed: false,
@@ -39,7 +15,6 @@ export default class App extends React.Component {
             points: 0,
         }
     }
-    componentDidMount () {
 
 
     componentWillMount() {
@@ -62,9 +37,19 @@ export default class App extends React.Component {
                 console.log('User NOT auth');
             }
         })
+
+
     }
+
+    componentDidMount () {
+    }
+
+
     componentWillUnmount () {
-        this.removeListener()
+        this.removeListener();
+        base.removeBinding(this.ref);
+
+    }
 
     addPoints(newPoints) {
         console.log("points is:")
