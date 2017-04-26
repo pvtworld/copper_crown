@@ -16,7 +16,7 @@ export default class App extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.removeListener = firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({
@@ -37,11 +37,6 @@ export default class App extends React.Component {
             }
         })
     }
-
-
-    componentDidMount () {
-    }
-
 
     componentWillUnmount () {
         this.removeListener()
