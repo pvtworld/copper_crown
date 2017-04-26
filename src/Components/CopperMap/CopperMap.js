@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
 import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
-import UserScore from "../UserScore/UserScore";
 import RoofInfo from '../RoofInfo/RoofInfo';
 import PlayerInfo from '../PlayerInfo/PlayerInfo';
 
