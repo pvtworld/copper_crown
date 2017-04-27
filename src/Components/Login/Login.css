@@ -1,0 +1,10 @@
+body {
+        background: #F26A4A;
+        font-family: 'Open Sans', serif;
+        color: #404040;
+}
+
+.login{
+    max-width: 400px;
+    margin: 40px auto 10px;
+}
