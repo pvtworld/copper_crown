@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Redirect, Switch, BrowserRouter} from 'react-router-dom';
-import Login from './Components/Login';
+import LoginContainer from './Components/LoginContainer';
 import firebase from './Firebase/firebase';
 import LandingPage from './Components/LandingPage';
 import NotFound from './Components/NotFound';
@@ -56,8 +56,8 @@ export default class App extends React.Component {
             <BrowserRouter>
                 <Switch>
                     <Route path='/' exact component={LandingPage} />
-                    <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                     <PrivateRoute authed={this.state.authed} path='/leaderboard' component={LeaderboardPage} />
+                    <PublicRoute authed={this.state.authed} path='/login' component={LoginContainer} />
                     <PrivateRoute authed={this.state.authed} path='/game' component={GameContainer} />
                     <Route component={NotFound} />
                 </Switch>
