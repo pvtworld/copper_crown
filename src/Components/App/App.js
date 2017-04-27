@@ -10,19 +10,19 @@ export default class App extends React.Component {
         this.logout = this.logout.bind(this);
         this.authHandler = this.authHandler.bind(this);
         this.addRoof = this.addRoof.bind(this);
-        this.state = {
-            uid: null,
-            userInfo : {
-                points: 0,
-                areaOfCopper: 0,
-            }
-        }
 
     }
 
+    state = {
+        uid: null,
+        userInfo : {
+            points: 0,
+            areaOfCopper: 0,
+        }
+    }
 
 
-        componentDidMount() {
+        componentWillMount() {
             base.onAuth((user) => {
                 if(user) {
                     this.authHandler(null, { user });
@@ -42,7 +42,7 @@ export default class App extends React.Component {
 
     authenticate(provider) {
         console.log(`Trying to log in with ${provider}`);
-        base.authWithOAuthPopup(provider, this.authHandler);
+        base.authWithOAuthRedirect(provider, this.authHandler);
     }
 
     logout() {
@@ -54,6 +54,7 @@ export default class App extends React.Component {
         console.log('current user: ');
         console.log(authData)
         if (err) {
+            alert(err)
             console.error(err);
             return;
         }
@@ -81,7 +82,7 @@ export default class App extends React.Component {
     renderLogin() {
         return (
             <nav>
-                <h2>CopperCrown</h2>
+                <h2>CopperCrown - 0.1</h2>
                 <p>Sign in to play the Game</p>
                 <button onClick={() => this.authenticate('github')}>Log In with Github</button>
                 <button onClick={() => this.authenticate('facebook')} >Log In with Facebook</button>
