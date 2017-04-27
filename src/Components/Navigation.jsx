@@ -11,7 +11,7 @@ class Navigation extends React.Component{
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="#">CopperCrown</a>
+                            <a href="/">CopperCrown</a>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
