@@ -58,7 +58,7 @@ export default class App extends React.Component {
                     <Route path='/' exact component={LandingPage} />
                     <PublicRoute authed={this.state.authed} path='/login' component={LoginContainer} />
                     <PrivateRoute authed={this.state.authed} path='/game' component={GameContainer} />
-                    <PublicRoute authed={this.state.authed} path='/leaderboard' component={LeaderboardPage} />
+                    <PrivateRoute authed={this.state.authed} path='/leaderboard' component={LeaderboardPage} />
                     <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>
