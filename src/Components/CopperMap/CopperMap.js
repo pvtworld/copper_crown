@@ -3,9 +3,8 @@ import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
 import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
 import RoofInfo from '../RoofInfo/RoofInfo';
 import PlayerInfo from '../PlayerInfo/PlayerInfo';
+import InfoContainer from "../InfoContainer/InfoContainer";
 
-var displayRoofInfo = false;
-var response = null;
 const GameMap = withGoogleMap(props => (
 
 
@@ -58,14 +57,6 @@ const GameMap = withGoogleMap(props => (
     </GoogleMap>
 ));
 
-function BottomPanel(props) {
-    if (props.displayRoofInfo) {
-        return (<RoofInfo id={props.response.id} value={Math.round(props.response.area * 0.00234) + 'kr'} area={props.response.area} leaveCallback={props.leaveCallback} stealCallback={props.stealCallback}/>);
-    }
-    return (<PlayerInfo state={props.state}/>);
-}
-
-
 export default class CopperMap extends Component {
     constructor() {
         super();
@@ -87,6 +78,7 @@ export default class CopperMap extends Component {
     handleMapClick = this.handleMapClick.bind(this);
     mapTimer = this.mapTimer.bind(this);
     stealRoof = this.stealRoof.bind(this);
+    leaveRoof = this.leaveRoof.bind(this);
 
 
     mapTimer() {
@@ -125,25 +117,35 @@ export default class CopperMap extends Component {
 
     handleRoof(roof) {
         if (roof) {
-            displayRoofInfo = true;
-            response = roof;
-            this.render();
+            console.log("Roof present")
+            this.setState({
+                displayRoof: true,
+                roofInfo: roof
+            });
+
         } else {
             console.log("No Copper");
-            displayRoofInfo = false;
-            this.render();
+            this.setState({
+                displayRoof: false
+            });
 
         }
     }
 
     stealRoof(points) {
         this.props.addPoints(points);
-        displayRoofInfo = false;
-        this.render();
+        this.leaveRoof();
+    }
+
+    leaveRoof() {
+        this.setState({
+            displayRoof: false,
+            roofInfo: null
+        });
+
     }
 
     handleMapClick(event) {
-        //this.props.addPoints(12)
         console.log("checkForCopper Dispatched")
         checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof);
     }
@@ -173,9 +175,7 @@ export default class CopperMap extends Component {
 
 
             </div>
-                <BottomPanel displayRoofInfo={displayRoofInfo} response={response} leaveCallback={this.handleRoof}
-                             stealCallback={this.stealRoof}
-                             state={this.props.state}/>
+                <InfoContainer roofInfo={this.state.roofInfo} displayRoof={this.state.displayRoof} state={this.props.state} stealRoof={this.stealRoof}  leaveRoof={this.leaveRoof}/>
             </div>
         );
     }
