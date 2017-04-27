@@ -14,6 +14,6 @@ describe('Render test', ()=> {
         component.setState({authed : true});
         component.setState({userInfo: {points : 0}});
         
-        // expect(toJson(component)).toMatchSnapshot();
+        expect(toJson(component)).toMatchSnapshot();
     })
 });
