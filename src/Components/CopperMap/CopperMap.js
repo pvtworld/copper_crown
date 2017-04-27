@@ -150,8 +150,9 @@ export default class CopperMap extends Component {
 
     render() {
         return (
+            <div>
             <div className="map">
-                <div style={{height: `80%`}}>
+                <div style={{height: `100%`}}>
 
                     <GameMap
                         containerElement={
@@ -169,11 +170,12 @@ export default class CopperMap extends Component {
                     />
 
                 </div>
-                <div style={{height: `15%`, width: `100%`}}>
+
+
+            </div>
                 <BottomPanel displayRoofInfo={displayRoofInfo} response={response} leaveCallback={this.handleRoof}
                              stealCallback={this.stealRoof}
                              state={this.props.state}/>
-                </div>
             </div>
         );
     }
