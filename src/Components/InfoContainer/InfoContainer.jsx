@@ -10,7 +10,7 @@ export default class InfoContainer extends React.Component {
                 <div>
                     <RoofInfo
                         id={this.props.roofInfo.id}
-                        value={Math.round(this.props.roofInfo.area * 0.00234) + 'kr'}
+                        value={Math.round(this.props.roofInfo.area * 0.00234)}
                         area={this.props.roofInfo.area}
                         leaveCallback={this.props.leaveRoof}
                         stealCallback={this.props.stealRoof}/>
