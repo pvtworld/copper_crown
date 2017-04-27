@@ -1,25 +1,39 @@
 exports[`Rendertests renders loginScreen when user not logged in 1`] = `
 <div>
-  <nav>
-    <h2>
-      CopperCrown - 0.1
-    </h2>
-    <p>
-      Sign in to play the Game
-    </p>
-    <button
-      onClick={[Function]}>
-      Log In with Github
-    </button>
-    <button
-      onClick={[Function]}>
-      Log In with Facebook
-    </button>
-    <button
-      onClick={[Function]}>
-      Log In with Google
-    </button>
-  </nav>
+  <div
+    className="box">
+    <div
+      className="login">
+      <h2>
+        CopperCrown - 0.1
+      </h2>
+      <hr />
+      <p>
+        Sign in to play the Game
+      </p>
+      <button
+        className="btn btn-lg btn-primary btn-block"
+        disabled={false}
+        onClick={[Function]}
+        type="button">
+        Log In with Facebook
+      </button>
+      <button
+        className="btn btn-lg btn-default btn-block"
+        disabled={false}
+        onClick={[Function]}
+        type="button">
+        Log In with Github
+      </button>
+      <button
+        className="btn btn-lg btn-danger btn-block"
+        disabled={false}
+        onClick={[Function]}
+        type="button">
+        Log In with Google
+      </button>
+    </div>
+  </div>
 </div>
 `;
 
