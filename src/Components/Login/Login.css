@@ -1,10 +1,28 @@
-body {
-        background: #F26A4A;
-        font-family: 'Open Sans', serif;
-        color: #404040;
+html, body {
+    background: url("image.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Open Sans', serif;
+    color: #404040;
+    width:100%;
+    height:100%;
+}
+
+h2 {
+    font-family: 'Open Sans', serif;
+    color: white;
+}
+
+p {
+    font-family: 'Open Sans', serif;
+    color: white;
 }
 
 .login{
     max-width: 400px;
     margin: 40px auto 10px;
 }
+
+
