@@ -1,42 +1,52 @@
 exports[`Render test renders a GameMap 1`] = `
-<div>
+<div
+  className="map">
   <div
-    className="map">
-    <div
-      style={
+    style={
+      Object {
+        "height": "80%",
+      }
+    }>
+    <withGoogleMap(Component)
+      center={
         Object {
-          "height": "100%",
+          "lat": 59.334591,
+          "lng": 18.06324,
         }
-      }>
-      <withGoogleMap(Component)
-        center={
-          Object {
-            "lat": 59.334591,
-            "lng": 18.06324,
-          }
-        }
-        containerElement={
-          <div
-            style={
-              Object {
-                "height": "100%",
-              }
-            } />
-        }
-        content={null}
-        handleRoof={[Function]}
-        mapElement={
-          <div
-            style={
-              Object {
-                "height": "100%",
-              }
-            } />
-        }
-        onMapClick={[Function]}
-        radius={5} />
-    </div>
+      }
+      containerElement={
+        <div
+          style={
+            Object {
+              "height": "100%",
+            }
+          } />
+      }
+      content={null}
+      handleRoof={[Function]}
+      mapElement={
+        <div
+          style={
+            Object {
+              "height": "100%",
+            }
+          } />
+      }
+      onMapClick={[Function]}
+      radius={5} />
   </div>
-  <UserScore />
+  <div
+    style={
+      Object {
+        "height": "15%",
+        "width": "100%",
+      }
+    }>
+    <BottomPanel
+      displayRoofInfo={false}
+      leaveCallback={[Function]}
+      response={null}
+      stealCallback={[Function]} />
+  </div>
 </div>
 `;
