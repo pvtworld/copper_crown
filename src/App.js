@@ -5,6 +5,7 @@ import firebase from './Firebase/firebase';
 import LandingPage from './Components/LandingPage';
 import NotFound from './Components/NotFound';
 import GameContainer from './Components/GameContainer';
+import LeaderboardPage from './Components/LeaderboardPage';
 
 function PublicRoute ({component: Component, authed, ...rest}) {
     return (
@@ -56,6 +57,7 @@ export default class App extends React.Component {
                 <Switch>
                     <Route path='/' exact component={LandingPage} />
                     <PublicRoute authed={this.state.authed} path='/login' component={Login} />
+                    <PrivateRoute authed={this.state.authed} path='/leaderboard' component={LeaderboardPage} />
                     <PrivateRoute authed={this.state.authed} path='/game' component={GameContainer} />
                     <Route component={NotFound} />
                 </Switch>

@@ -18,7 +18,7 @@ class Navigation extends React.Component{
                             Signed in as: {this.props.userName}
                         </Navbar.Text>
                         <Nav>
-                            <NavItem eventKey={1} href="#">Leaderboard</NavItem>
+                            <NavItem eventKey={1} href="/leaderboard">Leaderboard</NavItem>
                         </Nav>
                         <Nav pullRight>
                             <NavItem eventKey={2} onClick={this.props.userLogout} href="/login">Logout</NavItem>
