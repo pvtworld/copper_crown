@@ -1,6 +1,7 @@
 import React from 'react'
 import base from '../../Firebase/base';
 import CopperMap from '../CopperMap/CopperMap';
+import Login from '../Login/Login';
 
 export default class App extends React.Component {
     constructor(){
@@ -81,13 +82,7 @@ export default class App extends React.Component {
 
     renderLogin() {
         return (
-            <nav>
-                <h2>CopperCrown - 0.1</h2>
-                <p>Sign in to play the Game</p>
-                <button onClick={() => this.authenticate('github')}>Log In with Github</button>
-                <button onClick={() => this.authenticate('facebook')} >Log In with Facebook</button>
-                <button onClick={() => this.authenticate('google')} >Log In with Google</button>
-            </nav>
+            <Login authenticate={this.authenticate} />
         )
     }
 
