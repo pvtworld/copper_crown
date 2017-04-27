@@ -37,10 +37,8 @@ exports[`Render test renders a GameMap 1`] = `
         radius={5} />
     </div>
   </div>
-  <BottomPanel
-    displayRoofInfo={false}
-    leaveCallback={[Function]}
-    response={null}
-    stealCallback={[Function]} />
+  <InfoContainer
+    leaveRoof={[Function]}
+    stealRoof={[Function]} />
 </div>
 `;
