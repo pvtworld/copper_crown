@@ -8,7 +8,6 @@ var pos = 1;
 
 export default class LeaderboardPage extends Component{
 
-
     getNewPos(){
         var newPos = pos;
         pos++;

@@ -1,5 +1,7 @@
 import React from 'react';
-import {Navbar, Nav, NavItem} from 'react-bootstrap'
+import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+
 
 class Navigation extends React.Component{
 
@@ -9,19 +11,18 @@ class Navigation extends React.Component{
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a onClick={this.props.userLogout} href="/login">CopperCrown</a>
+                            <a href="#">CopperCrown</a>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
-                        <Navbar.Text>
-                            Signed in as: {this.props.userName}
-                        </Navbar.Text>
                         <Nav>
-                            <NavItem eventKey={1} href="/leaderboard">Leaderboard</NavItem>
+                            <LinkContainer to="/leaderboard">
+                                <NavItem eventKey={1}>Leaderboard</NavItem>
+                            </LinkContainer>
                         </Nav>
                         <Nav pullRight>
-                            <NavItem eventKey={2} onClick={this.props.userLogout} href="/login">Logout</NavItem>
+                            <NavItem eventKey={2} onClick={this.props.userLogout} href="#">Logout</NavItem>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
