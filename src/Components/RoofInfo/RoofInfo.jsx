@@ -17,9 +17,9 @@ export default class RoofInfo extends Component {
     leave = this.leave.bind(this);
 
     steal(){
+        console.log(this.props)
         console.log('STOLE ROOF!!!');
-        var stealFunc = this.props.stealCallback;
-        stealFunc(this.props.value);
+        this.props.stealCallback(this.props.value, this.props.area);
     }
 
     leave(){

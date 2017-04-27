@@ -9,13 +9,15 @@ export default class App extends React.Component {
         this.authenticate = this.authenticate.bind(this);
         this.logout = this.logout.bind(this);
         this.authHandler = this.authHandler.bind(this);
-        this.addPoints = this.addPoints.bind(this);
+        this.addRoof = this.addRoof.bind(this);
+
     }
 
     state = {
         uid: null,
         userInfo : {
             points: 0,
+            areaOfCopper: 0,
         }
     }
 
@@ -59,9 +61,10 @@ export default class App extends React.Component {
             });
         };
 
-    addPoints(newPoints) {
+    addRoof(newPoints, newArea) {
         const userInfo= {...this.state.userInfo};
         userInfo.points += parseInt(newPoints, 10);
+        userInfo.areaOfCopper += parseInt(newArea, 10);
         this.setState({ userInfo });
     }
 
@@ -89,7 +92,8 @@ export default class App extends React.Component {
             <div>
                 <CopperMap
                     state={this.state}
-                    addPoints={this.addPoints}
+                    addRoof={this.addRoof}
+                    
                 />
                 {logout}
 

@@ -10,8 +10,8 @@ export default class PlayerInfo extends Component {
             <div>
             <ListGroup>
                 <ListGroupItem bsStyle="success">PlayerID: {this.props.state.uid} </ListGroupItem>
-                <ListGroupItem bsStyle="info">Value of copper stolen: {this.props.state.userInfo.points + 'kr'}</ListGroupItem>
-                <ListGroupItem bsStyle="warning">Area of copper stolen: NaN</ListGroupItem>
+                <ListGroupItem bsStyle="info">Value of copper stolen: {this.props.state.userInfo.points}</ListGroupItem>
+                <ListGroupItem bsStyle="warning">Area of copper stolen: {this.props.state.userInfo.areaOfCopper + 'cm2'}</ListGroupItem>
             </ListGroup>
             </div>
         );

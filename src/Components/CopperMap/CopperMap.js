@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
 import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
@@ -130,8 +130,8 @@ export default class CopperMap extends Component {
         }
     }
 
-    stealRoof(points) {
-        this.props.addPoints(points);
+    stealRoof(points, area) {
+        this.props.addRoof(points, area)
         this.leaveRoof();
     }
 
@@ -151,29 +151,34 @@ export default class CopperMap extends Component {
     render() {
         return (
             <div>
-            <div className="map">
-                <div style={{height: `100%`}}>
+                <div className="map">
+                    <div style={{height: `100%`}}>
 
-                    <GameMap
-                        containerElement={
-                            <div style={{height: `100%`}}/>
-                        }
-                        mapElement={
-                            <div style={{height: `100%`}}/>
-                        }
-                        onMapClick={this.handleMapClick}
-                        handleRoof={this.handleRoof}
-                        center={this.state.center}
-                        content={this.state.content}
-                        radius={this.state.radius}
+                        <GameMap
+                            containerElement={
+                                <div style={{height: `100%`}}/>
+                            }
+                            mapElement={
+                                <div style={{height: `100%`}}/>
+                            }
+                            onMapClick={this.handleMapClick}
+                            handleRoof={this.handleRoof}
+                            center={this.state.center}
+                            content={this.state.content}
+                            radius={this.state.radius}
+                        />
 
-                    />
+                    </div>
+
 
                 </div>
-
-
-            </div>
-                <InfoContainer roofInfo={this.state.roofInfo} displayRoof={this.state.displayRoof} state={this.props.state} stealRoof={this.stealRoof}  leaveRoof={this.leaveRoof}/>
+                <InfoContainer
+                    roofInfo={this.state.roofInfo}
+                    displayRoof={this.state.displayRoof}
+                    state={this.props.state}
+                    stealRoof={this.stealRoof}
+                    leaveRoof={this.leaveRoof}
+                />
             </div>
         );
     }
