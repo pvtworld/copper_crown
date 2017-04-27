@@ -1,0 +1,7 @@
+exports[`Render test Renders without crashing 1`] = `
+<div>
+  <h1>
+    Welcome to CopperCrown!
+  </h1>
+</div>
+`;

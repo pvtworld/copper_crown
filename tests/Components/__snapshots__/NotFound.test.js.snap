@@ -1,0 +1,5 @@
+exports[`Render test Renders without crashing 1`] = `
+<p>
+  Sorry, whatever you\'re searching for is not here.
+</p>
+`;
