@@ -77,6 +77,8 @@ export default class CopperMap extends Component {
     mapTimer = this.mapTimer.bind(this);
     stealRoof = this.stealRoof.bind(this);
     leaveRoof = this.leaveRoof.bind(this);
+    roofCallback = this.roofCallback.bind(this);
+
 
 
     mapTimer() {
