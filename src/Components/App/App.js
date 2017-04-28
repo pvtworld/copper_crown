@@ -11,6 +11,7 @@ export default class App extends React.Component {
         this.logout = this.logout.bind(this);
         this.authHandler = this.authHandler.bind(this);
         this.addRoof = this.addRoof.bind(this);
+        this.roofAlreadyStolen = this.roofAlreadyStolen.bind(this);
 
     }
 
