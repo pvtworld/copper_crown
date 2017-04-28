@@ -90,6 +90,15 @@ export default class App extends React.Component {
         } else {
             userInfo.areaOfCopper = parseInt(newArea, 10);
         }
+        console.log("adding to firebase")
+        base.push('stolenRoofs', {
+            data: {roofId: newRoof},
+            then(err){
+                if(err){
+                    console.log(err);
+                }
+            }
+        });
 
         this.setState({ userInfo });
     }
