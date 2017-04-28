@@ -12,6 +12,7 @@ export default class App extends React.Component {
         this.authHandler = this.authHandler.bind(this);
         this.addRoof = this.addRoof.bind(this);
         this.roofAlreadyStolen = this.roofAlreadyStolen.bind(this);
+        this.getLeader = this.getLeader.bind(this);
 
     }
 
