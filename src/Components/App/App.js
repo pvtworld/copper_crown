@@ -65,7 +65,7 @@ export default class App extends React.Component {
         };
 
     roofAlreadyStolen(newRoof, callback) {
-        let roof = base.fetch('stolenRoofs', {
+        base.fetch('stolenRoofs', {
             context: this,
             queries: {
                 orderByChild: 'roofId',
