@@ -64,5 +64,9 @@ exports[`Rendertests renders map when user logged in 1`] = `
     onClick={[Function]}>
     Log Out!
   </button>
+  <button
+    onClick={[Function]}>
+    Print Leaderboard in console
+  </button>
 </div>
 `;
