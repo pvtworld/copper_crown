@@ -1,0 +1,17 @@
+html, body {
+    background: url("image.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h2 {
+    font-family: 'Open Sans', serif;
+    color: white;
+}
+
+p {
+    font-family: 'Open Sans', serif;
+    color: white;
+}
