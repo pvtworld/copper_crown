@@ -64,7 +64,20 @@ export default class App extends React.Component {
             });
         };
 
-    addRoof(newPoints, newArea) {
+    roofAlreadyStolen(newRoof, callback) {
+        let roof = base.fetch('stolenRoofs', {
+            context: this,
+            queries: {
+                orderByChild: 'roofId',
+                equalTo: newRoof.id},
+            then(response){
+                console.log(Object.keys(response).length)
+                callback(newRoof, (Object.keys(response).length));
+            }
+        });
+    }
+
+    addRoof(newPoints, newArea, newRoof) {
         const userInfo= {...this.state.userInfo};
         if(userInfo.points) {
             userInfo.points += parseInt(newPoints, 10);
