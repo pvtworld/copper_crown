@@ -49,6 +49,7 @@ exports[`Rendertests renders map when user logged in 1`] = `
 <div>
   <CopperMap
     addRoof={[Function]}
+    roofAlreadyStolen={[Function]}
     state={
       Object {
         "authed": true,
