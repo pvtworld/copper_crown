@@ -13,7 +13,9 @@ export default class InfoContainer extends React.Component {
                         value={Math.round(this.props.roofInfo.area * 0.00234)}
                         area={this.props.roofInfo.area}
                         leaveCallback={this.props.leaveRoof}
-                        stealCallback={this.props.stealRoof}/>
+                        stealCallback={this.props.stealRoof}
+                        roofAlreadyStolen={this.props.roofAlreadyStolen}
+                    />
                 </div>
             );
         }
