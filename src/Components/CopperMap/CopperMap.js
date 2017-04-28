@@ -77,6 +77,8 @@ export default class CopperMap extends Component {
     mapTimer = this.mapTimer.bind(this);
     stealRoof = this.stealRoof.bind(this);
     leaveRoof = this.leaveRoof.bind(this);
+    roofCallback = this.roofCallback.bind(this);
+
 
 
     mapTimer() {
@@ -113,14 +115,21 @@ export default class CopperMap extends Component {
         clearInterval(this.timer);
     }
 
+    roofCallback(roof, alreadyStolen) {
+        this.setState({
+            displayRoof: !alreadyStolen,
+            roofInfo: roof
+        });
+        if(alreadyStolen) {
+
+        alert("Roof already Stolen")
+        }
+    }
+
     handleRoof(roof) {
         if (roof) {
             console.log("Roof present")
-            this.setState({
-                displayRoof: true,
-                roofInfo: roof
-            });
-
+            this.props.roofAlreadyStolen(roof, this.roofCallback)
         } else {
             console.log("No Copper");
             this.setState({
@@ -130,8 +139,8 @@ export default class CopperMap extends Component {
         }
     }
 
-    stealRoof(points, area) {
-        this.props.addRoof(points, area)
+    stealRoof(points, area, id) {
+        this.props.addRoof(points, area, id)
         this.leaveRoof();
     }
 
@@ -178,6 +187,7 @@ export default class CopperMap extends Component {
                     state={this.props.state}
                     stealRoof={this.stealRoof}
                     leaveRoof={this.leaveRoof}
+                    roofAlreadyStolen={this.props.roofAlreadyStolen}
                 />
             </div>
         );

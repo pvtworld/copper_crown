@@ -11,6 +11,8 @@ export default class App extends React.Component {
         this.logout = this.logout.bind(this);
         this.authHandler = this.authHandler.bind(this);
         this.addRoof = this.addRoof.bind(this);
+        this.roofAlreadyStolen = this.roofAlreadyStolen.bind(this);
+        this.getLeader = this.getLeader.bind(this);
 
     }
 
@@ -34,7 +36,6 @@ export default class App extends React.Component {
                 }
             });
         }
-
 
     componentWillUnmount () {
         base.removeBinding(this.ref);
@@ -64,7 +65,34 @@ export default class App extends React.Component {
             });
         };
 
-    addRoof(newPoints, newArea) {
+    getLeader() {
+        base.fetch('users', {
+            context: this,
+            queries: {
+                orderByChild: 'points', },
+            asArray: true,
+            then(response){
+                response.reverse().forEach(function(element) {
+                    console.log("user: "+element.key + ", points: " +element.points);
+                });
+            }
+        });
+    }
+
+    roofAlreadyStolen(newRoof, callback) {
+        base.fetch('stolenRoofs', {
+            context: this,
+            queries: {
+                orderByChild: 'roofId',
+                equalTo: newRoof.id},
+            then(response){
+                console.log(Object.keys(response).length)
+                callback(newRoof, (Object.keys(response).length));
+            }
+        });
+    }
+
+    addRoof(newPoints, newArea, newRoof) {
         const userInfo= {...this.state.userInfo};
         if(userInfo.points) {
             userInfo.points += parseInt(newPoints, 10);
@@ -76,6 +104,15 @@ export default class App extends React.Component {
         } else {
             userInfo.areaOfCopper = parseInt(newArea, 10);
         }
+        console.log("adding to firebase")
+        base.push('stolenRoofs', {
+            data: {roofId: newRoof},
+            then(err){
+                if(err){
+                    console.log(err);
+                }
+            }
+        });
 
         this.setState({ userInfo });
     }
@@ -88,6 +125,7 @@ export default class App extends React.Component {
 
     render() {
         const logout = <button onClick={this.logout}>Log Out!</button>;
+        const leaderboard = <button onClick={this.getLeader}>Print Leaderboard in console</button>;
 
         // check if they are no logged in at all
         if(!this.state.uid) {
@@ -99,9 +137,10 @@ export default class App extends React.Component {
                 <CopperMap
                     state={this.state}
                     addRoof={this.addRoof}
+                    roofAlreadyStolen={this.roofAlreadyStolen}
 
                 />
-                {logout}
+                {logout}{leaderboard}
 
             </div>
         )
