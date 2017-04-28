@@ -1,7 +1,7 @@
 import React from 'react'
 import base from '../../Firebase/base';
 import CopperMap from '../CopperMap/CopperMap';
-import Login from '../Login/Login';
+import LoginContainer from '../LoginContainer/LoginContainer';
 
 export default class App extends React.Component {
     constructor(){
@@ -82,7 +82,7 @@ export default class App extends React.Component {
 
     renderLogin() {
         return (
-            <Login authenticate={this.authenticate} />
+            <LoginContainer authenticate={this.authenticate} />
         )
     }
 
