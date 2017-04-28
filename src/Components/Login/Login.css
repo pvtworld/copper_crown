@@ -3,10 +3,14 @@
     margin: 0 auto;
 }
 
+p {
+    color: white;
+}
+
 .box{
-    margin: 40px auto 10px;
+    margin: 80px auto 10px;
     width:400px;
-    padding: 10px 15px 15px;
+    padding: 20px 20px 20px;
     background: rgba(0,0,0,0.6);
     position: relative;
     border-radius: 5px;
