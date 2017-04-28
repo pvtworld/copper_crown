@@ -37,11 +37,6 @@ export default class App extends React.Component {
             });
         }
 
-        componentDidMount() {
-            this.getLeader();
-        }
-
-
     componentWillUnmount () {
         base.removeBinding(this.ref);
 
@@ -77,7 +72,9 @@ export default class App extends React.Component {
                 orderByChild: 'points', },
             asArray: true,
             then(response){
-                console.log(response.reverse())
+                response.reverse().forEach(function(element) {
+                    console.log("user: "+element.key + ", points: " +element.points);
+                });
             }
         });
     }
@@ -128,6 +125,7 @@ export default class App extends React.Component {
 
     render() {
         const logout = <button onClick={this.logout}>Log Out!</button>;
+        const leaderboard = <button onClick={this.getLeader}>Print Leaderboard in console</button>;
 
         // check if they are no logged in at all
         if(!this.state.uid) {
@@ -142,7 +140,7 @@ export default class App extends React.Component {
                     roofAlreadyStolen={this.roofAlreadyStolen}
 
                 />
-                {logout}
+                {logout}{leaderboard}
 
             </div>
         )
