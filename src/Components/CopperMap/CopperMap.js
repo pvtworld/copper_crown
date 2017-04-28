@@ -139,8 +139,8 @@ export default class CopperMap extends Component {
         }
     }
 
-    stealRoof(points, area) {
-        this.props.addRoof(points, area)
+    stealRoof(points, area, id) {
+        this.props.addRoof(points, area, id)
         this.leaveRoof();
     }
 
