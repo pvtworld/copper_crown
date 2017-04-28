@@ -37,6 +37,10 @@ export default class App extends React.Component {
             });
         }
 
+        componentDidMount() {
+            this.getLeader();
+        }
+
 
     componentWillUnmount () {
         base.removeBinding(this.ref);
@@ -65,6 +69,18 @@ export default class App extends React.Component {
                 uid: authData.user.uid,
             });
         };
+
+    getLeader() {
+        base.fetch('users', {
+            context: this,
+            queries: {
+                orderByChild: 'points', },
+            asArray: true,
+            then(response){
+                console.log(response.reverse())
+            }
+        });
+    }
 
     roofAlreadyStolen(newRoof, callback) {
         base.fetch('stolenRoofs', {
