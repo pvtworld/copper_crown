@@ -187,6 +187,7 @@ export default class CopperMap extends Component {
                     state={this.props.state}
                     stealRoof={this.stealRoof}
                     leaveRoof={this.leaveRoof}
+                    roofAlreadyStolen={this.props.roofAlreadyStolen}
                 />
             </div>
         );
