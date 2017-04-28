@@ -1,37 +1,45 @@
 exports[`Rendertests renders loginScreen when user not logged in 1`] = `
 <div>
-  <div
-    className="box">
+  <div>
     <div
-      className="login">
+      id="center_text">
       <h2>
-        CopperCrown - 0.1
+        COPPER
       </h2>
-      <hr />
-      <p>
-        Sign in to play the Game
-      </p>
-      <button
-        className="btn btn-lg btn-primary btn-block"
-        disabled={false}
-        onClick={[Function]}
-        type="button">
-        Log In with Facebook
-      </button>
-      <button
-        className="btn btn-lg btn-default btn-block"
-        disabled={false}
-        onClick={[Function]}
-        type="button">
-        Log In with Github
-      </button>
-      <button
-        className="btn btn-lg btn-danger btn-block"
-        disabled={false}
-        onClick={[Function]}
-        type="button">
-        Log In with Google
-      </button>
+      <h3>
+        CROWN
+      </h3>
+    </div>
+    <div
+      className="box">
+      <div
+        className="login">
+        <p>
+          Sign in to play the Game
+        </p>
+        <hr />
+        <button
+          className="btn btn-lg btn-primary btn-block"
+          disabled={false}
+          onClick={[Function]}
+          type="button">
+          Log In with Facebook
+        </button>
+        <button
+          className="btn btn-lg btn-default btn-block"
+          disabled={false}
+          onClick={[Function]}
+          type="button">
+          Log In with Github
+        </button>
+        <button
+          className="btn btn-lg btn-danger btn-block"
+          disabled={false}
+          onClick={[Function]}
+          type="button">
+          Log In with Google
+        </button>
+      </div>
     </div>
   </div>
 </div>
