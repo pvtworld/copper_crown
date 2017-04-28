@@ -113,14 +113,21 @@ export default class CopperMap extends Component {
         clearInterval(this.timer);
     }
 
+    roofCallback(roof, alreadyStolen) {
+        this.setState({
+            displayRoof: !alreadyStolen,
+            roofInfo: roof
+        });
+        if(alreadyStolen) {
+
+        alert("Roof already Stolen")
+        }
+    }
+
     handleRoof(roof) {
         if (roof) {
             console.log("Roof present")
-            this.setState({
-                displayRoof: true,
-                roofInfo: roof
-            });
-
+            var alreadyStolen = this.props.roofAlreadyStolen(roof, this.roofCallback)
         } else {
             console.log("No Copper");
             this.setState({
