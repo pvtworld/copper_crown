@@ -113,6 +113,7 @@ export default class App extends React.Component {
                 <CopperMap
                     state={this.state}
                     addRoof={this.addRoof}
+                    roofAlreadyStolen={this.roofAlreadyStolen}
 
                 />
                 {logout}
