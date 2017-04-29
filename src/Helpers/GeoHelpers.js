@@ -21,7 +21,7 @@ export const geolocation = (
 
 export function checkClickForCopper(long, lat, callback) {
 
-    const sthlmPointUrlTemplate = 'https://crossorigin.me/http://miljodata.stockholm.se/api/koppartak-1997-ytor?Geom=POINT(%longitude%%20%latitude%)';
+    const sthlmPointUrlTemplate = 'https://us-central1-coppercors.cloudfunctions.net/copperProvider/?whatcopper=Geom=POINT(%longitude%%20%latitude%)';
 
     const [x,y] = convertPoint(long, lat);
 
