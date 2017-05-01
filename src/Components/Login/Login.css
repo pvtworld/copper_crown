@@ -3,10 +3,6 @@
     margin: 0 auto;
 }
 
-p {
-    color: white;
-}
-
 @media screen and (max-width: 540px) {
     .login{
         width: 100%;
