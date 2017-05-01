@@ -1,7 +1,9 @@
 import React from 'react';
-import {Button, Panel, Col, Tooltip, OverlayTrigger} from 'react-bootstrap';
 import './Login.css'
+import {Button, Panel, Col} from 'react-bootstrap';
 import ToolTip from '../ToolTip/ToolTip'
+
+
 
 const title = <h2>Sign in to play the game</h2>;
 export default class Login extends React.Component {
@@ -15,7 +17,7 @@ export default class Login extends React.Component {
                     <Col className="text-right">
                         <ToolTip delayShow={200} id="tooltip-bottom" placement="bottom" tooltip="Help text. Help text. Help text. Help text. Help text. Help text." >Help</ToolTip>
                     </Col>
-            </Panel>
+                </Panel>
             </Col>
         );
     }
