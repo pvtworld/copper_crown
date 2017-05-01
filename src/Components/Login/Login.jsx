@@ -3,8 +3,6 @@ import './Login.css'
 import {Button, Panel, Col} from 'react-bootstrap';
 import ToolTip from '../ToolTip/ToolTip'
 
-
-
 const title = <h2>Sign in to play the game</h2>;
 export default class Login extends React.Component {
     render() {
