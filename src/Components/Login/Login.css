@@ -7,17 +7,6 @@ p {
     color: white;
 }
 
-.box{
-    margin: 80px auto 10px;
-    width:400px;
-    padding: 20px 20px 20px;
-    background: rgba(0,0,0,0.6);
-    position: relative;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-}
-
 @media screen and (max-width: 540px) {
     .login{
         width: 100%;
