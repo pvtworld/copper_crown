@@ -1,5 +1,5 @@
 .login{
-    max-width: 400px;
+    width: 400px;
     margin: 0 auto;
 }
 
@@ -19,7 +19,7 @@ p {
 }
 
 @media screen and (max-width: 540px) {
-    .box{
+    .login{
         width: 100%;
     }
 }
