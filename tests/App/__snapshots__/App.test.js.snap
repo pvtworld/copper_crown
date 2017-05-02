@@ -66,8 +66,10 @@ exports[`Rendertests renders loginScreen when user not logged in 1`] = `
 
 exports[`Rendertests renders map when user logged in 1`] = `
 <div>
-  <CopperMap
+  <GameContainer
     addRoof={[Function]}
+    leaderboard={[Function]}
+    logout={[Function]}
     roofAlreadyStolen={[Function]}
     state={
       Object {
@@ -79,13 +81,5 @@ exports[`Rendertests renders map when user logged in 1`] = `
         },
       }
     } />
-  <button
-    onClick={[Function]}>
-    Log Out!
-  </button>
-  <button
-    onClick={[Function]}>
-    Print Leaderboard in console
-  </button>
 </div>
 `;

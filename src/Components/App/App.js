@@ -1,7 +1,7 @@
 import React from 'react'
 import base from '../../Firebase/base';
-import CopperMap from '../CopperMap/CopperMap';
 import LoginContainer from '../LoginContainer/LoginContainer';
+import GameContainer from '../GameContainer/GameContainer'
 
 export default class App extends React.Component {
     constructor(){
@@ -49,6 +49,7 @@ export default class App extends React.Component {
 
     logout() {
         base.unauth();
+        console.log('Logging out');
         this.setState({ uid: null });
     }
 
@@ -124,9 +125,6 @@ export default class App extends React.Component {
     }
 
     render() {
-        const logout = <button onClick={this.logout}>Log Out!</button>;
-        const leaderboard = <button onClick={this.getLeader}>Print Leaderboard in console</button>;
-
         // check if they are no logged in at all
         if(!this.state.uid) {
             return <div>{this.renderLogin()}</div>
@@ -134,14 +132,12 @@ export default class App extends React.Component {
 
         return (
             <div>
-                <CopperMap
-                    state={this.state}
-                    addRoof={this.addRoof}
-                    roofAlreadyStolen={this.roofAlreadyStolen}
-
+                <GameContainer state={this.state}
+                               addRoof={this.addRoof}
+                               roofAlreadyStolen={this.roofAlreadyStolen}
+                               logout={this.logout}
+                               leaderboard={this.getLeader}
                 />
-                {logout}{leaderboard}
-
             </div>
         )
     }
