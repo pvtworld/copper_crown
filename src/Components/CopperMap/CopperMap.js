@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
+import {withGoogleMap, GoogleMap, Circle, Marker} from "react-google-maps";
 import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
 
