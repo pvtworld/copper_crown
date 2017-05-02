@@ -24,17 +24,8 @@ const GameMap = withGoogleMap(props => (
         }}
 
     >
-        <Circle
-            center={props.center}
-            radius={props.radius}
-            options={{
-                fillColor: `red`,
-                fillOpacity: 0.90,
-                strokeColor: `red`,
-                strokeOpacity: 0.50,
-                strokeWeight: 2,
-            }}
-        />
+
+
 
         <Circle
             onClick={(event => (
