@@ -8,7 +8,6 @@ const GameMap = withGoogleMap(props => (
 
     <GoogleMap
         center={props.center}
-        defaultZoom={18}
         defaultZoom={17}
         defaultCenter={props.center}
         onClick={props.onMapClick}
