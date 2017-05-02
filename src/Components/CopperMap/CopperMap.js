@@ -1,59 +1,7 @@
 import React, {Component} from 'react';
-import {withGoogleMap, GoogleMap, Circle} from "react-google-maps";
 import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
-
-const GameMap = withGoogleMap(props => (
-
-
-    <GoogleMap
-        center={props.center}
-        defaultZoom={18}
-        defaultCenter={props.center}
-        onClick={props.onMapClick}
-        options={{
-            mapTypeControl: false,
-            streetViewControl: false,
-            // zoomControl: false,
-            //draggable: false,
-            //scrollwheel: false,
-            //panControl: false,
-            //maxZoom: 18,
-            //minZoom: 18,
-            //zoom: 18,
-        }}
-
-    >
-        <Circle
-            center={props.center}
-            radius={props.radius}
-            options={{
-                fillColor: `red`,
-                fillOpacity: 0.90,
-                strokeColor: `red`,
-                strokeOpacity: 0.50,
-                strokeWeight: 2,
-            }}
-        />
-
-        <Circle
-            onClick={(event => (
-                checkClickForCopper(event.latLng.lng(), event.latLng.lat(), props.handleRoof)
-            ))
-            }
-            center={props.center}
-            radius={100}
-            options={{
-                fillColor: `green`,
-                fillOpacity: 0.10,
-                strokeColor: `black`,
-                strokeOpacity: 0.50,
-                strokeWeight: 2,
-            }}
-        />
-
-    </GoogleMap>
-));
+import {GameMap} from "../GameMap/GameMap";
 
 export default class CopperMap extends Component {
     constructor() {
