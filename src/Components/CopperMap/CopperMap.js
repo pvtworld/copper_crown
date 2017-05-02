@@ -43,6 +43,19 @@ const GameMap = withGoogleMap(props => (
             }}
         />
 
+        <Marker
+            defaultPosition={props.center}
+            position={props.center}
+            title="Click to zoom"
+            icon={{url: '/images/racoon.png',
+                scaledSize: {width: 20, height: 20},
+                size: {width: 360, height: 330},
+                anchor: {x:10, y:10}
+
+            }}
+            onClick={props.onMarkerClick}
+        />
+
     </GoogleMap>
 ));
 
