@@ -5,58 +5,36 @@ var currentRate;
 
 export function getPricePerSquareMeter(setPricePerSquareMeter) {
 
-    currentPricePerTon(savePrice);
+    const priceURL = 'https://www.quandl.com/api/v3/datasets/LME/PR_CU.json?api_key=sowBXJ3eiZby8MzvHbqP';
+    const rateURL = 'https://www.quandl.com/api/v3/datasets/BUNDESBANK/BBEX3_D_SEK_USD_CA_AC_000.json?api_key=sowBXJ3eiZby8MzvHbqP&start_date=' + currentDate();
 
-    function savePrice(price) {
+    fetch(priceURL)
+        .then(status)
+        .then(json)
+        .then((jsonObject) => {
+            currentPrice = jsonObject.dataset.data[0][1];
 
-        currentPrice = price;
-        dollarToSEK(saveRate);
-
-        function saveRate(rate) {
-
-            currentRate = rate;
-
-            const newPricePerSquareMeter = (currentPrice * currentRate) / squareMetersPerTon;
-            setPricePerSquareMeter(newPricePerSquareMeter);
-
-        }
-    }
-
+            fetch(rateURL)
+                .then(status)
+                .then(json)
+                .then((jsonObject) => {
+                    currentRate = jsonObject.dataset.data[0][1];
+                    setPricePerSquareMeter((currentPrice * currentRate) / squareMetersPerTon);
+                }).catch((error) =>{
+                alert('Error: Please refresh page.');
+            });
+        });
 }
 
-
-function currentPricePerTon(savePrice) {
-
-    const url = 'https://www.quandl.com/api/v3/datasets/LME/PR_CU.json?api_key=sowBXJ3eiZby8MzvHbqP';
-
-    const request = new XMLHttpRequest();
-    request.open('GET', url, true);
-    request.send();
-    request.addEventListener('readystatechange', processRequest, false);
-
-    function processRequest(e) {
-        if (request.readyState === 4 && request.status === 200) {
-            const response = JSON.parse(request.responseText);
-            savePrice(response.dataset.data[0][1]);
-        }
+function status(response){
+    if(response.status === 200){
+        return Promise.resolve(response);
     }
+    return Promise.reject(new Error(response.statusText));
 }
 
-function dollarToSEK(saveRate) {
-
-    const urlTemplate = 'https://www.quandl.com/api/v3/datasets/BUNDESBANK/BBEX3_D_SEK_USD_CA_AC_000.json?api_key=sowBXJ3eiZby8MzvHbqP&start_date=';
-
-    const request = new XMLHttpRequest();
-    request.open('GET', urlTemplate + currentDate(), true);
-    request.send();
-    request.addEventListener('readystatechange', processRequest, false);
-
-    function processRequest(e) {
-        if (request.readyState === 4 && request.status === 200) {
-            const response = JSON.parse(request.responseText);
-            saveRate(response.dataset.data[0][1]);
-        }
-    }
+function json(response){
+    return response.json();
 }
 
 function currentDate() {
