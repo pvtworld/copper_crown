@@ -73,7 +73,7 @@ function currentDate() {
         day = '0' + day;
     }
 
-    return year + '-' + month + '-' + day;
+    //return year + '-' + month + '-' + day;
 
-    //return '2017-05-02';
+    return '2017-05-02';
 }

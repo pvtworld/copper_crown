@@ -14,7 +14,6 @@ export default class App extends React.Component {
         this.addRoof = this.addRoof.bind(this);
         this.roofAlreadyStolen = this.roofAlreadyStolen.bind(this);
         this.getLeader = this.getLeader.bind(this);
-        //this.setPricePerSquareMeter = this.setPricePerSquareMeter.bind(this);
     }
 
     state = {
@@ -45,15 +44,9 @@ export default class App extends React.Component {
     componentDidMount() {
         getPricePerSquareMeter((newPrice) => {
             this.setState({pricePerSquareMeter: newPrice});
-            console.log(('newPrice: ' + newPrice));
         });
 
     }
-
-    // setPricePerSquareMeter(newPrice) {
-    //     this.setState({pricePerSquareMeter: newPrice});
-    //     console.log(('newPrice: ' + newPrice));
-    // }
 
     componentWillUnmount() {
         base.removeBinding(this.ref);
