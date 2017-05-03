@@ -1,23 +1,15 @@
 import { convertPoint } from './CoordinateConverter';
 
-// Get location from device
+export const geoError = (err) => {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+}
 
+export const geoOptions = {
+    enableHighAccuracy: true,
+    maximumAge: 0,
+    timeout: 4500
+}
 
-export const geolocation = (
-    navigator.geolocation ?
-        navigator.geolocation :
-        ({
-            getCurrentPosition(success, failure, options) {
-                options({
-                    enableHighAccuracy: true,
-                    maximumAge        : 30000,
-                    timeout           : 500
-                });
-                failure(`Your browser doesn't support geolocation.`);
-                success(`Your browser does support geolocation.`)
-            },
-        })
-);
 
 export function checkClickForCopper(long, lat, callback) {
 

@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
+import {
+    geoError,
+    geoOptions,
+    checkClickForCopper
+} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
 import {GameMap} from "../GameMap/GameMap";
 
@@ -11,56 +15,56 @@ export default class CopperMap extends Component {
             center: {
                 lat: 59.334591,
                 lng: 18.063240,
-            },
-            content: null,
-            radius: 5
+            }
         };
-
-
     }
 
-    isUnmounted = false;
+    geoTimer = null;
+
     handleRoof = this.handleRoof.bind(this);
     handleMapClick = this.handleMapClick.bind(this);
-    mapTimer = this.mapTimer.bind(this);
+    geoLocationWatcher = this.geoLocationWatcher.bind(this);
     stealRoof = this.stealRoof.bind(this);
     leaveRoof = this.leaveRoof.bind(this);
     roofCallback = this.roofCallback.bind(this);
 
+    geoLocationWatcher() {
+        if (navigator.geolocation) {
 
+            let watchPositionId;
 
-    mapTimer() {
-        geolocation.getCurrentPosition((position) => {
-            if (this.isUnmounted) {
-                return;
+            const geoSucess = (position) => {
+                console.log("Sucess! Located user at: ");
+                console.log(position);
+
+                this.setState({
+                    center: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    }
+                });
+
+                navigator.geolocation.clearWatch(watchPositionId);
             }
 
-            this.setState({
-                center: {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                },
-                content: `Location found using HTML5.`,
-            });
+            navigator.geolocation.getCurrentPosition(geoSucess, geoError, geoOptions)
 
-        }, (reason) => {
-            if (this.isUnmounted) {
-                return;
-            }
-        });
+            this.geoTimer = setInterval(function () {
+                watchPositionId = navigator.geolocation.watchPosition(geoSucess, geoError, geoOptions);
+            }, 5000);
 
+        } else {
+            alert("Turn on GPS")
+        }
     }
 
     componentDidMount() {
-        this.mapTimer();
-        setInterval(this.mapTimer, 5000);
-
+        this.geoLocationWatcher();
 
     }
 
     componentWillUnmount() {
-        this.isUnmounted = true;
-        clearInterval(this.timer);
+        clearInterval(this.geoTimer);
     }
 
     roofCallback(roof, alreadyStolen) {
@@ -68,9 +72,9 @@ export default class CopperMap extends Component {
             displayRoof: !alreadyStolen,
             roofInfo: roof
         });
-        if(alreadyStolen) {
+        if (alreadyStolen) {
 
-        alert("Roof already Stolen")
+            alert("Roof already Stolen")
         }
     }
 
