@@ -23,7 +23,6 @@ exports[`Render test renders a GameMap 1`] = `
               }
             } />
         }
-        content={null}
         handleRoof={[Function]}
         mapElement={
           <div
@@ -33,8 +32,7 @@ exports[`Render test renders a GameMap 1`] = `
               }
             } />
         }
-        onMapClick={[Function]}
-        radius={5} />
+        onMapClick={[Function]} />
     </div>
   </div>
   <InfoContainer
