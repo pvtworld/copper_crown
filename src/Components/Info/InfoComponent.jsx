@@ -8,7 +8,7 @@ export default class InfoComponent extends React.Component{
 
         if(this.props.renderInfo){
             return(
-                <div className="box">
+                <div className="info-box">
                     {back}
                     <div>
                         <h3>Info</h3>
