@@ -2,14 +2,13 @@ import React, {Component} from 'react';
 import {Button, Tooltip, OverlayTrigger, Grid, Col, Row} from 'react-bootstrap';
 import '../LoginContainer/LoginContainer.css';
 
-const tooltipSteal =(
-    <Tooltip id="tooltipSteal">Steal roof and add value to your account</Tooltip>
+const tooltipSteal = (
+    <Tooltip id="tooltipSteal">Steal roof and add the current value to your account</Tooltip>
 );
 
 const tooltipLeave = (
-    <Tooltip id="tooltipLeave">Leave roof alone</Tooltip>
+    <Tooltip id="tooltipLeave">Leave roof in hopes that the value will increase</Tooltip>
 );
-
 
 
 export default class RoofInfo extends Component {
@@ -18,11 +17,11 @@ export default class RoofInfo extends Component {
     leave = this.leave.bind(this);
 
 
-    steal(){
+    steal() {
         this.props.stealCallback(this.props.value, (this.props.area), this.props.id);
     }
 
-    leave(){
+    leave() {
         var leaveFunc = this.props.leaveCallback;
         leaveFunc(null);
 
