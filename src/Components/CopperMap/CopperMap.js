@@ -15,7 +15,8 @@ export default class CopperMap extends Component {
             center: {
                 lat: 59.334591,
                 lng: 18.063240,
-            }
+            },
+            isLoadingCopper: false
         };
     }
 
@@ -81,11 +82,13 @@ export default class CopperMap extends Component {
     handleRoof(roof) {
         if (roof) {
             console.log("Roof present")
+            this.setState({isLoadingCopper: false})
             this.props.roofAlreadyStolen(roof, this.roofCallback)
         } else {
             console.log("No Copper");
             this.setState({
-                displayRoof: false
+                displayRoof: false,
+                isLoadingCopper: false
             });
 
         }
@@ -106,6 +109,7 @@ export default class CopperMap extends Component {
 
     handleMapClick(event) {
         console.log("checkForCopper Dispatched")
+        this.setState({isLoadingCopper: true})
         checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof);
     }
 
@@ -137,6 +141,7 @@ export default class CopperMap extends Component {
                     roofInfo={this.state.roofInfo}
                     displayRoof={this.state.displayRoof}
                     state={this.props.state}
+                    isLoadingCopper={this.state.isLoadingCopper}
                     stealRoof={this.stealRoof}
                     leaveRoof={this.leaveRoof}
                     roofAlreadyStolen={this.props.roofAlreadyStolen}
