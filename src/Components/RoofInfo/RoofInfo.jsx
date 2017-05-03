@@ -19,7 +19,7 @@ export default class RoofInfo extends Component {
 
 
     steal(){
-        this.props.stealCallback(this.props.value, (this.props.area / 1000000), this.props.id);
+        this.props.stealCallback(this.props.value, (this.props.area), this.props.id);
     }
 
     leave(){
@@ -48,7 +48,7 @@ export default class RoofInfo extends Component {
 
                     <Row className="show-grid">
                         <Col xs={1} md={3} className="text-right"><h4>Area:</h4></Col>
-                        <Col xs={2} md={3} className="text-left"><h4>{(this.props.area / 1000000).toFixed(1) + 0} kvm</h4></Col>
+                        <Col xs={2} md={3} className="text-left"><h4>{this.props.area} kvm</h4></Col>
                     </Row>
 
                     <Row className="show-grid">
