@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Tooltip, OverlayTrigger, Grid, Col, Row} from 'react-bootstrap';
 
+
 const tooltipSteal =(
     <Tooltip id="tooltipSteal">Steal roof and add value to your account</Tooltip>
 );
@@ -16,8 +17,9 @@ export default class RoofInfo extends Component {
     steal = this.steal.bind(this);
     leave = this.leave.bind(this);
 
+
     steal(){
-        this.props.stealCallback(this.props.value, this.props.area, this.props.id);
+        this.props.stealCallback(this.props.value, (this.props.area / 1000000), this.props.id);
     }
 
     leave(){
@@ -28,9 +30,11 @@ export default class RoofInfo extends Component {
 
     render() {
 
+
+
         return (
 
-            <div className="container" style={{backgroundColor:'#F6BB42'}}>
+            <div className="container" style={{backgroundColor: '#F6BB42'}}>
                 <Grid>
                     <Row className="show-grid">
                         <Col xs={1} md={3} className="text-right"><h4>RoofID:</h4></Col>
@@ -39,12 +43,12 @@ export default class RoofInfo extends Component {
 
                     <Row className="show-grid">
                         <Col xs={1} md={3} className="text-right"><h4>Current value:</h4></Col>
-                        <Col xs={2} md={3} className="text-left"><h4>{this.props.value}</h4></Col>
+                        <Col xs={2} md={3} className="text-left"><h4>{this.props.value} kr</h4></Col>
                     </Row>
 
                     <Row className="show-grid">
                         <Col xs={1} md={3} className="text-right"><h4>Area:</h4></Col>
-                        <Col xs={2} md={3} className="text-left"><h4>{this.props.area}</h4></Col>
+                        <Col xs={2} md={3} className="text-left"><h4>{(this.props.area / 1000000).toFixed(1) + 0} kvm</h4></Col>
                     </Row>
 
                     <Row className="show-grid">
