@@ -11,7 +11,8 @@ export default class InfoComponent extends React.Component{
                 <div className="box">
                     {back}
                     <div>
-                        <h3>Copper roofs are dope</h3>
+                        <h3>Info</h3>
+                        <p>Copper roofs are dope</p>
                     </div>
                 </div>
             )
