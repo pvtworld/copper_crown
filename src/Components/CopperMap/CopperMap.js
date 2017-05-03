@@ -66,7 +66,7 @@ export default class CopperMap extends Component {
 
     componentWillUnmount() {
         this.isUnmounted = true;
-        clearInterval(this.timer);
+        clearInterval(this.geoTimer);
     }
 
     roofCallback(roof, alreadyStolen) {
