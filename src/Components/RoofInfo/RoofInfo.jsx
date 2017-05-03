@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Tooltip, OverlayTrigger, Grid, Col, Row} from 'react-bootstrap';
-
+import '../LoginContainer/LoginContainer.css';
 
 const tooltipSteal =(
     <Tooltip id="tooltipSteal">Steal roof and add value to your account</Tooltip>
@@ -34,7 +34,7 @@ export default class RoofInfo extends Component {
 
         return (
 
-            <div className="container" style={{backgroundColor: '#F6BB42'}}>
+            <div className="container" >
                 <Grid>
                     <Row className="show-grid">
                         <Col xs={1} md={3} className="text-right"><h4>RoofID:</h4></Col>
