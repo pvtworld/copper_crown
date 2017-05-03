@@ -68,7 +68,7 @@ exports[`Rendertests renders map when user logged in 1`] = `
 <div>
   <GameContainer
     addRoof={[Function]}
-    leaderboard={[Function]}
+    getLeader={[Function]}
     logout={[Function]}
     roofAlreadyStolen={[Function]}
     state={

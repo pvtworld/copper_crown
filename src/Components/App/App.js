@@ -136,7 +136,7 @@ export default class App extends React.Component {
                                addRoof={this.addRoof}
                                roofAlreadyStolen={this.roofAlreadyStolen}
                                logout={this.logout}
-                               leaderboard={this.getLeader}
+                               getLeader={this.getLeader}
                 />
             </div>
         )
