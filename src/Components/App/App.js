@@ -21,7 +21,8 @@ export default class App extends React.Component {
         userInfo : {
             points: 0,
             areaOfCopper: 0,
-        }
+        },
+        userLoading: false
     }
 
 
@@ -33,6 +34,7 @@ export default class App extends React.Component {
                         context: this,
                         state: 'userInfo'
                     });
+                    this.setState({userLoading: false})
                 }
             });
         }
@@ -43,7 +45,8 @@ export default class App extends React.Component {
     }
 
     authenticate(provider) {
-        console.log(`Trying to log in with ${provider}`);
+        console.log(`Trying to log in with ${provider}`); 
+        this.setState({userLoading: true})
         base.authWithOAuthRedirect(provider, this.authHandler);
     }
 
@@ -63,6 +66,7 @@ export default class App extends React.Component {
         }
             this.setState({
                 uid: authData.user.uid,
+                userLoading: false
             });
         };
 
@@ -120,7 +124,7 @@ export default class App extends React.Component {
 
     renderLogin() {
         return (
-            <LoginContainer authenticate={this.authenticate} />
+            <LoginContainer authenticate={this.authenticate} userLoading = {this.state.userLoading} />
         )
     }
 
