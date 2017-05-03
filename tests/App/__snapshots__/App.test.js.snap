@@ -74,6 +74,7 @@ exports[`Rendertests renders map when user logged in 1`] = `
     state={
       Object {
         "authed": true,
+        "pricePerSquareMeter": null,
         "uid": 1,
         "userInfo": Object {
           "areaOfCopper": 0,
