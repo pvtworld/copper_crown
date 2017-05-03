@@ -24,9 +24,11 @@ describe('Rendertests', () => {
         const component = shallow(<App/>);
         component.setState({authed : true});
         component.setState({uid : 1});
+        component.setState({pricePerSquareMeter : null});
 
         console.log(component.state('authed'));
         console.log(component.state('uid'));
+        console.log(component.state('pricePerSquareMeter'));
         
         expect(toJson(component)).toMatchSnapshot();
     })
