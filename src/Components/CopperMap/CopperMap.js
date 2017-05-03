@@ -21,7 +21,6 @@ export default class CopperMap extends Component {
 
     geoTimer = null;
 
-    isUnmounted = false;
     handleRoof = this.handleRoof.bind(this);
     handleMapClick = this.handleMapClick.bind(this);
     geoLocationWatcher = this.geoLocationWatcher.bind(this);
@@ -65,7 +64,6 @@ export default class CopperMap extends Component {
     }
 
     componentWillUnmount() {
-        this.isUnmounted = true;
         clearInterval(this.geoTimer);
     }
 
