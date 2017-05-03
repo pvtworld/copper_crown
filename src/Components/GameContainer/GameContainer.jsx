@@ -1,7 +1,6 @@
 import React from 'react'
 import CopperMap from '../CopperMap/CopperMap'
 import InfoComponent from '../Info/InfoComponent'
-import {Navbar, NavItem, Nav} from 'react-bootstrap'
 
 export default class GameContainer extends React.Component{
     state = {
@@ -27,10 +26,6 @@ export default class GameContainer extends React.Component{
         const leaderboard = <button onClick={this.props.getLeader}>Print Leaderboard in console</button>;
         const info = <button onClick={this.renderInfo}>Info</button>;
 
-        if(this.state.renderInfo){
-            return(<InfoComponent leaveInfo={this.leaveInfo}/>)
-        }
-
         return (
             <div>
                 <CopperMap state={this.props.state}
@@ -38,6 +33,9 @@ export default class GameContainer extends React.Component{
                            roofAlreadyStolen={this.props.roofAlreadyStolen}
                 />
                 {logout}{leaderboard}{info}
+                <InfoComponent renderInfo={this.state.renderInfo} leaveInfo={this.leaveInfo}/>
+
+
             </div>
         )
     }
