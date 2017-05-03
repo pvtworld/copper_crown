@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {geolocation, checkClickForCopper} from '../../Helpers/GeoHelpers';
+import {
+    geoError,
+    geoOptions,
+    checkClickForCopper
+} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
 import {GameMap} from "../GameMap/GameMap";
 
