@@ -124,7 +124,7 @@ export default class App extends React.Component {
 
     renderLogin() {
         return (
-            <LoginContainer authenticate={this.authenticate} userLoading = {this.state.userLoading} />
+            <LoginContainer authenticate={this.authenticate} userLoading={this.state.userLoading} />
         )
     }
 
