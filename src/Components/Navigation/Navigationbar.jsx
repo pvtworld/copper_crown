@@ -15,10 +15,10 @@ const Navigationbar = (props) => {
                 <Nav>
                     <NavItem onClick={props.renderPlayerInfo}>PlayerInfo</NavItem>
                     <NavItem onClick={props.renderLeader}>Leaderboards</NavItem>
-                    <NavItem onClick={props.renderInfo}>About</NavItem>
+                    <NavItem onClick={props.renderInfo}>About CopperCrown</NavItem>
                 </Nav>
                 <Nav pullRight>
-                    <NavDropdown title="Signed in as: Default Name " id="basic-nav-dropdown">
+                    <NavDropdown title="Signed in as: No Name" id="basic-nav-dropdown">
                         <MenuItem onClick={props.renderProfile}>Profile</MenuItem>
                         <MenuItem divider />
                         <MenuItem onClick={props.logout}>Logout</MenuItem>
