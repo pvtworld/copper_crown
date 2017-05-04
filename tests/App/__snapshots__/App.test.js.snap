@@ -7,62 +7,65 @@ exports[`Rendertests renders loginScreen when user not logged in 1`] = `
         "position": "relative",
       }
     }>
-    <div>
-      <div
-        id="center_text">
-        <h2>
-          COPPER
-        </h2>
-        <h3>
-          CROWN
-        </h3>
-      </div>
-      <div
-        className="col-md-4 col-md-offset-4">
+    <div
+      className="fullscreen">
+      <div>
         <div
-          className="login panel panel-default"
-          id={undefined}>
+          id="center_text">
+          <h2>
+            COPPER
+          </h2>
+          <h3>
+            CROWN
+          </h3>
+        </div>
+        <div
+          className="col-md-4 col-md-offset-4">
           <div
-            className="panel-heading">
-            <h2
-              className="panel-title">
-              Sign in to play the game
-            </h2>
-          </div>
-          <div
-            className="panel-body">
-            <button
-              className="btn btn-lg btn-primary btn-block"
-              disabled={false}
-              onClick={[Function]}
-              type="button">
-              Log In with Facebook
-            </button>
-            <button
-              className="btn btn-lg btn-default btn-block"
-              disabled={false}
-              onClick={[Function]}
-              type="button">
-              Log In with Github
-            </button>
-            <button
-              className="btn btn-lg btn-danger btn-block"
-              disabled={false}
-              onClick={[Function]}
-              type="button">
-              Log In with Google
-            </button>
+            className="login panel panel-default"
+            id={undefined}>
             <div
-              className="text-right ">
-              <a
-                href={undefined}
-                onBlur={[Function]}
-                onClick={null}
-                onFocus={[Function]}
-                onMouseOut={[Function]}
-                onMouseOver={[Function]}>
-                Help
-              </a>
+              className="panel-heading">
+              <h2
+                className="panel-title">
+                Sign in to play the game
+              </h2>
+            </div>
+            <div
+              className="panel-body">
+              <button
+                className="btn btn-lg btn-primary btn-block"
+                disabled={false}
+                onClick={[Function]}
+                type="button">
+                Log In with Facebook
+              </button>
+              <button
+                className="btn btn-lg btn-default btn-block"
+                disabled={false}
+                onClick={[Function]}
+                type="button">
+                Log In with Github
+              </button>
+              <button
+                className="btn btn-lg btn-danger btn-block"
+                disabled={false}
+                onClick={[Function]}
+                type="button">
+                Log In with Google
+              </button>
+              <div
+                className="text-right ">
+                <a
+                  href={undefined}
+                  onBlur={[Function]}
+                  onClick={null}
+                  onFocus={[Function]}
+                  onMouseOut={[Function]}
+                  onMouseOver={[Function]}>
+                  Help
+                </a>
+              </div>
             </div>
           </div>
         </div>
