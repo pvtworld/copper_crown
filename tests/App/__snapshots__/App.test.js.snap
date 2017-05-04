@@ -77,6 +77,7 @@ exports[`Rendertests renders map when user logged in 1`] = `
   <GameContainer
     addRoof={[Function]}
     getLeader={[Function]}
+    isLoading={false}
     logout={[Function]}
     roofAlreadyStolen={[Function]}
     state={
