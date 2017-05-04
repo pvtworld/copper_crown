@@ -36,6 +36,7 @@ exports[`Render test renders a GameMap 1`] = `
     </div>
   </div>
   <InfoContainer
+    isLoadingCopper={false}
     leaveRoof={[Function]}
     stealRoof={[Function]} />
 </div>
