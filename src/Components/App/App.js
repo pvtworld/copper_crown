@@ -73,9 +73,12 @@ export default class App extends React.Component {
                 orderByChild: 'points', },
             asArray: true,
             then(response){
+                var leaderboardList = [];
                 response.reverse().forEach(function(element) {
                     console.log("user: "+element.key + ", points: " +element.points);
+                    leaderboardList.push({user: element.key, points: element.points});
                 });
+                return leaderboardList;
             }
         });
     }
