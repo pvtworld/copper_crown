@@ -10,7 +10,6 @@ const tooltipLeave = (
     <Tooltip id="tooltipLeave">Leave roof in hopes that the value will increase</Tooltip>
 );
 
-
 export default class RoofInfo extends Component {
 
     steal = this.steal.bind(this);
@@ -28,8 +27,6 @@ export default class RoofInfo extends Component {
     }
 
     render() {
-
-
 
         return (
 

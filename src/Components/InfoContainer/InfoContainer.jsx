@@ -26,13 +26,6 @@ export default class InfoContainer extends React.Component {
                 </div>
             );
         }
-<<<<<<< HEAD
         return null;
-=======
-
-        return (
-            <PlayerInfo state={this.props.state} isLoadingCopper={this.props.isLoadingCopper}/>
-        );
->>>>>>> develop
     }
 }
