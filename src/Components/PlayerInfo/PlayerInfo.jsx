@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
-import './PlayerInfo.css'
 
 export default class PlayerInfo extends Component {
     render() {
-        const back = <Button bsStyle="primary" onClick={this.props.leavePlayerInfo}>Back</Button>;
+        const back = <Button bsStyle="primary" onClick={this.props.leavePlayerInfo}>Close</Button>;
 
         if(this.props.renderPlayerInfo){
             return (
-                <div className="player-box">
+                <div className="navpage-box">
                     {back}
                     <ListGroup>
                         <ListGroupItem bsStyle="success">PlayerID: {this.props.state.uid} </ListGroupItem>
