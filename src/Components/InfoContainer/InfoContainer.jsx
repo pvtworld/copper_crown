@@ -1,5 +1,4 @@
 import React from 'react';
-import PlayerInfo from "../PlayerInfo/PlayerInfo";
 import RoofInfo from "../RoofInfo/RoofInfo";
 
 export default class InfoContainer extends React.Component {
@@ -19,9 +18,9 @@ export default class InfoContainer extends React.Component {
                 </div>
             );
         }
-
-        return (
+        return null;
+        {/*        return (
             <PlayerInfo state={this.props.state}/>
-        );
+        );*/}
     }
 }
