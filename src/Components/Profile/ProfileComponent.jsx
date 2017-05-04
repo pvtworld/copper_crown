@@ -11,7 +11,7 @@ export default class ProfileComponent extends React.Component{
                     {back}
                     <div id ="center_text">
                     <h1>Mitt konto</h1>
-                    <h4>Logged in as: {name} </h4>
+                    <h4>Inloggad som: {name} </h4>
                     <h5>Användar ID:  {userID}</h5>
                     <Image src="/anonympers.jpg" responsive />
                     <h5>Mejladress: </h5>
