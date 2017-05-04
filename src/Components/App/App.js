@@ -47,7 +47,7 @@ export default class App extends React.Component {
     authenticate(provider) {
         console.log(`Trying to log in with ${provider}`); 
         this.setState({userLoading: true})
-        base.authWithOAuthRedirect(provider, this.authHandler);
+        base.authWithOAuthPopup(provider, this.authHandler);
     }
 
     logout() {
