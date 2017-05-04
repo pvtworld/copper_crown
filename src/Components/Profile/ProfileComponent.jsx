@@ -8,10 +8,8 @@ export default class ProfileComponent extends React.Component{
         if(this.props.renderProfile){
             return(
                 <div className="navpage-box">
+                    <h1>Profile Component</h1>
                     {back}
-                    <div>
-                        <h3>Profile</h3>
-                    </div>
                 </div>
             )
         }

@@ -9,6 +9,7 @@ export default class PlayerInfo extends Component {
         if(this.props.renderPlayerInfo){
             return (
                 <div className="navpage-box">
+                    <h1>PlayerInfo Component</h1>
                     {back}
                     <ListGroup>
                         <ListGroupItem bsStyle="success">PlayerID: {this.props.state.uid} </ListGroupItem>
