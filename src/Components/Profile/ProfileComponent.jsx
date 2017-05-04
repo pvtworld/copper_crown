@@ -11,11 +11,13 @@ export default class ProfileComponent extends React.Component{
                     {back}
                     <div id ="center_text">
                     <h1>Mitt konto</h1>
-                    <h2>Logged in as: {name} </h2>
-                    <h3>Användar ID:  {userID}</h3>
-                    <h4>Mejladress: </h4>
+                    <h4>Logged in as: {name} </h4>
+                    <h5>Användar ID:  {userID}</h5>
+                    <img src="anonympers.jpg" className="image-responsive" alt="Your picture"/>
+                    <h5>Mejladress: </h5>
                     <h5>Poäng: {points}</h5>
-                    <h6>Antal tagna tak: {roofsTaken}  Total storlek:  {roofSizeTaken}</h6>
+                    <h5>Antal tagna tak: {roofsTaken}</h5>  
+                    <h5>Total storlek:  {roofSizeTaken}</h5>
                     </div>
                 </div>
             )
