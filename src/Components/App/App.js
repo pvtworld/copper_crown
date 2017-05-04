@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 import base from '../../Firebase/base';
 import LoginContainer from '../LoginContainer/LoginContainer';
-import GameContainer from '../GameContainer/GameContainer'
+import GameContainer from '../GameContainer/GameContainer';
+import {getPricePerSquareMeter} from '../../Helpers/PointsHelpers';
 
 export default class App extends React.Component {
     constructor(){
@@ -13,31 +14,41 @@ export default class App extends React.Component {
         this.addRoof = this.addRoof.bind(this);
         this.roofAlreadyStolen = this.roofAlreadyStolen.bind(this);
         this.getLeader = this.getLeader.bind(this);
-
     }
 
     state = {
         uid: null,
-        userInfo : {
+        userInfo: {
             points: 0,
             areaOfCopper: 0,
-        }
+        },
+        pricePerSquareMeter: null
     }
 
 
-        componentWillMount() {
-            base.onAuth((user) => {
-                if(user) {
-                    this.authHandler(null, { user });
-                    this.ref = base.syncState(`users/${user.uid}`, {
-                        context: this,
-                        state: 'userInfo'
-                    });
-                }
-            });
-        }
+    componentWillMount() {
+        base.onAuth((user) => {
+            if (user) {
+                this.authHandler(null, {user});
+                this.ref = base.syncState(`users/${user.uid}`, {
+                    context: this,
+                    state: 'userInfo'
+                });
+            }
+        });
+    }
 
-    componentWillUnmount () {
+
+
+
+    componentDidMount() {
+        getPricePerSquareMeter((newPrice) => {
+            this.setState({pricePerSquareMeter: newPrice});
+        });
+
+    }
+
+    componentWillUnmount() {
         base.removeBinding(this.ref);
 
     }
@@ -50,7 +61,7 @@ export default class App extends React.Component {
     logout() {
         base.unauth();
         console.log('Logging out');
-        this.setState({ uid: null });
+        this.setState({uid: null});
     }
 
     authHandler(err, authData)  {
