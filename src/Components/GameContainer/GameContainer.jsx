@@ -3,12 +3,27 @@ import CopperMap from '../CopperMap/CopperMap';
 import InfoComponent from '../Info/InfoComponent';
 import ProfileComponent from '../Profile/ProfileComponent.jsx'
 import LeaderboardComponent from '../Leaderboard/LeaderComponent.jsx';
+import Navigationbar from '../Navigation/Navigationbar';
+import PlayerInfo from '../PlayerInfo/PlayerInfo';
 
 export default class GameContainer extends React.Component{
     state = {
         renderInfo: false,
         renderProfile: false,
-        renderLeader: false
+        renderLeader: false,
+        renderPlayerInfo: false
+    };
+
+    renderPlayerInfo = () => {
+        this.setState({
+            renderPlayerInfo: true
+        })
+    };
+
+    leavePlayerInfo = () => {
+        this.setState({
+            renderPlayerInfo: false
+        })
     };
 
     renderInfo = () => {
@@ -48,21 +63,35 @@ export default class GameContainer extends React.Component{
     };
 
     render() {
-        const logout = <button onClick={this.props.logout}>Log Out!</button>;
-        const leaderboard = <button onClick={this.renderLeader}>Leaderboard</button>;
-        const info = <button onClick={this.renderInfo}>Info</button>;
-        const profile = <button onClick={this.renderProfile}>Profile</button>;
-
         return (
             <div>
+                <Navigationbar logout={this.props.logout}
+                               renderLeader={this.renderLeader}
+                               renderInfo={this.renderInfo}
+                               renderProfile={this.renderProfile}
+                               renderPlayerInfo={this.renderPlayerInfo}
+                />
                 <CopperMap state={this.props.state}
                            addRoof={this.props.addRoof}
                            roofAlreadyStolen={this.props.roofAlreadyStolen}
                 />
-                {logout}{leaderboard}{info}{profile}
-                <InfoComponent renderInfo={this.state.renderInfo} leaveInfo={this.leaveInfo}/>
-                <ProfileComponent renderProfile={this.state.renderProfile} leaveProfile={this.leaveProfile}/>
-                <LeaderboardComponent renderLeader={this.state.renderLeader} leaveLeader={this.leaveLeader} getLeader={this.props.getLeader}/>
+                <InfoComponent
+                    renderInfo={this.state.renderInfo}
+                    leaveInfo={this.leaveInfo}
+                />
+                <ProfileComponent
+                    renderProfile={this.state.renderProfile}
+                    leaveProfile={this.leaveProfile}
+                />
+                <LeaderboardComponent
+                    renderLeader={this.state.renderLeader}
+                    leaveLeader={this.leaveLeader}
+                    getLeader={this.props.getLeader}
+                />
+                <PlayerInfo renderPlayerInfo={this.state.renderPlayerInfo}
+                            leavePlayerInfo={this.leavePlayerInfo}
+                            state={this.props.state}
+                />
             </div>
         )
     }
