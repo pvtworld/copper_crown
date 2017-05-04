@@ -1,6 +1,6 @@
 import React from 'react';
 import CopperMap from '../CopperMap/CopperMap';
-import InfoComponent from '../Info/InfoComponent';
+import InfoComponent from '../InfoComponent/InfoComponent';
 import ProfileComponent from '../Profile/ProfileComponent.jsx'
 import LeaderboardComponent from '../Leaderboard/LeaderComponent.jsx';
 import Navigationbar from '../Navigation/Navigationbar';

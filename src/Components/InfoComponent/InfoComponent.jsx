@@ -10,7 +10,7 @@ export default class InfoComponent extends React.Component{
                 <div className="navpage-box">
                     {back}
                     <div>
-                        <h3>Info</h3>
+                        <h3>Info Component</h3>
                         <p>Copper roofs are dope</p>
                     </div>
                 </div>
