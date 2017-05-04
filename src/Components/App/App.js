@@ -13,6 +13,7 @@ export default class App extends React.Component {
         this.addRoof = this.addRoof.bind(this);
         this.roofAlreadyStolen = this.roofAlreadyStolen.bind(this);
         this.getLeader = this.getLeader.bind(this);
+        this.getLeaderboard = this.getLeaderboard.bind(this);
 
     }
 
@@ -73,14 +74,27 @@ export default class App extends React.Component {
                 orderByChild: 'points', },
             asArray: true,
             then(response){
-                var leaderboardList = [];
                 response.reverse().forEach(function(element) {
                     console.log("user: "+element.key + ", points: " +element.points);
-                    leaderboardList.push({user: element.key, points: element.points});
                 });
-                return leaderboardList;
             }
         });
+    }
+
+    getLeaderboard() {
+        var data = [];
+        base.fetch('users', {
+            context: this,
+            queries: {
+                orderByChild: 'points', },
+            asArray: true,
+            then(response){
+                response.reverse().forEach(function (element) {
+                    data.push(element);
+                });
+            }
+        });
+        return data;
     }
 
     roofAlreadyStolen(newRoof, callback) {
@@ -140,6 +154,7 @@ export default class App extends React.Component {
                                roofAlreadyStolen={this.roofAlreadyStolen}
                                logout={this.logout}
                                getLeader={this.getLeader}
+                               getLeaderboard={this.getLeaderboard}
                 />
             </div>
         )

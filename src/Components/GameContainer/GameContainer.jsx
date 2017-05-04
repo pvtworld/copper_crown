@@ -62,7 +62,7 @@ export default class GameContainer extends React.Component{
                 {logout}{leaderboard}{info}{profile}
                 <InfoComponent renderInfo={this.state.renderInfo} leaveInfo={this.leaveInfo}/>
                 <ProfileComponent renderProfile={this.state.renderProfile} leaveProfile={this.leaveProfile}/>
-                <LeaderboardComponent renderLeader={this.state.renderLeader} leaveLeader={this.leaveLeader} getLeader={this.props.getLeader}/>
+                <LeaderboardComponent renderLeader={this.state.renderLeader} leaveLeader={this.leaveLeader} getLeaderboard={this.props.getLeaderboard}/>
             </div>
         )
     }
