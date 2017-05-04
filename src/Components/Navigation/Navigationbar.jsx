@@ -12,10 +12,6 @@ export default class Navigationbar extends React.Component{
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                    <Navbar.Text>
-                        {/*Get the displayName from provider via firebase*/}
-                        Signed in as: Default Name
-                    </Navbar.Text>
                     <Nav>
                         <NavItem eventKey={1} onClick={this.props.renderProfile}>Profile</NavItem>
                         <NavItem eventKey={2} onClick={this.props.renderLeader}>Leaderboards</NavItem>
