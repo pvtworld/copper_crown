@@ -11,6 +11,10 @@ html, body {
     margin: 80px 0;
 }
 
+.fullscreen {
+    height: 100vh;
+}
+
 h2 {
     font-family: 'Open Sans', serif;
     font-size: 40px;

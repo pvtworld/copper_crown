@@ -131,6 +131,9 @@ export default class App extends React.Component {
         this.setState({ userInfo });
     }
 
+
+
+
     renderLogin() {
         return (
             <LoginContainer authenticate={this.authenticate}
