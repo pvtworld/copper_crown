@@ -17,29 +17,29 @@ export default class App extends React.Component {
     }
 
     state = {
-        uid: null,
         userInfo: {
             points: 0,
             areaOfCopper: 0,
         },
-        pricePerSquareMeter: null
+        uid: null,
+        pricePerSquareMeter: null,
+        userLoading: false
     }
 
 
-    componentWillMount() {
-        base.onAuth((user) => {
-            if (user) {
-                this.authHandler(null, {user});
-                this.ref = base.syncState(`users/${user.uid}`, {
-                    context: this,
-                    state: 'userInfo'
-                });
-            }
-        });
-    }
-
-
-
+        componentWillMount() {
+            base.onAuth((user) => {
+                if(user) {
+                    this.authHandler(null, { user });
+                    this.ref = base.syncState(`users/${user.uid}`, {
+                        context: this,
+                        state: 'userInfo'
+                    });
+                    this.setState({userLoading: false})
+                }
+            });
+        }
+        
 
     componentDidMount() {
         getPricePerSquareMeter((newPrice) => {
@@ -54,8 +54,9 @@ export default class App extends React.Component {
     }
 
     authenticate(provider) {
-        console.log(`Trying to log in with ${provider}`);
-        base.authWithOAuthRedirect(provider, this.authHandler);
+        console.log(`Trying to log in with ${provider}`); 
+        this.setState({userLoading: true})
+        base.authWithOAuthPopup(provider, this.authHandler);
     }
 
     logout() {
@@ -74,6 +75,7 @@ export default class App extends React.Component {
         }
             this.setState({
                 uid: authData.user.uid,
+                userLoading: false
             });
         };
 
@@ -131,7 +133,7 @@ export default class App extends React.Component {
 
     renderLogin() {
         return (
-            <LoginContainer authenticate={this.authenticate} />
+            <LoginContainer authenticate={this.authenticate} userLoading={this.state.userLoading} />
         )
     }
 
