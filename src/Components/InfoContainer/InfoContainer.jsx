@@ -19,8 +19,5 @@ export default class InfoContainer extends React.Component {
             );
         }
         return null;
-        {/*        return (
-            <PlayerInfo state={this.props.state}/>
-        );*/}
     }
 }
