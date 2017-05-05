@@ -1,6 +1,6 @@
 import React from 'react';
 import RoofInfo from "../RoofInfo/RoofInfo";
-import Loading from './Loading';
+import Spinner from 'react-spinkit'
 
 var value = 'Calculating..';
 var area;
@@ -27,8 +27,12 @@ export default class InfoContainer extends React.Component {
                 </div>
             );
         }
-        return (
-            <Loading isLoadingCopper={this.props.isLoadingCopper}/>
-        );
+
+        if(this.props.isLoadingCopper){
+            return(
+                <Spinner spinnerName="chasing-dots" noFadeIn />
+            )
+        }
+        return null;
     }
 }
