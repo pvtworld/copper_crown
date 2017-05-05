@@ -131,9 +131,14 @@ export default class App extends React.Component {
         this.setState({ userInfo });
     }
 
+
+
+
     renderLogin() {
         return (
-            <LoginContainer authenticate={this.authenticate} userLoading={this.state.userLoading} />
+            <LoginContainer authenticate={this.authenticate}
+                            userLoading={this.state.userLoading}
+            />
         )
     }
 
@@ -150,6 +155,7 @@ export default class App extends React.Component {
                                roofAlreadyStolen={this.roofAlreadyStolen}
                                logout={this.logout}
                                getLeader={this.getLeader}
+                               isLoading={this.state.userLoading}
                 />
             </div>
         )
