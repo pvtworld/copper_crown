@@ -1,5 +1,6 @@
 import React from 'react';
 import RoofInfo from "../RoofInfo/RoofInfo";
+import Loading from './Loading';
 
 var value = 'Calculating..';
 var area;
@@ -26,6 +27,8 @@ export default class InfoContainer extends React.Component {
                 </div>
             );
         }
-        return null;
+        return (
+            <Loading isLoadingCopper={this.props.isLoadingCopper}/>
+        );
     }
 }

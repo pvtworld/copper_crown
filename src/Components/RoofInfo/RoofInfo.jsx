@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Button, Tooltip, OverlayTrigger, Grid, Col, Row} from 'react-bootstrap';
-import '../LoginContainer/LoginContainer.css';
 
 const tooltipSteal = (
     <Tooltip id="tooltipSteal">Steal roof and add the current value to your account</Tooltip>
