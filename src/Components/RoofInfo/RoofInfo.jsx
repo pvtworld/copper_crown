@@ -27,7 +27,7 @@ export default class RoofInfo extends Component {
 
     render() {
         return (
-            <div className="container" style={{background: '#ff7539'}}>
+            <div className="container" style={{background: '#ff943e'}}>
                 <Grid>
                     <Row className="show-grid">
                         <Col xs={1} md={3} className="text-right"><h4>RoofID:</h4></Col>
