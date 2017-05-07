@@ -81,20 +81,35 @@ export default class App extends React.Component {
         });
     }
 
-    getLeaderboard() {
-        var data = [];
+    getLeaderboard(callback) {
         base.fetch('users', {
             context: this,
             queries: {
                 orderByChild: 'points', },
             asArray: true,
             then(response){
-                response.reverse().forEach(function (element) {
-                    data.push(element);
-                });
+                console.log('update leaderboard');
+                var databaseInfo = response.reverse();
+                var myRank = undefined;
+                for (var i = 0; i < databaseInfo.length; i++){
+                    if (databaseInfo[i].key === this.state.uid){
+                        myRank = i + 1;
+                        break;
+                    }
+                }
+                var listItems = [];
+                var j = 1;
+                while (j <= databaseInfo.length && j <= 10){
+                    listItems.push({
+                        pos: j,
+                        name: databaseInfo[j-1].key,
+                        points: databaseInfo[j-1].points
+                    });
+                    j++;
+                }
+                callback(listItems, myRank);
             }
         });
-        return data;
     }
 
     roofAlreadyStolen(newRoof, callback) {
