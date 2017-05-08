@@ -16,7 +16,7 @@ export default class ProfileComponent extends React.Component{
                     <Image src="/anonympers.jpg" responsive />
                     <h5>Mail: </h5>
                     <h5>Points: {points}</h5>
-                    <h5>Number of roofs: {roofsTaken}</h5>  
+                    <h5>Number of roofs taken: {roofsTaken}</h5>  
                     <h5>Area of roofs taken:  {roofSizeTaken}</h5>
                     </div>
                 </div>
