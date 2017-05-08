@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { firebaseConnect } from 'react-redux-firebase';
 import { logoutAction } from '../../Redux/Actions/loginAction'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 
@@ -23,7 +23,7 @@ const Navigationbar = (props) => {
                     <NavDropdown title="Signed in as: No Name" id="basic-nav-dropdown">
                         <MenuItem onClick={props.renderProfile}>Profile</MenuItem>
                         <MenuItem divider />
-                        <MenuItem onClick={() => props.dispatch(logoutAction)}>Logout</MenuItem>
+                        <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
@@ -31,4 +31,4 @@ const Navigationbar = (props) => {
     )
 };
 
-export default connect()(Navigationbar);
+export default firebaseConnect()(Navigationbar);

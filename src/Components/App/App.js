@@ -1,5 +1,7 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase';
 import base from '../../Firebase/base';
 import LoginContainer from '../LoginContainer/LoginContainer';
 import GameContainer from '../GameContainer/GameContainer';
@@ -181,7 +183,7 @@ class App extends React.Component {
     render() {
         console.log(this.props);
         // check if they are no logged in at all
-        if(!this.props.uid) {
+        if(!this.props.auth) {
             return <div>{this.renderLogin()}</div>
         }
         
@@ -200,10 +202,11 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({firebase}) => {
       return {
-        uid: state.user.uid
+        authError: pathToJS(firebase, 'authError'),
+        auth: pathToJS(firebase, 'auth')
       }
     }
 
-export default connect(mapStateToProps)(App) 
+export default compose(firebaseConnect(),(connect(mapStateToProps)))(App)
