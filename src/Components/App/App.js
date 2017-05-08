@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 import base from '../../Firebase/base';
 import LoginContainer from '../LoginContainer/LoginContainer';
-import GameContainer from '../GameContainer/GameContainer'
+import GameContainer from '../GameContainer/GameContainer';
+import {getPricePerSquareMeter} from '../../Helpers/PointsHelpers';
 
 export default class App extends React.Component {
     constructor(){
@@ -18,11 +19,13 @@ export default class App extends React.Component {
     }
 
     state = {
-        uid: null,
-        userInfo : {
+        userInfo: {
             points: 0,
             areaOfCopper: 0,
-        }
+        },
+        uid: null,
+        pricePerSquareMeter: null,
+        userLoading: false
     }
 
 
@@ -34,24 +37,34 @@ export default class App extends React.Component {
                         context: this,
                         state: 'userInfo'
                     });
+                    this.setState({userLoading: false})
                 }
             });
         }
 
-    componentWillUnmount () {
+
+    componentDidMount() {
+        getPricePerSquareMeter((newPrice) => {
+            this.setState({pricePerSquareMeter: newPrice});
+        });
+
+    }
+
+    componentWillUnmount() {
         base.removeBinding(this.ref);
 
     }
 
     authenticate(provider) {
         console.log(`Trying to log in with ${provider}`);
-        base.authWithOAuthRedirect(provider, this.authHandler);
+        this.setState({userLoading: true})
+        base.authWithOAuthPopup(provider, this.authHandler);
     }
 
     logout() {
         base.unauth();
         console.log('Logging out');
-        this.setState({ uid: null });
+        this.setState({uid: null});
     }
 
     authHandler(err, authData)  {
@@ -64,6 +77,7 @@ export default class App extends React.Component {
         }
             this.setState({
                 uid: authData.user.uid,
+                userLoading: false
             });
         };
 
@@ -150,9 +164,14 @@ export default class App extends React.Component {
         this.setState({ userInfo });
     }
 
+
+
+
     renderLogin() {
         return (
-            <LoginContainer authenticate={this.authenticate} />
+            <LoginContainer authenticate={this.authenticate}
+                            userLoading={this.state.userLoading}
+            />
         )
     }
 
@@ -169,6 +188,7 @@ export default class App extends React.Component {
                                roofAlreadyStolen={this.roofAlreadyStolen}
                                logout={this.logout}
                                getLeader={this.getLeader}
+                               isLoading={this.state.userLoading}
                                getLeaderboard={this.getLeaderboard}
                 />
             </div>

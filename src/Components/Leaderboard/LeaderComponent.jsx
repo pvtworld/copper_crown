@@ -27,7 +27,7 @@ export default class LeaderComponent extends Component{
     }
 
     render(){
-        const back = <Button bsStyle="primary" onClick={this.props.leaveLeader}>Back</Button>;
+        const back = <Button bsStyle="primary" onClick={this.props.leaveLeader}>Close</Button>;
         const leader = <Button bsStyle="primary" onClick={this.props.getLeader}>Print leaderboard in console</Button>;
 
         if(this.props.renderLeader){
@@ -35,7 +35,7 @@ export default class LeaderComponent extends Component{
             this.props.getLeaderboard(this.listCallback);
 
             return(
-                <div className="leader-box">
+                <div className="navpage-box">
                     {back}
                     <div>
                         {leader}
