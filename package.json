@@ -16,6 +16,7 @@
     "react-google-maps": "beta",
     "react-loading-overlay": "^0.2.4",
     "react-redux": "^5.0.4",
+    "react-redux-firebase": "^1.4.0-rc.2",
     "react-router-dom": "^4.1.1",
     "react-spinkit": "^2.1.2",
     "react-test-renderer": "^15.5.4",
