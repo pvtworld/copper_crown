@@ -8,6 +8,10 @@ import './Components/App/App.css';
 
 const root = document.getElementById('root');
 
+store.subscribe(() => {
+    console.log(store.getState());
+})
+
 ReactDOM.render(
     <Provider store={store}>
         <App/>

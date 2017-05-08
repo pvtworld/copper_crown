@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { logoutAction } from '../../Redux/Actions/loginAction'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 
 const Navigationbar = (props) => {
@@ -21,7 +23,7 @@ const Navigationbar = (props) => {
                     <NavDropdown title="Signed in as: No Name" id="basic-nav-dropdown">
                         <MenuItem onClick={props.renderProfile}>Profile</MenuItem>
                         <MenuItem divider />
-                        <MenuItem onClick={props.logout}>Logout</MenuItem>
+                        <MenuItem onClick={() => props.dispatch(logoutAction)}>Logout</MenuItem>
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
@@ -29,4 +31,4 @@ const Navigationbar = (props) => {
     )
 };
 
-export default Navigationbar;
+export default connect()(Navigationbar);
