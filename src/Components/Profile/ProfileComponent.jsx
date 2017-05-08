@@ -10,14 +10,14 @@ export default class ProfileComponent extends React.Component{
                 <div className="profile-box">
                     {back}
                     <div id ="center_text">
-                    <h1>Mitt konto</h1>
-                    <h4>Inloggad som: {name} </h4>
-                    <h5>Användar ID:  {userID}</h5>
+                    <h1>My account</h1>
+                    <h4>Logged in as: {name} </h4>
+                    <h5>User ID:  {userID}</h5>
                     <Image src="/anonympers.jpg" responsive />
-                    <h5>Mejladress: </h5>
-                    <h5>Poäng: {points}</h5>
-                    <h5>Antal tagna tak: {roofsTaken}</h5>  
-                    <h5>Total storlek:  {roofSizeTaken}</h5>
+                    <h5>Mail: </h5>
+                    <h5>Points: {points}</h5>
+                    <h5>Number of roofs: {roofsTaken}</h5>  
+                    <h5>Area of roofs taken:  {roofSizeTaken}</h5>
                     </div>
                 </div>
             )
