@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { firebaseConnect, pathToJS, dataToJS } from 'react-redux-firebase';
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 
-export default class PlayerInfo extends Component {
+class PlayerInfo extends Component {
     render() {
+
         const back = <Button bsStyle="primary" onClick={this.props.leavePlayerInfo}>Close</Button>;
 
         if(this.props.renderPlayerInfo){
@@ -24,3 +27,25 @@ export default class PlayerInfo extends Component {
 }
 
 
+
+
+const authConnected = connect(
+ ({ firebase }) => ({
+    auth: pathToJS(firebase, 'auth') // gets auth from redux and sets as prop
+  })
+)(PlayerInfo)
+
+const firebaseConnected = firebaseConnect(
+  ({ auth }) => ([
+    
+    // Get auth from props
+    auth ? `users/${auth.uid}` : '/stolenRoofs'
+  ])
+)(authConnected)
+
+export default connect(
+ ({ firebase }, { auth }) => ({
+    // pathToJS(firebase, 'auth') gets from redux, but auth is already a prop
+    userID: dataToJS(firebase, auth ? `users/${auth.uid}` : '/stolenRoofs')
+ })
+)(firebaseConnected)
