@@ -9,7 +9,7 @@ export default class ProfileComponent extends React.Component{
             return(
                 <div className="profile-box">
                     {back}
-                    <div id ="center_text">
+                    <div id="center_text">
                     <h1>My account</h1>
                     <h4>Logged in as: {name} </h4>
                     <h5>User ID:  {userID}</h5>
