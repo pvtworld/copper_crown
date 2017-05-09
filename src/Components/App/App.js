@@ -13,8 +13,6 @@ class App extends React.Component {
         this.addRoof = this.addRoof.bind(this);
         this.roofAlreadyStolen = this.roofAlreadyStolen.bind(this);
         this.getLeader = this.getLeader.bind(this);
-        this.getLeaderboard = this.getLeaderboard.bind(this);
-
     }
 
     getLeader() {
@@ -27,37 +25,6 @@ class App extends React.Component {
                 response.reverse().forEach(function(element) {
                     console.log("user: "+element.key + ", points: " +element.points);
                 });
-            }
-        });
-    }
-
-    getLeaderboard(callback) {
-        base.fetch('users', {
-            context: this,
-            queries: {
-                orderByChild: 'points', },
-            asArray: true,
-            then(response){
-                console.log('update leaderboard');
-                var databaseInfo = response.reverse();
-                var myRank = undefined;
-                for (var i = 0; i < databaseInfo.length; i++){
-                    if (databaseInfo[i].key === this.state.uid){
-                        myRank = i + 1;
-                        break;
-                    }
-                }
-                var listItems = [];
-                var j = 1;
-                while (j <= databaseInfo.length && j <= 10){
-                    listItems.push({
-                        pos: j,
-                        name: databaseInfo[j-1].key,
-                        points: databaseInfo[j-1].points
-                    });
-                    j++;
-                }
-                callback(listItems, myRank);
             }
         });
     }
