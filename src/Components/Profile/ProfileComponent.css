@@ -13,3 +13,9 @@ h1{
     text-align: center;
     margin: 80px 0;
 }
+
+#picture{
+    text-align: center;
+    height: 100px;
+    width: 100px;
+}
