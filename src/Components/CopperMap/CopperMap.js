@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
     geoError,
     geoOptions,
     checkClickForCopper
 } from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
-import {GameMap} from "../GameMap/GameMap";
+import GameMap from "../GameMap/GameMap";
+import {searchForCopper} from '../../Redux/Actions/copperMapActions';
 
-export default class CopperMap extends Component {
+class CopperMap extends Component {
     constructor() {
         super();
 
@@ -16,7 +18,7 @@ export default class CopperMap extends Component {
                 lat: 59.334591,
                 lng: 18.063240,
             },
-            isLoadingCopper: false
+            //isLoadingCopper: false
         };
     }
 
@@ -36,7 +38,7 @@ export default class CopperMap extends Component {
 
             const geoSucess = (position) => {
                 console.log("Sucess! Located user at: ");
-                console.log(position);
+                //console.log(position);
 
                 this.setState({
                     center: {
@@ -82,13 +84,13 @@ export default class CopperMap extends Component {
     handleRoof(roof) {
         if (roof) {
             console.log("Roof present")
-            this.setState({isLoadingCopper: false})
+            this.props.dispatch(searchForCopper(false));
             this.props.roofAlreadyStolen(roof, this.roofCallback)
         } else {
             console.log("No Copper");
+            this.props.dispatch(searchForCopper(false));
             this.setState({
                 displayRoof: false,
-                isLoadingCopper: false
             });
 
         }
@@ -109,7 +111,7 @@ export default class CopperMap extends Component {
 
     handleMapClick(event) {
         console.log("checkForCopper Dispatched")
-        this.setState({isLoadingCopper: true})
+        this.props.dispatch(searchForCopper(true));
         checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof);
     }
 
@@ -151,3 +153,4 @@ export default class CopperMap extends Component {
     }
 }
 
+export default connect()(CopperMap);

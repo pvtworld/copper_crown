@@ -1,8 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {withGoogleMap, GoogleMap, Circle, Marker} from "react-google-maps";
 import {checkClickForCopper} from '../../Helpers/GeoHelpers';
 
-export const GameMap = withGoogleMap(props => (
+const GameMap = withGoogleMap(props => (
 
 
     <GoogleMap
@@ -57,3 +58,5 @@ export const GameMap = withGoogleMap(props => (
 
     </GoogleMap>
 ));
+
+export default connect()(GameMap);
