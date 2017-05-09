@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase'
 import './Login.css'
 import {Button, Panel, Col} from 'react-bootstrap';
-import { loginAction } from '../../Redux/Actions/loginAction'
 import ToolTip from '../ToolTip/ToolTip'
 
 const title = <h2>Sign in to play the game</h2>;

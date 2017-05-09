@@ -1,6 +1,5 @@
 import React from 'react';
 import { firebaseConnect } from 'react-redux-firebase';
-import { logoutAction } from '../../Redux/Actions/loginAction'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 
 const Navigationbar = (props) => {

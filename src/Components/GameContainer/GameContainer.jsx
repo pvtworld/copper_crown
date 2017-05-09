@@ -1,4 +1,5 @@
 import React from 'react';
+
 import CopperMap from '../CopperMap/CopperMap';
 import InfoComponent from '../InfoComponent/InfoComponent';
 import ProfileComponent from '../Profile/ProfileComponent.jsx'
@@ -6,7 +7,7 @@ import LeaderboardComponent from '../Leaderboard/LeaderComponent.jsx';
 import Navigationbar from '../Navigation/Navigationbar';
 import PlayerInfo from '../PlayerInfo/PlayerInfo';
 
-export default class GameContainer extends React.Component{
+class GameContainer extends React.Component{
     state = {
         renderInfo: false,
         renderProfile: false,
@@ -97,3 +98,4 @@ export default class GameContainer extends React.Component{
         )
     }
 }
+export default GameContainer;

@@ -1,7 +1,6 @@
 import React from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase';
+import { pathToJS } from 'react-redux-firebase';
 import base from '../../Firebase/base';
 import LoginContainer from '../LoginContainer/LoginContainer';
 import GameContainer from '../GameContainer/GameContainer';
@@ -11,78 +10,12 @@ class App extends React.Component {
     constructor(){
         super();
         this.renderLogin = this.renderLogin.bind(this);
-        this.authenticate = this.authenticate.bind(this);
-        this.logout = this.logout.bind(this);
-        this.authHandler = this.authHandler.bind(this);
         this.addRoof = this.addRoof.bind(this);
         this.roofAlreadyStolen = this.roofAlreadyStolen.bind(this);
         this.getLeader = this.getLeader.bind(this);
         this.getLeaderboard = this.getLeaderboard.bind(this);
 
     }
-
-    state = {
-        userInfo: {
-            points: 0,
-            areaOfCopper: 0,
-        },
-        uid: null,
-        pricePerSquareMeter: null,
-        userLoading: false
-    }
-
-
-        componentWillMount() {
-            base.onAuth((user) => {
-                if(user) {
-                    this.authHandler(null, { user });
-                    this.ref = base.syncState(`users/${user.uid}`, {
-                        context: this,
-                        state: 'userInfo'
-                    });
-                    this.setState({userLoading: false})
-                }
-            });
-        }
-
-
-    componentDidMount() {
-        getPricePerSquareMeter((newPrice) => {
-            this.setState({pricePerSquareMeter: newPrice});
-        });
-
-    }
-
-    componentWillUnmount() {
-        base.removeBinding(this.ref);
-
-    }
-
-    authenticate(provider) {
-        console.log(`Trying to log in with ${provider}`);
-        this.setState({userLoading: true})
-        base.authWithOAuthPopup(provider, this.authHandler);
-    }
-
-    logout() {
-        base.unauth();
-        console.log('Logging out');
-        this.setState({uid: null});
-    }
-
-    authHandler(err, authData)  {
-        console.log('current user: ');
-        console.log(authData)
-        if (err) {
-            alert(err)
-            console.error(err);
-            return;
-        }
-            this.setState({
-                uid: authData.user.uid,
-                userLoading: false
-            });
-        };
 
     getLeader() {
         base.fetch('users', {
@@ -173,7 +106,7 @@ class App extends React.Component {
     renderLogin() {
         return (
             <LoginContainer authenticate={this.authenticate}
-                            userLoading={this.state.userLoading}
+                            userLoading={false}
             />
         )
     }
@@ -181,12 +114,13 @@ class App extends React.Component {
 
 
     render() {
-        console.log(this.props);
+        console.log(this.props.auth);
         // check if they are no logged in at all
         if(!this.props.auth) {
             return <div>{this.renderLogin()}</div>
         }
         
+        console.log('Creating GameContainer');
         return (
             <div>
                 <GameContainer state={this.state}
@@ -194,7 +128,7 @@ class App extends React.Component {
                                roofAlreadyStolen={this.roofAlreadyStolen}
                                logout={this.logout}
                                getLeader={this.getLeader}
-                               isLoading={this.state.userLoading}
+                               isLoading={false}
                                getLeaderboard={this.getLeaderboard}
                 />
             </div>
@@ -209,4 +143,4 @@ const mapStateToProps = ({firebase}) => {
       }
     }
 
-export default compose(firebaseConnect(),(connect(mapStateToProps)))(App)
+export default (connect(mapStateToProps))(App)
