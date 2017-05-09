@@ -5,6 +5,7 @@ import base from '../../Firebase/base';
 import LoginContainer from '../LoginContainer/LoginContainer';
 import GameContainer from '../GameContainer/GameContainer';
 import {getPricePerSquareMeter} from '../../Helpers/PointsHelpers';
+import { browserHistory } from 'react-router'
 
 class App extends React.Component {
     constructor(){
@@ -71,11 +72,9 @@ class App extends React.Component {
 
 
     renderLogin() {
-        return (
-            <LoginContainer authenticate={this.authenticate}
-                            userLoading={false}
-            />
-        )
+        if(!this.props.auth){
+            browserHistory.push('/login')
+        }
     }
 
 
@@ -83,9 +82,7 @@ class App extends React.Component {
     render() {
         console.log(this.props.auth);
         // check if they are no logged in at all
-        if(!this.props.auth) {
-            return <div>{this.renderLogin()}</div>
-        }
+        this.renderLogin();
         
         console.log('Creating GameContainer');
         return (

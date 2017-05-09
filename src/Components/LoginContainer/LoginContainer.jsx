@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react'
 import Login from '../Login/Login'
 import './LoginContainer.css'
 import Loadable from 'react-loading-overlay'
+import { pathToJS } from 'react-redux-firebase';
+import { connect } from 'react-redux'
+import { browserHistory } from 'react-router';
 
-export default class LoginContainer extends React.Component {
+
+class LoginContainer extends Component {
+
+    static propTypes = {
+        auth: PropTypes.object,
+    }
+
+    componentWillReceiveProps({ auth }) {
+        if (auth) {
+            browserHistory.push('/') // redirect to /login if not authed
+        }
+    }
+
     render() {
         return (
             <Loadable active={false} spinner>
@@ -22,6 +37,14 @@ export default class LoginContainer extends React.Component {
     }
 };
 
+const mapStateToProps = ({firebase}) => {
+    return {
+        authError: pathToJS(firebase, 'authError'),
+        auth: pathToJS(firebase, 'auth')
+    }
+}
+
+export default (connect(mapStateToProps))(LoginContainer)
 
 
 
