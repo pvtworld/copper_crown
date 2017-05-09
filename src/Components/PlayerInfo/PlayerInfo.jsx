@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase';
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
