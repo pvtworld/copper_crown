@@ -8,11 +8,20 @@ import {
 import InfoContainer from "../InfoContainer/InfoContainer";
 import GameMap from "../GameMap/GameMap";
 import {searchForCopper} from '../../Redux/Actions/copperMapActions';
+import store from '../../Redux/store';
+
+store.subscribe(() => {
+    var newState = store.getState();
+    var map = new CopperMap();
+    if (newState.searchingForCopper === true){
+        checkClickForCopper(newState.searchPos.long, newState.searchPos.lat, map.handleRoof);
+    }
+});
 
 class CopperMap extends Component {
     constructor() {
         super();
-
+        this.handleMapClick = this.handleMapClick.bind(this);
         this.state = {
             center: {
                 lat: 59.334591,
@@ -37,7 +46,7 @@ class CopperMap extends Component {
             let watchPositionId;
 
             const geoSucess = (position) => {
-                console.log("Sucess! Located user at: ");
+                console.log("Successssssss! Located user at: ");
                 //console.log(position);
 
                 this.setState({
@@ -109,13 +118,17 @@ class CopperMap extends Component {
 
     }
 
-    handleMapClick(event) {
+    handleMapClick() {
         console.log("checkForCopper Dispatched")
-        this.props.dispatch(searchForCopper(true));
-        checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof);
+        console.log('Copper-lat', this.props.searchPos.lat);
+        checkClickForCopper(this.props.searchPos.long, this.props.searchPos.lat, this.handleRoof);
     }
 
+
+
     render() {
+        console.log('Copper-props', this.props);
+        console.log('Copper-lat', this.props.searchPos.lat);
         return (
             <div>
                 <div className="map">
@@ -153,4 +166,8 @@ class CopperMap extends Component {
     }
 }
 
-export default connect()(CopperMap);
+export default connect((state) => {
+    return {
+        searchPos: state.searchPos
+    }
+})(CopperMap);

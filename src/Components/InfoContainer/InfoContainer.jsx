@@ -1,13 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import RoofInfo from "../RoofInfo/RoofInfo";
 import Spinner from 'react-spinkit'
 
 var value = 'Calculating..';
 var area;
 
-export default class InfoContainer extends React.Component {
+class InfoContainer extends React.Component {
 
     render() {
+
+        console.log('props:', this.props);
         if (this.props.displayRoof) {
             if (this.props.state.pricePerSquareMeter) {
                 area = (this.props.roofInfo.area / 1000000).toFixed(1) + 0;
@@ -28,7 +31,7 @@ export default class InfoContainer extends React.Component {
             );
         }
 
-        if(this.props.isLoadingCopper){
+        if(this.props.searchingForCopper){
             return(
                 <Spinner spinnerName="chasing-dots" noFadeIn />
             )
@@ -36,3 +39,9 @@ export default class InfoContainer extends React.Component {
         return null;
     }
 }
+
+export default connect((state) => {
+    return {
+        searchingForCopper: state.searchingForCopper
+    }
+})(InfoContainer);

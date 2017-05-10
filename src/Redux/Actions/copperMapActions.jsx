@@ -11,3 +11,13 @@ export var displayRoofInfo = (info) => {
         info
     };
 };
+
+export var setSearchPosition = (latitude, longitude) => {
+    return {
+        type: 'SET_SEARCH_POSITION',
+        searchPos: {
+            lat: latitude,
+            long: longitude
+        }
+    };
+};

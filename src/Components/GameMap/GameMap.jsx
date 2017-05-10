@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withGoogleMap, GoogleMap, Circle, Marker} from "react-google-maps";
-import {checkClickForCopper} from '../../Helpers/GeoHelpers';
+import {searchForCopper, setSearchPosition} from '../../Redux/Actions/copperMapActions';
 
 const GameMap = withGoogleMap(props => (
 
@@ -10,7 +10,11 @@ const GameMap = withGoogleMap(props => (
         center={props.center}
         defaultZoom={17}
         defaultCenter={props.center}
-        onClick={props.onMapClick}
+        onClick={
+            event => {
+                props.dispatch(setSearchPosition(event.latLng.lat(), event.latLng.lng()));
+                props.dispatch(searchForCopper(true));
+            }}
         options={{
             mapTypeControl: false,
             streetViewControl: false,
@@ -28,10 +32,11 @@ const GameMap = withGoogleMap(props => (
 
 
         <Circle
-            onClick={(event => (
-                checkClickForCopper(event.latLng.lng(), event.latLng.lat(), props.handleRoof)
-            ))
-            }
+            onClick={
+                event => {
+                props.dispatch(setSearchPosition(event.latLng.lat(), event.latLng.lng()));
+                props.dispatch(searchForCopper(true));
+            }}
             center={props.center}
             radius={100}
             options={{
