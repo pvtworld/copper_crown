@@ -1,5 +1,4 @@
-/*
-import React from 'react'
+/*import React from 'react'
 import Nav from '../Navigation/Navigationbar'
 
 var Layout = (props) => (

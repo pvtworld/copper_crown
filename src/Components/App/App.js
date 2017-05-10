@@ -90,9 +90,6 @@ class App extends React.Component {
                 <GameContainer state={this.state}
                                addRoof={this.addRoof}
                                roofAlreadyStolen={this.roofAlreadyStolen}
-                               logout={this.logout}
-                               getLeader={this.getLeader}
-                               isLoading={false}
                 />
             </div>
         )
