@@ -67,14 +67,15 @@ class GameContainer extends React.Component{
         return (
             <div>
                 <Navigationbar
-                                renderLeader={this.renderLeader}
-                                renderInfo={this.renderInfo}
-                                renderProfile={this.renderProfile}
-                                renderPlayerInfo={this.renderPlayerInfo}
+                    renderLeader={this.renderLeader}
+                    renderInfo={this.renderInfo}
+                    renderProfile={this.renderProfile}
+                    renderPlayerInfo={this.renderPlayerInfo}
                 />
-                <CopperMap state={this.props.state}
-                           addRoof={this.props.addRoof}
-                           roofAlreadyStolen={this.props.roofAlreadyStolen}
+                <CopperMap
+                    state={this.props.state}
+                    addRoof={this.props.addRoof}
+                    roofAlreadyStolen={this.props.roofAlreadyStolen}
                 />
 
                 <InfoComponent
@@ -92,9 +93,10 @@ class GameContainer extends React.Component{
                     getLeader={this.props.getLeader}
                     getLeaderboard={this.props.getLeaderboard}
                 />
-                <PlayerInfo renderPlayerInfo={this.state.renderPlayerInfo}
-                            leavePlayerInfo={this.leavePlayerInfo}
-                            state={this.props.state}
+                <PlayerInfo
+                    renderPlayerInfo={this.state.renderPlayerInfo}
+                    leavePlayerInfo={this.leavePlayerInfo}
+                    state={this.props.state}
                 />
             </div>
         )
