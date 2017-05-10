@@ -1,4 +1,5 @@
 import React from 'react';
+//import { firebaseConnect} from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
@@ -20,7 +21,7 @@ const Navigationbar = (props) => {
                     <NavItem onClick={props.renderInfo}>About CopperCrown</NavItem>
                 </Nav>
                 <Nav pullRight>
-                    <NavDropdown title={titleName()} id="basic-nav-dropdown">
+                    <NavDropdown title={"Signed in as: "+props.auth.displayName} id="basic-nav-dropdown">
                         <MenuItem onClick={props.renderProfile}>Profile</MenuItem>
                         <MenuItem divider />
                         <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
@@ -31,13 +32,6 @@ const Navigationbar = (props) => {
     )
 };
 
-function titleName(){
-    var string = this.props.auth.displayName; 
-return "Signed in as: "+string; 
-};
-
-//export default firebaseConnect()(Navigationbar);
-//Max://
 const mapStateToProps = ({firebase}, {auth}) => ({
     userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined
 })
@@ -53,4 +47,4 @@ const authConnected = connect(
   })
 )(wrappedPlayerInfo)
 
-export default authConnected
+export default authConnected;
