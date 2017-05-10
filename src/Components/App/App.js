@@ -73,7 +73,7 @@ class App extends React.Component {
 
     renderLogin() {
         if(!this.props.auth){
-            browserHistory.push('/login')
+            browserHistory.push('/')
         }
     }
 
@@ -81,8 +81,8 @@ class App extends React.Component {
 
     render() {
         console.log(this.props.auth);
-        // check if they are no logged in at all
         this.renderLogin();
+        // check if they are no logged in at all
         
         console.log('Creating GameContainer');
         return (

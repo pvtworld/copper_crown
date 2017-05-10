@@ -14,8 +14,8 @@ class LoginContainer extends Component {
     }
 
     componentWillReceiveProps({ auth }) {
-        if (auth) {
-            browserHistory.push('/') // redirect to /login if not authed
+        if(auth){
+            browserHistory.push('/app')
         }
     }
 
@@ -32,7 +32,6 @@ class LoginContainer extends Component {
                     </div>
             </div>
             </Loadable>
-
         );  
     }
 };
