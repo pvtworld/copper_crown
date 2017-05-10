@@ -66,20 +66,22 @@ class GameContainer extends React.Component{
     render() {
         return (
             <div>
-                <Navigationbar logout={this.props.logout}
-                               renderLeader={this.renderLeader}
-                               renderInfo={this.renderInfo}
-                               renderProfile={this.renderProfile}
-                               renderPlayerInfo={this.renderPlayerInfo}
+                <Navigationbar
+                                renderLeader={this.renderLeader}
+                                renderInfo={this.renderInfo}
+                                renderProfile={this.renderProfile}
+                                renderPlayerInfo={this.renderPlayerInfo}
                 />
                 <CopperMap state={this.props.state}
                            addRoof={this.props.addRoof}
                            roofAlreadyStolen={this.props.roofAlreadyStolen}
                 />
+
                 <InfoComponent
                     renderInfo={this.state.renderInfo}
                     leaveInfo={this.leaveInfo}
                 />
+
                 <ProfileComponent
                     renderProfile={this.state.renderProfile}
                     leaveProfile={this.leaveProfile}

@@ -93,7 +93,6 @@ class App extends React.Component {
                                logout={this.logout}
                                getLeader={this.getLeader}
                                isLoading={false}
-                               getLeaderboard={this.getLeaderboard}
                 />
             </div>
         )
