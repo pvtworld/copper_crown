@@ -4,10 +4,6 @@ import { pathToJS } from 'react-redux-firebase';
 import base from '../../Firebase/base';
 import LoginContainer from '../LoginContainer/LoginContainer';
 import GameContainer from '../GameContainer/GameContainer';
-<<<<<<< HEAD
-=======
-//import {getPricePerSquareMeter} from '../../Helpers/PointsHelpers';
->>>>>>> 72a283cc5f2c9c4fa3586f8a55c1254b2e4a7cc6
 
 class App extends React.Component {
     constructor(){

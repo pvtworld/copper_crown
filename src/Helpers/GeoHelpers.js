@@ -27,7 +27,7 @@ const createObjectFromXML = (xml) => {
 }
 
 
-export const checkClickForCopper = (long, lat, dispatch, firebase) => {
+export const checkClickForCopper = (long, lat, dispatch) => {
 
     const sthlmPointUrlTemplate = 'https://us-central1-coppercors.cloudfunctions.net/copperProvider/?whatcopper=Geom=POINT(%longitude%%20%latitude%)';
     const [x,y] = convertPoint(long, lat);
