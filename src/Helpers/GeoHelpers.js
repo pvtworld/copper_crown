@@ -1,6 +1,6 @@
 import { convertPoint } from './CoordinateConverter';
-import {searchForCopper, searchDone} from '../Redux/Actions/copperMapActions';
-import { connect } from 'react-redux';
+import {searchForCopper, searchDone, displayRoofNotFound, displayRoofTaken, displayRoofNotTaken} from '../Redux/Actions/copperMapActions';
+import base from '../Firebase/base';
 
 export const geoError = (err) => {
     console.warn('ERROR(' + err.code + '): ' + err.message);
@@ -40,13 +40,28 @@ export const checkClickForCopper = (long, lat, dispatch, firebase) => {
     .then( parsedXML => {
         dispatch(searchDone());
         if (parsedXML.getElementsByTagName('dataEntitity')[0].getAttribute('resultRecords') === '1') {
-                console.log(createObjectFromXML(parsedXML))
-            } else {
-                console.log(parsedXML)
+            let roof = createObjectFromXML(parsedXML);
+        base.fetch('stolenRoofs', {
+            context: {},
+            queries: {
+                orderByChild: 'roofId',
+                equalTo: roof.id},
+                then(response){
+                if(Object.keys(response).length){
+                    dispatch(displayRoofTaken(roof))
+                }
+                else{
+                    dispatch(displayRoofNotTaken(roof))
+                }
             }
-        ;
+        })}
+        
+        else {
+           dispatch(displayRoofNotFound());
         }
-    );
+
+
+    });
 }
 
 
