@@ -4,8 +4,8 @@ import { copperSearchReducer, displayRoofReducer, searchPosReducer } from './cop
 
 const reducers = combineReducers({
     firebase: firebaseStateReducer,
-    searchingForCopper: copperSearchReducer,
-    displayRoofInfo: displayRoofReducer,
+    copperSearch: copperSearchReducer,
+    copperRoof: displayRoofReducer,
     searchPos: searchPosReducer
 });
 
