@@ -13,7 +13,6 @@ import store from '../../Redux/store';
 class CopperMap extends Component {
     constructor() {
         super();
-        this.handleMapClick = this.handleMapClick.bind(this);
         this.state = {
             center: {
                 lat: 59.334591,
