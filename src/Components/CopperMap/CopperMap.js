@@ -10,14 +10,6 @@ import GameMap from "../GameMap/GameMap";
 import {searchForCopper} from '../../Redux/Actions/copperMapActions';
 import store from '../../Redux/store';
 
-store.subscribe(() => {
-    var newState = store.getState();
-    var map = new CopperMap();
-    if (newState.searchingForCopper === true){
-        checkClickForCopper(newState.searchPos.long, newState.searchPos.lat, map.handleRoof);
-    }
-});
-
 class CopperMap extends Component {
     constructor() {
         super();
@@ -33,12 +25,8 @@ class CopperMap extends Component {
 
     geoTimer = null;
 
-    handleRoof = this.handleRoof.bind(this);
-    handleMapClick = this.handleMapClick.bind(this);
     geoLocationWatcher = this.geoLocationWatcher.bind(this);
-    stealRoof = this.stealRoof.bind(this);
-    leaveRoof = this.leaveRoof.bind(this);
-    roofCallback = this.roofCallback.bind(this);
+
 
     geoLocationWatcher() {
         if (navigator.geolocation) {
@@ -78,52 +66,6 @@ class CopperMap extends Component {
     componentWillUnmount() {
         clearInterval(this.geoTimer);
     }
-
-    roofCallback(roof, alreadyStolen) {
-        this.setState({
-            displayRoof: !alreadyStolen,
-            roofInfo: roof
-        });
-        if (alreadyStolen) {
-
-            alert("Roof already Stolen")
-        }
-    }
-
-    handleRoof(roof) {
-        if (roof) {
-            console.log("Roof present")
-            this.props.dispatch(searchForCopper(false));
-            this.props.roofAlreadyStolen(roof, this.roofCallback)
-        } else {
-            console.log("No Copper");
-            this.props.dispatch(searchForCopper(false));
-            this.setState({
-                displayRoof: false,
-            });
-
-        }
-    }
-
-    stealRoof(points, area, id) {
-        this.props.addRoof(points, area, id)
-        this.leaveRoof();
-    }
-
-    leaveRoof() {
-        this.setState({
-            displayRoof: false,
-            roofInfo: null
-        });
-
-    }
-
-    handleMapClick() {
-        console.log("checkForCopper Dispatched")
-        console.log('Copper-lat', this.props.searchPos.lat);
-        checkClickForCopper(this.props.searchPos.long, this.props.searchPos.lat, this.handleRoof);
-    }
-
 
 
     render() {
