@@ -11,7 +11,29 @@ export const geoOptions = {
 }
 
 
-export function checkClickForCopper(long, lat, callback) {
+export const checkClickForCopper = (long, lat) => {
+
+    const sthlmPointUrlTemplate = 'https://us-central1-coppercors.cloudfunctions.net/copperProvider/?whatcopper=Geom=POINT(%longitude%%20%latitude%)';
+    const [x,y] = convertPoint(long, lat);
+
+    fetch(createUrl(sthlmPointUrlTemplate, x, y), { method: 'GET'} )
+    .then( response => response.text())
+    .then( text => {
+            const parser = new DOMParser();
+            const parsedXML = parser.parseFromString(text, 'text/xml');
+
+            if (parsedXML.getElementsByTagName('dataEntitity')[0].getAttribute('resultRecords') === '1') {
+                console.log({ id: parsedXML.getElementsByTagName('id')[0].childNodes[0].nodeValue,
+                    area: parsedXML.getElementsByTagName('area')[0].childNodes[0].nodeValue })
+            } else {
+                console.log(text)
+            }
+        ;
+    }
+    );
+} 
+
+export function checkClickForCopper2(long, lat, callback) {
 
     const sthlmPointUrlTemplate = 'https://us-central1-coppercors.cloudfunctions.net/copperProvider/?whatcopper=Geom=POINT(%longitude%%20%latitude%)';
 
