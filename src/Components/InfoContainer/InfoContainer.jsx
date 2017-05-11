@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import RoofInfo from "../RoofInfo/RoofInfo";
-import RoofStolen from '../RoofStolen/RoofStolen'
+import RoofStolen from '../RoofInfo/RoofStolen';
+import RoofNotFound from '../RoofInfo/RoofNotFound';
 import Spinner from 'react-spinkit'
 
 var value = 'Calculating..';
@@ -20,31 +21,29 @@ class InfoContainer extends React.Component {
             case true: 
 
                 if(this.props.roofTaken){
-                    return <RoofStolen dispatch={this.props.dispatch}/>
+                    return <RoofStolen/>
                 }
                 else{
-
-                }
-                area = (this.props.area / 1000000).toFixed(1) + 0;
-                value = (100 * area).toFixed(1) + 0;
-
-            case false :
-        }
-
-
-
-            return (
-                <div>
-                    <RoofInfo
-                        id={this.props.id}
-                        value={value}
-                        area={area}
-                        leaveCallback={this.props.leaveRoof}
-                        stealCallback={this.props.stealRoof}
-                        roofAlreadyStolen={this.props.roofAlreadyStolen}
+                    area = (this.props.area / 1000000).toFixed(1) + 0;
+                    value = (100 * area).toFixed(1) + 0;
+                    return(
+                    <div>
+                        <RoofInfo
+                            value={value}
+                            area={area}
                     />
                 </div>
-            );
+                )
+                }
+
+
+            case false :
+                return <RoofNotFound/>
+            default: 
+                return null
+            }
+
+
         }
 
     }
