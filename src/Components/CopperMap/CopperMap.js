@@ -3,12 +3,9 @@ import {connect} from 'react-redux';
 import {
     geoError,
     geoOptions,
-    checkClickForCopper
 } from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
 import GameMap from "../GameMap/GameMap";
-import {searchForCopper} from '../../Redux/Actions/copperMapActions';
-import store from '../../Redux/store';
 
 class CopperMap extends Component {
     constructor() {

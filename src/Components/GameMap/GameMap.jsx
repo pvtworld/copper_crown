@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withGoogleMap, GoogleMap, Circle, Marker} from "react-google-maps";
-import {searchForCopper, setSearchPosition} from '../../Redux/Actions/copperMapActions';
 import { checkClickForCopper } from '../../Helpers/GeoHelpers';
 
 const GameMap = withGoogleMap(props => (
