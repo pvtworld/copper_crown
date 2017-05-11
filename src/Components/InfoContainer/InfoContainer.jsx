@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import RoofInfo from "../RoofInfo/RoofInfo";
+import RoofStolen from '../RoofStolen/RoofStolen'
 import Spinner from 'react-spinkit'
 
 var value = 'Calculating..';
@@ -10,17 +11,32 @@ class InfoContainer extends React.Component {
 
     render() {
 
-        console.log('props:', this.props);
-        if (this.props.displayRoof) {
-            if (this.props.state.pricePerSquareMeter) {
-                area = (this.props.roofInfo.area / 1000000).toFixed(1) + 0;
-                value = (this.props.state.pricePerSquareMeter * area).toFixed(1) + 0;
-            }
+        if(this.props.searching){
+            return(
+                <Spinner spinnerName="chasing-dots" noFadeIn />
+            )
+        }
+        switch (this.props.foundRoof){
+            case true: 
+
+                if(this.props.roofTaken){
+                    return <RoofStolen dispatch={this.props.dispatch}/>
+                }
+                else{
+
+                }
+                area = (this.props.area / 1000000).toFixed(1) + 0;
+                value = (100 * area).toFixed(1) + 0;
+
+            case false :
+        }
+
+
 
             return (
                 <div>
                     <RoofInfo
-                        id={this.props.roofInfo.id}
+                        id={this.props.id}
                         value={value}
                         area={area}
                         leaveCallback={this.props.leaveRoof}
@@ -31,17 +47,15 @@ class InfoContainer extends React.Component {
             );
         }
 
-        if(this.props.searchingForCopper){
-            return(
-                <Spinner spinnerName="chasing-dots" noFadeIn />
-            )
-        }
-        return null;
+    }
+const mapStateToProps = (state) => {
+    return {
+        searching: state.copperSearch.searching,
+        foundRoof : state.copperRoof.foundRoof,
+        roofTaken : state.copperRoof.roofTaken,
+        id: state.copperRoof.id,
+        area: state.copperRoof.area
     }
 }
 
-export default connect((state) => {
-    return {
-        searchingForCopper: state.searchingForCopper
-    }
-})(InfoContainer);
+export default connect(mapStateToProps)(InfoContainer);
