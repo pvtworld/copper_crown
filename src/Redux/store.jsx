@@ -1,6 +1,7 @@
-import { createStore, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { reactReduxFirebase } from 'react-redux-firebase'
 import reducers from './Reducers/combiner';
+import logger from 'redux-logger';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBxf-SMmqau97RBu5y4f4a62OQBWLwevUM",
@@ -12,6 +13,6 @@ const createStoreWithFirebase = compose(
   reactReduxFirebase(firebaseConfig)
 )(createStore)
 
-const store = createStoreWithFirebase(reducers);
+const store = createStoreWithFirebase(reducers, applyMiddleware(logger));
 
 export default store; 

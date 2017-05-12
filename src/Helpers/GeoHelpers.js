@@ -40,13 +40,13 @@ export const checkClickForCopper = (long, lat, dispatch) => {
     .then( parsedXML => {
         dispatch(searchDone());
         if (parsedXML.getElementsByTagName('dataEntitity')[0].getAttribute('resultRecords') === '1') {
-            let roof = createObjectFromXML(parsedXML);
-        base.fetch('stolenRoofs', {
-            context: {},
-            queries: {
+            const roof = createObjectFromXML(parsedXML);
+            base.fetch('stolenRoofs', {
+                context: {},
+                queries: {
                 orderByChild: 'roofId',
                 equalTo: roof.id},
-                then(response){
+            then(response){
                 if(Object.keys(response).length){
                     dispatch(displayRoofTaken(roof))
                 }

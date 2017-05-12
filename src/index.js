@@ -9,7 +9,6 @@ const root = document.getElementById('root');
 
 store.subscribe(() => {
     console.log('Uppdaterar state:', store.getState());
-})
+});
 
 ReactDOM.render(<Root store={store} />, root);
-
