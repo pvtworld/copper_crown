@@ -5,9 +5,6 @@ import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
 import Spinner from 'react-spinkit'
 
-var value = 'Calculating..';
-var area;
-
 class InfoContainer extends React.Component {
 
     render() {
@@ -24,13 +21,9 @@ class InfoContainer extends React.Component {
                     return <RoofStolen/>
                 }
                 else{
-                    area = (this.props.area / 1000000).toFixed(1) + 0;
-                    value = (100 * area).toFixed(1) + 0;
                     return(
                     <div>
                         <RoofInfo
-                            value={value}
-                            area={area}
                     />
                 </div>
                 )
