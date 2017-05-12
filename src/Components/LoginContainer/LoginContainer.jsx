@@ -4,23 +4,11 @@ import './LoginContainer.css'
 import Loadable from 'react-loading-overlay'
 import { pathToJS } from 'react-redux-firebase';
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router';
 
-
-class LoginContainer extends Component {
-
-    static propTypes = {
-        auth: PropTypes.object,
-    }
-
-    componentWillReceiveProps({ auth }) {
-        if(auth){
-        }
-    }
-
+class LoginContainer extends React.Component {
     render() {
         return (
-            <Loadable active={false} spinner>
+            <Loadable active={this.props.loadingUser} spinner>
             <div className="fullscreen">
                     <div>
                         <div id="center_text">
@@ -35,14 +23,12 @@ class LoginContainer extends Component {
     }
 };
 
-const mapStateToProps = ({firebase}) => {
-    return {
-        authError: pathToJS(firebase, 'authError'),
-        auth: pathToJS(firebase, 'auth')
+const mapStateToProps = (state) => {
+    return{
+        loadingUser: state.login.loadingUser
     }
 }
-
-export default (connect(mapStateToProps))(LoginContainer)
+export default connect(mapStateToProps)(LoginContainer)
 
 
 

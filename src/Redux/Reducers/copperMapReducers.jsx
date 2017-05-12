@@ -9,7 +9,18 @@ export var copperSearchReducer = (state = {searching: false}, action) => {
     }
 };
 
-
+export var loginReducer = (state = {loadingUser: false}, action ) => {
+    switch (action.type){
+        case 'LOGIN_STARTED':
+            return {...state, loadingUser: true}
+        case 'LOGIN_FINISHED':
+            return {...state, loadingUser: false}
+        case 'LOGIN_ERROR':
+            return {...state, loadingUser: false}
+        default:
+            return state;
+    }
+}
 
 export var displayRoofReducer = (state = {foundRoof: null, id: null, area: null}, action) => {
     switch (action.type){

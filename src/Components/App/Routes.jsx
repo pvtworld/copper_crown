@@ -25,7 +25,7 @@ const Routes = (props) => (
             <Route path="/profile" component={() => <h1>Profile</h1>} />
             <Route path="/leaderboard" component={() => <h1>Leaderboard</h1>} />
             <Route path="/info" component={() => <h1>Info</h1>} />
-            <IndexRoute component={UserIsNotAuth(LoginContainer)} />
+            <IndexRoute component={LoginContainer} />
         </Route>
     <Route path="*" component={NotFound} />
 </Router>
