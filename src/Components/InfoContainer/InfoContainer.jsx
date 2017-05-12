@@ -3,7 +3,12 @@ import {connect} from 'react-redux';
 import RoofInfo from "../RoofInfo/RoofInfo";
 import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
-import Spinner from 'react-spinkit'
+import Spinner from 'react-spinkit';
+import PlayerInfo from '../../Components/PlayerInfo/PlayerInfo';
+import Leaderboard from '../../Components/Leaderboard/LeaderComponent';
+import About from '../AboutComponent/AboutComponent';
+import Profile from '../../Components/Profile/ProfileComponent'
+
 
 var value = 'Calculating..';
 var area;
@@ -11,12 +16,25 @@ var area;
 class InfoContainer extends React.Component {
 
     render() {
-
         if(this.props.searching){
             return(
                 <Spinner spinnerName="chasing-dots" noFadeIn />
             )
         }
+
+        switch(this.props.showModalString){
+            case 'SHOW_PLAYERINFO':
+                return <PlayerInfo/>
+            case 'SHOW_LEADERBOARD':
+                return <Leaderboard/>
+            case 'SHOW_PROFILE':
+                return <Profile/>
+            case 'SHOW_ABOUT':
+                return <About/>
+            default:
+                return null;
+        }
+
         switch (this.props.foundRoof){
             case true: 
 
@@ -42,8 +60,6 @@ class InfoContainer extends React.Component {
             default: 
                 return null
             }
-
-
         }
 
     }
@@ -53,7 +69,8 @@ const mapStateToProps = (state) => {
         foundRoof : state.copperRoof.foundRoof,
         roofTaken : state.copperRoof.roofTaken,
         id: state.copperRoof.id,
-        area: state.copperRoof.area
+        area: state.copperRoof.area,
+        showModalString: state.showModal.showModalString
     }
 }
 
