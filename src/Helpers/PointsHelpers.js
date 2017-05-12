@@ -1,13 +1,14 @@
+import { fetchingPrice, copperPriceReturned } from '../Redux/Actions/copperMapActions'
 const squareMetersPerTon = 186.720442;
 
 var currentPrice;
 var currentRate;
 
-export function getPricePerSquareMeter(setPricePerSquareMeter) {
+export function getPricePerSquareMeter(dispatch) {
 
     const priceURL = 'https://www.quandl.com/api/v3/datasets/LME/PR_CU.json?api_key=sowBXJ3eiZby8MzvHbqP';
     const rateURL = 'https://www.quandl.com/api/v3/datasets/BUNDESBANK/BBEX3_D_SEK_USD_CA_AC_000.json?api_key=sowBXJ3eiZby8MzvHbqP&start_date=' + currentDate();
-
+    dispatch(fetchingPrice())
     fetch(priceURL)
         .then(status)
         .then(json)
@@ -19,7 +20,7 @@ export function getPricePerSquareMeter(setPricePerSquareMeter) {
                 .then(json)
                 .then((jsonObject) => {
                     currentRate = jsonObject.dataset.data[0][1];
-                    setPricePerSquareMeter((currentPrice * currentRate) / squareMetersPerTon);
+                    dispatch(copperPriceReturned((currentPrice * currentRate) / squareMetersPerTon));
                 }).catch((error) => {
                 alert('Error: Please refresh page.');
             });

@@ -3,25 +3,30 @@ import { connect } from 'react-redux';
 import { pathToJS } from 'react-redux-firebase';
 import LoginContainer from '../LoginContainer/LoginContainer';
 import GameContainer from '../GameContainer/GameContainer';
+import { getPricePerSquareMeter } from '../../Helpers/PointsHelpers';
 
 class App extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.renderLogin = this.renderLogin.bind(this);
     }
 
 
     renderLogin() {
         return (
-            <LoginContainer authenticate={this.authenticate}
-                            userLoading={false}
-            />
+            <LoginContainer/>
         )
+    }
+
+    componentDidMount(){
+        getPricePerSquareMeter(this.props.dispatch);
     }
 
 
 
     render() {
+        
+
         console.log(this.props.auth);
         // check if they are no logged in at all
         if(!this.props.auth) {
