@@ -13,7 +13,7 @@ const Navigationbar = (props) => {
             <Navbar.Header>
                 <a href="#" className="navbar-text visible-xs-inline-block">Example text</a>
                 <Navbar.Brand>
-                    <a>CopperCrown</a>
+                    <a onClick={() => props.dispatch(resetModal())}>CopperCrown</a>
                 </Navbar.Brand>
                 <Navbar.Toggle />
             </Navbar.Header>

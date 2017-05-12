@@ -1,18 +1,25 @@
 import React from 'react';
-import { Button } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase';
 import { resetModal } from '../../Redux/Actions/navigationActions';
 import { connect } from 'react-redux'
 
 const AboutComponent = (props) => {
-    const back = <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>Close</Button>;
+
     return (
-        <div className="navpage-box">
-            {back}
-            <div>
-                <h3>Info Component</h3>
-                <p>Copper roofs are dope</p>
-            </div>
+        <div className="static-modal">
+            <Modal.Dialog>
+                <Modal.Header>
+                    <Modal.Title>About </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Copper roofs are dope</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
+                </Modal.Footer>
+
+            </Modal.Dialog>
         </div>
     )
 };
@@ -33,3 +40,4 @@ const authConnected = connect(
 )(wrappedPlayerInfo)
 
 export default authConnected;
+

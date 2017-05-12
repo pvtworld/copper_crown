@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {firebaseConnect, dataToJS, pathToJS} from 'react-redux-firebase';
-import {Grid, Button} from 'react-bootstrap';
+import { Grid, Button, Modal} from 'react-bootstrap';
 import LeaderHeading from './LeaderHeading';
 import LeaderboardList from './LeaderboardList';
 import CurrentRank from './CurrentRank';
@@ -52,21 +52,29 @@ class LeaderComponent extends Component{
     }
 
     render(){
-        const back = <Button bsStyle="primary" onClick={() => this.props.dispatch(resetModal())}>Close</Button>;
             var sortedUserInfo = this.getUserInfo();
             var myRank = this.getMyRank(sortedUserInfo);
             var listItems = this.getLeaderboardInfo(sortedUserInfo);
 
             return(
-                <div className="navpage-box">
-                    {back}
-                    <div>
-                        <Grid>
-                            <LeaderHeading/>
-                            <LeaderboardList listItems={listItems} />
-                            <CurrentRank rank={myRank} />
-                        </Grid>
-                    </div>
+                <div className="static-modal">
+
+                    <Modal.Dialog>
+                        <Modal.Header>
+                            <Modal.Title>Profile Component</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Grid>
+                                <LeaderHeading/>
+                                <LeaderboardList listItems={listItems} />
+                                <CurrentRank rank={myRank} />
+                            </Grid>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button bsStyle="primary" onClick={() => this.props.dispatch(resetModal())}>OK</Button>
+                        </Modal.Footer>
+
+                    </Modal.Dialog>
                 </div>
             )
     }
