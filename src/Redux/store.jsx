@@ -13,6 +13,9 @@ const createStoreWithFirebase = compose(
   reactReduxFirebase(firebaseConfig)
 )(createStore)
 
-const store = createStoreWithFirebase(reducers, applyMiddleware(logger));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStoreWithFirebase(reducers, composeEnhancers(applyMiddleware(logger)));
+
 
 export default store; 
