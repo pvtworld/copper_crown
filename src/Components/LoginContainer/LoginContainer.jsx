@@ -15,7 +15,6 @@ class LoginContainer extends Component {
 
     componentWillReceiveProps({ auth }) {
         if(auth){
-            browserHistory.push('/app')
         }
     }
 
