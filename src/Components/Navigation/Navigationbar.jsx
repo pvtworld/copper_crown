@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import { showLeaderboard, showAbout, showPlayerInfo, showProfile, resetModal } from '../../Redux/Actions/navigationActions';
 
 const Navigationbar = (props) => {
     var userName = props.auth.displayName;
-    if (!userName) userName = "No Name";
+    if (!userName) userName = "Anonymous";
 
     return(
         <Navbar inverse collapseOnSelect>
@@ -18,13 +19,13 @@ const Navigationbar = (props) => {
             </Navbar.Header>
             <Navbar.Collapse>
                 <Nav>
-                    <NavItem onClick={props.renderPlayerInfo}>PlayerInfo</NavItem>
-                    <NavItem onClick={props.renderLeader}>Leaderboards</NavItem>
-                    <NavItem onClick={props.renderInfo}>About CopperCrown</NavItem>
+                    <NavItem onClick={() => props.dispatch(showPlayerInfo())}>PlayerInfo</NavItem>
+                    <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboards</NavItem>
+                    <NavItem onClick={() => props.dispatch(showAbout())}>About CopperCrown</NavItem>
                 </Nav>
                 <Nav pullRight>
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
-                        <MenuItem onClick={props.renderProfile}>Profile</MenuItem>
+                        <MenuItem onClick={() => props.dispatch(showProfile())}>Profile</MenuItem>
                         <MenuItem divider />
                         <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
                     </NavDropdown>
