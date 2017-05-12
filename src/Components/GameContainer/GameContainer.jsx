@@ -1,14 +1,14 @@
 import React from 'react';
 
 import CopperMap from '../CopperMap/CopperMap';
-import InfoComponent from '../InfoComponent/InfoComponent';
+import InfoComponent from '../AboutComponent/AboutComponent';
 import ProfileComponent from '../Profile/ProfileComponent.jsx'
 import LeaderboardComponent from '../Leaderboard/LeaderComponent.jsx';
 import Navigationbar from '../Navigation/Navigationbar';
 import PlayerInfo from '../PlayerInfo/PlayerInfo';
 
 class GameContainer extends React.Component{
-    state = {
+/*    state = {
         renderInfo: false,
         renderProfile: false,
         renderLeader: false,
@@ -61,7 +61,7 @@ class GameContainer extends React.Component{
         this.setState({
             renderLeader: false
         })
-    };
+    };*/
 
     render() {
         return (
@@ -78,7 +78,7 @@ class GameContainer extends React.Component{
                     roofAlreadyStolen={this.props.roofAlreadyStolen}
                 />
 
-                <InfoComponent
+                {/*<InfoComponent
                     renderInfo={this.state.renderInfo}
                     leaveInfo={this.leaveInfo}
                 />
@@ -97,7 +97,7 @@ class GameContainer extends React.Component{
                     renderPlayerInfo={this.state.renderPlayerInfo}
                     leavePlayerInfo={this.leavePlayerInfo}
                     state={this.props.state}
-                />
+                />*/}
             </div>
         )
     }

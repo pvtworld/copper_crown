@@ -5,6 +5,7 @@ import {Grid, Button} from 'react-bootstrap';
 import LeaderHeading from './LeaderHeading';
 import LeaderboardList from './LeaderboardList';
 import CurrentRank from './CurrentRank';
+import { resetModal } from '../../Redux/Actions/navigationActions';
 
 class LeaderComponent extends Component{
 
@@ -51,11 +52,7 @@ class LeaderComponent extends Component{
     }
 
     render(){
-        const back = <Button bsStyle="primary" onClick={this.props.leaveLeader}>Close</Button>;
-        const leader = <Button bsStyle="primary" onClick={this.props.getLeader}>Print leaderboard in console</Button>;
-
-        if(this.props.renderLeader){
-
+        const back = <Button bsStyle="primary" onClick={() => this.props.dispatch(resetModal())}>Close</Button>;
             var sortedUserInfo = this.getUserInfo();
             var myRank = this.getMyRank(sortedUserInfo);
             var listItems = this.getLeaderboardInfo(sortedUserInfo);
@@ -63,9 +60,6 @@ class LeaderComponent extends Component{
             return(
                 <div className="navpage-box">
                     {back}
-                    <div>
-                        {leader}
-                    </div>
                     <div>
                         <Grid>
                             <LeaderHeading/>
@@ -75,8 +69,6 @@ class LeaderComponent extends Component{
                     </div>
                 </div>
             )
-        }
-        return null;
     }
 }
 
