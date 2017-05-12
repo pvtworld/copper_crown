@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { pathToJS } from 'react-redux-firebase';
-import LoginContainer from '../LoginContainer/LoginContainer';
 import GameContainer from '../GameContainer/GameContainer';
-import {getPricePerSquareMeter} from '../../Helpers/PointsHelpers';
 import { browserHistory } from 'react-router'
 
 class App extends React.Component {

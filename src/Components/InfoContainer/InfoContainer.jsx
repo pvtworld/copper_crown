@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import RoofInfo from "../RoofInfo/RoofInfo";
 import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
@@ -32,7 +32,7 @@ class InfoContainer extends React.Component {
             case 'SHOW_ABOUT':
                 return <About/>
             default:
-                return null;
+                break;
         }
 
         switch (this.props.foundRoof){

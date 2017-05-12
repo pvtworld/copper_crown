@@ -1,8 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import Login from '../Login/Login'
 import './LoginContainer.css'
 import Loadable from 'react-loading-overlay'
-import { pathToJS } from 'react-redux-firebase';
 import { connect } from 'react-redux'
 
 class LoginContainer extends React.Component {

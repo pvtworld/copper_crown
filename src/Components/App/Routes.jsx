@@ -3,12 +3,8 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import NotFound from '../NotFound/NotFound';
 import LoginContainer from '../LoginContainer/LoginContainer';
 import App from './App';
-import CopperMap from '../CopperMap/CopperMap';
-import InfoComponent from '../AboutComponent/AboutComponent'
-import Layout from './Layout'
 import { connect } from 'react-redux'
 import { pathToJS } from 'react-redux-firebase'
-import { UserIsNotAuth } from './routerUtils'
 
 var redirectIfAuth = (props) => {
     console.log(props.auth);
@@ -17,9 +13,9 @@ var redirectIfAuth = (props) => {
     }
 }
 
-var checkIfAuth = () => {
+/*var checkIfAuth = () => {
 
-}
+}*/
 
 const Routes = (props) => (
     <Router history={browserHistory}>
