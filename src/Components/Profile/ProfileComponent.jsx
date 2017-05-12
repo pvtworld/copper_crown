@@ -6,8 +6,8 @@ import {Button, Image} from 'react-bootstrap'
 
 class ProfileComponent extends React.Component{
     render(){
-        console.log(this.props.auth);
-        console.log(this.props.userInfo);
+        //console.log(this.props.auth);
+        //console.log(this.props.userInfo);
         const back = <Button bsStyle="primary" onClick={this.props.leaveProfile}>Close</Button>;
         if(this.props.renderProfile){
             return(

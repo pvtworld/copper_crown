@@ -1,33 +1,28 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
     geoError,
     geoOptions,
-    checkClickForCopper
 } from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
-import {GameMap} from "../GameMap/GameMap";
+import GameMap from "../GameMap/GameMap";
 
-export default class CopperMap extends Component {
+class CopperMap extends Component {
     constructor() {
         super();
-
         this.state = {
             center: {
                 lat: 59.334591,
                 lng: 18.063240,
             },
-            isLoadingCopper: false
+            //isLoadingCopper: false
         };
     }
 
     geoTimer = null;
 
-    handleRoof = this.handleRoof.bind(this);
-    handleMapClick = this.handleMapClick.bind(this);
     geoLocationWatcher = this.geoLocationWatcher.bind(this);
-    stealRoof = this.stealRoof.bind(this);
-    leaveRoof = this.leaveRoof.bind(this);
-    roofCallback = this.roofCallback.bind(this);
+
 
     geoLocationWatcher() {
         if (navigator.geolocation) {
@@ -35,8 +30,8 @@ export default class CopperMap extends Component {
             let watchPositionId;
 
             const geoSucess = (position) => {
-                console.log("Sucess! Located user at: ");
-                console.log(position);
+                console.log("Successssssss! Located user at: ");
+                //console.log(position);
 
                 this.setState({
                     center: {
@@ -68,52 +63,10 @@ export default class CopperMap extends Component {
         clearInterval(this.geoTimer);
     }
 
-    roofCallback(roof, alreadyStolen) {
-        this.setState({
-            displayRoof: !alreadyStolen,
-            roofInfo: roof
-        });
-        if (alreadyStolen) {
-
-            alert("Roof already Stolen")
-        }
-    }
-
-    handleRoof(roof) {
-        if (roof) {
-            console.log("Roof present")
-            this.setState({isLoadingCopper: false})
-            this.props.roofAlreadyStolen(roof, this.roofCallback)
-        } else {
-            console.log("No Copper");
-            this.setState({
-                displayRoof: false,
-                isLoadingCopper: false
-            });
-
-        }
-    }
-
-    stealRoof(points, area, id) {
-        this.props.addRoof(points, area, id)
-        this.leaveRoof();
-    }
-
-    leaveRoof() {
-        this.setState({
-            displayRoof: false,
-            roofInfo: null
-        });
-
-    }
-
-    handleMapClick(event) {
-        console.log("checkForCopper Dispatched")
-        this.setState({isLoadingCopper: true})
-        checkClickForCopper(event.latLng.lng(), event.latLng.lat(), this.handleRoof);
-    }
 
     render() {
+        console.log('Copper-props', this.props);
+        console.log('Copper-lat', this.props.searchPos.lat);
         return (
             <div>
                 <div className="map">
@@ -151,3 +104,8 @@ export default class CopperMap extends Component {
     }
 }
 
+export default connect((state) => {
+    return {
+        searchPos: state.searchPos
+    }
+})(CopperMap);

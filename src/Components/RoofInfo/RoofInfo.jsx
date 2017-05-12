@@ -1,5 +1,25 @@
-import React, {Component} from 'react';
-import {Button, Tooltip, OverlayTrigger, Grid, Col, Row} from 'react-bootstrap';
+import React from 'react';
+import {compose} from 'redux';
+import { connect } from 'react-redux';
+import {firebaseConnect} from 'react-redux-firebase'
+import {resetRoof} from '../../Redux/Actions/copperMapActions';
+import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
+
+
+const addRoof = (update, uid, newArea, newRoof, dispatch) => {
+    // //update(`users/${uid}`, {points: "", areaOfCopper: 'is a value' })
+    //     base.push('stolenRoofs', {
+    //         data: {roofId: newRoof},
+    //         then(err){
+    //             if(err){
+    //                 console.log(err);
+    //             }
+    //             else
+    //                 dispatch(resetRoof)
+    //         }
+    //     });
+    dispatch(resetRoof());
+    }
 
 const tooltipSteal = (
     <Tooltip id="tooltipSteal">Steal roof and add the current value to your account</Tooltip>
@@ -9,60 +29,37 @@ const tooltipLeave = (
     <Tooltip id="tooltipLeave">Leave roof in hopes that the value will increase</Tooltip>
 );
 
-export default class RoofInfo extends Component {
-
-    steal = this.steal.bind(this);
-    leave = this.leave.bind(this);
 
 
-    steal() {
-        this.props.stealCallback(this.props.value, (this.props.area), this.props.id);
-    }
+const RoofInfo = (props) => {
+            return (
+            <div className="static-modal">
+                <Modal.Dialog>
+                    <Modal.Header>
+                        <Modal.Title>Roof Found</Modal.Title>
+                    </Modal.Header>
 
-    leave() {
-        var leaveFunc = this.props.leaveCallback;
-        leaveFunc(null);
+                    <Modal.Body>
+                        Will you claim it?
+                    </Modal.Body>
 
-    }
-
-    render() {
-        return (
-            <div className="container" style={{background: '#ff943e'}}>
-                <Grid>
-                    <Row className="show-grid">
-                        <Col xs={1} md={3} className="text-right"><h4>RoofID:</h4></Col>
-                        <Col xs={2} md={5} className="text-left"><h4>{this.props.id}</h4></Col>
-                    </Row>
-
-                    <Row className="show-grid">
-                        <Col xs={1} md={3} className="text-right"><h4>Current value:</h4></Col>
-                        <Col xs={2} md={3} className="text-left"><h4>{this.props.value} kr</h4></Col>
-                    </Row>
-
-                    <Row className="show-grid">
-                        <Col xs={1} md={3} className="text-right"><h4>Area:</h4></Col>
-                        <Col xs={2} md={3} className="text-left"><h4>{this.props.area} kvm</h4></Col>
-                    </Row>
-
-                    <Row className="show-grid">
-                        <Col md={6} mdPush={6}>
+                    <Modal.Footer>
                             <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipLeave}>
-                                <Button bsStyle="danger" bsSize="large" block onClick={this.leave}>Leave</Button>
+                                <Button bsStyle="danger" bsSize="large" block onClick={() => props.dispatch(resetRoof())}>Leave</Button>
                             </OverlayTrigger>
-                        </Col>
-                        <Col md={6} mdPull={6}>
                             <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipSteal}>
-                                <Button bsStyle="success" bsSize="large" block onClick={this.steal}>Steal</Button>
+                                <Button bsStyle="success" bsSize="large" block onClick={() => addRoof(props.firebase.update, props.uid, props.points, props.area, props.dispatch)}>Steal</Button>
                             </OverlayTrigger>
-                        </Col>
-                    </Row>
-                </Grid>
+                    </Modal.Footer>
 
-            </div>
-        );
+                </Modal.Dialog>
+            </div>)
+}
+const mapStateToProps = (state, {firebase}) => {
+    return{
+        uid: firebase.auth.uid,
+        id: state.copperRoof.id,
     }
-
-
 }
 
-
+export default compose(firebaseConnect(), connect(mapStateToProps))(RoofInfo)

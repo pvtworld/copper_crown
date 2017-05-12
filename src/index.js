@@ -8,7 +8,7 @@ import Root from './Components/App/Root'
 const root = document.getElementById('root');
 
 store.subscribe(() => {
-    console.log(store.getState());
+    console.log('Uppdaterar state:', store.getState());
 })
 
 ReactDOM.render(<Root store={store} />, root);

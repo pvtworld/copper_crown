@@ -12,7 +12,6 @@ class App extends React.Component {
         super();
         this.renderLogin = this.renderLogin.bind(this);
         this.addRoof = this.addRoof.bind(this);
-        this.roofAlreadyStolen = this.roofAlreadyStolen.bind(this);
         this.getLeader = this.getLeader.bind(this);
     }
 
@@ -26,19 +25,6 @@ class App extends React.Component {
                 response.reverse().forEach(function(element) {
                     console.log("user: "+element.key + ", points: " +element.points);
                 });
-            }
-        });
-    }
-
-    roofAlreadyStolen(newRoof, callback) {
-        base.fetch('stolenRoofs', {
-            context: this,
-            queries: {
-                orderByChild: 'roofId',
-                equalTo: newRoof.id},
-            then(response){
-                console.log(Object.keys(response).length)
-                callback(newRoof, (Object.keys(response).length));
             }
         });
     }
