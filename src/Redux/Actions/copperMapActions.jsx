@@ -39,12 +39,14 @@ export const resetRoof = () => {
     }
 }
 
-export const setSearchPosition = (latitude, longitude) => {
-    return {
-        type: 'SET_SEARCH_POSITION',
-        searchPos: {
-            lat: latitude,
-            long: longitude
-        }
-    };
-};
+export const loadingUser = () => {
+    return {type: 'LOGIN_STARTED'}
+}
+
+export const finishedLoadingUser = () => {
+    return {type: 'LOGIN_FINISHED'}
+}
+
+export const loadingError = () => {
+    return {type: 'LOGIN_ERROR'}
+}

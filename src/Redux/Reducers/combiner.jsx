@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { firebaseStateReducer } from 'react-redux-firebase'
-import { copperSearchReducer, displayRoofReducer, searchPosReducer } from './copperMapReducers';
+import { copperSearchReducer, displayRoofReducer, loginReducer} from './copperMapReducers';
 
 const reducers = combineReducers({
+    login: loginReducer,
     firebase: firebaseStateReducer,
     copperSearch: copperSearchReducer,
     copperRoof: displayRoofReducer,
-    searchPos: searchPosReducer
 });
 
 export default reducers;

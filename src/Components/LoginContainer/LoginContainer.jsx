@@ -2,11 +2,12 @@ import React from 'react';
 import Login from '../Login/Login'
 import './LoginContainer.css'
 import Loadable from 'react-loading-overlay'
+import {connect} from 'react-redux'
 
-export default class LoginContainer extends React.Component {
+class LoginContainer extends React.Component {
     render() {
         return (
-            <Loadable active={false} spinner>
+            <Loadable active={this.props.loadingUser} spinner>
             <div className="fullscreen">
                     <div>
                         <div id="center_text">
@@ -21,6 +22,13 @@ export default class LoginContainer extends React.Component {
         );  
     }
 };
+
+const mapStateToProps = (state) => {
+    return{
+        loadingUser: state.login.loadingUser
+    }
+}
+export default connect(mapStateToProps)(LoginContainer)
 
 
 
