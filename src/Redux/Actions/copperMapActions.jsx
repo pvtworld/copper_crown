@@ -10,25 +10,21 @@ export const searchDone = () => {
     };
 };
 
-export const displayRoofInfo = (info) => {
-    return {
-        type: 'DISPLAY_ROOF_INFO',
-        info
-    };
-};
 
 export const displayRoofTaken = (roof) => {
     return {
         type: 'DISPLAY_ROOF_TAKEN',
-        action: {id: roof.id, area: roof.area}
+        id: roof.id,
+        area: roof.area
     }
 }
 
 export const displayRoofNotTaken = (roof) => {
     return {
         type: 'DISPLAY_ROOF_NOT_TAKEN',
-        action: {id: roof.id, area: roof.area}
-    }
+        id: roof.id,
+        area: roof.area
+    }   
 }
 
 export const displayRoofNotFound = () => {
