@@ -22,16 +22,27 @@ export var loginReducer = (state = {loadingUser: false}, action ) => {
     }
 }
 
-export var displayRoofReducer = (state = {foundRoof: null, id: null, area: null}, action) => {
+export var copperPriceReducer = (state = {price: null}, action) => {
+    switch (action.type){
+        case 'FETCHING_COPPER_PRICE':
+            return state;
+        case 'COPPER_PRICE_RETURNED':
+            return {...state, price: action.price};
+        default:
+            return state;
+    }
+}
+
+export var displayRoofReducer = (state = {foundRoof: null, id: null, value: null, area: null}, action) => {
     switch (action.type){
         case 'DISPLAY_ROOF_NOT_TAKEN':
-            return {...state, foundRoof: true, roofTaken: false, id: action.id, area: action.area};
+            return {...state, foundRoof: true, roofTaken: false, id: action.id, value: action.value, area: action.area};
         case 'DISPLAY_ROOF_TAKEN':
-            return {...state, foundRoof: true, roofTaken: true, id: action.id, area: action.area};
+            return {...state, foundRoof: true, roofTaken: true, id: action.id, value: action.value, area: action.area};
         case 'DISPLAY_ROOF_NOT_FOUND':
             return {...state, foundRoof: false}
         case 'RESET_ROOF':
-            return {...state, foundRoof: null, roofTaken: null, id: null, area: null}
+            return {...state, foundRoof: null, roofTaken: null, id: null, value: null, area: null}
         default:
             return state;
     }
