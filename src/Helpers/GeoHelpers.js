@@ -1,6 +1,7 @@
 import { convertPoint } from './CoordinateConverter';
 import {searchForCopper, searchDone, displayRoofNotFound, displayRoofTaken, displayRoofNotTaken} from '../Redux/Actions/copperMapActions';
 import base from '../Firebase/base';
+import store from '../Redux/store';
 
 export const geoError = (err) => {
     console.warn('ERROR(' + err.code + '): ' + err.message);
@@ -19,19 +20,26 @@ const convertFromTextToXML = (textToConvert) => {
         return (textToReturn);
 }
 
-const createObjectFromXML = (xml) => {
+const createObjectFromXML = (xml, pricePerSquareMeter) => {
+    let area = xml.getElementsByTagName('area')[0].childNodes[0].nodeValue 
+    let areaCalculated = (area / 1000000).toFixed(1) + 0;
+    let value = (pricePerSquareMeter * areaCalculated).toFixed(1) + 0;
     return{
         id: xml.getElementsByTagName('id')[0].childNodes[0].nodeValue,
-        area: xml.getElementsByTagName('area')[0].childNodes[0].nodeValue 
+        area: areaCalculated,
+        value: value
         }
 }
 
 
-export const checkClickForCopper = (long, lat, dispatch) => {
+export const checkClickForCopper = (long, lat) => {
+
+    const state = store.getState();
+    const dispatch = store.dispatch;
 
     const sthlmPointUrlTemplate = 'https://us-central1-coppercors.cloudfunctions.net/copperProvider/?whatcopper=Geom=POINT(%longitude%%20%latitude%)';
     const [x,y] = convertPoint(long, lat);
-    dispatch(searchForCopper());
+    store.dispatch(searchForCopper());
 
     fetch(createUrl(sthlmPointUrlTemplate, x, y), { method: 'GET'} )
     .then( response => response.status === 200 ? Promise.resolve(response) : Promise.reject(new Error(response.statusText)))
@@ -40,7 +48,7 @@ export const checkClickForCopper = (long, lat, dispatch) => {
     .then( parsedXML => {
         dispatch(searchDone());
         if (parsedXML.getElementsByTagName('dataEntitity')[0].getAttribute('resultRecords') === '1') {
-            const roof = createObjectFromXML(parsedXML);
+            const roof = createObjectFromXML(parsedXML, state.copperPrice.price);
             base.fetch('stolenRoofs', {
                 context: {},
                 queries: {
