@@ -65,8 +65,6 @@ class CopperMap extends Component {
 
 
     render() {
-        console.log('Copper-props', this.props);
-        console.log('Copper-lat', this.props.searchPos.lat);
         return (
             <div>
                 <div className="map">
@@ -104,8 +102,4 @@ class CopperMap extends Component {
     }
 }
 
-export default connect((state) => {
-    return {
-        searchPos: state.searchPos
-    }
-})(CopperMap);
+export default connect()(CopperMap);
