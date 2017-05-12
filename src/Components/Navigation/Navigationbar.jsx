@@ -1,16 +1,11 @@
 import React from 'react';
-//import { firebaseConnect} from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 
 const Navigationbar = (props) => {
-
-    var displayName = props.auth.displayName;
-
-    if(!displayName){
-        displayName = 'No Name'
-    }
+    var userName = props.auth.displayName;
+    if (!userName) userName = "No Name";
 
     return(
         <Navbar inverse collapseOnSelect>
@@ -28,7 +23,7 @@ const Navigationbar = (props) => {
                     <NavItem onClick={props.renderInfo}>About CopperCrown</NavItem>
                 </Nav>
                 <Nav pullRight>
-                    <NavDropdown title={`Signed in as: ${displayName}`} id="basic-nav-dropdown">
+                    <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
                         <MenuItem onClick={props.renderProfile}>Profile</MenuItem>
                         <MenuItem divider />
                         <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
