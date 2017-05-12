@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {
-    geoError,
-    geoOptions,
-} from '../../Helpers/GeoHelpers';
+import { geoError, geoOptions} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
 import GameMap from "../GameMap/GameMap";
 
@@ -77,8 +74,6 @@ class CopperMap extends Component {
                             mapElement={
                                 <div style={{height: `100%`}}/>
                             }
-                            onMapClick={this.handleMapClick}
-                            handleRoof={this.handleRoof}
                             center={this.state.center}
                             content={this.state.content}
                             radius={this.state.radius}
@@ -88,15 +83,7 @@ class CopperMap extends Component {
 
 
                 </div>
-                <InfoContainer
-                    roofInfo={this.state.roofInfo}
-                    displayRoof={this.state.displayRoof}
-                    state={this.props.state}
-                    isLoadingCopper={this.state.isLoadingCopper}
-                    stealRoof={this.stealRoof}
-                    leaveRoof={this.leaveRoof}
-                    roofAlreadyStolen={this.props.roofAlreadyStolen}
-                />
+                <InfoContainer/>
             </div>
         );
     }
