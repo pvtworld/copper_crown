@@ -11,7 +11,7 @@ export var copperSearchReducer = (state = {searching: false}, action) => {
 
 
 
-export var displayRoofReducer = (state = {foundRoof: null}, action) => {
+export var displayRoofReducer = (state = {foundRoof: null, id: null, area: null}, action) => {
     switch (action.type){
         case 'DISPLAY_ROOF_NOT_TAKEN':
             return {...state, foundRoof: true, roofTaken: false, id: action.id, area: action.area};
@@ -20,16 +20,7 @@ export var displayRoofReducer = (state = {foundRoof: null}, action) => {
         case 'DISPLAY_ROOF_NOT_FOUND':
             return {...state, foundRoof: false}
         case 'RESET_ROOF':
-            return {...state, foundRoof: null}
-        default:
-            return state;
-    }
-};
-
-export var searchPosReducer = (state = {lat: 0, long: 0}, action) => {
-    switch (action.type){
-        case 'SET_SEARCH_POSITION':
-            return action.searchPos;
+            return {...state, foundRoof: null, roofTaken: null, id: null, area: null}
         default:
             return state;
     }
