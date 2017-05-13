@@ -6,31 +6,19 @@ import { browserHistory } from 'react-router'
 
 class App extends React.Component {
 
-    constructor(props){
-        super(props)
-
+    redirectIfAuth = (props) => {
         if(!props.auth){
-            this.setState({
-                isAuth: false
-            })
-        }else{
-            this.setState({
-                isAuth: true
-            })
-        }
-    }
-
-    componentWillMount(){
-        if(!this.isAuth){
-            console.log('User is not auth, redirecting to /')
+            console.log('User is not auth, redirecting to login /', props.auth);
             browserHistory.push('/')
+        }else{
+            console.log('User is auth, doing nothing');
         }
-    }
+}
 
     render() {
         console.log(this.props.auth);
+        this.redirectIfAuth(this.props);
         // check if they are no logged in at all
-        
         console.log('Creating GameContainer');
         return (
             <div>
