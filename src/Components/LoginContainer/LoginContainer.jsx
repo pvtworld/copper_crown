@@ -3,8 +3,17 @@ import Login from '../Login/Login'
 import './LoginContainer.css'
 import Loadable from 'react-loading-overlay'
 import { connect } from 'react-redux'
+//import { browserHistory } from 'react-router'
 
 class LoginContainer extends React.Component {
+
+/*    componentWillMount({ auth }){
+        if(auth){
+            console.log('User auth, redirecting to /app')
+            browserHistory.push('/app')
+        }
+    }*/
+
     render() {
         return (
             <Loadable active={this.props.loadingUser} spinner>
@@ -18,16 +27,16 @@ class LoginContainer extends React.Component {
                     </div>
             </div>
             </Loadable>
-        );  
+        );
     }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state /*{firebase}*/) => {
     return{
-        loadingUser: state.login.loadingUser
+        loadingUser: state.login.loadingUser,
+        /*auth: firebase.auth*/
     }
 }
 export default connect(mapStateToProps)(LoginContainer)
-
 
 

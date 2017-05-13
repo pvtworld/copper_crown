@@ -5,23 +5,30 @@ import GameContainer from '../GameContainer/GameContainer';
 import { browserHistory } from 'react-router'
 
 class App extends React.Component {
-    constructor(){
-        super();
-        this.renderLogin = this.renderLogin.bind(this);
+
+    constructor(props){
+        super(props)
+
+        if(!props.auth){
+            this.setState({
+                isAuth: false
+            })
+        }else{
+            this.setState({
+                isAuth: true
+            })
+        }
     }
 
-
-    renderLogin() {
-        if(!this.props.auth){
+    componentWillMount(){
+        if(!this.isAuth){
+            console.log('User is not auth, redirecting to /')
             browserHistory.push('/')
         }
     }
 
-
-
     render() {
         console.log(this.props.auth);
-        this.renderLogin();
         // check if they are no logged in at all
         
         console.log('Creating GameContainer');

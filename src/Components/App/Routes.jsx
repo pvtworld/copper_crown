@@ -17,20 +17,21 @@ var redirectIfAuth = (props) => {
 
 }*/
 
-const Routes = (props) => (
+const rout = (
+    <Route path="/">
+        <Route path="/app" component={App} />
+        <IndexRoute component={LoginContainer} />
+        <Route path="*" component={NotFound} />
+    </Route>
+)
+
+const Routes = () => (
     <Router history={browserHistory}>
-        <Route path="/">
-            <Route path="/app" component={App} />
-            <Route path="/profile" component={() => <h1>Profile</h1>} />
-            <Route path="/leaderboard" component={() => <h1>Leaderboard</h1>} />
-            <Route path="/info" component={() => <h1>Info</h1>} />
-            <IndexRoute component={LoginContainer} onEnter={redirectIfAuth(props)} />
-        </Route>
-    <Route path="*" component={NotFound} />
-</Router>
+        {rout}
+    </Router>
 );
 
-const mapStateToProps = ({firebase}) => {
+const mapStateToProps = ({ firebase }) => {
       return {
         authError: pathToJS(firebase, 'authError'),
         auth: pathToJS(firebase, 'auth')
