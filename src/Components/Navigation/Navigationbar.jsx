@@ -5,9 +5,15 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import { showLeaderboard, showAbout, showPlayerInfo, showProfile, resetModal } from '../../Redux/Actions/navigationActions';
 
 const Navigationbar = (props) => {
-    var userName = props.auth.displayName;
-    if (!userName) userName = "Anonymous";
 
+    try {
+        var userName = props.auth.displayName;
+        if (!userName) userName = "Anonymous";
+    }
+    catch(err) {
+
+    }
+    
     return(
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
