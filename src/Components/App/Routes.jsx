@@ -6,17 +6,6 @@ import App from './App';
 import { connect } from 'react-redux'
 import { pathToJS } from 'react-redux-firebase'
 
-var redirectIfAuth = (props) => {
-    console.log(props.auth);
-    if(props.auth){
-        browserHistory.push('/app')
-    }
-}
-
-/*var checkIfAuth = () => {
-
-}*/
-
 const rout = (
     <Route path="/">
         <Route path="/app" component={App} />
