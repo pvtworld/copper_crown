@@ -5,7 +5,8 @@ import { firebaseConnect } from 'react-redux-firebase'
 import './Login.css'
 import {Button, Panel, Col} from 'react-bootstrap';
 import ToolTip from '../ToolTip/ToolTip'
-import { loadingUser, finishedLoadingUser } from '../../Redux/Actions/copperMapActions'
+import { loadingUser, finishedLoadingUser, loadingError } from '../../Redux/Actions/copperMapActions'
+import { browserHistory } from 'react-router';
 
 const title = <h2>Sign in to play the game</h2>;
 
@@ -13,8 +14,14 @@ const loginUser = (firebase, provider, dispatch) => {
     dispatch(loadingUser());
     firebase.login({provider: provider, type: 'popup'}).then(() => {
         dispatch(finishedLoadingUser());
+        console.log('Login successful, redirecting to /app');
+        browserHistory.push('/app')
+    }, (error) => {
+        //handle login error
+        dispatch(loadingError());
+        alert('Unable to authenticate!\n' + error);
     })
-}
+};
 
 const Login = (props) => {
         return (
