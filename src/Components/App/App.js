@@ -2,9 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { pathToJS } from 'react-redux-firebase';
 import GameContainer from '../GameContainer/GameContainer';
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router
+import { getPricePerSquareMeter } from '../../Helpers/PointsHelpers';
 
 class App extends React.Component {
+
+    componentDidMount(){
+        getPricePerSquareMeter(this.props.dispatch);
+    }
 
     redirectIfAuth = (props) => {
         if(!props.auth){
@@ -16,14 +21,13 @@ class App extends React.Component {
 }
 
     render() {
+        
         console.log(this.props.auth);
         this.redirectIfAuth(this.props);
         // check if they are no logged in at all
         console.log('Creating GameContainer');
-        return (
-            <div>
-                <GameContainer state={this.state}/>
-            </div>
+        return (          
+                  <GameContainer state={this.state}/>
         )
     }
 }

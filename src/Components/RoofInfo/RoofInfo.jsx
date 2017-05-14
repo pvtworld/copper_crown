@@ -1,23 +1,27 @@
 import React from 'react';
-import {compose} from 'redux';
 import { connect } from 'react-redux';
-import {firebaseConnect} from 'react-redux-firebase'
+import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
 import {resetRoof} from '../../Redux/Actions/copperMapActions';
 import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 
 
-const addRoof = (update, uid, newArea, newRoof, dispatch) => {
-    // //update(`users/${uid}`, {points: "", areaOfCopper: 'is a value' })
-    //     base.push('stolenRoofs', {
-    //         data: {roofId: newRoof},
-    //         then(err){
-    //             if(err){
-    //                 console.log(err);
-    //             }
-    //             else
-    //                 dispatch(resetRoof)
-    //         }
-    //     });
+const addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
+
+    let newUserPoints = userInfo.points + parseInt(price, 10);
+    let newUserArea = userInfo.areaOfCopper + parseInt(area, 10);
+    dispatch({type: 'UPDATING_USER_POINTS' })
+    firebase.set(`users/${uid}`, {points: newUserPoints , areaOfCopper: newUserArea })
+    .then( () => {
+        dispatch({type: 'USER_POINTS_UPDATED' })
+        return Promise.resolve();
+    })
+    .then( () => {
+        dispatch({type: 'UPDATING_STOLEN_ROOFS'})
+        firebase.push('stolenRoofs', {roofId: id})
+    })
+    .then( () => {
+        dispatch({type: 'STOLEN_ROOFS_UPDATED'})
+    } )
     dispatch(resetRoof());
     }
 
@@ -38,7 +42,7 @@ const RoofInfo = (props) => {
                         <Modal.Header>
                             <Modal.Title>Roof Found</Modal.Title>
                         </Modal.Header>
-
+                      
                         <Modal.Body>
                             Will you claim it?
                         </Modal.Body>
@@ -51,15 +55,43 @@ const RoofInfo = (props) => {
                                     <Button bsStyle="success" bsSize="large" block onClick={() => addRoof(props.firebase.update, props.uid, props.points, props.area, props.dispatch)}>Steal</Button>
                                 </OverlayTrigger>
                         </Modal.Footer>
+                    <Modal.Body>
+                        Price: {parseInt(props.price,10)} Area: {parseInt(props.area,10)}
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                            <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipLeave}>
+                                <Button bsStyle="danger" bsSize="large" block onClick={() => props.dispatch(resetRoof())}>Leave</Button>
+                            </OverlayTrigger>
+                            <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipSteal}>
+                                <Button bsStyle="success" bsSize="large" block onClick={() => addRoof(props.firebase, props.uid, props.id, props.price, props.area, props.userInfo, props.dispatch)}>Steal</Button>
+                            </OverlayTrigger>
+                    </Modal.Footer>
 
                     </Modal.Dialog>
                 </div>)
 }
-const mapStateToProps = (state, { firebase }) => {
+
+const mapStateToProps = (state, {auth}) => {
     return{
-        uid: firebase.auth.uid,
+        userInfo: dataToJS(state.firebase, `users/${auth.uid}`),
+        uid: auth.uid,
         id: state.copperRoof.id,
+        price: state.copperRoof.value,
+        area: state.copperRoof.area,
+
     }
 }
 
-export default compose(firebaseConnect(), connect(mapStateToProps))(RoofInfo)
+const propsConnected = connect(mapStateToProps)(RoofInfo)
+
+const wrappedPlayerInfo = firebaseConnect(
+    ({auth}) => ([auth ? `users/${auth.uid}`: '/']))(propsConnected);
+
+const authConnected = connect(
+ ({ firebase }) => ({
+    auth: pathToJS(firebase, 'auth') // gets auth from redux and sets as prop
+  })
+)(wrappedPlayerInfo)
+
+export default authConnected
