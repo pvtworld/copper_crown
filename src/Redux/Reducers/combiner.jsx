@@ -8,7 +8,7 @@ const reducers = combineReducers({
     firebase: firebaseStateReducer,
     copperSearch: copperSearchReducer,
     copperRoof: displayRoofReducer,
-    showModal: showModalReducer
+    showModal: showModalReducer,
     copperPrice: copperPriceReducer
 });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { pathToJS } from 'react-redux-firebase';
 import GameContainer from '../GameContainer/GameContainer';
-import { browserHistory } from 'react-router
+import { browserHistory } from 'react-router'
 import { getPricePerSquareMeter } from '../../Helpers/PointsHelpers';
 
 class App extends React.Component {
@@ -33,10 +33,10 @@ class App extends React.Component {
 }
 
 const mapStateToProps = ({firebase}) => {
-      return {
+    return {
         authError: pathToJS(firebase, 'authError'),
         auth: pathToJS(firebase, 'auth')
-      }
     }
+}
 
 export default (connect(mapStateToProps))(App)
