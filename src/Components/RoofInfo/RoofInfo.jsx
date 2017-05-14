@@ -37,24 +37,12 @@ const tooltipLeave = (
 
 const RoofInfo = (props) => {
             return (
-                <div className="static-modal">
-                    <Modal.Dialog>
-                        <Modal.Header>
-                            <Modal.Title>Roof Found</Modal.Title>
-                        </Modal.Header>
-                      
-                        <Modal.Body>
-                            Will you claim it?
-                        </Modal.Body>
+            <div className="static-modal">
+                <Modal.Dialog>
+                    <Modal.Header>
+                        <Modal.Title>Roof Found</Modal.Title>
+                    </Modal.Header>
 
-                        <Modal.Footer>
-                                <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipLeave}>
-                                    <Button bsStyle="danger" bsSize="large" block onClick={() => props.dispatch(resetRoof())}>Leave</Button>
-                                </OverlayTrigger>
-                                <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipSteal}>
-                                    <Button bsStyle="success" bsSize="large" block onClick={() => addRoof(props.firebase.update, props.uid, props.points, props.area, props.dispatch)}>Steal</Button>
-                                </OverlayTrigger>
-                        </Modal.Footer>
                     <Modal.Body>
                         Price: {parseInt(props.price,10)} Area: {parseInt(props.area,10)}
                     </Modal.Body>
@@ -68,8 +56,8 @@ const RoofInfo = (props) => {
                             </OverlayTrigger>
                     </Modal.Footer>
 
-                    </Modal.Dialog>
-                </div>)
+                </Modal.Dialog>
+            </div>)
 }
 
 const mapStateToProps = (state, {auth}) => {
