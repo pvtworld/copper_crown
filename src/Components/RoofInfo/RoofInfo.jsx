@@ -59,6 +59,7 @@ const RoofInfo = (props) => {
                 </Modal.Dialog>
             </div>)
 }
+
 const mapStateToProps = (state, {auth}) => {
     return{
         userInfo: dataToJS(state.firebase, `users/${auth.uid}`),

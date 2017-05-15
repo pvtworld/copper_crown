@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { firebaseStateReducer } from 'react-redux-firebase'
+import { showModalReducer } from './navigationReducers';
 import { copperSearchReducer, displayRoofReducer, loginReducer, copperPriceReducer} from './copperMapReducers';
 
 const reducers = combineReducers({
@@ -7,6 +8,7 @@ const reducers = combineReducers({
     firebase: firebaseStateReducer,
     copperSearch: copperSearchReducer,
     copperRoof: displayRoofReducer,
+    showModal: showModalReducer,
     copperPrice: copperPriceReducer
 });
 

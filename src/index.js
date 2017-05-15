@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import App from './Components/App/App';
 import store from './Redux/store';
 import './index.css';
 import './Components/App/App.css';
+import Root from './Components/App/Root'
 
 const root = document.getElementById('root');
 
-ReactDOM.render(
-    <Provider store={store}>
-        <App/>
-    </Provider>
-    , root);
+store.subscribe(() => {
+    console.log('Uppdaterar state:', store.getState());
+});
+
+ReactDOM.render(<Root store={store} />, root);

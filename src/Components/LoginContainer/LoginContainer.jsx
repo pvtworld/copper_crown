@@ -1,10 +1,11 @@
-import React from 'react';
+import React from 'react'
 import Login from '../Login/Login'
 import './LoginContainer.css'
 import Loadable from 'react-loading-overlay'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 class LoginContainer extends React.Component {
+
     render() {
         return (
             <Loadable active={this.props.loadingUser} spinner>
@@ -18,18 +19,15 @@ class LoginContainer extends React.Component {
                     </div>
             </div>
             </Loadable>
-
-        );  
+        );
     }
-};
+}
 
 const mapStateToProps = (state) => {
     return{
-        loadingUser: state.login.loadingUser
+        loadingUser: state.login.loadingUser,
     }
-}
+};
 export default connect(mapStateToProps)(LoginContainer)
-
-
 
 
