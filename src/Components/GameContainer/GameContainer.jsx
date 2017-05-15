@@ -9,11 +9,7 @@ class GameContainer extends React.Component{
         return (
             <div>
                 <Navigationbar/>
-                <CopperMap
-                    state={this.props.state}
-                    addRoof={this.props.addRoof}
-                    roofAlreadyStolen={this.props.roofAlreadyStolen}
-                />
+                <CopperMap/>
             </div>
         )
     }

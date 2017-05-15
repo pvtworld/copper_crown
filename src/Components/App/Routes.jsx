@@ -3,8 +3,6 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import NotFound from '../NotFound/NotFound';
 import LoginContainer from '../LoginContainer/LoginContainer';
 import App from './App';
-import { connect } from 'react-redux'
-import { pathToJS } from 'react-redux-firebase'
 
 const rout = (
     <Route path="/">
@@ -20,11 +18,4 @@ const Routes = () => (
     </Router>
 );
 
-const mapStateToProps = ({ firebase }) => {
-      return {
-        authError: pathToJS(firebase, 'authError'),
-        auth: pathToJS(firebase, 'auth')
-      }
-    }
-
-export default (connect(mapStateToProps))(Routes)
+export default Routes;

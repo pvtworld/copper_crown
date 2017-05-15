@@ -30,7 +30,7 @@ class LoginContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return{
+    return {
         auth: pathToJS(state.firebase, 'auth'),
         loadingUser: state.login.loadingUser,
     }

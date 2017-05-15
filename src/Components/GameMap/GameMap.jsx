@@ -56,7 +56,10 @@ const GameMap = withGoogleMap(props => (
                 anchor: {x:20, y:20}
 
             }}
-            onClick={props.onMarkerClick}
+            onClick={
+                event => {
+                    checkClickForCopper(event.latLng.lng(), event.latLng.lat(), props.dispatch);
+                }}
         />
 
     </GoogleMap>

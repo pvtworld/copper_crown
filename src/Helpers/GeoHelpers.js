@@ -21,16 +21,15 @@ const convertFromTextToXML = (textToConvert) => {
 }
 
 const createObjectFromXML = (xml, pricePerSquareMeter) => {
-    let area = xml.getElementsByTagName('area')[0].childNodes[0].nodeValue 
-    let areaCalculated = (area / 1000000).toFixed(1) + 0;
+    let area = xml.getElementsByTagName('lutarea')[0].childNodes[0].nodeValue
+    let areaCalculated = (area / 1000).toFixed(1) + 0;
     let value = (pricePerSquareMeter * areaCalculated).toFixed(1) + 0;
-    return{
+    return {
         id: xml.getElementsByTagName('id')[0].childNodes[0].nodeValue,
         area: areaCalculated,
         value: value
         }
 }
-
 
 export const checkClickForCopper = (long, lat) => {
 
@@ -39,7 +38,7 @@ export const checkClickForCopper = (long, lat) => {
 
     const sthlmPointUrlTemplate = 'https://us-central1-coppercors.cloudfunctions.net/copperProvider/?whatcopper=Geom=POINT(%longitude%%20%latitude%)';
     const [x,y] = convertPoint(long, lat);
-    store.dispatch(searchForCopper());
+    dispatch(searchForCopper());
 
     fetch(createUrl(sthlmPointUrlTemplate, x, y), { method: 'GET'} )
     .then( response => response.status === 200 ? Promise.resolve(response) : Promise.reject(new Error(response.statusText)))

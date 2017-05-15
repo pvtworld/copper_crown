@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import { geoError, geoOptions} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
 import GameMap from "../GameMap/GameMap";
@@ -12,7 +11,6 @@ class CopperMap extends Component {
                 lat: 59.334591,
                 lng: 18.063240,
             },
-            //isLoadingCopper: false
         };
     }
 
@@ -89,4 +87,4 @@ class CopperMap extends Component {
     }
 }
 
-export default connect()(CopperMap);
+export default CopperMap;

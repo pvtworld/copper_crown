@@ -21,13 +21,12 @@ class App extends React.Component {
 }
 
     render() {
-        
-        console.log(this.props.auth);
+
         this.redirectIfAuth(this.props);
         // check if they are no logged in at all
         console.log('Creating GameContainer');
         return (          
-                  <GameContainer state={this.state}/>
+                  <GameContainer/>
         )
     }
 }
