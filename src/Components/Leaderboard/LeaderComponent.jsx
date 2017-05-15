@@ -74,15 +74,9 @@ class LeaderComponent extends Component{
         var leaderboardItems = [];
         var i = 1;
         while (i <= extractedTeamInfo.length && i <= 10){
-            var teamName;
-            for (var team in this.props.teams){
-                if (extractedTeamInfo[i-1].teamId === team){
-                    teamName = this.props.teams[team].teamName;
-                }
-            }
             leaderboardItems.push({
                 pos: i,
-                name: teamName,
+                name: this.props.teams ? this.props.teams[extractedTeamInfo[i-1].teamId].teamName : '',
                 points: extractedTeamInfo[i-1].points
             });
             i++;
