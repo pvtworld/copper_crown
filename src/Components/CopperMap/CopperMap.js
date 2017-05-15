@@ -8,11 +8,25 @@ class CopperMap extends Component {
         super();
         this.state = {
             center: {
+                mounted: false,
                 lat: 59.334591,
                 lng: 18.063240,
             },
         };
     }
+
+    componentDidMount(){
+        this.setState({
+            mounted: true
+        })
+    }
+
+    componentWillUnmount(){
+        this.setState({
+            mounted: false
+        })
+    }
+
 
     geoTimer = null;
 
@@ -28,12 +42,14 @@ class CopperMap extends Component {
                 console.log("Successssssss! Located user at: ");
                 //console.log(position);
 
-                this.setState({
-                    center: {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    }
-                });
+                if(this.state.mounted){
+                    this.setState({
+                        center: {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        }
+                    });
+                }
 
                 navigator.geolocation.clearWatch(watchPositionId);
             }
