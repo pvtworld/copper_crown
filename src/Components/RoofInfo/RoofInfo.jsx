@@ -1,5 +1,29 @@
-import React, {Component} from 'react';
-import {Button, Tooltip, OverlayTrigger, Grid, Col, Row} from 'react-bootstrap';
+import React from 'react';
+import { connect } from 'react-redux';
+import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
+import {resetRoof} from '../../Redux/Actions/copperMapActions';
+import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
+
+
+const addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
+
+    let newUserPoints = userInfo.points + parseInt(price, 10);
+    let newUserArea = userInfo.areaOfCopper + parseInt(area, 10);
+    dispatch({type: 'UPDATING_USER_POINTS' })
+    firebase.set(`users/${uid}`, {points: newUserPoints , areaOfCopper: newUserArea })
+    .then( () => {
+        dispatch({type: 'USER_POINTS_UPDATED' })
+        return Promise.resolve();
+    })
+    .then( () => {
+        dispatch({type: 'UPDATING_STOLEN_ROOFS'})
+        firebase.push('stolenRoofs', {roofId: id})
+    })
+    .then( () => {
+        dispatch({type: 'STOLEN_ROOFS_UPDATED'})
+    } )
+    dispatch(resetRoof());
+    }
 
 const tooltipSteal = (
     <Tooltip id="tooltipSteal">Steal roof and add the current value to your account</Tooltip>
@@ -9,60 +33,53 @@ const tooltipLeave = (
     <Tooltip id="tooltipLeave">Leave roof in hopes that the value will increase</Tooltip>
 );
 
-export default class RoofInfo extends Component {
-
-    steal = this.steal.bind(this);
-    leave = this.leave.bind(this);
 
 
-    steal() {
-        this.props.stealCallback(this.props.value, (this.props.area), this.props.id);
-    }
+const RoofInfo = (props) => {
+            return (
+            <div className="static-modal">
+                <Modal.Dialog>
+                    <Modal.Header>
+                        <Modal.Title>Roof Found</Modal.Title>
+                    </Modal.Header>
 
-    leave() {
-        var leaveFunc = this.props.leaveCallback;
-        leaveFunc(null);
+                    <Modal.Body>
+                        Price: {parseInt(props.price,10)} Area: {parseInt(props.area,10)}
+                    </Modal.Body>
 
-    }
-
-    render() {
-        return (
-            <div className="container" style={{background: '#ff943e'}}>
-                <Grid>
-                    <Row className="show-grid">
-                        <Col xs={1} md={3} className="text-right"><h4>RoofID:</h4></Col>
-                        <Col xs={2} md={5} className="text-left"><h4>{this.props.id}</h4></Col>
-                    </Row>
-
-                    <Row className="show-grid">
-                        <Col xs={1} md={3} className="text-right"><h4>Current value:</h4></Col>
-                        <Col xs={2} md={3} className="text-left"><h4>{this.props.value} kr</h4></Col>
-                    </Row>
-
-                    <Row className="show-grid">
-                        <Col xs={1} md={3} className="text-right"><h4>Area:</h4></Col>
-                        <Col xs={2} md={3} className="text-left"><h4>{this.props.area} kvm</h4></Col>
-                    </Row>
-
-                    <Row className="show-grid">
-                        <Col md={6} mdPush={6}>
+                    <Modal.Footer>
                             <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipLeave}>
-                                <Button bsStyle="danger" bsSize="large" block onClick={this.leave}>Leave</Button>
+                                <Button bsStyle="danger" bsSize="large" block onClick={() => props.dispatch(resetRoof())}>Leave</Button>
                             </OverlayTrigger>
-                        </Col>
-                        <Col md={6} mdPull={6}>
                             <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipSteal}>
-                                <Button bsStyle="success" bsSize="large" block onClick={this.steal}>Steal</Button>
+                                <Button bsStyle="success" bsSize="large" block onClick={() => addRoof(props.firebase, props.uid, props.id, props.price, props.area, props.userInfo, props.dispatch)}>Steal</Button>
                             </OverlayTrigger>
-                        </Col>
-                    </Row>
-                </Grid>
+                    </Modal.Footer>
 
-            </div>
-        );
-    }
-
-
+                </Modal.Dialog>
+            </div>)
 }
 
+const mapStateToProps = (state, {auth}) => {
+    return{
+        userInfo: dataToJS(state.firebase, `users/${auth.uid}`),
+        uid: auth.uid,
+        id: state.copperRoof.id,
+        price: state.copperRoof.value,
+        area: state.copperRoof.area,
 
+    }
+}
+
+const propsConnected = connect(mapStateToProps)(RoofInfo)
+
+const wrappedPlayerInfo = firebaseConnect(
+    ({auth}) => ([auth ? `users/${auth.uid}`: '/']))(propsConnected);
+
+const authConnected = connect(
+ ({ firebase }) => ({
+    auth: pathToJS(firebase, 'auth') // gets auth from redux and sets as prop
+  })
+)(wrappedPlayerInfo)
+
+export default authConnected
