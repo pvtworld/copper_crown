@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {firebaseConnect, dataToJS, pathToJS} from 'react-redux-firebase';
 import { Grid, Button, Modal} from 'react-bootstrap';
-import LeaderHeading from './LeaderHeading';
 import LeaderboardList from './LeaderboardList';
 import CurrentRank from './CurrentRank';
 import { resetModal } from '../../Redux/Actions/navigationActions';
@@ -18,6 +17,7 @@ class LeaderComponent extends Component{
 
     getUserInfo() {
         var unsortedUserInfo = this.props.users;
+        console.log('raw user infooooo:', unsortedUserInfo);
         var idArray = Object.keys(unsortedUserInfo);
         var dataArray = Object.values(unsortedUserInfo);
         for (var i = 0; i < dataArray.length; i++){
@@ -57,15 +57,15 @@ class LeaderComponent extends Component{
             var listItems = this.getLeaderboardInfo(sortedUserInfo);
 
             return(
+                this.props.requestingUsers ? <div></div> :
                 <div className="static-modal">
 
                     <Modal.Dialog>
                         <Modal.Header>
-                            <Modal.Title>Profile Component</Modal.Title>
+                            <Modal.Title>Leaderboard</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Grid>
-                                <LeaderHeading/>
                                 <LeaderboardList listItems={listItems} />
                                 <CurrentRank rank={myRank} />
                             </Grid>
@@ -82,11 +82,15 @@ class LeaderComponent extends Component{
 
 var wrappedUserInfo = firebaseConnect(
     ['/users']
+    //['/users#orderByChild=points']
+    //[{path: '/users', queryParams: ['orderByChild=points']}]
+    //[{path: '/users', queryParams: ['orderByChild=points', 'equalTo=1963253']}]
 )(LeaderComponent);
 
 export default connect(
     ({firebase}) => ({
         users: dataToJS(firebase, 'users'),
-        auth: pathToJS(firebase, 'auth')
+        auth: pathToJS(firebase, 'auth'),
+        requestingUsers: pathToJS(firebase, 'requesting/users')
     })
 )(wrappedUserInfo);
