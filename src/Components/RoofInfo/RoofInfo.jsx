@@ -19,11 +19,11 @@ const addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
     })
     .then( () => {
         dispatch({type: 'UPDATING_STOLEN_ROOFS'})
-        firebase.push('stolenRoofs', {roofId: id})
+        firebase.push('stolenRoofs', {roofId: id, userId: uid})
     })
     .then( () => {
         dispatch({type: 'STOLEN_ROOFS_UPDATED'})
-    } )
+    })
     dispatch(resetRoof());
     }
 
