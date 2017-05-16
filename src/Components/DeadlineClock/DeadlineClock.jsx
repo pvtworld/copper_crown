@@ -54,9 +54,9 @@ export default class DeadlineClock extends React.Component{
             console.log('GAME ENDED')
         }
     }
-    render(){ 
+    render(){
         return(
-            <div>
+            <div className="center-text">
                 <div className="days">Days: {this.addZero(this.state.days)} </div>
                 <div className="hours">Hours: {this.addZero(this.state.hours)} </div>
                 <div className="minutes">Minutes: {this.addZero(this.state.minutes)} </div>
