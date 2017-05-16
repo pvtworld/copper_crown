@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap'
 import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase';
 import { resetModal } from '../../Redux/Actions/navigationActions';
 import { connect } from 'react-redux'
+import DeadlineClock from '../DeadlineClock/DeadlineClock'
 
 const AboutComponent = (props) => {
 
@@ -13,7 +14,8 @@ const AboutComponent = (props) => {
                     <Modal.Title>About </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Copper roofs are dope</p>
+                    <p>Game session ends in:</p>
+                    <DeadlineClock/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
