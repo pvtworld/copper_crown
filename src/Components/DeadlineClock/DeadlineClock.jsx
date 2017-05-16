@@ -1,15 +1,16 @@
 import React from 'react'
 import './DeadlineClock.css'
+import { connect } from 'react-redux'
+import { addDays, addHours, addMinutes, addSeconds, resetTimer, showEndText, resetEndText } from '../../Redux/Actions/clockActions'
 
-export default class DeadlineClock extends React.Component{
+
+class DeadlineClock extends React.Component{
     constructor() {
         super();
         this.state = {
             showEndText: false,
-            days: 0,
             hours: 0,
             minutes: 0,
-            seconds: 0
         }
     }
 
@@ -30,13 +31,13 @@ export default class DeadlineClock extends React.Component{
     addZero(previousNumber){
         if(previousNumber < 10){
             return '0' + previousNumber;
-        }else{
+        } else {
             return previousNumber;
         }
     }
 
     startTimer() {
-        const gameFinishDate = "May 16, 2017 18:19:50"; //When game is ending
+        const gameFinishDate = "May 16, 2017 19:46:10"; //When game is ending
         let countDownFromDate = new Date(gameFinishDate).getTime();
         let remaining = countDownFromDate - new Date().getTime();
 
@@ -45,25 +46,40 @@ export default class DeadlineClock extends React.Component{
         let minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
-        this.setState({showEndText: false, days, hours, minutes, seconds});
+        this.props.dispatch(addDays(days));
+        this.props.dispatch(addHours(hours));
+        this.props.dispatch(addMinutes(minutes));
+        this.props.dispatch(addSeconds(seconds));
+        this.props.dispatch(resetEndText());
 
         //Handle finished game
         if (remaining <= 1000) {
             clearInterval(this.timer);
-            console.log('GAME SESSION HAS ENDED');
-            this.setState({ showEndText: true, days: 0, hours: 0, minutes: 0, seconds: 0});
+            this.props.dispatch(resetTimer());
+            this.props.dispatch(showEndText());
         }
     }
     render(){
         return(
             <div className="center-text">
-                <div className="days">Days: {this.addZero(this.state.days)} </div>
-                <div className="hours">Hours: {this.addZero(this.state.hours)} </div>
-                <div className="minutes">Minutes: {this.addZero(this.state.minutes)} </div>
-                <div className="seconds">Seconds: {this.addZero(this.state.seconds)} </div>
-                <p>{this.state.showEndText ? 'GAME SESSION HAS ENDED!' : ''}</p>
+                <div className="days">Days: {this.addZero(this.props.days)} </div>
+                <div className="hours">Hours: {this.addZero(this.props.hours)} </div>
+                <div className="minutes">Minutes: {this.addZero(this.props.minutes)} </div>
+                <div className="seconds">Seconds: {this.addZero(this.props.seconds)} </div>
+                <p>{this.props.showEndText ? 'CURRENT GAME SESSION HAS ENDED!' : ''}</p>
             </div>
 
             )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        days: state.deadlineClock.days,
+        hours: state.deadlineClock.hours,
+        minutes: state.deadlineClock.minutes,
+        seconds: state.deadlineClock.seconds,
+        showEndText: state.deadlineClock.showEndText
+    }
+}
+export default connect(mapStateToProps)(DeadlineClock)
