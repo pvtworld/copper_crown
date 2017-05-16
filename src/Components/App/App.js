@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { pathToJS } from 'react-redux-firebase';
 import GameContainer from '../GameContainer/GameContainer';
+import TeamChooser from '../TeamChooser/TeamChooser';
 import { browserHistory } from 'react-router'
 import { getPricePerSquareMeter, bindPriceMultiplier } from '../../Helpers/PointsHelpers';
 
@@ -19,6 +20,7 @@ class App extends React.Component {
             browserHistory.push('/')
         }else{
             console.log('User is auth, doing nothing');
+
         }
 }
 
@@ -27,8 +29,10 @@ class App extends React.Component {
         this.redirectIfAuth(this.props);
         // check if they are no logged in at all
         console.log('Creating GameContainer');
-        return (          
+        return ( <div>
+                <TeamChooser/>
                   <GameContainer/>
+            </div>
         )
     }
 }
