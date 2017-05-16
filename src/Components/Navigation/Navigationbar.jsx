@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import { showLeaderboard, showAbout, showPlayerInfo, showProfile, resetModal } from '../../Redux/Actions/navigationActions';
+import './Nav.css'
 
 const Navigationbar = (props) => {
 
@@ -13,6 +14,8 @@ const Navigationbar = (props) => {
     catch(err) {
 
     }
+
+    const navbarStyle = {backgroundColor: '#F16E10 !important'};
     
     return(
         <Navbar inverse collapseOnSelect>
@@ -24,7 +27,7 @@ const Navigationbar = (props) => {
                 <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>
-                <Nav>
+                <Nav style={navbarStyle}>
                     <NavItem onClick={() => props.dispatch(showPlayerInfo())}>PlayerInfo</NavItem>
                     <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboards</NavItem>
                     <NavItem onClick={() => props.dispatch(showAbout())}>About CopperCrown</NavItem>
