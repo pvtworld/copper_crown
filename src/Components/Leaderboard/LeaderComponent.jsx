@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {firebaseConnect, dataToJS, pathToJS} from 'react-redux-firebase';
 import { Grid, Button, Modal} from 'react-bootstrap';
-import LeaderHeading from './LeaderHeading';
 import LeaderboardList from './LeaderboardList';
 import CurrentRank from './CurrentRank';
 import { resetModal } from '../../Redux/Actions/navigationActions';
@@ -12,24 +11,58 @@ class LeaderComponent extends Component{
     constructor(){
         super();
         this.getUserInfo = this.getUserInfo.bind(this);
-        this.getMyRank = this.getMyRank.bind(this);
+        this.getMyTeamRank = this.getMyTeamRank.bind(this);
         this.getLeaderboardInfo = this.getLeaderboardInfo.bind(this);
+        this.getUnsortedInfo = this.getUnsortedInfo.bind(this);
     }
 
-    getUserInfo() {
+    getUnsortedInfo() {
         var unsortedUserInfo = this.props.users;
         var idArray = Object.keys(unsortedUserInfo);
         var dataArray = Object.values(unsortedUserInfo);
         for (var i = 0; i < dataArray.length; i++){
             dataArray[i].userId=idArray[i];
         }
-        return dataArray.sort(function(a, b) {return b.points - a.points});
+        return dataArray;
+    }
+
+    getUserInfo(unsortedInfo) {
+        var teamNames = [];
+        unsortedInfo.forEach((player) => {
+            if (teamNames.indexOf(player.team) === -1){
+                teamNames.push(player.team);
+            }
+        });
+        var teamScores = [];
+        teamNames.forEach((team) => {
+            var totalScore = 0;
+            unsortedInfo.forEach((player) => {
+                if (player.team === team){
+                    totalScore += player.points;
+                }
+            });
+            teamScores.push(totalScore);
+        });
+        var teamData = [];
+        for (var i = 0; i < teamNames.length; i++){
+            teamData.push({
+                teamId: teamNames[i],
+                points: teamScores[i]
+            });
+        }
+        return teamData.sort(function(a, b) {return b.points - a.points});
     };
 
-    getMyRank(sortedUserInfo){
+    getMyTeamRank(extractedTeamInfo, rawInfo){
         var myRank = undefined;
-        for (var i = 0; i < sortedUserInfo.length; i++){
-            if (sortedUserInfo[i].userId === this.props.auth.uid){
+        var myTeam;
+        rawInfo.forEach((player) => {
+            if (player.userId === this.props.auth.uid){
+                myTeam = player.team;
+            }
+        });
+        for (var i = 0; i < extractedTeamInfo.length; i++){
+            if (extractedTeamInfo[i].teamId === myTeam){
                 myRank = i + 1;
                 break;
             }
@@ -37,37 +70,41 @@ class LeaderComponent extends Component{
         return myRank;
     }
 
-    getLeaderboardInfo(sortedUserInfo){
-        var listItems = [];
+    getLeaderboardInfo(extractedTeamInfo){
+        var leaderboardItems = [];
         var i = 1;
-        while (i <= sortedUserInfo.length && i <= 10){
-            listItems.push({
+        while (i <= extractedTeamInfo.length && i <= 10){
+            leaderboardItems.push({
                 pos: i,
-                name: sortedUserInfo[i-1].userId,
-                points: sortedUserInfo[i-1].points
+                name: this.props.teams ? this.props.teams[extractedTeamInfo[i-1].teamId].teamName : '',
+                points: extractedTeamInfo[i-1].points
             });
             i++;
         }
-        return listItems;
+        return leaderboardItems;
     }
 
     render(){
-            var sortedUserInfo = this.getUserInfo();
-            var myRank = this.getMyRank(sortedUserInfo);
-            var listItems = this.getLeaderboardInfo(sortedUserInfo);
+
+        if (this.props.requestingUsers){
+            return <div></div>;
+        } else {
+            var unsortedInfo = this.getUnsortedInfo();
+            var sortedTeamInfo = this.getUserInfo(unsortedInfo);
+            var leaderboardInfo = this.getLeaderboardInfo(sortedTeamInfo);
+            var rankInfo = this.getMyTeamRank(sortedTeamInfo, unsortedInfo);
 
             return(
                 <div className="static-modal">
 
                     <Modal.Dialog>
                         <Modal.Header>
-                            <Modal.Title>Profile Component</Modal.Title>
+                            <Modal.Title>Leaderboard</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Grid>
-                                <LeaderHeading/>
-                                <LeaderboardList listItems={listItems} />
-                                <CurrentRank rank={myRank} />
+                                <LeaderboardList listItems={leaderboardInfo} />
+                                <CurrentRank rank={rankInfo} />
                             </Grid>
                         </Modal.Body>
                         <Modal.Footer>
@@ -77,16 +114,19 @@ class LeaderComponent extends Component{
                     </Modal.Dialog>
                 </div>
             )
+        }
     }
 }
 
 var wrappedUserInfo = firebaseConnect(
-    ['/users']
+    ['/users', '/teams']
 )(LeaderComponent);
 
 export default connect(
     ({firebase}) => ({
         users: dataToJS(firebase, 'users'),
-        auth: pathToJS(firebase, 'auth')
+        teams: dataToJS(firebase, 'teams'),
+        auth: pathToJS(firebase, 'auth'),
+        requestingUsers: pathToJS(firebase, 'requesting/users')
     })
 )(wrappedUserInfo);
