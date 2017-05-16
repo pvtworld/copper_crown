@@ -7,13 +7,14 @@ class CopperMap extends Component {
     constructor() {
         super();
         this.state = {
+            isMounted: false,
             center: {
                 lat: 59.334591,
                 lng: 18.063240,
             },
         };
     }
-
+    
     geoTimer = null;
 
     geoLocationWatcher = this.geoLocationWatcher.bind(this);
@@ -28,17 +29,19 @@ class CopperMap extends Component {
                 console.log("Successssssss! Located user at: ");
                 //console.log(position);
 
-                this.setState({
-                    center: {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    }
-                });
+                if(this.state.isMounted){
+                    this.setState({
+                        center: {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        }
+                    });
+                }
 
                 navigator.geolocation.clearWatch(watchPositionId);
             }
 
-            navigator.geolocation.getCurrentPosition(geoSucess, geoError, geoOptions)
+            navigator.geolocation.getCurrentPosition(geoSucess, geoError, geoOptions);
 
             this.geoTimer = setInterval(function () {
                 watchPositionId = navigator.geolocation.watchPosition(geoSucess, geoError, geoOptions);
@@ -50,11 +53,17 @@ class CopperMap extends Component {
     }
 
     componentDidMount() {
+        this.setState({
+            isMounted: true
+        })
         this.geoLocationWatcher();
 
     }
 
     componentWillUnmount() {
+        this.setState({
+            isMounted: false
+        })
         clearInterval(this.geoTimer);
     }
 

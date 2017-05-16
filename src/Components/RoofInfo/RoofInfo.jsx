@@ -9,19 +9,21 @@ const addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
 
     let newUserPoints = userInfo.points + parseInt(price, 10);
     let newUserArea = userInfo.areaOfCopper + parseInt(area, 10);
+    let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen += 1 : 1;
+
     dispatch({type: 'UPDATING_USER_POINTS' })
-    firebase.set(`users/${uid}`, {points: newUserPoints , areaOfCopper: newUserArea })
+    firebase.set(`users/${uid}`, {points: newUserPoints , areaOfCopper: newUserArea, roofsStolen: newRoofsStolen , team: userInfo.team})
     .then( () => {
         dispatch({type: 'USER_POINTS_UPDATED' })
         return Promise.resolve();
     })
     .then( () => {
         dispatch({type: 'UPDATING_STOLEN_ROOFS'})
-        firebase.push('stolenRoofs', {roofId: id})
+        firebase.push('stolenRoofs', {roofId: id, userId: uid})
     })
     .then( () => {
         dispatch({type: 'STOLEN_ROOFS_UPDATED'})
-    } )
+    })
     dispatch(resetRoof());
     }
 
