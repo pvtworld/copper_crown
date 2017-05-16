@@ -65,3 +65,10 @@ export const copperPriceReturned = (item) => {
         price: item
     }
 }
+
+export const multiplierReturned = (item) => {
+    return{
+        type: 'MULTIPLIER_RETURNED',
+        multiplier: item
+    }
+}
