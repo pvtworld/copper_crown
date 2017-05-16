@@ -7,8 +7,8 @@ import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 
 const addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
 
-    let newUserPoints = userInfo.points + parseInt(price, 10);
-    let newUserArea = userInfo.areaOfCopper + parseInt(area, 10);
+    let newUserPoints = userInfo.points + parseInt(price, 10) || parseInt(price, 10) ;
+    let newUserArea = userInfo.areaOfCopper + parseInt(area, 10) || parseInt(area, 10) ;
     let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen += 1 : 1;
 
     dispatch({type: 'UPDATING_USER_POINTS' })
