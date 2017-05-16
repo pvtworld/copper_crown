@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { pathToJS } from 'react-redux-firebase';
 import GameContainer from '../GameContainer/GameContainer';
 import { browserHistory } from 'react-router'
-import { getPricePerSquareMeter } from '../../Helpers/PointsHelpers';
+import { getPricePerSquareMeter, bindPriceMultiplier } from '../../Helpers/PointsHelpers';
 
 class App extends React.Component {
 
     componentDidMount(){
         getPricePerSquareMeter(this.props.dispatch);
+        bindPriceMultiplier(this.props.dispatch);
+
     }
 
     redirectIfAuth = (props) => {
