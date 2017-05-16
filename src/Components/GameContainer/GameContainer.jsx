@@ -1,7 +1,7 @@
 import React from 'react';
-
 import CopperMap from '../CopperMap/CopperMap';
 import Navigationbar from '../Navigation/Navigationbar';
+import DeadClock from '../DeadlineClock/DeadlineClock'
 
 class GameContainer extends React.Component{
 
@@ -9,6 +9,7 @@ class GameContainer extends React.Component{
         return (
             <div>
                 <Navigationbar/>
+                <DeadClock/>
                 <CopperMap/>
             </div>
         )
