@@ -4,15 +4,15 @@ import RoofInfo from "../RoofInfo/RoofInfo";
 import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
 import Spinner from 'react-spinkit';
-import PlayerInfo from '../../Components/PlayerInfo/PlayerInfo';
-import Leaderboard from '../../Components/Leaderboard/LeaderComponent';
+import PlayerInfo from '../PlayerInfo/PlayerInfo';
+import Leaderboard from '../Leaderboard/LeaderComponent';
 import About from '../AboutComponent/AboutComponent';
-import Profile from '../../Components/Profile/ProfileComponent'
-
+import Profile from '../Profile/ProfileComponent'
 
 class InfoContainer extends React.Component {
 
     render() {
+
         if(this.props.searching){
             return(
                 <Spinner spinnerName="chasing-dots" noFadeIn />
