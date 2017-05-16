@@ -20,10 +20,10 @@ const convertFromTextToXML = (textToConvert) => {
         return (textToReturn);
 }
 
-const createObjectFromXML = (xml, pricePerSquareMeter) => {
+const createObjectFromXML = (xml, pricePerSquareMeter, multiplier) => {
     let area = xml.getElementsByTagName('lutarea')[0].childNodes[0].nodeValue
     let areaCalculated = (area / 1000).toFixed(1) + 0;
-    let value = (pricePerSquareMeter * areaCalculated).toFixed(1) + 0;
+    let value = (pricePerSquareMeter * areaCalculated*multiplier).toFixed(1) + 0;
     return {
         id: xml.getElementsByTagName('id')[0].childNodes[0].nodeValue,
         area: areaCalculated,
@@ -47,7 +47,7 @@ export const checkClickForCopper = (long, lat) => {
     .then( parsedXML => {
         dispatch(searchDone());
         if (parsedXML.getElementsByTagName('dataEntitity')[0].getAttribute('resultRecords') === '1') {
-            const roof = createObjectFromXML(parsedXML, state.copperPrice.price);
+            const roof = createObjectFromXML(parsedXML, state.copperPrice.price, state.copperMultiplier.multiplier);
             base.fetch('stolenRoofs', {
                 context: {},
                 queries: {
