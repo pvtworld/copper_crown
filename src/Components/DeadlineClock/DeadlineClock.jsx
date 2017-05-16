@@ -5,14 +5,6 @@ import { addDays, addHours, addMinutes, addSeconds, resetTimer, showEndText, res
 
 
 class DeadlineClock extends React.Component{
-    constructor() {
-        super();
-        this.state = {
-            showEndText: false,
-            hours: 0,
-            minutes: 0,
-        }
-    }
 
     timer = null;
 
