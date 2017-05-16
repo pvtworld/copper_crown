@@ -6,7 +6,7 @@ export const showLeaderboard = () => {
 
 export const showAbout = () => {
     return {
-        type: 'SHOW_ABOUT'
+        type: 'SHOW_GAME_INFO'
     };
 };
 

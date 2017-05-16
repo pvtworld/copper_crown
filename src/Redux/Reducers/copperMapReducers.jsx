@@ -47,3 +47,12 @@ export var displayRoofReducer = (state = {foundRoof: null, id: null, value: null
             return state;
     }
 };
+
+export var updatePriceMultiplierReducer = (state = {multiplier: null}, action) => {
+    switch (action.type){
+        case 'MULTIPLIER_RETURNED':
+            return {...state, multiplier: action.multiplier};
+        default:
+            return state;
+    }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import ScoreComponent from '../ScoreComponent/ScoreComponent'
 import CopperMap from '../CopperMap/CopperMap';
 import Navigationbar from '../Navigation/Navigationbar';
 
@@ -8,6 +9,7 @@ class GameContainer extends React.Component{
         return (
             <div>
                 <Navigationbar/>
+                <ScoreComponent/>
                 <CopperMap/>
             </div>
         )

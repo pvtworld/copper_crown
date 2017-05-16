@@ -37,7 +37,7 @@ class DeadlineClock extends React.Component{
     }
 
     startTimer() {
-        const gameFinishDate = "May 16, 2017 19:46:10"; //When game is ending
+        const gameFinishDate = "May 16, 2017 19:59:10"; //When game is ending
         let countDownFromDate = new Date(gameFinishDate).getTime();
         let remaining = countDownFromDate - new Date().getTime();
 

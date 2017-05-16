@@ -4,15 +4,16 @@ import RoofInfo from "../RoofInfo/RoofInfo";
 import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
 import Spinner from 'react-spinkit';
-import PlayerInfo from '../../Components/PlayerInfo/PlayerInfo';
-import Leaderboard from '../../Components/Leaderboard/LeaderComponent';
-import About from '../GameInfoComponent/GameInfoComponent';
-import Profile from '../../Components/Profile/ProfileComponent'
 
+import PlayerInfo from '../PlayerInfo/PlayerInfo';
+import Leaderboard from '../Leaderboard/LeaderComponent';
+import GameInfo from '../GameInfoComponent/GameInfoComponent';
+import Profile from '../Profile/ProfileComponent'
 
 class InfoContainer extends React.Component {
 
     render() {
+
         if(this.props.searching){
             return(
                 <Spinner spinnerName="chasing-dots" noFadeIn />
@@ -26,8 +27,8 @@ class InfoContainer extends React.Component {
                 return <Leaderboard/>
             case 'SHOW_PROFILE':
                 return <Profile/>
-            case 'SHOW_ABOUT':
-                return <About/>
+            case 'SHOW_GAME_INFO':
+                return <GameInfo/>
             default:
                 break;
         }
