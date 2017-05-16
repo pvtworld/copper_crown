@@ -25,9 +25,9 @@ const Navigationbar = (props) => {
             </Navbar.Header>
             <Navbar.Collapse>
                 <Nav>
-                    <NavItem onClick={() => props.dispatch(showPlayerInfo())}>PlayerInfo</NavItem>
+                    <NavItem onClick={() => props.dispatch(showPlayerInfo())}>Player info</NavItem>
                     <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboards</NavItem>
-                    <NavItem onClick={() => props.dispatch(showAbout())}>About CopperCrown</NavItem>
+                    <NavItem onClick={() => props.dispatch(showAbout())}>Game info</NavItem>
                 </Nav>
                 <Nav pullRight>
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">

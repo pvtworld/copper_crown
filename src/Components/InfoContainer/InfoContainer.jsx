@@ -6,7 +6,7 @@ import RoofNotFound from '../RoofInfo/RoofNotFound';
 import Spinner from 'react-spinkit';
 import PlayerInfo from '../../Components/PlayerInfo/PlayerInfo';
 import Leaderboard from '../../Components/Leaderboard/LeaderComponent';
-import About from '../AboutComponent/AboutComponent';
+import About from '../GameInfoComponent/GameInfoComponent';
 import Profile from '../../Components/Profile/ProfileComponent'
 
 
