@@ -5,13 +5,13 @@ import { resetModal } from '../../Redux/Actions/navigationActions';
 import { connect } from 'react-redux'
 import DeadlineClock from '../DeadlineClock/DeadlineClock'
 
-const AboutComponent = (props) => {
+const GameInfoComponent = (props) => {
 
     return (
         <div className="static-modal">
             <Modal.Dialog>
                 <Modal.Header>
-                    <Modal.Title>About </Modal.Title>
+                    <Modal.Title>Game info </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Game session ends in:</p>
@@ -30,7 +30,7 @@ const mapStateToProps = ({firebase}, {auth}) => ({
     userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined
 })
 
-const propsConnected = connect(mapStateToProps)(AboutComponent)
+const propsConnected = connect(mapStateToProps)(GameInfoComponent)
 
 const wrappedPlayerInfo = firebaseConnect(
     ({auth}) => ([auth ? `users/${auth.uid}`: '/']))(propsConnected);
