@@ -1,4 +1,5 @@
-import { fetchingPrice, copperPriceReturned } from '../Redux/Actions/copperMapActions'
+import { fetchingPrice, copperPriceReturned, multiplierReturned } from '../Redux/Actions/copperMapActions'
+import base from '../Firebase/base';
 const squareMetersPerTon = 186.720442;
 
 var currentPrice;
@@ -55,4 +56,15 @@ function currentDate() {
     // return year + '-' + month + '-' + day;
 
     return '2017-05-02';
+}
+
+export function bindPriceMultiplier(dispatch) {
+    base.listenTo('stolenRoofs', {
+        context: {},
+
+        asArray: true,
+        then(roofArray) {
+            dispatch(multiplierReturned(roofArray.length === 0 ? 0.01 : roofArray.length/100))
+        }
+    });
 }
