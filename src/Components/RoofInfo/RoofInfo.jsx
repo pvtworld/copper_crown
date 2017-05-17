@@ -7,12 +7,17 @@ import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 
 const addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
 
-    let newUserPoints = userInfo.points + parseInt(price, 10);
-    let newUserArea = userInfo.areaOfCopper + parseInt(area, 10);
+    let newUserPoints = userInfo.points + parseInt(price, 10) || parseInt(price, 10) ;
+    let newUserArea = userInfo.areaOfCopper + parseInt(area, 10) || parseInt(area, 10) ;
     let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen += 1 : 1;
 
     dispatch({type: 'UPDATING_USER_POINTS' })
-    firebase.set(`users/${uid}`, {points: newUserPoints , areaOfCopper: newUserArea, roofsStolen: newRoofsStolen , team: userInfo.team})
+    const newUserInfo = {...userInfo};
+    newUserInfo.points = newUserPoints;
+    newUserInfo.areaOfCopper = newUserArea;
+    newUserInfo.roofsStolen =  newRoofsStolen
+
+    firebase.set(`users/${uid}`, {...newUserInfo})
     .then( () => {
         dispatch({type: 'USER_POINTS_UPDATED' })
         return Promise.resolve();
@@ -38,6 +43,9 @@ const tooltipLeave = (
 
 
 const RoofInfo = (props) => {
+    if (!props.userInfo) {
+        props.firebase.set(`users/${props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, school: null, schoolClass: null})
+    }
             return (
             <div className="static-modal">
                 <Modal.Dialog>
