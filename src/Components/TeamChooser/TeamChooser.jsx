@@ -1,19 +1,19 @@
 import React from 'react';
-import {connect, store} from 'react-redux';
+import {connect} from 'react-redux';
 import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
 import {Modal, Button} from 'react-bootstrap';
 
 const addTeam = (firebase, uid, userInfo, dispatch, school, schoolClass) => {
+    const newUserInfo = {...userInfo};
+    newUserInfo.school = school;
+    newUserInfo.schoolClass = schoolClass;
 
     dispatch({type: 'UPDATE_TEAM_INFO'})
-    firebase.set(`users/${uid}`, {
-        points: userInfo.points,
-        areaOfCopper: userInfo.areaOfCopper,
-        roofsStolen: userInfo.roofsStolen,
-        school: school,
-        schoolClass: schoolClass
-    })
+    firebase.set(`users/${uid}`, {...newUserInfo})
 }
+
+
+
 const TeamChooser = (props) => {
 
     let school = null
