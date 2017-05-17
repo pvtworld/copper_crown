@@ -38,6 +38,9 @@ const tooltipLeave = (
 
 
 const RoofInfo = (props) => {
+    if (!props.userInfo) {
+        props.firebase.set(`users/${props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, school: null, schoolClass: null})
+    }
             return (
             <div className="static-modal">
                 <Modal.Dialog>
