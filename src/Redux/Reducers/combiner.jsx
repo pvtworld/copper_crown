@@ -10,7 +10,7 @@ const reducers = combineReducers({
     copperRoof: displayRoofReducer,
     showModal: showModalReducer,
     copperPrice: copperPriceReducer,
-    copperMultiplier: updatePriceMultiplierReducer
+    copperMultiplier: updatePriceMultiplierReducer,
 });
 
 export default reducers;
