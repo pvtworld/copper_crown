@@ -16,6 +16,7 @@ class App extends React.Component {
     }
 
     redirectIfAuth = (props) => {
+
         if(!props.auth){
             console.log('User is not auth, redirecting to login /', props.auth);
             browserHistory.push('/')
@@ -26,13 +27,12 @@ class App extends React.Component {
 }
 
     render() {
-
         this.redirectIfAuth(this.props);
         // check if they are no logged in at all
         console.log('Creating GameContainer');
         return ( <div>
                 <TeamChooser/>
-                  <GameContainer/>
+                <GameContainer/>
             </div>
         )
     }
@@ -41,7 +41,8 @@ class App extends React.Component {
 const mapStateToProps = ({firebase}) => {
     return {
         authError: pathToJS(firebase, 'authError'),
-        auth: pathToJS(firebase, 'auth')
+        auth: pathToJS(firebase, 'auth'),
+        firebase: firebase
     }
 }
 
