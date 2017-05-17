@@ -22,7 +22,7 @@ const ProfileComponent = (props) => {
                     <Image id="picture" src={props.auth.photoURL} circle />
                     <h5>Mail: {props.auth.email}</h5>
                     <h5>Points: {props.userInfo.points}</h5>
-                    <h5>Number of roofs taken: {'Not implemented'}</h5>
+                    <h5>Number of roofs taken: {props.userInfo.roofsStolen}</h5>
                     <h5>Area of roofs taken:  {props.userInfo.areaOfCopper}</h5>
                 </Modal.Body>
                 <Modal.Footer>
