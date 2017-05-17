@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { pathToJS } from 'react-redux-firebase';
+import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
 import GameContainer from '../GameContainer/GameContainer';
 import TeamChooser from '../TeamChooser/TeamChooser';
 import { browserHistory } from 'react-router'
 import { getPricePerSquareMeter, bindPriceMultiplier } from '../../Helpers/PointsHelpers';
+
 
 class App extends React.Component {
 
