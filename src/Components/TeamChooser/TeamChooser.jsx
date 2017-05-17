@@ -61,16 +61,19 @@ const TeamChooser = (props) => {
         }
     }
     return null
+
 }
 
 const mapStateToProps = ({firebase}, {auth}) => ({
-    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined
+    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined,
+    teams: dataToJS(firebase, '/teams')
+
 })
 
 const propsConnected = connect(mapStateToProps)(TeamChooser);
 
 const wrappedPlayerInfo = firebaseConnect(
-    ({auth}) => ([auth ? `users/${auth.uid}` : '/']))(propsConnected);
+    ({auth}) => ([auth ? `users/${auth.uid}` : '/',  '/teams']))(propsConnected);
 
 const authConnected = connect(
     ({firebase}) => ({
