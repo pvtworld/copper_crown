@@ -6,6 +6,25 @@ import { resetModal } from '../../Redux/Actions/navigationActions';
 
 const GameStatisticsComponent = (props) => {
 
+/*    
+    var countPercentOfAllRoofs = (numberOfRoofs) =>{ //Total % of roofs stolen
+       return{ 
+           (numberOfRoofs/allRoofs)*100
+       }
+            }
+
+    var countPercentofStolenRoofs = (numberOfRoofs) =>{ //Can count % of roofs stolen by team
+        return{
+            (numberOfRoofs/TotalRoofsStolen)*100
+        }
+    
+    var personalContribution = (myRoofs) =>{
+        return{
+            (myRoofs/teamsRoofs)*100
+        }
+    }
+*/
+
     return (
         <div className="static-modal">
             <Modal.Dialog>
