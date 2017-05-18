@@ -26,20 +26,5 @@ const GameInfoComponent = (props) => {
     )
 };
 
-const mapStateToProps = ({firebase}, {auth}) => ({
-    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined
-})
-
-const propsConnected = connect(mapStateToProps)(GameInfoComponent)
-
-const wrappedPlayerInfo = firebaseConnect(
-    ({auth}) => ([auth ? `users/${auth.uid}`: '/']))(propsConnected);
-
-const authConnected = connect(
-    ({ firebase }) => ({
-        auth: pathToJS(firebase, 'auth') // gets auth from redux and sets as prop
-    })
-)(wrappedPlayerInfo)
-
-export default authConnected;
+export default connect()(GameInfoComponent)
 
