@@ -18,7 +18,7 @@ const Navigationbar = (props) => {
     return(
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
-                <a href="#" className="navbar-text visible-xs-inline-block">Example text</a>
+                {/*<a href="#" className="navbar-text visible-xs-inline-block">Example text</a>*/}
                 <Navbar.Brand>
                     <a onClick={() => props.dispatch(resetModal())}>CopperCrown</a>
                 </Navbar.Brand>
