@@ -45,7 +45,6 @@ const GameStatisticsComponent = (props) => {
                     <h5>Percent of roofs stolen:</h5>
                     <h5>Personal contribution:</h5>
                     <h5>Contribution in percent: </h5>
-                    <h5></h5>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
