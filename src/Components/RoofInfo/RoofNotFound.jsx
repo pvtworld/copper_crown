@@ -1,27 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { resetRoof } from '../../Redux/Actions/copperMapActions';
-import {Modal, Button} from 'react-bootstrap'
+import Snackbar from 'material-ui/Snackbar'
 
-const RoofNotFound = (props) => {
-        return (
-            <div className="static-modal">
-                <Modal.Dialog>
-                    <Modal.Header>
-                        <Modal.Title>Roof Not Found</Modal.Title>
-                    </Modal.Header>
 
-                    <Modal.Body>
-                        Better luck next time 
-                    </Modal.Body>
+class RoofNotFound extends React.Component{
 
-                    <Modal.Footer>
-                        <Button bsStyle="primary" onClick={() => {props.dispatch(resetRoof())}}>OK</Button>
-                    </Modal.Footer>
-
-                </Modal.Dialog>
-            </div>)
+    render(){
+        return(
+            <Snackbar
+                open={true}
+                message={'Roof not found'}
+                action="Dismiss"
+                autoHideDuration={3000}
+            />
+        )
+    }
 }
 
-
 export default connect()(RoofNotFound)
+
+
