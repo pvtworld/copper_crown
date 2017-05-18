@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap'
-import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase';
 import { resetModal } from '../../Redux/Actions/navigationActions';
 import { connect } from 'react-redux'
 import DeadlineClock from '../DeadlineClock/DeadlineClock'
