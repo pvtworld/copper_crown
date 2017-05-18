@@ -10,22 +10,22 @@ const GameStatisticsComponent = (props) => {
         <div className="static-modal">
             <Modal.Dialog>
                 <Modal.Header>
-                    <Modal.Title>GameStatistics</Modal.Title>
+                    <Modal.Title>Game statistics</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
                     <h5>Total number of roofs:</h5>
                     <h5>Number of roofs left:</h5>
                     <h5>Percent of roofs left:</h5>
-                    <p></p>
+                    <br></br>
                     <h5>Total numbers of roofs stolen:</h5>
                     <h5>Total percent of roofs stolen:</h5>
-                    <p></p>
-                    <p></p>
+                    <br></br>
+                    <br></br>
                     <h5>Numbers of roofs stolen by team:</h5>
+                    <h5>Percent of roofs stolen:</h5>
                     <h5>Personal contribution:</h5>
                     <h5>Contribution in percent: </h5>
-                    <p></p>
                     <h5></h5>
                 </Modal.Body>
                 <Modal.Footer>
