@@ -13,7 +13,7 @@ const AboutComponent = (props) => {
                     <Modal.Title>About </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Copper roofs are dope</p>
+                    <p>Copper roofs are fun</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
