@@ -15,22 +15,20 @@ const Navigationbar = (props) => {
 
     }
 
-    const navbarStyle = {backgroundColor: '#F16E10 !important'};
-    
     return(
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
-                <a href="#" className="navbar-text visible-xs-inline-block">Example text</a>
+                {/*<a href="#" className="navbar-text visible-xs-inline-block">Example text</a>*/}
                 <Navbar.Brand>
                     <a onClick={() => props.dispatch(resetModal())}>CopperCrown</a>
                 </Navbar.Brand>
                 <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>
-                <Nav style={navbarStyle}>
+                <Nav>
                     <NavItem onClick={() => props.dispatch(showPlayerInfo())}>PlayerInfo</NavItem>
                     <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboards</NavItem>
-                    <NavItem onClick={() => props.dispatch(showAbout())}>About CopperCrown</NavItem>
+                    <NavItem onClick={() => props.dispatch(showAbout())}>Game info</NavItem>
                 </Nav>
                 <Nav pullRight>
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
