@@ -1,26 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { resetRoof } from '../../Redux/Actions/copperMapActions';
-import {Modal, Button} from 'react-bootstrap'
+import Snackbar from 'material-ui/Snackbar'
 
-const RoofStolen = (props) => { 
-         return (
-            <div className="static-modal">
-                <Modal.Dialog>
-                    <Modal.Header>
-                        <Modal.Title>Roof Already Stolen</Modal.Title>
-                    </Modal.Header>
+class RoofStolen extends React.Component { 
+    constructor(){
+        super()
+        this.state = {
+            open: false
+        }
+        window.setTimeout(() => this.setState({open: true}), 1)
+    }
 
-                    <Modal.Body>
-                        Better luck next time 
-                    </Modal.Body>
-
-                    <Modal.Footer>
-                        <Button bsStyle="primary" onClick={() => {props.dispatch(resetRoof())}}>OK</Button>
-                    </Modal.Footer>
-
-                </Modal.Dialog>
-            </div>)
+    render(){
+        return(
+            <Snackbar
+                open={this.state.open}
+                message={'Roof already stolen'}
+                action="Dismiss"
+                autoHideDuration={3000}
+                onActionTouchTap={() => {  
+                    this.setState({open: false})
+                    window.setTimeout(() => this.props.dispatch(resetRoof()), 600)
+                    }}
+                onRequestClose={() => {
+                    this.setState({open: false})
+                    window.setTimeout(() => this.props.dispatch(resetRoof()), 600)
+                    }
+                }
+            />
+        )
+    }
 }
 
 
