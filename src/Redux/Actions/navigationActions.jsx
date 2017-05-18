@@ -22,6 +22,12 @@ export const showProfile = () => {
     };
 };
 
+export const showStatistics = () => {
+    return{
+        type: 'SHOW_STATISTICS'
+    };
+};
+
 export const resetModal = () => {
     return {
         type: 'RESET_MODAL'
