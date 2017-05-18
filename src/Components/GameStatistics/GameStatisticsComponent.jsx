@@ -4,7 +4,7 @@ import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import { Button, Modal } from 'react-bootstrap';
 import { resetModal } from '../../Redux/Actions/navigationActions';
 
-const ProfileComponent = (props) => {
+const GameStatisticsComponent = (props) => {
 
     return (
         <div className="static-modal">
@@ -36,4 +36,4 @@ const ProfileComponent = (props) => {
         </div>
     )
 }
-export default ProfileComponent
+export default connect()(GameStatisticsComponent);
