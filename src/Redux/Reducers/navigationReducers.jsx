@@ -2,8 +2,8 @@ export var showModalReducer = (state = {showModalString: ''}, action) => {
     switch (action.type){
         case 'SHOW_LEADERBOARD':
             return {...state, showModalString: 'SHOW_LEADERBOARD'};
-        case 'SHOW_ABOUT':
-            return {...state, showModalString: 'SHOW_ABOUT'};
+        case 'SHOW_GAME_INFO':
+            return {...state, showModalString: 'SHOW_GAME_INFO'};
         case 'SHOW_PLAYERINFO':
             return {...state, showModalString: 'SHOW_PLAYERINFO'};
         case 'SHOW_PROFILE':
