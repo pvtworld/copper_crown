@@ -3,9 +3,29 @@ import { connect } from 'react-redux';
 import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
 import {resetRoof} from '../../Redux/Actions/copperMapActions';
 import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import RoofInfoSnackbar from './RoofInfoSnackbar'
 
 
-const addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
+const tooltipSteal = (
+    <Tooltip id="tooltipSteal">Steal roof and add the current value to your account</Tooltip>
+);
+
+const tooltipLeave = (
+    <Tooltip id="tooltipLeave">Leave roof in hopes that the value will increase</Tooltip>
+);
+
+
+
+class RoofInfo extends React.Component {
+    constructor(props) {
+        super()
+        this.addRoof = this.addRoof.bind(this);
+
+        this.state={showSnackbar: false}
+    }
+
+
+    addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
 
     let newUserPoints = userInfo.points + parseInt(price, 10) || parseInt(price, 10) ;
     let newUserArea = userInfo.areaOfCopper + parseInt(area, 10) || parseInt(area, 10) ;
@@ -29,24 +49,19 @@ const addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
     .then( () => {
         dispatch({type: 'STOLEN_ROOFS_UPDATED'})
     })
-    dispatch(resetRoof());
+    this.setState({showSnackbar: true})
     }
 
-const tooltipSteal = (
-    <Tooltip id="tooltipSteal">Steal roof and add the current value to your account</Tooltip>
-);
 
-const tooltipLeave = (
-    <Tooltip id="tooltipLeave">Leave roof in hopes that the value will increase</Tooltip>
-);
-
-
-
-const RoofInfo = (props) => {
-    if (!props.userInfo) {
-        props.firebase.set(`users/${props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, school: null, schoolClass: null})
+    render() {
+    if (!this.props.userInfo) {
+        this.props.firebase.set(`users/${this.props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, school: null, schoolClass: null})
     }
-            return (
+    if(this.state.showSnackbar){
+        return <RoofInfoSnackbar/>
+    }
+
+    return (
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Header>
@@ -54,20 +69,21 @@ const RoofInfo = (props) => {
                     </Modal.Header>
 
                     <Modal.Body>
-                        Price: {parseInt(props.price,10)} Area: {parseInt(props.area,10)}
+                        Price: {parseInt(this.props.price,10)} Area: {parseInt(this.props.area,10)}
                     </Modal.Body>
 
                     <Modal.Footer>
                             <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipLeave}>
-                                <Button bsStyle="danger" bsSize="large" block onClick={() => props.dispatch(resetRoof())}>Leave</Button>
+                                <Button bsStyle="danger" bsSize="large" block onClick={() => this.props.dispatch(resetRoof())}>Leave</Button>
                             </OverlayTrigger>
                             <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipSteal}>
-                                <Button bsStyle="success" bsSize="large" block onClick={() => addRoof(props.firebase, props.uid, props.id, props.price, props.area, props.userInfo, props.dispatch)}>Steal</Button>
+                                <Button bsStyle="success" bsSize="large" block onClick={() => this.addRoof(this.props.firebase, this.props.uid, this.props.id, this.props.price, this.props.area, this.props.userInfo, this.props.dispatch)}>Steal</Button>
                             </OverlayTrigger>
                     </Modal.Footer>
 
                 </Modal.Dialog>
             </div>)
+    }   
 }
 
 const mapStateToProps = (state, {auth}) => {
