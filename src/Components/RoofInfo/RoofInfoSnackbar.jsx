@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { resetRoof } from '../../Redux/Actions/copperMapActions';
 import Snackbar from 'material-ui/Snackbar'
 
-class RoofStolen extends React.Component { 
+
+class RoofInfoSnackbar extends React.Component{
     constructor(){
         super()
         this.state = {
@@ -16,7 +17,7 @@ class RoofStolen extends React.Component {
         return(
             <Snackbar
                 open={this.state.open}
-                message={'Roof already stolen'}
+                message={'Roof Stolen'}
                 action="Dismiss"
                 autoHideDuration={3000}
                 onActionTouchTap={() => {  
@@ -33,6 +34,4 @@ class RoofStolen extends React.Component {
     }
 }
 
-
-
-export default connect()(RoofStolen)
+export default connect()(RoofInfoSnackbar)
