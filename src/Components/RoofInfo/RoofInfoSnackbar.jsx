@@ -17,10 +17,11 @@ class RoofInfoSnackbar extends React.Component{
         return(
             <Snackbar
                 open={this.state.open}
-                message={'Roof Stolen'}
+                message={'Congratulations, you stole the roof!'}
                 action="Dismiss"
-                autoHideDuration={3000}
-                onActionTouchTap={() => {  
+                autoHideDuration={5000}
+                bodyStyle={{ backgroundColor: '#2ecc71'}}
+                onActionTouchTap={() => {
                     this.setState({open: false})
                     window.setTimeout(() => this.props.dispatch(resetRoof()), 600)
                     }}
