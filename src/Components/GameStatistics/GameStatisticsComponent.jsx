@@ -6,24 +6,14 @@ import { resetModal } from '../../Redux/Actions/navigationActions';
 
 const GameStatisticsComponent = (props) => {
 
-/*    
-    var countPercentOfAllRoofs = (numberOfRoofs) =>{ //Total % of roofs stolen
-       return{ 
-           (numberOfRoofs/allRoofs)*100
-       }
-            }
-
-    var countPercentofStolenRoofs = (numberOfRoofs) =>{ //Can count % of roofs stolen by team
-        return{
-            (numberOfRoofs/TotalRoofsStolen)*100
-        }
+    var allRoofs = "10000";
+    console.log("Stulna tak: ",props.stolenRoofs);
     
-    var personalContribution = (myRoofs) =>{
-        return{
-            (myRoofs/teamsRoofs)*100
-        }
-    }
-*/
+    var roofArray =props.stolenRoofs? Object.keys(props.stolenRoofs): [];
+    var roofsStolen = roofArray.length;
+
+    var playerArray = props.users? Object.keys(props.users): [];
+    var numOfPlayers = playerArray.length;
 
     return (
         <div className="static-modal">
@@ -33,12 +23,15 @@ const GameStatisticsComponent = (props) => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <h5>Total number of roofs:</h5>
-                    <h5>Number of roofs left:</h5>
-                    <h5>Percent of roofs left:</h5>
+                    <h5>Total number of roofs: {allRoofs}</h5>
+                    <h5>Number of roofs left: {allRoofs-roofsStolen}</h5>
+                    <h5>Percent of roofs left: {((allRoofs-roofsStolen)/allRoofs)*100+"%"}</h5>
                     <br></br>
-                    <h5>Numbers of roofs stolen by me:</h5>
+                    <h5>Numbers of roofs stolen by me: {props.auth.roofsStolen}</h5>
                     <h5>Percent of roofs stolen by me:</h5>
+                    <br></br>
+                    <h5>Current number of players: {numOfPlayers}</h5>
+                    <h5>Daily copperprice:</h5>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
@@ -48,4 +41,16 @@ const GameStatisticsComponent = (props) => {
         </div>
     )
 }
-export default connect()(GameStatisticsComponent);
+//export default connect()(GameStatisticsComponent);
+
+var wrappedUserInfo = firebaseConnect(
+    ['/users', '/stolenRoofs']
+)(GameStatisticsComponent);
+
+export default connect(
+    ({firebase}) => ({
+        users: dataToJS(firebase, 'users'),
+        stolenRoofs: dataToJS(firebase, 'stolenRoofs'),
+        auth: pathToJS(firebase, 'auth')
+    })
+)(wrappedUserInfo);     
