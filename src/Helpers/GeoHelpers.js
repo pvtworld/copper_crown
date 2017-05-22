@@ -36,6 +36,10 @@ export const checkClickForCopper = (long, lat) => {
     const state = store.getState();
     const dispatch = store.dispatch;
 
+    if(state.copperSearch.searching){
+        return;
+    }
+
     const sthlmPointUrlTemplate = 'https://us-central1-coppercors.cloudfunctions.net/copperProvider/?whatcopper=Geom=POINT(%longitude%%20%latitude%)';
     const [x,y] = convertPoint(long, lat);
     dispatch(searchForCopper());
