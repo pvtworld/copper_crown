@@ -27,9 +27,6 @@ const GameStatisticsComponent = (props) => {
                     <h5>Number of roofs left: {allRoofs-roofsStolen}</h5>
                     <h5>Percent of roofs left: {((allRoofs-roofsStolen)/allRoofs)*100+"%"}</h5>
                     <br></br>
-                    <h5>Numbers of roofs stolen by me: {props.auth.roofsStolen}</h5>
-                    <h5>Percent of roofs stolen by me:</h5>
-                    <br></br>
                     <h5>Current number of players: {numOfPlayers}</h5>
                     <h5>Daily copperprice:</h5>
                 </Modal.Body>
