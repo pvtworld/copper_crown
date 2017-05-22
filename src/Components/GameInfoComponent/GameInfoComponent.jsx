@@ -13,8 +13,6 @@ const GameInfoComponent = (props) => {
                     <Modal.Title>Game info </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Game session ends in:</p>
-                    <DeadlineClock/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>

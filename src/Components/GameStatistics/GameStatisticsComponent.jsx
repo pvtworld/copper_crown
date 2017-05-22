@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import { Button, Modal } from 'react-bootstrap';
 import { resetModal } from '../../Redux/Actions/navigationActions';
+import DeadlineClock from '../DeadlineClock/DeadlineClock'
 
 const GameStatisticsComponent = (props) => {
 
@@ -23,6 +24,9 @@ const GameStatisticsComponent = (props) => {
                 </Modal.Header>
 
                 <Modal.Body>
+                    <h5>Game session ends in: </h5>
+                    <DeadlineClock/>
+                    <br></br>
                     <h5>Total number of roofs: {allRoofs}</h5>
                     <h5>Number of roofs left: {allRoofs-roofsStolen}</h5>
                     <h5>Percent of roofs left: {((allRoofs-roofsStolen)/allRoofs)*100+"%"}</h5>
