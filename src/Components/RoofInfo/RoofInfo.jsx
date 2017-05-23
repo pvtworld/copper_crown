@@ -14,16 +14,27 @@ const tooltipLeave = (
     <Tooltip id="tooltipLeave">Leave roof in hopes that the value will increase</Tooltip>
 );
 
-
+let numberOfThieves;
 
 class RoofInfo extends React.Component {
     constructor(props) {
-        super()
+        super();
         this.addRoof = this.addRoof.bind(this);
-
         this.state={showSnackbar: false}
     }
 
+    componentWillMount(){
+
+        const area = this.props.area;
+
+        if(area < 150){
+            numberOfThieves = 1;
+        }else if(area >= 150 && area < 300){
+            numberOfThieves = 2;
+        }else{
+            numberOfThieves = 1337;
+        }
+    }
 
     addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
 
@@ -61,6 +72,7 @@ class RoofInfo extends React.Component {
         return <RoofInfoSnackbar/>
     }
 
+
     return (
             <div className="static-modal">
                 <Modal.Dialog>
@@ -69,7 +81,7 @@ class RoofInfo extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        Price: {parseInt(this.props.price,10)} Area: {parseInt(this.props.area,10)}
+                        Price: {parseInt(this.props.price,10)} Area: {parseInt(this.props.area,10)} Thieves required: {numberOfThieves}
                     </Modal.Body>
 
                     <Modal.Footer>
