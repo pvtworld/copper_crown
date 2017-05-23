@@ -48,12 +48,12 @@ var wrappedUserInfo = firebaseConnect(
     ['/users', '/stolenRoofs']
 )(GameStatisticsComponent);
 
-const mapStateToProps = ({firebase}) => {
+const mapStateToProps = (state) => {
     return {
-    users: dataToJS(firebase, 'users'),
-    stolenRoofs: dataToJS(firebase, 'stolenRoofs'),
-    auth: pathToJS(firebase, 'auth'),
-    //copperPrice: state ? state.copperPrice.price : 0
+    users: dataToJS(state.firebase, 'users'),
+    stolenRoofs: dataToJS(state.firebase, 'stolenRoofs'),
+    auth: pathToJS(state.firebase, 'auth'),
+    copperPrice: state.copperPrice.price
 
 }};
 
