@@ -8,13 +8,19 @@ import DeadlineClock from '../DeadlineClock/DeadlineClock'
 const GameStatisticsComponent = (props) => {
 
     var allRoofs = "10000";
-    console.log("Stulnaaaaaa tak: ",props);
+    console.log("Stulna tak: ",props);
     
-    var roofArray =props.stolenRoofs? Object.keys(props.stolenRoofs): [];
+    var roofArray = props.stolenRoofs ? Object.keys(props.stolenRoofs): [];
     var roofsStolen = roofArray.length;
 
     var playerArray = props.users? Object.keys(props.users): [];
     var numOfPlayers = playerArray.length;
+
+    var percentRoofsLeft = ((allRoofs - roofsStolen) / allRoofs) * 100;
+
+    var squareMeterPrice = props.copperPrice ? props.copperPrice : 0;
+    var multiplier = props.copperMultiplier ? props.copperMultiplier : 0;
+    var copperPrice = squareMeterPrice * multiplier;
 
     return (
         <div className="static-modal">
@@ -28,11 +34,11 @@ const GameStatisticsComponent = (props) => {
                     <DeadlineClock/>
                     <br></br>
                     <h5>Total number of roofs: {allRoofs}</h5>
-                    <h5>Number of roofs left: {allRoofs-roofsStolen}</h5>
-                    <h5>Percent of roofs left: {((allRoofs-roofsStolen)/allRoofs)*100+"%"}</h5>
+                    <h5>Number of roofs left: {allRoofs - roofsStolen}</h5>
+                    <h5>Percent of roofs left: {percentRoofsLeft.toFixed(1) + "%"}</h5>
                     <br></br>
                     <h5>Current number of players: {numOfPlayers}</h5>
-                    <h5>Daily copperprice: {props.copperPrice > 0 ? props.copperPrice : "noll"}</h5>
+                    <h5>Current copper price: {copperPrice.toFixed(2) + " kr/sqm"}</h5>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
@@ -53,7 +59,8 @@ const mapStateToProps = (state) => {
     users: dataToJS(state.firebase, 'users'),
     stolenRoofs: dataToJS(state.firebase, 'stolenRoofs'),
     auth: pathToJS(state.firebase, 'auth'),
-    copperPrice: state.copperPrice.price
+    copperPrice: state.copperPrice.price,
+    copperMultiplier: state.copperMultiplier.multiplier
 
 }};
 
