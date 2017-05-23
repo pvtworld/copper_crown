@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap'
 import { resetModal } from '../../Redux/Actions/navigationActions';
 import { connect } from 'react-redux'
-import DeadlineClock from '../DeadlineClock/DeadlineClock'
+//import DeadlineClock from '../DeadlineClock/DeadlineClock'
 
 const GameInfoComponent = (props) => {
 

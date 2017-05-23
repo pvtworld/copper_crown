@@ -8,7 +8,7 @@ import DeadlineClock from '../DeadlineClock/DeadlineClock'
 const GameStatisticsComponent = (props) => {
 
     var allRoofs = "10000";
-    console.log("Stulna tak: ",props.stolenRoofs);
+    console.log("Stulnaaaaaa tak: ",props);
     
     var roofArray =props.stolenRoofs? Object.keys(props.stolenRoofs): [];
     var roofsStolen = roofArray.length;
@@ -32,7 +32,7 @@ const GameStatisticsComponent = (props) => {
                     <h5>Percent of roofs left: {((allRoofs-roofsStolen)/allRoofs)*100+"%"}</h5>
                     <br></br>
                     <h5>Current number of players: {numOfPlayers}</h5>
-                    <h5>Daily copperprice:</h5>
+                    <h5>Daily copperprice: {props.copperPrice > 0 ? props.copperPrice : "noll"}</h5>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
@@ -42,16 +42,19 @@ const GameStatisticsComponent = (props) => {
         </div>
     )
 }
-//export default connect()(GameStatisticsComponent);
+
 
 var wrappedUserInfo = firebaseConnect(
     ['/users', '/stolenRoofs']
 )(GameStatisticsComponent);
 
-export default connect(
-    ({firebase}) => ({
-        users: dataToJS(firebase, 'users'),
-        stolenRoofs: dataToJS(firebase, 'stolenRoofs'),
-        auth: pathToJS(firebase, 'auth')
-    })
-)(wrappedUserInfo);     
+const mapStateToProps = ({firebase}) => {
+    return {
+    users: dataToJS(firebase, 'users'),
+    stolenRoofs: dataToJS(firebase, 'stolenRoofs'),
+    auth: pathToJS(firebase, 'auth'),
+    //copperPrice: state ? state.copperPrice.price : 0
+
+}};
+
+export default connect(mapStateToProps)(wrappedUserInfo);
