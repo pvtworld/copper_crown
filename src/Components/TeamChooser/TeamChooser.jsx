@@ -1,67 +1,56 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
+import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Modal, Button} from 'react-bootstrap';
 
-const addTeam = (firebase, uid, userInfo, dispatch, school, schoolClass) => {
-    const newUserInfo = {...userInfo};
-    newUserInfo.school = school;
-    newUserInfo.schoolClass = schoolClass;
+class TeamChooser extends Component {
 
-    dispatch({type: 'UPDATE_TEAM_INFO'})
+    constructor(){
+        super();
+        this.addUsername = this.addUsername.bind(this);
+        this.handleNewUsername = this.handleNewUsername.bind(this);
+    }
+
+    addUsername(firebase, uid, userInfo, dispatch, username) {
+    const newUserInfo = {...userInfo};
+    newUserInfo.username = username;
+
+    dispatch({type: 'UPDATE_USERNAME'})
     firebase.set(`users/${uid}`, {...newUserInfo})
 }
 
+    handleNewUsername() {
+        var username = this.refs.newUserName.value;
+        this.addUsername(this.props.firebase, this.props.auth.uid, this.props.userInfo, this.props.dispatch, username);
+        this.props.onClose();
+    };
+
+    // const handleSchoolChange = (event) => {
+    //     school = event.target.value;
+    // }
 
 
-const TeamChooser = (props) => {
+    render (){
+        return (
+            <div className="static-modal">
+                <Modal.Dialog>
+                    <Modal.Header>
+                        <Modal.Title>Choose Username</Modal.Title>
+                    </Modal.Header>
 
-    let school = null
-    let schoolClass = null;
+                    <Modal.Body>
+                        <p>Enter a username: </p>
+                        <input type="text" ref="newUserName" />
+                    </Modal.Body>
 
-    const handleSchoolChange = (event) => {
-        school = event.target.value;
+                    <Modal.Footer>
+                            <Button bsStyle="success" bsSize="large" block onClick={this.handleNewUsername} >Ok</Button>
+                    </Modal.Footer>
+
+                </Modal.Dialog>
+            </div>
+        )
     }
-
-    const handleClassChange = (event) => {
-        schoolClass = event.target.value;
-    }
-
-    if (props.userInfo) {
-        if (!props.userInfo.school) {
-            return (
-                <div className="static-modal">
-                    <Modal.Dialog>
-                        <Modal.Header>
-                            <Modal.Title>Choose Team</Modal.Title>
-                        </Modal.Header>
-
-                        <Modal.Body>
-                            <select onChange={handleSchoolChange}>
-                                <option value="-1">Välj Skola</option>
-                                <option value="Skola1">Skola1</option>
-                                <option value="Skola2">Skola2</option>
-                                <option value="Skola3">Skola3</option>
-                            </select>
-                            <select onChange={handleClassChange}>
-                                <option value="-1">Välj Klass</option>
-                                <option value="8a">8a</option>
-                                <option value="8b">8b</option>
-                                <option value="8c">8c</option>
-                            </select>
-                        </Modal.Body>
-
-                        <Modal.Footer>
-                                <Button bsStyle="success" bsSize="large" block onClick={() => addTeam(props.firebase, props.auth.uid, props.userInfo, props.dispatch, school, schoolClass)} >Ok</Button>
-                        </Modal.Footer>
-
-                    </Modal.Dialog>
-                </div>
-            )
-        }
-    }
-    return null
-
 }
 
 const mapStateToProps = ({firebase}, {auth}) => ({

@@ -9,6 +9,14 @@ import { getPricePerSquareMeter, bindPriceMultiplier } from '../../Helpers/Point
 
 class App extends React.Component {
 
+    constructor(){
+        super();
+        this.handleClose = this.handleClose.bind(this);
+        this.state = {
+            showUsernameModal: true
+        }
+    }
+
     componentDidMount(){
         getPricePerSquareMeter(this.props.dispatch);
         bindPriceMultiplier(this.props.dispatch);
@@ -26,15 +34,28 @@ class App extends React.Component {
         }
 }
 
+    handleClose(){
+        this.setState({
+        showUsernameModal: false}
+    )};
+
+
     render() {
         this.redirectIfAuth(this.props);
         // check if they are no logged in at all
         console.log('Creating GameContainer');
-        return ( <div>
-                <TeamChooser/>
-                <GameContainer/>
-            </div>
-        )
+        if (this.state.showUsernameModal){
+            return ( <div>
+                    <TeamChooser onClose={this.handleClose}/>
+                    <GameContainer/>
+                </div>
+            )
+        } else {
+            return ( <div>
+                    <GameContainer/>
+                </div>
+            )
+        }
     }
 }
 

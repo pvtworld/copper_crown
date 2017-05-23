@@ -1,5 +1,5 @@
-export const updateTeamInfo = () => {
+export const updateUsername = () => {
     return{
-        type: 'UPDATE_TEAM_INFO'
+        type: 'UPDATE_USERNAME'
     }
 }

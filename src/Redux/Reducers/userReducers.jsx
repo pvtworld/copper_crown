@@ -1,4 +1,4 @@
-export var updateTeamInfoReducer = (state = {school: null, schoolClass: null}, action) => {
+export var updateUsernameReducer = (state = {username: null}, action) => {
     switch (action.type){
         default:
             return state;
