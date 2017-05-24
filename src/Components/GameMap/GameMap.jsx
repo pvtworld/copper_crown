@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withGoogleMap, GoogleMap, Circle, Marker} from "react-google-maps";
 import { checkClickForCopper } from '../../Helpers/GeoHelpers';
+import StyledGameMap from "./StyledGameMap.json";
 
 const GameMap = withGoogleMap(props => (
 
@@ -17,6 +18,7 @@ const GameMap = withGoogleMap(props => (
         options={{
             mapTypeControl: false,
             streetViewControl: false,
+            clickableIcons: false,
             // zoomControl: false,
             //draggable: false,
             //scrollwheel: false,
@@ -24,7 +26,9 @@ const GameMap = withGoogleMap(props => (
             //maxZoom: 18,
             //minZoom: 18,
             //zoom: 18,
+            
         }}
+        defaultOptions={{ styles: StyledGameMap }}
 
     >
 
