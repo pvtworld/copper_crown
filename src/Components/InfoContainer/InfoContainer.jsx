@@ -3,13 +3,7 @@ import { connect } from 'react-redux';
 import RoofInfo from "../RoofInfo/RoofInfo";
 import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
-<<<<<<< HEAD
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-import PlayerInfo from '../PlayerInfo/PlayerInfo';
-=======
-import Spinner from 'react-spinkit';
-
->>>>>>> 9060c0d9ee0aee9b64c3e9e9ee468ccb41fc1ce0
 import Leaderboard from '../Leaderboard/LeaderComponent';
 import GameInfo from '../GameInfoComponent/GameInfoComponent';
 import Profile from '../Profile/ProfileComponent'

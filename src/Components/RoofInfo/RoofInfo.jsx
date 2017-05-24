@@ -74,7 +74,7 @@ class RoofInfo extends React.Component {
             })
             .then(() => {
                 dispatch({type: 'UPDATING_STOLEN_ROOFS'})
-                firebase.push('stolenRoofs', {roofId: id, userId: uid})
+                firebase.push('stolenRoofs', {roofId: id, userId: uid, points: (parseInt(price, 10)), area: (parseInt(area, 10))})
 
             })
             .then(() => {

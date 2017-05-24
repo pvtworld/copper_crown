@@ -27,7 +27,7 @@ const Navigationbar = (props) => {
             <Navbar.Collapse>
                 <Nav>
                     <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboards</NavItem>
-                    <NavItem onClick={() => props.dispatch(showAbout())}>Game info</NavItem>
+                    <NavItem onClick={() => props.dispatch(showAbout())}>Stolen Roofs</NavItem>
                     <NavItem onClick={()=> props.dispatch(showStatistics())}>Game statistics</NavItem>
                 </Nav>
                 <Nav pullRight>
