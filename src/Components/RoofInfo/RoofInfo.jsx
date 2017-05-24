@@ -31,22 +31,34 @@ class RoofInfo extends React.Component {
                     ourRoof: null}
     }
 
-    componentWillMount(){
+    componentWillMount() {
 
         const area = this.props.area;
+        let thieves;
 
-        if(area < 150){
-            this.setState({numberOfThieves: 1})
-        }else if(area >= 150 && area < 300){
-            this.setState({numberOfThieves: 2})
-        }else{
-            this.setState({numberOfThieves: 1337})
+        if (area < 150) {
+            thieves = 1;
+        } else if (area >= 150 && area < 300) {
+            thieves = 2;
+        } else if (area >= 300 && area < 400) {
+            thieves = 3;
+        } else if (area >= 400 && area < 500) {
+            thieves = 4;
+        } else if (area >= 500 && area < 600) {
+            thieves = 5;
+        } else if (area >= 600 && area < 700) {
+            thieves = 6;
+        } else if (area >= 700 && area < 800) {
+            thieves = 7;
+        } else {
+            thieves = 8;
         }
+        this.setState({numberOfThieves: thieves})
     }
 
     addPoints = (firebase, uid, id, price, area, userInfo, dispatch) => {
-        let newUserPoints = userInfo.points + (parseInt(price, 10) / this.state.numberOfThieves) || parseInt(price, 10) / this.state.numberOfThieves;
-        let newUserArea = userInfo.areaOfCopper + (parseInt(area, 10) / this.state.numberOfThieves) || parseInt(area, 10) / this.state.numberOfThieves;
+        let newUserPoints = Math.round(userInfo.points + (parseInt(price, 10) / this.state.numberOfThieves)) || Math.round((parseInt(price, 10) / this.state.numberOfThieves));
+        let newUserArea = Math.round(userInfo.areaOfCopper + (parseInt(area, 10) / this.state.numberOfThieves)) || Math.round((parseInt(area, 10) / this.state.numberOfThieves));
         let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen += 1 : 1;
 
         dispatch({type: 'UPDATING_USER_POINTS'})
