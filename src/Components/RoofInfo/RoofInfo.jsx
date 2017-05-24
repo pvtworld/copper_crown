@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
-import {resetRoof, checkForThieves, thievesReturned} from '../../Redux/Actions/copperMapActions';
+import {resetRoof} from '../../Redux/Actions/copperMapActions';
 import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import RoofInfoSnackbar from './RoofInfoSnackbar';
 //import store from '../Redux/store';
@@ -17,14 +17,17 @@ const tooltipLeave = (
     <Tooltip id="tooltipLeave">Leave roof in hopes that the value will increase</Tooltip>
 );
 
-let numberOfThieves;
 
 class RoofInfo extends React.Component {
     constructor(props) {
         super();
         this.addRoof = this.addRoof.bind(this);
-        //this.checkNumberOfThievesOnSite = this.checkNumberOfThievesOnSite.bind(this);
-        this.state={showSnackbar: false}
+        this.addPoints = this.addPoints.bind(this);
+        this.state={showSnackbar: false,
+                    numberOfThieves: 0,
+                    wait: false,
+                    thievesAtRoof: 0,
+                    ourRoof: null}
     }
 
     componentWillMount(){
@@ -32,41 +35,17 @@ class RoofInfo extends React.Component {
         const area = this.props.area;
 
         if(area < 150){
-            numberOfThieves = 1;
+            this.setState({numberOfThieves: 1})
         }else if(area >= 150 && area < 300){
-            numberOfThieves = 2;
+            this.setState({numberOfThieves: 2})
         }else{
-            numberOfThieves = 1337;
+            this.setState({numberOfThieves: 1337})
         }
     }
 
-    addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
-
-        // const state = store.getState();
-        //
-        // state.numberOfThieves.thives
-        // dispatch(checkForThieves());
-        //
-        // firebase.fetch('roofsInProgress', {
-        //     context: {},
-        //     queries: {
-        //         orderByChild: 'roofId',
-        //         equalTo: id
-        //     },
-        //     then(response){
-        //         console.log(response);
-        //         dispatch(thievesReturned(null))
-        //
-        //
-        //     }
-        //
-        // });
-
-        //firebase.push('dsanjkn', {roofId: id, userId: uid})
-
-
-        let newUserPoints = userInfo.points + parseInt(price, 10) || parseInt(price, 10);
-        let newUserArea = userInfo.areaOfCopper + parseInt(area, 10) || parseInt(area, 10);
+    addPoints = (firebase, uid, id, price, area, userInfo, dispatch) => {
+        let newUserPoints = userInfo.points + (parseInt(price, 10) / this.state.numberOfThieves) || parseInt(price, 10) / this.state.numberOfThieves;
+        let newUserArea = userInfo.areaOfCopper + (parseInt(area, 10) / this.state.numberOfThieves) || parseInt(area, 10) / this.state.numberOfThieves;
         let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen += 1 : 1;
 
         dispatch({type: 'UPDATING_USER_POINTS'})
@@ -89,16 +68,78 @@ class RoofInfo extends React.Component {
                 dispatch({type: 'STOLEN_ROOFS_UPDATED'})
             })
         this.setState({showSnackbar: true})
+
+    }
+
+
+    addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
+        if(this.state.numberOfThieves === 1) {
+            this.addPoints(this.props.firebase, this.props.uid, this.props.id, this.props.price, this.props.area, this.props.userInfo, this.props.dispatch)
+        } else {
+
+            if(this.props.roofInProgress) {
+                let newRoof = this.props.roofInProgress
+                console.log("roof: "+newRoof)
+                firebase.set(`roofsInProgress/${id}`, {count: 18000})
+                console.log("ja")
+
+            } else {
+                firebase.set(`roofsInProgress/${id}`, {count: 1})
+                console.log(this.props.roofInProgress)
+
+            }
+
+            this.setState({wait: true})
+        }
+
+
+
     }
 
 
 
     render() {
+        console.log(this.props.roofInProgress)
     if (!this.props.userInfo) {
         this.props.firebase.set(`users/${this.props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, school: null, schoolClass: null})
+        console.log("ASDASFASFASFSAFASFASFASFASFSFASFSAFASFSAFASFDASSFASFD")
+        console.log(this.props.userInfo)
+    }
+
+    if (!this.props.roofInProgress) {
+        this.props.firebase.set(`roofsInProgress/${this.props.id}`, {count: 1})
     }
     if(this.state.showSnackbar){
         return <RoofInfoSnackbar/>
+    }
+    if(this.state.wait) {
+
+
+        if(this.state.thievesAtRoof === this.state.numberOfThieves) {
+            this.addPoints(this.props.firebase, this.props.uid, this.props.id, this.props.price, this.props.area, this.props.userInfo, this.props.dispatch)
+        }
+
+        return(
+            <div className="static-modal">
+                <Modal.Dialog>
+                    <Modal.Header>
+                        <Modal.Title>WaITING</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        Waiting
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipLeave}>
+                            <Button bsStyle="danger" bsSize="large" block onClick={() => this.props.dispatch(resetRoof())}>Leave</Button>
+                        </OverlayTrigger>
+                    </Modal.Footer>
+
+                </Modal.Dialog>
+            </div>
+
+        )
     }
 
 
@@ -110,7 +151,7 @@ class RoofInfo extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        Price: {parseInt(this.props.price,10)} Area: {parseInt(this.props.area,10)} Thieves required: {numberOfThieves}
+                        Price: {parseInt(this.props.price,10)} Area: {parseInt(this.props.area,10)} Thieves required: {this.state.numberOfThieves}
                     </Modal.Body>
 
                     <Modal.Footer>
@@ -128,12 +169,15 @@ class RoofInfo extends React.Component {
 }
 
 const mapStateToProps = (state, {auth}) => {
+    console.log("ASSADNKLANSF    " +dataToJS(state.firebase, `users/${auth.uid}`))
+    console.log("ASSADNKLANSF    " +dataToJS(state.firebase, `roofsInProgress/${state.copperRoof.id}`))
     return{
         userInfo: dataToJS(state.firebase, `users/${auth.uid}`),
+        roofInProgress: dataToJS(state.firebase, `roofsInProgress/${state.copperRoof.id}`),
         uid: auth.uid,
         id: state.copperRoof.id,
         price: state.copperRoof.value,
-        area: state.copperRoof.area,
+        area: state.copperRoof.area
 
     }
 }
