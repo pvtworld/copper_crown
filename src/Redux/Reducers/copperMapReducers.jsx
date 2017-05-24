@@ -56,14 +56,3 @@ export var updatePriceMultiplierReducer = (state = {multiplier: null}, action) =
             return state;
     }
 }
-
-export var checkForThievesReducer = (state = {thives: null}, action) => {
-    switch (action.type){
-        case 'CHECKING_FOR_THIEVES':
-            return state;
-        case 'THIEVES_RETURNED':
-            return {...state, thives: action.thives};
-        default:
-            return state;
-    }
-}
