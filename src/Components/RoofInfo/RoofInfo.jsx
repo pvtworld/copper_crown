@@ -105,7 +105,7 @@ class RoofInfo extends React.Component {
     if(this.state.wait) {
 
 
-        if(this.state.thievesAtRoof === this.state.numberOfThieves) {
+        if(this.props.roofInProgress.count === this.state.numberOfThieves) {
             this.addPoints(this.props.firebase, this.props.uid, this.props.id, this.props.price, this.props.area, this.props.userInfo, this.props.dispatch)
         }
 
@@ -113,11 +113,12 @@ class RoofInfo extends React.Component {
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Header>
-                        <Modal.Title>WaITING</Modal.Title>
+                        <Modal.Title>Waiting for more thieves</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
-                        Waiting
+                        You need {this.state.numberOfThieves} thieves present
+                        Currently {this.props.roofInProgress.count} thieves at roof
                     </Modal.Body>
 
                     <Modal.Footer>
