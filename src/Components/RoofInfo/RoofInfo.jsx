@@ -78,14 +78,11 @@ class RoofInfo extends React.Component {
         } else {
 
             if(this.props.roofInProgress) {
-                let newRoof = this.props.roofInProgress
-                console.log("roof: "+newRoof)
-                firebase.set(`roofsInProgress/${id}`, {count: 18000})
-                console.log("ja")
+                let newCount = this.props.roofInProgress.count + 1
+                firebase.set(`roofsInProgress/${id}`, {count: newCount})
 
             } else {
                 firebase.set(`roofsInProgress/${id}`, {count: 1})
-                console.log(this.props.roofInProgress)
 
             }
 
@@ -99,15 +96,8 @@ class RoofInfo extends React.Component {
 
 
     render() {
-        console.log(this.props.roofInProgress)
     if (!this.props.userInfo) {
         this.props.firebase.set(`users/${this.props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, school: null, schoolClass: null})
-        console.log("ASDASFASFASFSAFASFASFASFASFSFASFSAFASFSAFASFDASSFASFD")
-        console.log(this.props.userInfo)
-    }
-
-    if (!this.props.roofInProgress) {
-        this.props.firebase.set(`roofsInProgress/${this.props.id}`, {count: 1})
     }
     if(this.state.showSnackbar){
         return <RoofInfoSnackbar/>
@@ -169,8 +159,6 @@ class RoofInfo extends React.Component {
 }
 
 const mapStateToProps = (state, {auth}) => {
-    console.log("ASSADNKLANSF    " +dataToJS(state.firebase, `users/${auth.uid}`))
-    console.log("ASSADNKLANSF    " +dataToJS(state.firebase, `roofsInProgress/${state.copperRoof.id}`))
     return{
         userInfo: dataToJS(state.firebase, `users/${auth.uid}`),
         roofInProgress: dataToJS(state.firebase, `roofsInProgress/${state.copperRoof.id}`),
@@ -185,7 +173,7 @@ const mapStateToProps = (state, {auth}) => {
 const propsConnected = connect(mapStateToProps)(RoofInfo)
 
 const wrappedPlayerInfo = firebaseConnect(
-    ({auth}) => ([auth ? `users/${auth.uid}`: '/']))(propsConnected);
+    ({auth}) => ([auth ? `users/${auth.uid}` : '/',  '/roofsInProgress']))(propsConnected);
 
 const authConnected = connect(
  ({ firebase }) => ({
