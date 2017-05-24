@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
-import {resetRoof} from '../../Redux/Actions/copperMapActions';
+import {resetRoof, checkForThieves, thievesReturned} from '../../Redux/Actions/copperMapActions';
 import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
-import RoofInfoSnackbar from './RoofInfoSnackbar'
+import RoofInfoSnackbar from './RoofInfoSnackbar';
+//import store from '../Redux/store';
+
+
 
 
 const tooltipSteal = (
@@ -20,6 +23,7 @@ class RoofInfo extends React.Component {
     constructor(props) {
         super();
         this.addRoof = this.addRoof.bind(this);
+        //this.checkNumberOfThievesOnSite = this.checkNumberOfThievesOnSite.bind(this);
         this.state={showSnackbar: false}
     }
 
@@ -38,30 +42,55 @@ class RoofInfo extends React.Component {
 
     addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
 
-    let newUserPoints = userInfo.points + parseInt(price, 10) || parseInt(price, 10) ;
-    let newUserArea = userInfo.areaOfCopper + parseInt(area, 10) || parseInt(area, 10) ;
-    let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen += 1 : 1;
+        // const state = store.getState();
+        //
+        // state.numberOfThieves.thives
+        // dispatch(checkForThieves());
+        //
+        // firebase.fetch('roofsInProgress', {
+        //     context: {},
+        //     queries: {
+        //         orderByChild: 'roofId',
+        //         equalTo: id
+        //     },
+        //     then(response){
+        //         console.log(response);
+        //         dispatch(thievesReturned(null))
+        //
+        //
+        //     }
+        //
+        // });
 
-    dispatch({type: 'UPDATING_USER_POINTS' })
-    const newUserInfo = {...userInfo};
-    newUserInfo.points = newUserPoints;
-    newUserInfo.areaOfCopper = newUserArea;
-    newUserInfo.roofsStolen =  newRoofsStolen
+        //firebase.push('dsanjkn', {roofId: id, userId: uid})
 
-    firebase.set(`users/${uid}`, {...newUserInfo})
-    .then( () => {
-        dispatch({type: 'USER_POINTS_UPDATED' })
-        return Promise.resolve();
-    })
-    .then( () => {
-        dispatch({type: 'UPDATING_STOLEN_ROOFS'})
-        firebase.push('stolenRoofs', {roofId: id, userId: uid})
-    })
-    .then( () => {
-        dispatch({type: 'STOLEN_ROOFS_UPDATED'})
-    })
-    this.setState({showSnackbar: true})
+
+        let newUserPoints = userInfo.points + parseInt(price, 10) || parseInt(price, 10);
+        let newUserArea = userInfo.areaOfCopper + parseInt(area, 10) || parseInt(area, 10);
+        let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen += 1 : 1;
+
+        dispatch({type: 'UPDATING_USER_POINTS'})
+        const newUserInfo = {...userInfo};
+        newUserInfo.points = newUserPoints;
+        newUserInfo.areaOfCopper = newUserArea;
+        newUserInfo.roofsStolen = newRoofsStolen
+
+        firebase.set(`users/${uid}`, {...newUserInfo})
+            .then(() => {
+                dispatch({type: 'USER_POINTS_UPDATED'})
+                return Promise.resolve();
+            })
+            .then(() => {
+                dispatch({type: 'UPDATING_STOLEN_ROOFS'})
+                firebase.push('stolenRoofs', {roofId: id, userId: uid})
+
+            })
+            .then(() => {
+                dispatch({type: 'STOLEN_ROOFS_UPDATED'})
+            })
+        this.setState({showSnackbar: true})
     }
+
 
 
     render() {
