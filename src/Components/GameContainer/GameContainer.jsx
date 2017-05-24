@@ -10,10 +10,6 @@ class GameContainer extends React.Component{
         return (
             <div>
                 <Navigationbar/>
-                <ChatComponent history={this.props.history}
-                               userID={this.props.userID}
-                               sendMessage={this.props.sendMessage}
-                />
                 <ScoreComponent/>
                 <CopperMap/>
             </div>

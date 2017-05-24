@@ -15,9 +15,9 @@ export default class ChatHistory extends React.Component {
                         ' at ' + messageDate.toLocaleTimeString();
                     return (
                         <li key={messageObject.When } >
-                            <span>Anonymous robot #{messageObject.Who}</span>
-                            <span>{messageObject.What}</span>
-                            <span>{messageDateTime}</span>
+                            <span>USERID: #{messageObject.Who}</span>
+                            <div><span>{messageObject.What}</span></div>
+                            <div><span>{messageDateTime}</span></div>
                         </li>
                     );})
                 }
