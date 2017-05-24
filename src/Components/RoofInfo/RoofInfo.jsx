@@ -23,6 +23,7 @@ class RoofInfo extends React.Component {
         super();
         this.addRoof = this.addRoof.bind(this);
         this.addPoints = this.addPoints.bind(this);
+        this.leaveRoof = this.leaveRoof.bind(this);
         this.state={showSnackbar: false,
                     numberOfThieves: 0,
                     wait: false,
@@ -67,6 +68,7 @@ class RoofInfo extends React.Component {
             .then(() => {
                 dispatch({type: 'STOLEN_ROOFS_UPDATED'})
             })
+        this.setState({wait: false})
         this.setState({showSnackbar: true})
 
     }
@@ -89,8 +91,17 @@ class RoofInfo extends React.Component {
             this.setState({wait: true})
         }
 
+    }
 
+    leaveRoof= () => {
+        let newCount = this.props.roofInProgress.count -1
+        this.props.firebase.set(`roofsInProgress/${this.props.id}`, {count: newCount})
+        if(newCount === 0) {
+            this.props.firebase.set(`roofsInProgress/${this.props.id}`, {})
+        }
+        this.setState({wait: false})
 
+        this.props.dispatch(resetRoof())
     }
 
 
@@ -103,8 +114,6 @@ class RoofInfo extends React.Component {
         return <RoofInfoSnackbar/>
     }
     if(this.state.wait) {
-
-
         if(this.props.roofInProgress.count === this.state.numberOfThieves) {
             this.addPoints(this.props.firebase, this.props.uid, this.props.id, this.props.price, this.props.area, this.props.userInfo, this.props.dispatch)
         }
@@ -123,7 +132,7 @@ class RoofInfo extends React.Component {
 
                     <Modal.Footer>
                         <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipLeave}>
-                            <Button bsStyle="danger" bsSize="large" block onClick={() => this.props.dispatch(resetRoof())}>Leave</Button>
+                            <Button bsStyle="danger" bsSize="large" block onClick={this.leaveRoof}>Leave</Button>
                         </OverlayTrigger>
                     </Modal.Footer>
 
