@@ -35,8 +35,8 @@ const removeRoof = (roof, firebase, dispatch, userInfo, uid) => () => {
     newUserInfo.areaOfCopper = newUserArea;
     newUserInfo.roofsStolen =  newRoofsStolen
 
-    firebase.set(`users/${uid}`, {...newUserInfo})
-    })
+    firebase.update(`users/${uid}`, {...newUserInfo})
+    })  
     .then( () => {
         dispatch({type: 'USER_POINTS_UPDATED' })
     })
@@ -57,7 +57,14 @@ const PlayerInfo = (props) => {
             {props.stolenRoofs ? 
             <div> 
                 {
-                createRoofs(props.stolenRoofs).map( roof => (<ListItem className="roof" key={roof.roofId} primaryText={roof.roofId} disabled={true} rightIcon={<DeleteForever hoverColor={red500} onClick={removeRoof(roof, props.firebase, props.dispatch, props.userInfo, props.auth.uid)}/>}> </ListItem>)) 
+                createRoofs(props.stolenRoofs).map( roof => (<ListItem 
+                                                            className="roof" key={roof.roofId} 
+                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.area}, Points: ${roof.points}`} 
+                                                            disabled={true} 
+                                                            rightIcon={<DeleteForever 
+                                                                        hoverColor={red500} 
+                                                                        onClick={removeRoof(roof, props.firebase, props.dispatch, props.userInfo, props.auth.uid)}/>}> 
+                                                            </ListItem>)) 
                 }
             </div> 
                 : <div> No roofs stolen </div>
@@ -85,7 +92,7 @@ const mapStateToProps = (state, {auth}) => {
 const propsConnected = connect(mapStateToProps)(PlayerInfo)
 
 const wrappedPlayerInfo = firebaseConnect(
-    ({auth}) => ([auth ? `stolenRoofs#orderByChild=userId&equalTo=${auth.uid}`: '/']))(propsConnected);
+    ({auth}) => ([auth ? `stolenRoofs#orderByChild=userId&equalTo=${auth.uid}`: '/', auth ? `users/${auth.uid}`: '/']))(propsConnected);
 
 const authConnected = connect(
  ({ firebase }) => ({
