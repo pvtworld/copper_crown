@@ -6,7 +6,6 @@ import StyledGameMap from "./StyledGameMap.json";
 
 const GameMap = withGoogleMap(props => (
 
-
     <GoogleMap
         center={props.center}
         defaultZoom={17}
