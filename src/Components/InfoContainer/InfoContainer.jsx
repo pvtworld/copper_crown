@@ -5,7 +5,6 @@ import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
 import Spinner from 'react-spinkit';
 
-import PlayerInfo from '../PlayerInfo/PlayerInfo';
 import Leaderboard from '../Leaderboard/LeaderComponent';
 import GameInfo from '../GameInfoComponent/GameInfoComponent';
 import Profile from '../Profile/ProfileComponent'
@@ -22,8 +21,6 @@ class InfoContainer extends React.Component {
         }
 
         switch(this.props.showModalString){
-            case 'SHOW_PLAYERINFO':
-                return <PlayerInfo/>
             case 'SHOW_LEADERBOARD':
                 return <Leaderboard/>
             case 'SHOW_PROFILE':

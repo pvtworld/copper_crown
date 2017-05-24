@@ -10,12 +10,6 @@ export const showAbout = () => {
     };
 };
 
-export const showPlayerInfo = () => {
-    return {
-        type: 'SHOW_PLAYERINFO'
-    };
-};
-
 export const showProfile = () => {
     return {
         type: 'SHOW_PROFILE'
