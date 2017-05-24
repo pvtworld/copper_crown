@@ -17,7 +17,7 @@ const ProfileComponent = (props) => {
                 <Modal.Body>
                     <h1>My account</h1>
                     <h4>Logged in as: {props.auth.displayName} </h4>
-                    <h5>My team: {props.userInfo.school ? (props.userInfo.school +" klass: "+ props.userInfo.schoolClass) : ""}</h5>
+                    <h5>Username: {props.userInfo.username}</h5>
                     <h5>User ID:  {props.auth.uid}</h5>
                     <Image id="picture" src={props.auth.photoURL} circle />
                     <h5>Mail: {props.auth.email}</h5>
@@ -45,8 +45,7 @@ const wrappedPlayerInfo = firebaseConnect(
 
 const authConnected = connect(
  ({ firebase }) => ({
-     auth: pathToJS(firebase, 'auth'), // gets auth from redux and sets as prop
-     teams: dataToJS(firebase, 'teams')
+     auth: pathToJS(firebase, 'auth')
   })
 )(wrappedPlayerInfo)
 
