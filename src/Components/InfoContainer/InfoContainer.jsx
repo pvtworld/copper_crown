@@ -9,6 +9,7 @@ import PlayerInfo from '../PlayerInfo/PlayerInfo';
 import Leaderboard from '../Leaderboard/LeaderComponent';
 import GameInfo from '../GameInfoComponent/GameInfoComponent';
 import Profile from '../Profile/ProfileComponent'
+import ChatComponent from '../ChatComponent/ChatComponent';
 
 class InfoContainer extends React.Component {
 
@@ -29,6 +30,9 @@ class InfoContainer extends React.Component {
                 return <Profile/>
             case 'SHOW_GAME_INFO':
                 return <GameInfo/>
+            case 'SHOW_GAME_CHAT':
+                console.log('Will render chatComponent!')
+                return <ChatComponent/>;
             default:
                 break;
         }
