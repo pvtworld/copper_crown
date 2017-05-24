@@ -22,8 +22,17 @@ export const showProfile = () => {
     };
 };
 
+export const showChat = () => {
+    return {
+        type: 'SHOW_GAME_CHAT'
+    };
+};
+
 export const resetModal = () => {
     return {
         type: 'RESET_MODAL'
     };
 };
+
+
+
