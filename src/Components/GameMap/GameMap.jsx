@@ -47,6 +47,7 @@ const GameMap = withGoogleMap(props => (
                 strokeColor: `black`,
                 strokeOpacity: 0.50,
                 strokeWeight: 2,
+                 
             }}
         />
 
