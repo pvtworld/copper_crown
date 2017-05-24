@@ -7,8 +7,7 @@ import DeadlineClock from '../DeadlineClock/DeadlineClock'
 
 const GameStatisticsComponent = (props) => {
 
-    var allRoofs = "10000";
-    console.log("Stulna tak: ",props);
+    const allRoofs = 11907;
     
     var roofArray = props.stolenRoofs ? Object.keys(props.stolenRoofs): [];
     var roofsStolen = roofArray.length;
