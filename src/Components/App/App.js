@@ -5,30 +5,30 @@ import GameContainer from '../GameContainer/GameContainer';
 import TeamChooser from '../TeamChooser/TeamChooser';
 import { browserHistory } from 'react-router'
 import { getPricePerSquareMeter, bindPriceMultiplier } from '../../Helpers/PointsHelpers';
-import * as pubnub from 'pubnub';
+// import * as pubnub from 'pubnub';
 
 class App extends React.Component {
 
     constructor(){
         super();
-        this.state = {
+/*        this.state = {
             userID: Math.round(Math.random() * 1000000).toString(),
             history: []
-        };
+        };*/
     }
 
-    sendMessage = (message) => {
-        this.PubNub.publish({
-            channel: 'ReactChat',
-            message: message,
-        });
-    }
+/*    sendMessage = (message) => {
+    this.PubNub.publish({
+        channel: 'ReactChat',
+        message: message,
+    });
+}*/
 
     componentDidMount(){
         getPricePerSquareMeter(this.props.dispatch);
         bindPriceMultiplier(this.props.dispatch);
 
-        this.PubNub = pubnub.init({
+        /*this.PubNub = pubnub.init({
             publish_key: 'pub-c-425d3d2e-ad86-4961-bb14-1eb59efec74d',
             subscribe_key: 'sub-c-39bab7dc-3fcc-11e7-b6a4-02ee2ddab7fe',
             ssl: (location.protocol.toLowerCase() === 'https:'),
@@ -39,7 +39,7 @@ class App extends React.Component {
             message: (message) => this.setState({
                 history: this.state.history.concat(message)
             }),
-        });
+        });*/
 
     }
 
@@ -59,10 +59,7 @@ class App extends React.Component {
         return (
             <div>
                 <TeamChooser/>
-                <GameContainer history={this.state.history}
-                               userID={this.state.userID}
-                               sendMessage={this.sendMessage}
-                />
+                <GameContainer/>
             </div>
         )
     }
