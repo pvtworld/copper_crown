@@ -5,10 +5,10 @@ import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
 import Spinner from 'react-spinkit';
 
-import PlayerInfo from '../PlayerInfo/PlayerInfo';
 import Leaderboard from '../Leaderboard/LeaderComponent';
 import GameInfo from '../GameInfoComponent/GameInfoComponent';
 import Profile from '../Profile/ProfileComponent'
+import GameStatistics from '../GameStatistics/GameStatisticsComponent';
 
 class InfoContainer extends React.Component {
 
@@ -21,14 +21,14 @@ class InfoContainer extends React.Component {
         }
 
         switch(this.props.showModalString){
-            case 'SHOW_PLAYERINFO':
-                return <PlayerInfo/>
             case 'SHOW_LEADERBOARD':
                 return <Leaderboard/>
             case 'SHOW_PROFILE':
                 return <Profile/>
             case 'SHOW_GAME_INFO':
                 return <GameInfo/>
+            case 'SHOW_STATISTICS':
+                return <GameStatistics/>
             default:
                 break;
         }
