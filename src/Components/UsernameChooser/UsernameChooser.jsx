@@ -2,28 +2,29 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Modal, Button} from 'react-bootstrap';
+import {addNewUser} from '../../Redux/Actions/userActions';
 
 class TeamChooser extends Component {
 
-    constructor(){
-        super();
-        this.addUsername = this.addUsername.bind(this);
-        this.handleNewUsername = this.handleNewUsername.bind(this);
-    }
-
-    addUsername(firebase, uid, userInfo, dispatch, username) {
-    const newUserInfo = {...userInfo};
-    newUserInfo.username = username;
-
-    dispatch({type: 'UPDATE_USERNAME'})
-    firebase.set(`users/${uid}`, {...newUserInfo})
-}
-
-    handleNewUsername() {
-        var username = this.refs.newUserName.value;
-        this.addUsername(this.props.firebase, this.props.auth.uid, this.props.userInfo, this.props.dispatch, username);
-        this.props.onClose();
-    };
+//     constructor(){
+//         super();
+//         this.addUsername = this.addUsername.bind(this);
+//         this.handleNewUsername = this.handleNewUsername.bind(this);
+//     }
+//
+//     addUsername(firebase, uid, userInfo, dispatch, username) {
+//     const newUserInfo = {...userInfo};
+//     newUserInfo.username = username;
+//
+//     dispatch({type: 'UPDATE_USERNAME'})
+//     firebase.set(`users/${uid}`, {...newUserInfo})
+// }
+//
+//     handleNewUsername() {
+//         var username = this.refs.newUserName.value;
+//         this.addUsername(this.props.firebase, this.props.auth.uid, this.props.userInfo, this.props.dispatch, username);
+//         this.props.onClose();
+//     };
 
     // const handleSchoolChange = (event) => {
     //     school = event.target.value;
@@ -44,7 +45,7 @@ class TeamChooser extends Component {
                     </Modal.Body>
 
                     <Modal.Footer>
-                            <Button bsStyle="success" bsSize="large" block onClick={this.handleNewUsername} >Ok</Button>
+                            <Button bsStyle="success" bsSize="large" block onClick={() => {this.props.dispatch(addNewUser())}} >Ok</Button>
                     </Modal.Footer>
 
                 </Modal.Dialog>

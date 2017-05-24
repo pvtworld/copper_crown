@@ -26,7 +26,7 @@ class CopperMap extends Component {
             let watchPositionId;
 
             const geoSucess = (position) => {
-                console.log("Successssssss! Located user at: ");
+                console.log("Succeeeeeeeess! Located user at: ");
                 //console.log(position);
 
                 if(this.state.isMounted){
