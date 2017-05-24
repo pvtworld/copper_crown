@@ -94,32 +94,6 @@ class RoofInfo extends React.Component {
             if(this.props.roofInProgress) {
                 let newCount = this.props.roofInProgress.count + 1
                 firebase.set(`roofsInProgress/${id}`, {count: newCount})
-
-<<<<<<< HEAD
-    let newUserPoints = userInfo.points + parseInt(price, 10) || parseInt(price, 10) ;
-    let newUserArea = userInfo.areaOfCopper + parseInt(area, 10) || parseInt(area, 10) ;
-    let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen += 1 : 1;
-
-    dispatch({type: 'UPDATING_USER_POINTS' })
-    const newUserInfo = {...userInfo};
-    newUserInfo.points = newUserPoints;
-    newUserInfo.areaOfCopper = newUserArea;
-    newUserInfo.roofsStolen =  newRoofsStolen
-
-    firebase.set(`users/${uid}`, {...newUserInfo})
-    .then( () => {
-        dispatch({type: 'USER_POINTS_UPDATED' })
-        return Promise.resolve();
-    })
-    .then( () => {
-        dispatch({type: 'UPDATING_STOLEN_ROOFS'})
-        firebase.push('stolenRoofs', {roofId: id, userId: uid, points: parseInt(price, 10), area: parseInt(area,10)})
-    })
-    .then( () => {
-        dispatch({type: 'STOLEN_ROOFS_UPDATED'})
-    })
-    this.setState({showSnackbar: true})
-=======
             } else {
                 firebase.set(`roofsInProgress/${id}`, {count: 1})
 
@@ -139,7 +113,6 @@ class RoofInfo extends React.Component {
         this.setState({wait: false})
 
         this.props.dispatch(resetRoof())
->>>>>>> 9060c0d9ee0aee9b64c3e9e9ee468ccb41fc1ce0
     }
 
 
