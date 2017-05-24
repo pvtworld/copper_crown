@@ -3,11 +3,17 @@ import { connect } from 'react-redux';
 import RoofInfo from "../RoofInfo/RoofInfo";
 import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
+<<<<<<< HEAD
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import PlayerInfo from '../PlayerInfo/PlayerInfo';
+=======
+import Spinner from 'react-spinkit';
+
+>>>>>>> 9060c0d9ee0aee9b64c3e9e9ee468ccb41fc1ce0
 import Leaderboard from '../Leaderboard/LeaderComponent';
 import GameInfo from '../GameInfoComponent/GameInfoComponent';
 import Profile from '../Profile/ProfileComponent'
+import GameStatistics from '../GameStatistics/GameStatisticsComponent';
 
 class InfoContainer extends React.Component {
     render() {
@@ -31,14 +37,14 @@ class InfoContainer extends React.Component {
         }
 
         switch(this.props.showModalString){
-            case 'SHOW_PLAYERINFO':
-                return <PlayerInfo/>
             case 'SHOW_LEADERBOARD':
                 return <Leaderboard/>
             case 'SHOW_PROFILE':
                 return <Profile/>
             case 'SHOW_GAME_INFO':
                 return <GameInfo/>
+            case 'SHOW_STATISTICS':
+                return <GameStatistics/>
             default:
                 break;
         }
