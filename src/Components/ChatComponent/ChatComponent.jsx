@@ -16,14 +16,16 @@ class ChatComponent extends React.Component{
         };
     }
 
+    pubNub = null;
+
     componentDidMount(){
-        this.PubNub = pubnub.init({
+        this.pubNub = pubnub.init({
             publish_key: 'pub-c-425d3d2e-ad86-4961-bb14-1eb59efec74d',
             subscribe_key: 'sub-c-39bab7dc-3fcc-11e7-b6a4-02ee2ddab7fe',
             ssl: (location.protocol.toLowerCase() === 'https:'),
         });
 
-        this.PubNub.subscribe({
+        this.pubNub.subscribe({
             channel: 'CopperCrownChat',
             message: (message) => this.setState({
                 history: this.state.history.concat(message)
@@ -31,8 +33,14 @@ class ChatComponent extends React.Component{
         });
     }
 
+    componentWillUnmount(){
+        this.pubNub.unsubscribe({
+            channel: 'CopperCrownChat'
+        })
+    }
+
     sendMessage = (message) => {
-        this.PubNub.publish({
+        this.pubNub.publish({
             channel: 'CopperCrownChat',
             message: message,
         });
