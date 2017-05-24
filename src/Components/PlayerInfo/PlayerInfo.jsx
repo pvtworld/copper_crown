@@ -18,8 +18,29 @@ const createRoofs = (roofs) => {
     return array;
 }
 
-const removeRoof = (roof,firebase) => () => {
+const removeRoof = (roof, firebase, dispatch, userInfo, uid) => () => {
+    dispatch({type: 'UPDATING_STOLEN_ROOFS'})
     firebase.remove(`stolenRoofs/${roof.firebaseId}`)
+    .then( () => {
+        dispatch({type: 'STOLEN_ROOFS_UPDATED'})
+        return Promise.resolve();
+    }).then( () =>  {
+    let newUserPoints = userInfo.points - parseInt(roof.points, 10) || parseInt(roof.points, 10) ;
+    let newUserArea = userInfo.areaOfCopper - parseInt(roof.area, 10) || parseInt(roof.area, 10) ;
+    let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen -= 1 : 0;
+
+    dispatch({type: 'UPDATING_USER_POINTS' })
+    const newUserInfo = {...userInfo};
+    newUserInfo.points = newUserPoints;
+    newUserInfo.areaOfCopper = newUserArea;
+    newUserInfo.roofsStolen =  newRoofsStolen
+
+    firebase.set(`users/${uid}`, {...newUserInfo})
+    })
+    .then( () => {
+        dispatch({type: 'USER_POINTS_UPDATED' })
+    })
+    
 }
 
 const PlayerInfo = (props) => {
@@ -36,7 +57,7 @@ const PlayerInfo = (props) => {
             {props.stolenRoofs ? 
             <div> 
                 {
-                createRoofs(props.stolenRoofs).map( roof => (<ListItem className="roof" key={roof.roofId} primaryText={roof.roofId} disabled={true} rightIcon={<DeleteForever hoverColor={red500} onClick={removeRoof(roof, props.firebase)}/>}> </ListItem>)) 
+                createRoofs(props.stolenRoofs).map( roof => (<ListItem className="roof" key={roof.roofId} primaryText={roof.roofId} disabled={true} rightIcon={<DeleteForever hoverColor={red500} onClick={removeRoof(roof, props.firebase, props.dispatch, props.userInfo, props.auth.uid)}/>}> </ListItem>)) 
                 }
             </div> 
                 : <div> No roofs stolen </div>
@@ -54,8 +75,9 @@ const PlayerInfo = (props) => {
     }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, {auth}) => {
     return{
+        userInfo: dataToJS(state.firebase, `users/${auth.uid}`),
         stolenRoofs: dataToJS(state.firebase, `stolenRoofs`),
     }
 }
