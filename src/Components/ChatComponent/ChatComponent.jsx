@@ -5,13 +5,14 @@ import {Button, Modal} from 'react-bootstrap'
 import {resetModal} from '../../Redux/Actions/navigationActions'
 import {connect} from 'react-redux'
 import * as pubnub from 'pubnub'
+import {pathToJS, firebaseConnect} from 'react-redux-firebase'
 
 class ChatComponent extends React.Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            userID: Math.round(Math.random() * 1000000).toString(),
+            userID: props.auth.uid,
             history: []
         };
     }
@@ -54,7 +55,6 @@ class ChatComponent extends React.Component{
                         <Modal.Title>Chat Component</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h1>ChatComponent</h1>
                         <ChatHistory history={this.state.history}/>
                         <ChatInputField userID={this.state.userID} sendMessage={this.sendMessage}/>
                     </Modal.Body>
@@ -67,6 +67,12 @@ class ChatComponent extends React.Component{
     }
 }
 
-export default connect()(ChatComponent)
+const mapStateToProps = (state, {auth}) => {
+    return {
+        auth: pathToJS(state.firebase, 'auth')
+    }
+}
+
+export default connect(mapStateToProps)(ChatComponent)
 
 
