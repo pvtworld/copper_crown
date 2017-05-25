@@ -28,8 +28,8 @@ class RoofInfo extends React.Component {
         this.state={showSnackbar: false,
                     numberOfThieves: 0,
                     wait: false,
-                    thievesAtRoof: 0,
-                    ourRoof: null}
+                    thievesAtRoof: 0
+                    }
     }
 
     componentWillMount() {
@@ -59,13 +59,13 @@ class RoofInfo extends React.Component {
     }
 
     addPoints = () => {
+        let newPoints = Math.round(this.props.price / this.state.numberOfThieves);
+        let newArea = Math.round(this.props.area / this.state.numberOfThieves);
 
-        let newUserPoints = Math.round((this.props.userInfo.points + this.props.price) / this.state.numberOfThieves) ||
-            Math.round(this.props.price / this.state.numberOfThieves);
-        let newUserArea = Math.round((this.props.userInfo.areaOfCopper + this.props.area) / this.state.numberOfThieves) ||
-            Math.round(this.props.area / this.state.numberOfThieves);
+        let newUserPoints = this.props.userInfo.points + newPoints;
+        let newUserArea = this.props.userInfo.areaOfCopper + newArea;
 
-        let newRoofsStolen = this.props.userInfo.roofsStolen ? this.props.userInfo.roofsStolen += 1 : 1;
+        let newRoofsStolen = this.props.userInfo.roofsStolen + 1;
 
         this.props.dispatch({type: 'UPDATING_USER_POINTS'})
         const newUserInfo = {...this.props.userInfo};
@@ -80,7 +80,7 @@ class RoofInfo extends React.Component {
             })
             .then(() => {
                 this.props.dispatch({type: 'UPDATING_STOLEN_ROOFS'})
-                this.props.firebase.push('stolenRoofs', {roofId: this.props.id, userId: this.props.uid})
+                this.props.firebase.push('stolenRoofs', {roofId: this.props.id, userId: this.props.uid, pointsPerUser: newPoints, areaPerUser: newArea })
 
             })
             .then(() => {
