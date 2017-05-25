@@ -1,7 +1,7 @@
 import React from 'react'
 import ChatInputField from './ChatInputField'
 import ChatHistory from "./ChatHistory";
-import { Button, Modal } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import { resetModal } from '../../Redux/Actions/navigationActions'
 import { connect } from 'react-redux'
 import * as pubnub from 'pubnub'
@@ -10,8 +10,8 @@ import Toggle from 'material-ui/Toggle';
 import './ChatInput.css'
 import IconButton from 'material-ui/IconButton';
 import Close from 'material-ui/svg-icons/navigation/close';
-import {red500} from 'material-ui/styles/colors';
-import {red900} from 'material-ui/styles/colors'
+import { red500 } from 'material-ui/styles/colors';
+import { red900 } from 'material-ui/styles/colors'
 
 class ChatComponent extends React.Component{
 
@@ -74,16 +74,18 @@ class ChatComponent extends React.Component{
                         </IconButton>
                         </div>
                         <Modal.Title>Chat Component</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
                         <Toggle
                             label="Show profile picture"
                             defaultToggled={this.state.isToggled}
                             style={{maxWidth: 200}}
                             onToggle={this.changePhotoURL}
                         />
+                    </Modal.Header>
+
+                    <Modal.Body>
                         <ChatHistory history={this.state.history}/>
                     </Modal.Body>
+
                     <Modal.Footer>
                         <div className="floating-left">
                         <ChatInputField userID={this.state.userID}
