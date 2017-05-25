@@ -28,8 +28,8 @@ class RoofInfo extends React.Component {
         this.state={showSnackbar: false,
                     numberOfThieves: 0,
                     wait: false,
-                    thievesAtRoof: 0,
-                    ourRoof: null}
+                    thievesAtRoof: 0
+                    }
     }
 
     componentWillMount() {
