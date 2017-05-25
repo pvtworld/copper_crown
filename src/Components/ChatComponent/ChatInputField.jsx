@@ -2,9 +2,13 @@ import React, {PropTypes} from 'react'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import TextField from 'material-ui/TextField';
+import Avatar from 'material-ui/Avatar';
 import './ChatInput.css'
+import { connect } from 'react-redux'
+import { pathToJS } from 'react-redux-firebase'
+import Chip from 'material-ui/Chip';
 
-export default class ChatInputField extends React.Component {
+class ChatInputField extends React.Component {
 
     constructor(){
         super();
@@ -17,10 +21,6 @@ export default class ChatInputField extends React.Component {
         userID: PropTypes.string,
         sendMessage: PropTypes.func,
     };
-
-    componentDidMount() {
-
-    }
 
     onFormSubmit = (e) => {
         e.preventDefault();
@@ -56,8 +56,6 @@ export default class ChatInputField extends React.Component {
         }
     }
 
-
-
     handleChange = (event) => {
         this.setState({
             value: event.target.value,
@@ -70,19 +68,34 @@ export default class ChatInputField extends React.Component {
             <div className="footer-bar">
                     <TextField
                         hintText="Type message here"
-                        value={this.state.value}
                         type="text"
+                        value={this.state.value}
                         onChange={this.handleChange}
                         onKeyPress={this.onEnterPress}
                     />
                     <FloatingActionButton   backgroundColor={'#222222'}
                                             type="submit"
-                                            style={{marginRight: 5}}
-                                            onTouchTap={this.onFormSubmit}>
+                                            onTouchTap={this.onFormSubmit}
+                    >
 
                         <ContentSend />
                     </FloatingActionButton>
+
+
+                <Chip style={{margin: 4}}>
+                    <Avatar src={this.props.auth.photoURL} />
+                    {this.props.auth.uid}
+                </Chip>
+
             </div>
         )
     }
 }
+
+const mapStateToProps = (state, {auth}) => {
+    return {
+        auth: pathToJS(state.firebase, 'auth')
+    }
+}
+
+export default connect(mapStateToProps)(ChatInputField)
