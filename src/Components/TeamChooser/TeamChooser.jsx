@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Modal, Button} from 'react-bootstrap';
 
-class UserNameChooser extends Component {
+class TeamChooser extends Component {
 
     constructor(){
         super();
@@ -24,6 +24,11 @@ class UserNameChooser extends Component {
         this.addUsername(this.props.firebase, this.props.auth.uid, this.props.userInfo, this.props.dispatch, username);
         this.props.onClose();
     };
+
+    // const handleSchoolChange = (event) => {
+    //     school = event.target.value;
+    // }
+
 
     render (){
         return (
@@ -49,13 +54,15 @@ class UserNameChooser extends Component {
 }
 
 const mapStateToProps = ({firebase}, {auth}) => ({
-    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined
+    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined,
+    teams: dataToJS(firebase, '/teams')
+
 })
 
-const propsConnected = connect(mapStateToProps)(UserNameChooser);
+const propsConnected = connect(mapStateToProps)(TeamChooser);
 
 const wrappedPlayerInfo = firebaseConnect(
-    ({auth}) => ([auth ? `users/${auth.uid}` : '/']))(propsConnected);
+    ({auth}) => ([auth ? `users/${auth.uid}` : '/',  '/teams']))(propsConnected);
 
 const authConnected = connect(
     ({firebase}) => ({
