@@ -9,7 +9,7 @@ const ProfileComponent = (props) => {
 
     return (
         <div className="static-modal">
-            <Modal.Dialog>
+            <Modal.Dialog dialogClassName="light-modal">
                 <Modal.Header>
                     <Modal.Title>Profile Component</Modal.Title>
                 </Modal.Header>
@@ -26,7 +26,7 @@ const ProfileComponent = (props) => {
                     <h5>Area of roofs taken:  {props.userInfo.areaOfCopper}</h5>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
+                    <Button bsStyle="default" onClick={() => props.dispatch(resetModal())}>OK</Button>
                 </Modal.Footer>
 
             </Modal.Dialog>

@@ -18,11 +18,55 @@
   height: 100%;
 }
 
-.modal-body {
+/*.modal-body {
     max-height: calc(100vh - 150px);
     overflow-y: auto;
-}
+}*/
 
 .center-text{
   text-align: center;
+}
+
+.dark-modal{
+  margin: 0px;
+  padding: 0px;
+  background-color: black;
+  width: 100%;
+  min-height: 100%;
+}
+.dark-modal > .modal-content{
+  font-size: 1.5rem;
+  background-color: black;
+  color: white;
+}
+
+.light-modal{
+
+}
+.light-modal > .modal-content{
+  font-size: 1.5rem;
+  background-color: black;
+  color: white;
+}
+
+.white-modal{
+
+}
+
+.white-modal > .modal-header{
+  background-color: black;
+}
+
+.white-modal > .modal-footer{
+  background-color: black;
+}
+
+.white-modal > .modal-content{
+  font-size: 1.5rem;
+}
+
+.bg-black {
+  background-color: black;
+  color: white;
+  overflow: hidden;
 }

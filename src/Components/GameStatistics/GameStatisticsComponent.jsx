@@ -22,9 +22,9 @@ const GameStatisticsComponent = (props) => {
     var copperPrice = squareMeterPrice * multiplier;
 
     return (
-        <div className="static-modal">
-            <Modal.Dialog>
-                <Modal.Header>
+
+            <Modal.Dialog dialogClassName="white-modal" backdrop={true}>
+                <Modal.Header className="bg-black">
                     <Modal.Title>Game statistics</Modal.Title>
                 </Modal.Header>
 
@@ -39,12 +39,12 @@ const GameStatisticsComponent = (props) => {
                     <h5>Current number of players: {numOfPlayers}</h5>
                     <h5>Current copper price: {copperPrice.toFixed(2) + " kr/sqm"}</h5>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
+                <Modal.Footer className="bg-black">
+                    <Button bsStyle="default" onClick={() => props.dispatch(resetModal())}>OK</Button>
                 </Modal.Footer>
 
             </Modal.Dialog>
-        </div>
+
     )
 }
 

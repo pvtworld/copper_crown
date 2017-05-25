@@ -6,9 +6,10 @@ export default class LeaderboardItem extends Component {
         var {pos, name, points} = this.props;
         return (
             <Row>
-                <Col xs={1} sm={1} md={1}>{pos.toString()}</Col>
+                <Col xs={0} sm={1} md={3}/>
+                <Col xs={1} sm={1} md={2}>{pos.toString()}</Col>
                 <Col xs={6} sm={4} md={2}>{name}</Col>
-                <Col xs={5} sm={7} md={9}>{points}</Col>
+                <Col xs={5} sm={6} md={5}>{points}</Col>
             </Row>
         );
     }

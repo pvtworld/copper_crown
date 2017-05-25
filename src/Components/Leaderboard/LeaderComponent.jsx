@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {firebaseConnect, dataToJS, pathToJS} from 'react-redux-firebase';
-import { Grid, Button, Modal} from 'react-bootstrap';
+import { Grid, Row, Col, Button, Modal} from 'react-bootstrap';
 import LeaderboardList from './LeaderboardList';
 import CurrentRank from './CurrentRank';
 import { resetModal } from '../../Redux/Actions/navigationActions';
@@ -17,7 +17,7 @@ class LeaderComponent extends Component{
 
     getUserInfo() {
         var unsortedUserInfo = this.props.users;
-        console.log('raw user iinnnnnnffffffoooooooooooooo:', unsortedUserInfo);
+        console.log('raw useer iiiiiiiiiiiiiiinnnnnnnnnnnnffffffffooooooooooooooooooo:', unsortedUserInfo);
         var idArray = Object.keys(unsortedUserInfo);
         var dataArray = Object.values(unsortedUserInfo);
         for (var i = 0; i < dataArray.length; i++){
@@ -58,22 +58,28 @@ class LeaderComponent extends Component{
 
         return(
             this.props.requestingUsers ? <div></div> :
-                <div className="static-modal">
+                //<div className="static-modal">
+                <div>
+                    <Modal.Dialog dialogClassName="dark-modal">
 
-                    <Modal.Dialog>
-                        <Modal.Header>
-                            <Modal.Title>Leaderboard</Modal.Title>
-                        </Modal.Header>
                         <Modal.Body>
                             <Grid>
+                                <Row>
+                                    <Col xs={0} sm={1} md={3}/>
+                                    <Col xs={9} sm={9} md={8}><h1>Leaderboard</h1></Col>
+                                    <Col xs={3} sm={2} md={1}>
+                                        <Button bsStyle="default" onClick={() => this.props.dispatch(resetModal())}>Close</Button>
+                                    </Col>
+                                </Row>
+                                <br/>
                                 <LeaderboardList listItems={listItems} />
-                                <CurrentRank rank={myRank} />
+                                <br/>
+                                <Col xs={0} sm={1} md={3}/>
+                                <Col xs={12} sm={11} md={9}>
+                                    <CurrentRank rank={myRank} />
+                                </Col>
                             </Grid>
                         </Modal.Body>
-                        <Modal.Footer>
-                            <Button bsStyle="primary" onClick={() => this.props.dispatch(resetModal())}>OK</Button>
-                        </Modal.Footer>
-
                     </Modal.Dialog>
                 </div>
         )
