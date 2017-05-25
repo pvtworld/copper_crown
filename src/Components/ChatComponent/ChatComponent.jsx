@@ -6,6 +6,12 @@ import { resetModal } from '../../Redux/Actions/navigationActions'
 import { connect } from 'react-redux'
 import * as pubnub from 'pubnub'
 import { pathToJS } from 'react-redux-firebase'
+import Toggle from 'material-ui/Toggle';
+import './ChatInput.css'
+import IconButton from 'material-ui/IconButton';
+import Close from 'material-ui/svg-icons/navigation/close';
+import {red500} from 'material-ui/styles/colors';
+import {red900} from 'material-ui/styles/colors'
 
 class ChatComponent extends React.Component{
 
@@ -13,7 +19,9 @@ class ChatComponent extends React.Component{
         super(props);
         this.state = {
             userID: props.auth.uid,
-            history: []
+            history: [],
+            photoURL: '',
+            isToggled: false
         };
     }
 
@@ -40,6 +48,14 @@ class ChatComponent extends React.Component{
         })
     }
 
+    handleToggleState = () => {
+
+    }
+
+    changePhotoURL = () => {
+
+    }
+
     sendMessage = (message) => {
         this.pubNub.publish({
             channel: 'CopperCrownChat',
@@ -52,14 +68,29 @@ class ChatComponent extends React.Component{
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Header>
+                        <div className="floating-right">
+                        <IconButton onTouchTap={() => this.props.dispatch(resetModal())}>
+                            <Close color={red500} hoverColor={red900}/>
+                        </IconButton>
+                        </div>
                         <Modal.Title>Chat Component</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        <Toggle
+                            label="Show profile picture"
+                            defaultToggled={this.state.isToggled}
+                            style={{maxWidth: 200}}
+                            onToggle={this.changePhotoURL}
+                        />
                         <ChatHistory history={this.state.history}/>
-                        <ChatInputField userID={this.state.userID} sendMessage={this.sendMessage}/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button bsStyle="primary" onClick={() => this.props.dispatch(resetModal())}>OK</Button>
+                        <div className="floating-left">
+                        <ChatInputField userID={this.state.userID}
+                                        sendMessage={this.sendMessage}
+                        />
+                        </div>
+                        <IconButton iconClassName="muidocs-icon-custom-github" />
                     </Modal.Footer>
                 </Modal.Dialog>
             </div>

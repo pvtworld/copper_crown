@@ -3,10 +3,10 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import TextField from 'material-ui/TextField';
 import Avatar from 'material-ui/Avatar';
-import './ChatInput.css'
 import { connect } from 'react-redux'
 import { pathToJS } from 'react-redux-firebase'
 import Chip from 'material-ui/Chip';
+import './ChatInput.css'
 
 class ChatInputField extends React.Component {
 
@@ -65,7 +65,7 @@ class ChatInputField extends React.Component {
     render() {
         console.log('Value state: ', this.state.value)
         return (
-            <div className="footer-bar">
+            <div>
                     <TextField
                         hintText="Type message here"
                         type="text"
@@ -73,14 +73,14 @@ class ChatInputField extends React.Component {
                         onChange={this.handleChange}
                         onKeyPress={this.onEnterPress}
                     />
+                <div className="floating-right">
                     <FloatingActionButton   backgroundColor={'#222222'}
                                             type="submit"
                                             onTouchTap={this.onFormSubmit}
                     >
-
                         <ContentSend />
                     </FloatingActionButton>
-
+                </div>
 
                 <Chip style={{margin: 4}}>
                     <Avatar src={this.props.auth.photoURL} />
