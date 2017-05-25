@@ -28,7 +28,7 @@ class ChatHistory extends React.Component {
                     const messageDate = new Date(messageObject.When);
                     const messageDateTime = messageDate.toLocaleTimeString();
                     return (
-                                <ListItem leftAvatar={<Avatar src={this.props.auth.photoURL} />}
+                                <ListItem leftAvatar={<Avatar src={messageObject.PhotoURL} />}
                                           disabled={true}
                                           primaryText={<p style={{color: '#727272', fontSize: '15px'}}>{messageObject.Who} </p>}
                                           secondaryText={<p style={{color: '#222222', fontSize: '16px'}}>{messageObject.What} <span style={{color: '#727272', fontSize: '13px'}}>at {messageDateTime}</span></p>}

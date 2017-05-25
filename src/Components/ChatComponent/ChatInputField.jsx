@@ -35,6 +35,7 @@ class ChatInputField extends React.Component {
             Who: this.props.userID,
             What: message,
             When: new Date().valueOf(),
+            PhotoURL: this.props.auth.photoURL
         };
 
         this.props.sendMessage(messageObj);
