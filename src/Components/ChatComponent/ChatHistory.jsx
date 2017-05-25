@@ -1,5 +1,11 @@
 import React, {PropTypes} from 'react';
-export default class ChatHistory extends React.Component {
+import {List, ListItem} from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import { connect } from 'react-redux'
+import { pathToJS } from 'react-redux-firebase'
+
+
+class ChatHistory extends React.Component {
 
     static propTypes = {
         history: PropTypes.array
@@ -8,20 +14,29 @@ export default class ChatHistory extends React.Component {
     render() {
         console.log('history: ', this.props.history)
         return (
-            <ul>
+            <List>
                 { this.props.history.map((messageObject) => {
                     const messageDate = new Date(messageObject.When);
-                    const messageDateTime = messageDate.toLocaleDateString() +
-                        ' at ' + messageDate.toLocaleTimeString();
+                    const messageDateTime = messageDate.toLocaleTimeString();
                     return (
-                        <li key={messageObject.When } >
-                            <span>USERID: #{messageObject.Who}</span>
-                            <div><span>{messageObject.What}</span></div>
-                            <div><span>{messageDateTime}</span></div>
-                        </li>
+                        <ListItem leftAvatar={<Avatar src={this.props.auth.photoURL} />}
+                                  disabled={true}
+                                  primaryText={<p style={{color: '#727272', fontSize: '15px'}}>{messageObject.Who} </p>}
+                                  secondaryText={<p style={{color: '#222222', fontSize: '16px'}}>{messageObject.What} <span style={{color: '#727272', fontSize: '13px'}}>at {messageDateTime}</span></p>}
+                                  key={messageObject.When}
+                        >
+                        </ListItem>
                     );})
                 }
-            </ul>
+            </List>
         );
     }
 }
+
+const mapStateToProps = (state, {auth}) => {
+    return {
+        auth: pathToJS(state.firebase, 'auth')
+    }
+}
+
+export default connect(mapStateToProps)(ChatHistory)
