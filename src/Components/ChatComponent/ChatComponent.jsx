@@ -21,8 +21,8 @@ class ChatComponent extends React.Component{
         this.state = {
             userID: props.auth.uid,
             history: [],
-            photoURL: '',
-            isToggled: false
+            photoURL: this.props.auth.photoURL,
+            isToggled: true
         };
     }
 
@@ -50,7 +50,15 @@ class ChatComponent extends React.Component{
     }
 
     handleToggleState = () => {
+        this.setState({
+            isToggled: false
+        })
 
+        if(this.state.isToggled === false){
+            this.setState({
+                isToggled: true
+            })
+        }
     }
 
     changePhotoURL = () => {
@@ -65,6 +73,7 @@ class ChatComponent extends React.Component{
     }
 
     render(){
+        console.log('Toggle state:', this.state.isToggled)
         return (
             <div className="static-modal">
                 <Modal.Dialog>
@@ -79,7 +88,7 @@ class ChatComponent extends React.Component{
                         <Toggle label="Show profile picture"
                                 defaultToggled={this.state.isToggled}
                                 style={{maxWidth: 200}}
-                                onToggle={this.changePhotoURL}
+                                onToggle={this.handleToggleState}
                         />
                     </Modal.Header>
 
@@ -88,7 +97,8 @@ class ChatComponent extends React.Component{
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ChatInputField userID={this.state.userID}
+                        <ChatInputField photoURL={this.state.photoURL}
+                                        userID={this.state.userID}
                                         sendMessage={this.sendMessage}
                         />
                     </Modal.Footer>
