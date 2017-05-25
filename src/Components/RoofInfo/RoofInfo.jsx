@@ -79,6 +79,7 @@ class RoofInfo extends React.Component {
                 return Promise.resolve();
             })
             .then(() => {
+
                 this.props.dispatch({type: 'UPDATING_STOLEN_ROOFS'})
                 this.props.firebase.push('stolenRoofs', {roofId: this.props.id, userId: this.props.uid, pointsPerUser: newPoints, areaPerUser: newArea })
 
@@ -99,7 +100,6 @@ class RoofInfo extends React.Component {
         } else {
             if(this.props.roofInProgress) {
                 this.changeRoofCount(1);
-
             } else {
                 this.props.dispatch({type: 'CREATING_ROOF_IN_PROGRESS'})
                 this.props.firebase.set(`roofsInProgress/${this.props.id}`, {count: 1})
