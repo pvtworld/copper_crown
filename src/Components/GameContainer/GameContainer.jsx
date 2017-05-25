@@ -10,7 +10,7 @@ class GameContainer extends React.Component{
     render() {
         if (!this.props.userInfo) {
             this.props.dispatch({type: 'CREATING_DEFAULT_USER_VALUES'})
-            this.props.firebase.set(`users/${this.props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, userName: this.props.userName})
+            this.props.firebase.set(`users/${this.props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, username: this.props.username})
                 .then(() => {
                     this.props.dispatch({type: 'CREATED_DEFAULT_USER_VALUES'})
                     return Promise.resolve();
@@ -30,7 +30,7 @@ class GameContainer extends React.Component{
 const mapStateToProps = (state, {auth}) => {
     return{
         userInfo: dataToJS(state.firebase, `users/${auth.uid}`),
-        userName: auth.displayName,
+        username: auth.displayName,
         uid : auth.uid
     }
 }
