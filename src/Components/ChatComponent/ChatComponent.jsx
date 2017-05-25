@@ -1,11 +1,11 @@
 import React from 'react'
 import ChatInputField from './ChatInputField'
 import ChatHistory from "./ChatHistory";
-import {Button, Modal} from 'react-bootstrap'
-import {resetModal} from '../../Redux/Actions/navigationActions'
-import {connect} from 'react-redux'
+import { Button, Modal } from 'react-bootstrap'
+import { resetModal } from '../../Redux/Actions/navigationActions'
+import { connect } from 'react-redux'
 import * as pubnub from 'pubnub'
-import {pathToJS, firebaseConnect} from 'react-redux-firebase'
+import { pathToJS } from 'react-redux-firebase'
 
 class ChatComponent extends React.Component{
 
