@@ -51,12 +51,14 @@ class ChatComponent extends React.Component{
 
     handleToggleState = () => {
         this.setState({
-            isToggled: false
+            isToggled: false,
+            photoURL: ''
         })
 
         if(this.state.isToggled === false){
             this.setState({
-                isToggled: true
+                isToggled: true,
+                photoURL: this.props.auth.photoURL
             })
         }
     }

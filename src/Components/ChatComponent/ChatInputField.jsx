@@ -31,11 +31,13 @@ class ChatInputField extends React.Component {
                 return;
             }
 
+            console.log('PHOTOURL: ', this.props.photoURL);
+
         const messageObj = {
             Who: this.props.userID,
             What: message,
             When: new Date().valueOf(),
-            PhotoURL: this.props.auth.photoURL
+            PhotoURL: this.props.photoURL
         };
 
         this.props.sendMessage(messageObj);
