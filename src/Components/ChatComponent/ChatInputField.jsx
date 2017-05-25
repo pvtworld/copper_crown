@@ -1,6 +1,17 @@
 import React, {PropTypes} from 'react'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentSend from 'material-ui/svg-icons/content/send';
+import TextField from 'material-ui/TextField';
+import './ChatInput.css'
 
 export default class ChatInputField extends React.Component {
+
+    constructor(){
+        super();
+        this.state = ({
+            value: ''
+        })
+    }
 
     static propTypes = {
         userID: PropTypes.string,
@@ -8,14 +19,14 @@ export default class ChatInputField extends React.Component {
     };
 
     componentDidMount() {
-        this.refs.textMessage.focus();
+
     }
 
     onFormSubmit = (e) => {
         e.preventDefault();
 
         try {
-            let message = this.refs.textMessage.value;
+            let message = this.state.value;
             if (message.length === 0) {
                 return;
             }
@@ -27,8 +38,9 @@ export default class ChatInputField extends React.Component {
         };
 
         this.props.sendMessage(messageObj);
-        this.refs.textMessage.value = '';
-        this.refs.textMessage.focus();
+        this.setState({
+            value: ''
+        })
 
         }
         catch(err) {
@@ -37,12 +49,40 @@ export default class ChatInputField extends React.Component {
 
     }
 
+    onEnterPress = (e) => {
+        if (e.charCode === 13) {
+            e.preventDefault();
+            this.onFormSubmit(e);
+        }
+    }
+
+
+
+    handleChange = (event) => {
+        this.setState({
+            value: event.target.value,
+        });
+    };
+
     render() {
+        console.log('Value state: ', this.state.value)
         return (
-            <form onSubmit={this.onFormSubmit}>
-                <input type="text" placeholder="Type message here" ref="textMessage" />
-                <button type="submit">Send</button>
-            </form>
+            <div className="footer-bar">
+                    <TextField
+                        hintText="Type message here"
+                        value={this.state.value}
+                        type="text"
+                        onChange={this.handleChange}
+                        onKeyPress={this.onEnterPress}
+                    />
+                    <FloatingActionButton   backgroundColor={'#222222'}
+                                            type="submit"
+                                            style={{marginRight: 5}}
+                                            onTouchTap={this.onFormSubmit}>
+
+                        <ContentSend />
+                    </FloatingActionButton>
+            </div>
         )
     }
 }
