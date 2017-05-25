@@ -6,23 +6,14 @@ import './Login.css'
 import {Button, Panel, Col} from 'react-bootstrap';
 import ToolTip from '../ToolTip/ToolTip'
 import { loadingUser, finishedLoadingUser, loadingError } from '../../Redux/Actions/copperMapActions'
-import { showUsernameModal } from '../../Redux/Actions/userActions';
 import { browserHistory } from 'react-router';
 
 const title = <h2>Sign in to play the game</h2>;
-
-const registeredUser = () => {
-    console.log('check if in fiiiiireeeeeeeeeeebase');
-    return true;
-};
 
 const loginUser = (firebase, provider, dispatch) => {
     dispatch(loadingUser());
     firebase.login({provider: provider, type: 'popup'}).then(() => {
         dispatch(finishedLoadingUser());
-        if (registeredUser()){
-            dispatch(showUsernameModal());
-        }
         console.log('Login successful, redirecting to /app');
         browserHistory.push('/app')
     }, (error) => {
