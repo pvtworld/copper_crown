@@ -62,10 +62,10 @@ class RoofInfo extends React.Component {
         let newPoints = Math.round(this.props.price / this.state.numberOfThieves);
         let newArea = Math.round(this.props.area / this.state.numberOfThieves);
 
-        let newUserPoints = this.props.userInfo.points + newPoints || newPoints;
-        let newUserArea = this.props.userInfo.areaOfCopper + newArea || newArea;
+        let newUserPoints = this.props.userInfo.points + newPoints;
+        let newUserArea = this.props.userInfo.areaOfCopper + newArea;
 
-        let newRoofsStolen = this.props.userInfo.roofsStolen ? this.props.userInfo.roofsStolen += 1 : 1;
+        let newRoofsStolen = this.props.userInfo.roofsStolen + 1;
 
         this.props.dispatch({type: 'UPDATING_USER_POINTS'})
         const newUserInfo = {...this.props.userInfo};
