@@ -13,6 +13,7 @@ import Close from 'material-ui/svg-icons/navigation/close';
 import { red500 } from 'material-ui/styles/colors';
 import { red900 } from 'material-ui/styles/colors'
 
+
 class ChatComponent extends React.Component{
 
     constructor(props){
@@ -70,15 +71,15 @@ class ChatComponent extends React.Component{
                     <Modal.Header>
                         <div className="floating-right">
                         <IconButton onTouchTap={() => this.props.dispatch(resetModal())}>
-                            <Close color={red500} hoverColor={red900}/>
+                            <Close color={red500}
+                                   hoverColor={red900}/>
                         </IconButton>
                         </div>
                         <Modal.Title>Chat Component</Modal.Title>
-                        <Toggle
-                            label="Show profile picture"
-                            defaultToggled={this.state.isToggled}
-                            style={{maxWidth: 200}}
-                            onToggle={this.changePhotoURL}
+                        <Toggle label="Show profile picture"
+                                defaultToggled={this.state.isToggled}
+                                style={{maxWidth: 200}}
+                                onToggle={this.changePhotoURL}
                         />
                     </Modal.Header>
 
@@ -87,12 +88,9 @@ class ChatComponent extends React.Component{
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <div className="floating-left">
                         <ChatInputField userID={this.state.userID}
                                         sendMessage={this.sendMessage}
                         />
-                        </div>
-                        <IconButton iconClassName="muidocs-icon-custom-github" />
                     </Modal.Footer>
                 </Modal.Dialog>
             </div>

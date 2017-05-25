@@ -16,7 +16,7 @@ class ChatHistory extends React.Component {
         const elem = ReactDOM.findDOMNode(this.refs.test);
 
         if (elem) {
-            elem.scrollIntoView(false);
+            elem.scrollIntoView(true);
         }
     }
 
@@ -28,7 +28,6 @@ class ChatHistory extends React.Component {
                     const messageDate = new Date(messageObject.When);
                     const messageDateTime = messageDate.toLocaleTimeString();
                     return (
-
                                 <ListItem leftAvatar={<Avatar src={this.props.auth.photoURL} />}
                                           disabled={true}
                                           primaryText={<p style={{color: '#727272', fontSize: '15px'}}>{messageObject.Who} </p>}

@@ -2,7 +2,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 150px;
+    height: 100px;
     background-color: red;
 }
 
@@ -13,6 +13,10 @@
 .floating-right {
     float: right;
     vertical-align: top;
+}
+
+.modal-footer{
+    padding: 12px;
 }
 
 .modal-title {
