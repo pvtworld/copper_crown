@@ -82,7 +82,7 @@ class ChatInputField extends React.Component {
                 <Chip style={{margin: 4}}
                       backgroundColor={orange200}>
                     <Avatar src={this.props.auth.photoURL} />
-                    {this.props.auth.uid}
+                    You: {this.props.auth.uid}
                 </Chip>
 
             </div>
