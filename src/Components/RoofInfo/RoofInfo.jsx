@@ -144,7 +144,7 @@ class RoofInfo extends React.Component {
     render() {
     if (!this.props.userInfo) {
         this.props.dispatch({type: 'CREATING_DEFAULT_USER_VALUES'})
-        this.props.firebase.set(`users/${this.props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, school: null, schoolClass: null})
+        this.props.firebase.set(`users/${this.props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0})
             .then(() => {
                 this.props.dispatch({type: 'CREATED_DEFAULT_USER_VALUES'})
                 return Promise.resolve();
