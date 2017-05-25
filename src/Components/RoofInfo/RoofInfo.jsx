@@ -4,7 +4,6 @@ import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
 import {resetRoof} from '../../Redux/Actions/copperMapActions';
 import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import RoofInfoSnackbar from './RoofInfoSnackbar';
-//import store from '../Redux/store';
 
 
 
@@ -19,16 +18,18 @@ const tooltipLeave = (
 
 
 class RoofInfo extends React.Component {
+
     constructor(props) {
         super();
         this.addRoof = this.addRoof.bind(this);
         this.addPoints = this.addPoints.bind(this);
         this.leaveRoof = this.leaveRoof.bind(this);
+        this.changeRoofCount = this.changeRoofCount.bind(this);
         this.state={showSnackbar: false,
                     numberOfThieves: 0,
                     wait: false,
-                    thievesAtRoof: 0,
-                    ourRoof: null}
+                    thievesAtRoof: 0
+                    }
     }
 
     componentWillMount() {
@@ -53,32 +54,38 @@ class RoofInfo extends React.Component {
         } else {
             thieves = 8;
         }
+
         this.setState({numberOfThieves: thieves})
     }
 
-    addPoints = (firebase, uid, id, price, area, userInfo, dispatch) => {
-        let newUserPoints = Math.round(userInfo.points + (parseInt(price, 10) / this.state.numberOfThieves)) || Math.round((parseInt(price, 10) / this.state.numberOfThieves));
-        let newUserArea = Math.round(userInfo.areaOfCopper + (parseInt(area, 10) / this.state.numberOfThieves)) || Math.round((parseInt(area, 10) / this.state.numberOfThieves));
-        let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen += 1 : 1;
+    addPoints = () => {
+        let newPoints = Math.round(this.props.price / this.state.numberOfThieves);
+        let newArea = Math.round(this.props.area / this.state.numberOfThieves);
 
-        dispatch({type: 'UPDATING_USER_POINTS'})
-        const newUserInfo = {...userInfo};
+        let newUserPoints = this.props.userInfo.points + newPoints;
+        let newUserArea = this.props.userInfo.areaOfCopper + newArea;
+
+        let newRoofsStolen = this.props.userInfo.roofsStolen + 1;
+
+        this.props.dispatch({type: 'UPDATING_USER_POINTS'})
+        const newUserInfo = {...this.props.userInfo};
         newUserInfo.points = newUserPoints;
         newUserInfo.areaOfCopper = newUserArea;
         newUserInfo.roofsStolen = newRoofsStolen
 
-        firebase.set(`users/${uid}`, {...newUserInfo})
+        this.props.firebase.set(`users/${this.props.uid}`, {...newUserInfo})
             .then(() => {
-                dispatch({type: 'USER_POINTS_UPDATED'})
+                this.props.dispatch({type: 'USER_POINTS_UPDATED'})
                 return Promise.resolve();
             })
             .then(() => {
-                dispatch({type: 'UPDATING_STOLEN_ROOFS'})
-                firebase.push('stolenRoofs', {roofId: id, userId: uid, points: (parseInt(price, 10)), area: (parseInt(area, 10))})
+
+                this.props.dispatch({type: 'UPDATING_STOLEN_ROOFS'})
+                this.props.firebase.push('stolenRoofs', {roofId: this.props.id, userId: this.props.uid, pointsPerUser: newPoints, areaPerUser: newArea })
 
             })
             .then(() => {
-                dispatch({type: 'STOLEN_ROOFS_UPDATED'})
+                this.props.dispatch({type: 'STOLEN_ROOFS_UPDATED'})
             })
         this.setState({wait: false})
         this.setState({showSnackbar: true})
@@ -86,47 +93,64 @@ class RoofInfo extends React.Component {
     }
 
 
-    addRoof = (firebase, uid, id, price, area, userInfo, dispatch) => {
+    addRoof = () => {
         if(this.state.numberOfThieves === 1) {
-            this.addPoints(this.props.firebase, this.props.uid, this.props.id, this.props.price, this.props.area, this.props.userInfo, this.props.dispatch)
-        } else {
+            this.addPoints()
 
+        } else {
             if(this.props.roofInProgress) {
-                let newCount = this.props.roofInProgress.count + 1
-                firebase.set(`roofsInProgress/${id}`, {count: newCount})
+                this.changeRoofCount(1);
             } else {
-                firebase.set(`roofsInProgress/${id}`, {count: 1})
+                this.props.dispatch({type: 'CREATING_ROOF_IN_PROGRESS'})
+                this.props.firebase.set(`roofsInProgress/${this.props.id}`, {count: 1})
+                    .then(() => {
+                        this.props.dispatch({type: 'CREATED_ROOF_IN_PROGRESS'})
+                        return Promise.resolve();
+                    })
 
             }
 
             this.setState({wait: true})
         }
-
     }
 
     leaveRoof= () => {
-        let newCount = this.props.roofInProgress.count -1
-        this.props.firebase.set(`roofsInProgress/${this.props.id}`, {count: newCount})
-        if(newCount === 0) {
-            this.props.firebase.set(`roofsInProgress/${this.props.id}`, {})
-        }
+        this.changeRoofCount(-1)
         this.setState({wait: false})
-
         this.props.dispatch(resetRoof())
+    }
+
+    changeRoofCount = (value) => {
+        let newCount = this.props.roofInProgress.count + value
+        this.props.dispatch({type: 'CHANGING_USER_AT_ROOF_COUNT'})
+        this.props.firebase.set(`roofsInProgress/${this.props.id}`, {count: newCount})
+            .then(() => {
+                this.props.dispatch({type: 'CHANGED_USERS_AT_ROOF_COUNT'})
+                return Promise.resolve();
+            })
+
+        if(newCount === 0) {
+            this.props.dispatch({type: 'DELETING_ROOF_IN_PROGRESS'})
+            this.props.firebase.set(`roofsInProgress/${this.props.id}`, {})
+                .then(() => {
+                    this.props.dispatch({type: 'DELETED_ROOF_IN_PROGRESS'})
+                    return Promise.resolve();
+                })
+        }
     }
 
 
 
     render() {
-    if (!this.props.userInfo) {
-        this.props.firebase.set(`users/${this.props.uid}`, {points: 0, areaOfCopper: 0, roofsStolen: 0, school: null, schoolClass: null})
-    }
+
     if(this.state.showSnackbar){
         return <RoofInfoSnackbar/>
     }
     if(this.state.wait) {
         if(this.props.roofInProgress.count === this.state.numberOfThieves) {
-            this.addPoints(this.props.firebase, this.props.uid, this.props.id, this.props.price, this.props.area, this.props.userInfo, this.props.dispatch)
+            this.addPoints()
+            this.changeRoofCount(-1)
+
         }
 
         return(
@@ -170,7 +194,7 @@ class RoofInfo extends React.Component {
                                 <Button bsStyle="danger" bsSize="large" block onClick={() => this.props.dispatch(resetRoof())}>Leave</Button>
                             </OverlayTrigger>
                             <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipSteal}>
-                                <Button bsStyle="success" bsSize="large" block onClick={() => this.addRoof(this.props.firebase, this.props.uid, this.props.id, this.props.price, this.props.area, this.props.userInfo, this.props.dispatch)}>Steal</Button>
+                                <Button bsStyle="success" bsSize="large" block onClick={() => this.addRoof()}>Steal</Button>
                             </OverlayTrigger>
                     </Modal.Footer>
 
