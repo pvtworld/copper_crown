@@ -8,7 +8,7 @@ const GameInfoComponent = (props) => {
 
     return (
         <div className="static-modal">
-            <Modal.Dialog>
+            <Modal.Dialog dialogClassName="full-modal">
                 <Modal.Header>
                     <Modal.Title>Game info </Modal.Title>
                 </Modal.Header>

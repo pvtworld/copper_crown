@@ -8,8 +8,8 @@ import { resetModal } from '../../Redux/Actions/navigationActions';
 const ProfileComponent = (props) => {
 
     return (
-        <div className="static-modal">
-            <Modal.Dialog dialogClassName="light-modal">
+        //<div className="static-modal">
+            <Modal.Dialog dialogClassName="light-modal" onHide={() => props.dispatch(resetModal())}>
                 <Modal.Header>
                     <Modal.Title>Profile Component</Modal.Title>
                 </Modal.Header>
@@ -30,7 +30,7 @@ const ProfileComponent = (props) => {
                 </Modal.Footer>
 
             </Modal.Dialog>
-        </div>
+        //</div>
     )
 }
 
