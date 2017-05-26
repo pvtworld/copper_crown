@@ -19,7 +19,7 @@ class GameStatisticsComponent extends React.Component {
   }
 
     componentDidMount() {
-    this.timer = setTimeout(() => this.progress(this.percentOfRoofsLeft(this.props)),1000);
+    this.timer = setTimeout(() => this.progress(this.percentOfRoofsLeft(this.props)),0);
   }
 
   componentWillUnmount() {
@@ -31,7 +31,7 @@ class GameStatisticsComponent extends React.Component {
       this.setState({completed: 0});
     } else {
       this.setState({completed});
-      this.timer = setTimeout(() => this.progress(this.percentOfRoofsLeft(this.props)),9000);
+      this.timer = setTimeout(() => this.progress(this.percentOfRoofsLeft(this.props)),1000);
     }
   } 
 
