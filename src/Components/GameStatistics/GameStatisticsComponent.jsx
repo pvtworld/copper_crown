@@ -19,21 +19,23 @@ class GameStatisticsComponent extends React.Component {
   }
 
     componentDidMount() {
-    this.timer = setTimeout(() => this.progress(this.percentOfRoofsLeft(this.props)),0);
+        this.setState({completed: this.percentOfRoofsLeft(this.props)});
+    //this.timer = setTimeout(() => this.setState({completed: 60}); //this.progress(60),0);
+    
   }
 
-  componentWillUnmount() {
+ /* componentWillUnmount() {
     clearTimeout(this.timer);
-  }
+ }/*
 
-  progress(completed) {
+  /*progress(completed) {
     if (completed < 0) {
       this.setState({completed: 0});
     } else {
       this.setState({completed});
-      this.timer = setTimeout(() => this.progress(this.percentOfRoofsLeft(this.props)),1000);
+      //this.timer = setTimeout(() => this.progress(11800),1000);
     }
-  } 
+  } */
 
   
 
@@ -86,7 +88,7 @@ render(){
                     <h5>Current copper price: {this.countDailyCopperPrice(this.props).toFixed(2) + " kr/sqm"}</h5>
                     <br></br>
                     <p id="leftp">Roofs remaining: {this.numOfRoofsLeft(this.props)}</p><p id="rightp">Roofs taken:{allRoofs-this.numOfRoofsLeft(this.props)}</p>
-                    <LinearProgress mode="determinate" value={this.state.completed} />
+                    <LinearProgress id="progressbar" mode="determinate" color={"#2CA484"} value={this.state.completed} />
                     <br></br>
                 </Modal.Body>
                 <Modal.Footer>
