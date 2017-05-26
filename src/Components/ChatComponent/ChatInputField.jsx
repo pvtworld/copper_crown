@@ -31,8 +31,6 @@ class ChatInputField extends React.Component {
                 return;
             }
 
-            console.log('PHOTOURL: ', this.props.photoURL);
-
         const messageObj = {
             Who: this.props.userID,
             What: message,
@@ -66,7 +64,6 @@ class ChatInputField extends React.Component {
     };
 
     render() {
-        console.log('Value state: ', this.state.value)
         return (
             <div>
                     <TextField

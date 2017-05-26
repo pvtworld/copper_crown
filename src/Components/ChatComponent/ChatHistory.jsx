@@ -21,7 +21,6 @@ class ChatHistory extends React.Component {
     }
 
     render() {
-        console.log('history: ', this.props.history)
         return (
             <List>
                 { this.props.history.map((messageObject) => {
@@ -32,6 +31,7 @@ class ChatHistory extends React.Component {
                                           disabled={true}
                                           primaryText={<p style={{color: '#727272', fontSize: '15px'}}>{messageObject.Who} </p>}
                                           secondaryText={<p style={{color: '#222222', fontSize: '16px'}}>{messageObject.What} <span style={{color: '#727272', fontSize: '13px'}}>at {messageDateTime}</span></p>}
+                                          secondaryTextLines={2}
                                           key={messageObject.When}
                                           ref="test"
                                 />

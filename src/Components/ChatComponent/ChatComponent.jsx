@@ -22,7 +22,8 @@ class ChatComponent extends React.Component{
             userID: props.auth.uid,
             history: [],
             photoURL: this.props.auth.photoURL,
-            isToggled: true
+            isToggled: true,
+            userOnline: []
         };
     }
 
@@ -40,6 +41,7 @@ class ChatComponent extends React.Component{
             message: (message) => this.setState({
                 history: this.state.history.concat(message)
             }),
+            presence: this.handleChatPresence
         });
     }
 
@@ -63,8 +65,24 @@ class ChatComponent extends React.Component{
         }
     }
 
-    changePhotoURL = () => {
+    handleChatPresence = (newPresenceData) => {
+        console.log('inside handleChatPresence')
+        switch (newPresenceData.action) {
+            case 'join':
+                this.setState({
+                    userOnline: this.state.userOnline.concat(newPresenceData.uuid)
+                })
+                break;
+            case 'leave':
+            case 'timeout':
+                break;
+            default:
+                console.log('unknown action: ' + newPresenceData.action);
+        }
+    }
 
+    leaveCrownChat = () => {
+        this.pubNub.unsubscribe({ channel: 'CopperCrownChat' });
     }
 
     sendMessage = (message) => {
@@ -75,7 +93,7 @@ class ChatComponent extends React.Component{
     }
 
     render(){
-        console.log('Toggle state:', this.state.isToggled)
+        console.log('usersOnline: ', this.state.userOnline);
         return (
             <div className="static-modal">
                 <Modal.Dialog>
