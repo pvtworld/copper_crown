@@ -13,25 +13,25 @@ class GameStatisticsComponent extends React.Component {
     super(props);
 
     this.state = {
-      completed: 0,
+      completed: 11907
     };
   }
 
     componentDidMount() {
-    this.timer = setTimeout(() => this.progress(5), 1000);
+    this.timer = setTimeout(() => this.progress(500), 11907);
   }
 
   componentWillUnmount() {
     clearTimeout(this.timer);
   }
 
-  progress(completed) {
-    if (completed > 100) {
-      this.setState({completed: 100});
+  progress(roofsLeft) {
+    if (roofsLeft > 0) {
+      this.setState({completed: 11907});
     } else {
-      this.setState({completed});
+      this.setState({roofsLeft});
       const diff = Math.random() * 10;
-      this.timer = setTimeout(() => this.progress(completed + diff), 1000);
+      this.timer = setTimeout(() => this.progress(roofsLeft + diff), 1000);
     }
   } 
 
@@ -69,7 +69,6 @@ render(){
     console.log("Detta är props2: " + this.props);
     return (
         <div className="static-modal">
-            <LinearProgress mode="determinate" value={this.state.completed} />
             <Modal.Dialog>
                 <Modal.Header>
                     <Modal.Title>Game statistics</Modal.Title>
@@ -85,6 +84,8 @@ render(){
                     <br></br>
                     <h5>Current number of players: {this.numOfPlayers(this.props)}</h5>
                     <h5>Current copper price: {this.countDailyCopperPrice(this.props).toFixed(2) + " kr/sqm"}</h5>
+                    <br></br>
+                    <LinearProgress mode="determinate" value={this.state.completed} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={() => this.props.dispatch(resetModal())}>OK</Button>
