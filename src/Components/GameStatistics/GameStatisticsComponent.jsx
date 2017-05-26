@@ -7,7 +7,7 @@ import DeadlineClock from '../DeadlineClock/DeadlineClock'
 import LinearProgress from 'material-ui/LinearProgress';
 import './GameStatistics.css';
 
-var allRoofs = 11907;
+const allRoofs = 11907;
 class GameStatisticsComponent extends React.Component {
 
       constructor(props) {
@@ -40,7 +40,6 @@ class GameStatisticsComponent extends React.Component {
   
 
     numOfRoofsLeft = (props) =>{
-        console.log("Detta är props1: " + props)
         var roofArray = props.stolenRoofs ? Object.keys(props.stolenRoofs): [];
         var roofsStolen = roofArray.length; 
 
@@ -68,7 +67,6 @@ class GameStatisticsComponent extends React.Component {
     } 
 
 render(){
-    console.log("Detta är props2: " + this.props);
     return (
         <div className="static-modal">
             <Modal.Dialog>
