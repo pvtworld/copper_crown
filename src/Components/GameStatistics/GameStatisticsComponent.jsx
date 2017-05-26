@@ -5,6 +5,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { resetModal } from '../../Redux/Actions/navigationActions';
 import DeadlineClock from '../DeadlineClock/DeadlineClock'
 import LinearProgress from 'material-ui/LinearProgress';
+import './GameStatistics.css';
 
 var allRoofs = 11907;
 class GameStatisticsComponent extends React.Component {
@@ -13,25 +14,24 @@ class GameStatisticsComponent extends React.Component {
     super(props);
 
     this.state = {
-      completed: 11907
+        completed: 100
     };
   }
 
     componentDidMount() {
-    this.timer = setTimeout(() => this.progress(500), 11907);
+    this.timer = setTimeout(() => this.progress(this.percentOfRoofsLeft(this.props)),1000);
   }
 
   componentWillUnmount() {
     clearTimeout(this.timer);
   }
 
-  progress(roofsLeft) {
-    if (roofsLeft > 0) {
-      this.setState({completed: 11907});
+  progress(completed) {
+    if (completed < 0) {
+      this.setState({completed: 0});
     } else {
-      this.setState({roofsLeft});
-      const diff = Math.random() * 10;
-      this.timer = setTimeout(() => this.progress(roofsLeft + diff), 1000);
+      this.setState({completed});
+      this.timer = setTimeout(() => this.progress(this.percentOfRoofsLeft(this.props)),9000);
     }
   } 
 
@@ -85,6 +85,7 @@ render(){
                     <h5>Current number of players: {this.numOfPlayers(this.props)}</h5>
                     <h5>Current copper price: {this.countDailyCopperPrice(this.props).toFixed(2) + " kr/sqm"}</h5>
                     <br></br>
+                    <p>Roofs remaining: {this.numOfRoofsLeft(this.props)}</p><p id="rightp">Roofs taken:{allRoofs-this.numOfRoofsLeft(this.props)}</p>
                     <LinearProgress mode="determinate" value={this.state.completed} />
                 </Modal.Body>
                 <Modal.Footer>
