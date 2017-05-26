@@ -87,6 +87,7 @@ render(){
                     <br></br>
                     <p id="leftp">Roofs remaining: {this.numOfRoofsLeft(this.props)}</p><p id="rightp">Roofs taken:{allRoofs-this.numOfRoofsLeft(this.props)}</p>
                     <LinearProgress mode="determinate" value={this.state.completed} />
+                    <br></br>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="primary" onClick={() => this.props.dispatch(resetModal())}>OK</Button>

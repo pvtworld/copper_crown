@@ -3,8 +3,10 @@
 
 #rightp{
     float:right;
+    font-size: 11px;
 }
 
 #leftp{
  float:left;
+ font-size: 11px;
 }
