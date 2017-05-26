@@ -1,5 +1,10 @@
-p { display: inline }
 
-rightp{
-    align-content: right;
+
+
+#rightp{
+    float:right;
+}
+
+#leftp{
+ float:left;
 }

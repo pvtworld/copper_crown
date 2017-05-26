@@ -85,7 +85,7 @@ render(){
                     <h5>Current number of players: {this.numOfPlayers(this.props)}</h5>
                     <h5>Current copper price: {this.countDailyCopperPrice(this.props).toFixed(2) + " kr/sqm"}</h5>
                     <br></br>
-                    <p>Roofs remaining: {this.numOfRoofsLeft(this.props)}</p><p id="rightp">Roofs taken:{allRoofs-this.numOfRoofsLeft(this.props)}</p>
+                    <p id="leftp">Roofs remaining: {this.numOfRoofsLeft(this.props)}</p><p id="rightp">Roofs taken:{allRoofs-this.numOfRoofsLeft(this.props)}</p>
                     <LinearProgress mode="determinate" value={this.state.completed} />
                 </Modal.Body>
                 <Modal.Footer>
