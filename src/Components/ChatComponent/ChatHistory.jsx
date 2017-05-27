@@ -34,15 +34,16 @@ export default class ChatHistory extends React.Component {
                     { this.props.history.map((messageObject) => {
                         const messageDate = new Date(messageObject.messageTimestamp);
                         const messageDateTime = messageDate.toLocaleTimeString();
+
                         return (
                             <div>
                             <ListItem leftAvatar={<Avatar src={messageObject.PhotoURL} style={{display: 'block'}}/>}
                                       disabled={true}
-                                      primaryText={<p style={{color: '#727272', fontSize: '13px'}}>{messageObject.authID} </p>}
-                                      secondaryText={<p style={{color: '#222222', fontSize: '14px'}}>{messageObject.newMessage} <span style={{color: '#727272', fontSize: '13px'}}>at {messageDateTime}</span></p>}
-                                      secondaryTextLines={2}
                                       key={messageObject.When}
-                            />
+                            >   
+                                <p style={{color: '#6f6f6f', fontSize: '13px'}}>{messageObject.authID}</p>
+                                <p style={{color: '#3d3d3d', fontSize: '14px'}}>{messageObject.newMessage} <span style={{color: '#6f6f6f', fontSize: '12px'}}>at {messageDateTime}</span></p>
+                            </ListItem>
                              <Divider/>
                             </div>
                         );})
