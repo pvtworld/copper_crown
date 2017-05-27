@@ -12,24 +12,22 @@ import IconButton from 'material-ui/IconButton';
 import Close from 'material-ui/svg-icons/navigation/close';
 import { red500 } from 'material-ui/styles/colors';
 import { red900 } from 'material-ui/styles/colors'
-
+import { setUserAuthID, addMessageToList, addHistoryToList } from './ChatActions'
 
 class ChatComponent extends React.Component{
 
     constructor(props){
         super(props);
         this.state = {
-            userID: props.auth.uid,
-            history: [],
             photoURL: this.props.auth.photoURL,
-            isToggled: true,
-            userOnline: []
+            isToggled: true
         };
     }
 
     pubNub = null;
 
     componentDidMount(){
+        this.props.setAuthID(this.props.auth.uid);
         this.pubNub = pubnub.init({
             publish_key: 'pub-c-425d3d2e-ad86-4961-bb14-1eb59efec74d',
             subscribe_key: 'sub-c-39bab7dc-3fcc-11e7-b6a4-02ee2ddab7fe',
@@ -38,17 +36,15 @@ class ChatComponent extends React.Component{
 
         this.pubNub.subscribe({
             channel: 'CopperCrownChat',
-            message: (message) => this.setState({
-                history: this.state.history.concat(message)
-            }),
+            message: this.props.addMessage,
             presence: this.handleChatPresence
         });
+
+        this.fetchHistory();
     }
 
     componentWillUnmount(){
-        this.pubNub.unsubscribe({
-            channel: 'CopperCrownChat'
-        })
+        this.leaveCrownChat()
     }
 
     handleToggleState = () => {
@@ -65,16 +61,33 @@ class ChatComponent extends React.Component{
         }
     }
 
+    fetchHistory = () => {
+        this.pubNub.history({
+            channel: 'CopperCrownChat',
+            count: 15,
+            start: this.props.lastMessageTimestamp,
+            callback: (data) => {
+                this.props.addMessageHistory(data[0], data[1]);
+            },
+        });
+    }
+
     handleChatPresence = (newPresenceData) => {
-        console.log('inside handleChatPresence')
+        console.log('inside handleChatPresence');
         switch (newPresenceData.action) {
             case 'join':
-                this.setState({
+                console.log('INSIDE JOIN CONCATINATES presenceData');
+/*                this.setState({
                     userOnline: this.state.userOnline.concat(newPresenceData.uuid)
-                })
+                });*/
                 break;
             case 'leave':
+                console.log('INSIDE LEAVE FILTERS')
+                this.leaveCrownChat();
+                break;
             case 'timeout':
+                console.log('INSIDE TIMEOUT FILTERS')
+                this.leaveCrownChat();
                 break;
             default:
                 console.log('unknown action: ' + newPresenceData.action);
@@ -93,32 +106,34 @@ class ChatComponent extends React.Component{
     }
 
     render(){
-        console.log('usersOnline: ', this.state.userOnline);
+
         return (
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Header>
                         <div className="floating-right">
-                        <IconButton onTouchTap={() => this.props.dispatch(resetModal())}>
+                        <IconButton onTouchTap={this.props.resetModal}>
                             <Close color={red500}
                                    hoverColor={red900}/>
                         </IconButton>
                         </div>
-                        <Modal.Title>Chat Component</Modal.Title>
-                        <Toggle label="Show profile picture"
+                        <Modal.Title>Chat Component new <p>Users online: 0</p> </Modal.Title>
+                        <Toggle label="Let other users see my profile picture"
                                 defaultToggled={this.state.isToggled}
-                                style={{maxWidth: 200}}
+                                style={{maxWidth: 300}}
                                 onToggle={this.handleToggleState}
                         />
                     </Modal.Header>
 
                     <Modal.Body>
-                        <ChatHistory history={this.state.history}/>
+                        <ChatHistory fetchHistory={this.fetchHistory}
+                                     history={this.props.history}
+                        />
                     </Modal.Body>
 
                     <Modal.Footer>
                         <ChatInputField photoURL={this.state.photoURL}
-                                        userID={this.state.userID}
+                                        userID={this.props.userID}
                                         sendMessage={this.sendMessage}
                         />
                     </Modal.Footer>
@@ -130,10 +145,22 @@ class ChatComponent extends React.Component{
 
 const mapStateToProps = (state, {auth}) => {
     return {
-        auth: pathToJS(state.firebase, 'auth')
+        auth: pathToJS(state.firebase, 'auth'),
+        history: state.chat.get('messages').toJS(),
+        userID: state.chat.get('userID'),
+        lastMessageTimestamp: state.chat.get('lastMessageTimestamp'),
     }
 }
 
-export default connect(mapStateToProps)(ChatComponent)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        resetModal: () => dispatch(resetModal()),
+        addMessage: (newMessage) => dispatch(addMessageToList(newMessage)),
+        setAuthID: (authID) => dispatch(setUserAuthID(authID)),
+        addMessageHistory: (messages, timestamp) => dispatch(addHistoryToList(messages, timestamp)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatComponent)
 
 
