@@ -12,26 +12,20 @@ import IconButton from 'material-ui/IconButton';
 import Close from 'material-ui/svg-icons/navigation/close';
 import { red500 } from 'material-ui/styles/colors';
 import { red900 } from 'material-ui/styles/colors'
-import { setUserAuthID, addMessageToList, addHistoryToList } from './ChatActions'
+import { setUserAuthID, addMessageToList, addHistoryToList, removeUserFromOnlineList, addUserToOnlineList, showProfilePicture, setProfilePicture } from './ChatActions'
 
 class ChatComponent extends React.Component{
-
-    constructor(props){
-        super(props);
-        this.state = {
-            photoURL: this.props.auth.photoURL,
-            isToggled: true
-        };
-    }
 
     pubNub = null;
 
     componentDidMount(){
         this.props.setAuthID(this.props.auth.uid);
+        this.props.setProfilePictureURL(this.props.auth.photoURL);
         this.pubNub = pubnub.init({
             publish_key: 'pub-c-425d3d2e-ad86-4961-bb14-1eb59efec74d',
             subscribe_key: 'sub-c-39bab7dc-3fcc-11e7-b6a4-02ee2ddab7fe',
             ssl: (location.protocol.toLowerCase() === 'https:'),
+            uuid: this.props.auth.uid
         });
 
         this.pubNub.subscribe({
@@ -41,6 +35,8 @@ class ChatComponent extends React.Component{
         });
 
         this.fetchHistory();
+
+        window.addEventListener('beforeunload', this.leaveCrownChat);
     }
 
     componentWillUnmount(){
@@ -48,26 +44,23 @@ class ChatComponent extends React.Component{
     }
 
     handleToggleState = () => {
-        this.setState({
-            isToggled: false,
-            photoURL: ''
-        })
 
-        if(this.state.isToggled === false){
-            this.setState({
-                isToggled: true,
-                photoURL: this.props.auth.photoURL
-            })
+        this.props.setProfilePictureURL(this.props.auth.photoURL);
+        this.props.setProfilePictureInChat(true);
+
+        if(this.props.showProfilePicture === true){
+            this.props.setProfilePictureInChat(false);
+            this.props.setProfilePictureURL('');
         }
     }
 
     fetchHistory = () => {
         this.pubNub.history({
             channel: 'CopperCrownChat',
-            count: 15,
+            count: 10,
             start: this.props.lastMessageTimestamp,
-            callback: (data) => {
-                this.props.addMessageHistory(data[0], data[1]);
+            callback: (newData) => {
+                this.props.addMessageHistory(newData[0], newData[1]);
             },
         });
     }
@@ -77,20 +70,17 @@ class ChatComponent extends React.Component{
         switch (newPresenceData.action) {
             case 'join':
                 console.log('INSIDE JOIN CONCATINATES presenceData');
-/*                this.setState({
-                    userOnline: this.state.userOnline.concat(newPresenceData.uuid)
-                });*/
+                this.props.addUserToList(newPresenceData.uuid);
                 break;
             case 'leave':
-                console.log('INSIDE LEAVE FILTERS')
-                this.leaveCrownChat();
+                this.props.removeUserFromList(newPresenceData.uuid);
                 break;
             case 'timeout':
                 console.log('INSIDE TIMEOUT FILTERS')
-                this.leaveCrownChat();
+                this.props.removeUserFromList(newPresenceData.uuid);
                 break;
             default:
-                console.log('unknown action: ' + newPresenceData.action);
+                return null;
         }
     }
 
@@ -117,9 +107,9 @@ class ChatComponent extends React.Component{
                                    hoverColor={red900}/>
                         </IconButton>
                         </div>
-                        <Modal.Title>Chat Component new <p>Users online: 0</p> </Modal.Title>
+                        <Modal.Title>Chat <p>Users online: {this.props.usersInChat.length}</p> </Modal.Title>
                         <Toggle label="Let other users see my profile picture"
-                                defaultToggled={this.state.isToggled}
+                                defaultToggled={this.props.showProfilePicture}
                                 style={{maxWidth: 300}}
                                 onToggle={this.handleToggleState}
                         />
@@ -132,7 +122,7 @@ class ChatComponent extends React.Component{
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <ChatInputField photoURL={this.state.photoURL}
+                        <ChatInputField photoURL={this.props.profilePictureURL}
                                         userID={this.props.userID}
                                         sendMessage={this.sendMessage}
                         />
@@ -149,6 +139,9 @@ const mapStateToProps = (state, {auth}) => {
         history: state.chat.get('messages').toJS(),
         userID: state.chat.get('userID'),
         lastMessageTimestamp: state.chat.get('lastMessageTimestamp'),
+        usersInChat: state.chat.get('usersInChat').toJS(),
+        profilePictureURL: state.chat.get('profilePictureURL'),
+        showProfilePicture: state.chat.get('showProfilePicture')
     }
 }
 
@@ -158,6 +151,10 @@ const mapDispatchToProps = (dispatch) => {
         addMessage: (newMessage) => dispatch(addMessageToList(newMessage)),
         setAuthID: (authID) => dispatch(setUserAuthID(authID)),
         addMessageHistory: (messages, timestamp) => dispatch(addHistoryToList(messages, timestamp)),
+        addUserToList: (authID) => dispatch(addUserToOnlineList(authID)),
+        removeUserFromList: (authID) => dispatch(removeUserFromOnlineList(authID)),
+        setProfilePictureURL: (profilePictureURL) => dispatch(setProfilePicture(profilePictureURL)),
+        setProfilePictureInChat: (bool) => dispatch(showProfilePicture(bool)),
     };
 }
 
