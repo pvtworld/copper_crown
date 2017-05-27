@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { pathToJS } from 'react-redux-firebase'
 import ReactDOM from 'react-dom'
 import './ChatInput.css'
+import Divider from 'material-ui/Divider';
 
 
 class ChatHistory extends React.Component {
@@ -36,6 +37,7 @@ class ChatHistory extends React.Component {
                         const messageDate = new Date(messageObject.When);
                         const messageDateTime = messageDate.toLocaleTimeString();
                         return (
+                            <div>
                             <ListItem leftAvatar={<Avatar src={messageObject.PhotoURL} style={{display: 'block'}}/>}
                                       disabled={true}
                                       primaryText={<p style={{color: '#727272', fontSize: '13px'}}>{messageObject.Who} </p>}
@@ -43,6 +45,8 @@ class ChatHistory extends React.Component {
                                       secondaryTextLines={2}
                                       key={messageObject.When}
                             />
+                             <Divider/>
+                            </div>
                         );})
                     }
                 </List>
