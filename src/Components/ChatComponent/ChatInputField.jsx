@@ -6,14 +6,15 @@ import { pathToJS } from 'react-redux-firebase'
 import Chip from 'material-ui/Chip';
 import './ChatInput.css'
 import RaisedButton from 'material-ui/RaisedButton';
-import { orange200 } from 'material-ui/styles/colors'
+import { orange200, orange500 } from 'material-ui/styles/colors'
 
 class ChatInputField extends React.Component {
 
     constructor(){
         super();
         this.state = ({
-            value: ''
+            value: '',
+            typingDisabled: false
         })
     }
 
@@ -33,10 +34,14 @@ class ChatInputField extends React.Component {
             PhotoURL: this.props.photoURL
         };
 
-        this.props.sendMessage(messageObj);
-        this.setState({
-            value: ''
-        })
+        if(this.state.value.length > 30){
+            alert('Maximum 30 characters')
+        }else{
+            this.props.sendMessage(messageObj);
+            this.setState({
+                value: ''
+            })
+        }
 
         }
         catch(err) {
@@ -53,12 +58,14 @@ class ChatInputField extends React.Component {
     }
 
     handleChange = (event) => {
+
         this.setState({
             value: event.target.value,
         });
     };
 
     render() {
+        console.log(this.state.value)
         return (
             <div>
                     <TextField
@@ -68,17 +75,25 @@ class ChatInputField extends React.Component {
                         onChange={this.handleChange}
                         onKeyPress={this.onEnterPress}
                         fullWidth={true}
+                        underlineFocusStyle={{borderColor: orange500}}
                     />
 
-                <RaisedButton label="Send" fullWidth={true} backgroundColor={'#FFF'}
-                              type="submit"
-                              onTouchTap={this.onFormSubmit}/>
+                <p className='floating-right' style={{color: '#696969'}}>{this.state.value.length}/30</p>
 
-                <Chip style={{margin: 4}}
+                <Chip style={{marginTop: 10, marginBottom: 10}}
                       backgroundColor={orange200}>
                     <Avatar src={this.props.photoURL} />
-                    You: {this.props.auth.uid}
+                        {this.props.auth.uid}
                 </Chip>
+
+                <div style={{clear: 'both'}}>
+                <RaisedButton label="Send" fullWidth={true} backgroundColor={'#FFF'}
+                              type="submit"
+                              onTouchTap={this.onFormSubmit}
+                />
+                </div>
+
+
 
             </div>
         )
