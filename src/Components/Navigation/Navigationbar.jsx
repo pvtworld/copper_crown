@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
-import { showLeaderboard, showAbout, showPlayerInfo, showProfile, resetModal, showChat } from '../../Redux/Actions/navigationActions';
+import { showLeaderboard, showAbout, showStatistics, showProfile, resetModal, showChat } from '../../Redux/Actions/navigationActions';
 import './Nav.css'
 
 const Navigationbar = (props) => {

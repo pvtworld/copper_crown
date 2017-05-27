@@ -14,12 +14,7 @@ class App extends React.Component {
     }
 
     redirectIfAuth = (props) => {
-<<<<<<< HEAD
-        if(!props.auth){
-=======
-
         if (!props.auth) {
->>>>>>> develop
             console.log('User is not auth, redirecting to login /', props.auth);
             browserHistory.push('/')
         } else {
@@ -31,14 +26,7 @@ class App extends React.Component {
     render() {
         this.redirectIfAuth(this.props);
         console.log('Creating GameContainer');
-<<<<<<< HEAD
-        return (
-            <div>
-                <TeamChooser/>
-=======
-
         return ( <div>
->>>>>>> develop
                 <GameContainer/>
             </div>
         )

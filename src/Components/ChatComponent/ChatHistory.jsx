@@ -1,7 +1,6 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
-import { pathToJS } from 'react-redux-firebase'
 import ReactDOM from 'react-dom'
 import './ChatInput.css'
 import Divider from 'material-ui/Divider';
