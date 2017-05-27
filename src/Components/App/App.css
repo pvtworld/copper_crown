@@ -19,10 +19,14 @@
 }
 
 .modal-body {
-    max-height: calc(100vh - 300px);
-    overflow-y: auto;
+  max-height: 500px;
+  overflow: hidden;
+  padding: 0;
 }
 
 .center-text{
   text-align: center;
 }
+
+
+
