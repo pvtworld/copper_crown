@@ -28,3 +28,8 @@
     overflow: scroll;
     padding-left: 15px;
 }
+
+.modal-footer{
+    border-top: 0px;
+    padding: 30px;
+}
