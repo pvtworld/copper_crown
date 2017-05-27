@@ -22,17 +22,17 @@ export function addHistoryToList(messages, timestamp) {
     };
 }
 
-export function addUserToOnlineList(message) {
+export function addUserToOnlineList(newUser) {
     return {
         type: 'ADD_USER_TO_LIST',
-        payload: message,
+        payload: newUser,
     };
 }
 
-export function removeUserFromOnlineList(message) {
+export function removeUserFromOnlineList(userToBeRemoved) {
     return {
         type: 'REMOVE_USER_FROM_LIST',
-        payload: message,
+        payload: userToBeRemoved,
     };
 }
 

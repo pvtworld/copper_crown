@@ -66,17 +66,14 @@ class ChatComponent extends React.Component{
     }
 
     handleChatPresence = (newPresenceData) => {
-        console.log('inside handleChatPresence');
         switch (newPresenceData.action) {
             case 'join':
-                console.log('INSIDE JOIN CONCATINATES presenceData');
                 this.props.addUserToList(newPresenceData.uuid);
                 break;
             case 'leave':
                 this.props.removeUserFromList(newPresenceData.uuid);
                 break;
             case 'timeout':
-                console.log('INSIDE TIMEOUT FILTERS')
                 this.props.removeUserFromList(newPresenceData.uuid);
                 break;
             default:
