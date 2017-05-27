@@ -31,7 +31,6 @@ class InfoContainer extends React.Component {
             case 'SHOW_GAME_INFO':
                 return <GameInfo/>
             case 'SHOW_GAME_CHAT':
-                console.log('Will render chatComponent!')
                 return <ChatComponent/>;
             default:
                 break;

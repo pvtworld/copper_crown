@@ -17,11 +17,6 @@ class ChatInputField extends React.Component {
         })
     }
 
-    static propTypes = {
-        userID: PropTypes.string,
-        sendMessage: PropTypes.func,
-    };
-
     onFormSubmit = (e) => {
         e.preventDefault();
 
