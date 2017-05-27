@@ -21,3 +21,32 @@ export function addHistoryToList(messages, timestamp) {
         },
     };
 }
+
+export function addUserToOnlineList(message) {
+    return {
+        type: 'ADD_USER_TO_LIST',
+        payload: message,
+    };
+}
+
+export function removeUserFromOnlineList(message) {
+    return {
+        type: 'REMOVE_USER_FROM_LIST',
+        payload: message,
+    };
+}
+
+export function showProfilePicture(bool) {
+    return {
+        type: 'SHOW_PROFILE_PICTURE',
+        payload: bool
+    };
+}
+
+export function setProfilePicture(profileURL) {
+    return {
+        type: 'SET_PROFILE_PICTURE',
+        payload: profileURL
+    };
+}
+
