@@ -22,3 +22,10 @@
 .modal-title {
     margin-top: 12px;
 }
+
+.collection {
+    height: 500px;
+    width: 100%;
+    overflow: scroll;
+    padding-left: 15px;
+}
