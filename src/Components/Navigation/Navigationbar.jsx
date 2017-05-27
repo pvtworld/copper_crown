@@ -26,15 +26,15 @@ const Navigationbar = (props) => {
             </Navbar.Header>
             <Navbar.Collapse>
                 <Nav>
-                    <NavItem onClick={() => props.dispatch(showPlayerInfo())}>PlayerInfo</NavItem>
+                    <NavItem onClick={() => props.dispatch(showProfile())}>Profile</NavItem>
+                    <NavItem onClick={() => props.dispatch(showAbout())}>Stolen Roofs</NavItem>
                     <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboards</NavItem>
                     <NavItem onClick={() => props.dispatch(showAbout())}>Game info</NavItem>
                     <NavItem onClick={() => props.dispatch(showChat())}>Chat</NavItem>
+                    <NavItem onClick={()=> props.dispatch(showStatistics())}>Game statistics</NavItem>
                 </Nav>
                 <Nav pullRight>
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
-                        <MenuItem onClick={() => props.dispatch(showProfile())}>Profile</MenuItem>
-                        <MenuItem divider />
                         <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
                     </NavDropdown>
                 </Nav>

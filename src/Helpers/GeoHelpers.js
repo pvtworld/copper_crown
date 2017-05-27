@@ -26,8 +26,8 @@ const createObjectFromXML = (xml, pricePerSquareMeter, multiplier) => {
     let value = (pricePerSquareMeter * areaCalculated*multiplier).toFixed(1) + 0;
     return {
         id: xml.getElementsByTagName('id')[0].childNodes[0].nodeValue,
-        area: areaCalculated,
-        value: value
+        area: parseInt(areaCalculated, 10),
+        value: parseInt(value, 10)
         }
 }
 
