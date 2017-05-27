@@ -92,7 +92,7 @@ class ChatInputField extends React.Component {
                         rowsMax={2}
                     />
 
-                <p className='floating-right' style={{color: '#696969'}}>{this.state.value.length}/100</p>
+                <p className='floating-right' style={{color: '#696969', marginRight: '5px'}}>{this.state.value.length}/100</p>
 
                 <Chip style={{marginTop: 10, marginBottom: 15}}
                       backgroundColor={orange200}>

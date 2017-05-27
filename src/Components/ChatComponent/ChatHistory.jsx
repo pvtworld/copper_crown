@@ -37,19 +37,22 @@ export default class ChatHistory extends React.Component {
 
                         return (
                             <div>
-                            <ListItem leftAvatar={<Avatar src={messageObject.PhotoURL} style={{display: 'block'}}/>}
-                                      disabled={true}
-                                      key={messageObject.When}
-                            >   
-                                <p style={{color: '#6f6f6f', fontSize: '13px'}}>{messageObject.authID}</p>
-                                <p style={{color: '#3d3d3d', fontSize: '14px'}}>{messageObject.newMessage} <span style={{color: '#6f6f6f', fontSize: '12px'}}>at {messageDateTime}</span></p>
-                            </ListItem>
-                             <Divider/>
+                                <ListItem leftAvatar={<Avatar src={messageObject.PhotoURL} style={{display: 'block'}}/>}
+                                          disabled={true}
+                                          key={messageObject.When}
+                                >
+                                    <p style={{color: '#6f6f6f', fontSize: '13px'}}>{messageObject.authID}</p>
+                                    <p style={{color: '#3d3d3d', fontSize: '14px'}}>{messageObject.newMessage} <span
+                                        style={{color: '#6f6f6f', fontSize: '12px'}}>at {messageDateTime}</span></p>
+                                </ListItem>
+                                <Divider/>
                             </div>
-                        );})
+                        );
+                    })
                     }
                 </List>
             </ul>
         );
+
     }
 }
