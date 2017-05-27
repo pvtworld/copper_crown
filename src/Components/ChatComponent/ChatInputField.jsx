@@ -14,9 +14,10 @@ class ChatInputField extends React.Component {
         super();
         this.state = ({
             value: '',
-            typingDisabled: false
+            disabledButton: false,
         })
     }
+
 
     onFormSubmit = (e) => {
         e.preventDefault();
@@ -25,25 +26,25 @@ class ChatInputField extends React.Component {
             let message = this.state.value;
             if (message.length === 0) {
                 return;
+            } else if(message.length > 100){
+                alert('Maximum characters (100) exceeded')
+                return;
             }
 
         const messageObj = {
-            Who: this.props.userID,
-            What: message,
-            When: new Date().valueOf(),
+            authID: this.props.userID,
+            newMessage: message + '',
+            messageTimestamp: new Date().valueOf(),
             PhotoURL: this.props.photoURL
         };
 
-        if(this.state.value.length > 30){
-            alert('Maximum 30 characters')
-        }else{
             this.props.sendMessage(messageObj);
+
             this.setState({
                 value: ''
             })
         }
 
-        }
         catch(err) {
 
         }
@@ -58,10 +59,21 @@ class ChatInputField extends React.Component {
     }
 
     handleChange = (event) => {
-
         this.setState({
             value: event.target.value,
         });
+
+/*        if(this.state.value.length < 101){
+            this.setState({
+                disabledButton: false
+            })
+        }
+
+        if(this.state.value.length > 98){
+            this.setState({
+                disabledButton: true
+            })
+        }*/
     };
 
     render() {
@@ -75,19 +87,26 @@ class ChatInputField extends React.Component {
                         onKeyPress={this.onEnterPress}
                         fullWidth={true}
                         underlineFocusStyle={{borderColor: orange500}}
+                        multiLine={true}
+                        rows={2}
+                        rowsMax={2}
                     />
 
-                <p className='floating-right' style={{color: '#696969'}}>{this.state.value.length}/30</p>
+                <p className='floating-right' style={{color: '#696969'}}>{this.state.value.length}/100</p>
 
-                <Chip style={{marginTop: 10, marginBottom: 10}}
+                <Chip style={{marginTop: 10, marginBottom: 15}}
                       backgroundColor={orange200}>
                     <Avatar src={this.props.photoURL} />
                         {this.props.auth.uid}
                 </Chip>
 
                 <div style={{clear: 'both'}}>
-                <RaisedButton label="Send" fullWidth={true} backgroundColor={'#FFF'}
+                <RaisedButton label="Send"
+                              fullWidth={true}
+                              backgroundColor={'#FFF'}
                               type="submit"
+                              primary={true}
+                              disabled={this.state.disabledButton}
                               onTouchTap={this.onFormSubmit}
                 />
                 </div>
