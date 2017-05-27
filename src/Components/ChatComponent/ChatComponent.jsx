@@ -99,7 +99,7 @@ class ChatComponent extends React.Component{
 
         return (
             <div className="static-modal">
-                <Modal.Dialog>
+                <Modal.Dialog dialogClassName="full-modal">
                     <Modal.Header>
                         <div className="floating-right">
                         <IconButton onTouchTap={this.props.resetModal}>
@@ -107,12 +107,15 @@ class ChatComponent extends React.Component{
                                    hoverColor={red900}/>
                         </IconButton>
                         </div>
-                        <Modal.Title>Chat <p>Users online: {this.props.usersInChat.length}</p> </Modal.Title>
-                        <Toggle label="Let other users see my profile picture"
+                        <Modal.Title>Chat <p style={{color: '#6f6f6f', fontSize: '13px', marginTop: '5px'}}>Users online: {this.props.usersInChat.length}</p> </Modal.Title>
+
+
+                        <Toggle label="Profile picture visible"
                                 defaultToggled={this.props.showProfilePicture}
-                                style={{maxWidth: 300}}
+                                style={{maxWidth: 200}}
                                 onToggle={this.handleToggleState}
                         />
+
                     </Modal.Header>
 
                     <Modal.Body>
