@@ -65,7 +65,6 @@ class ChatInputField extends React.Component {
     };
 
     render() {
-        console.log(this.state.value)
         return (
             <div>
                     <TextField
