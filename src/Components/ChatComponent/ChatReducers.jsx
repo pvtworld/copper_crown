@@ -4,6 +4,9 @@ const initialState = fromJS({
     userID: '',
     messages: [],
     lastMessageTimestamp: null,
+    usersInChat: [],
+    profilePictureURL: '',
+    showProfilePicture: true
 });
 
 export var chatReducer = (state = initialState, action) => {
@@ -16,6 +19,18 @@ export var chatReducer = (state = initialState, action) => {
             return state
                 .update('messages', (messages) => messages.unshift(...action.payload.messages))
                 .update('lastMessageTimestamp', () => action.payload.timestamp);
+        case 'ADD_USER_TO_LIST':
+            return state
+                .update('usersInChat', (users) => (users.indexOf(action.payload) >= 0 ?
+                    users :
+                    users.concat(action.payload)));
+        case 'REMOVE_USER_FROM_LIST':
+            return state
+                .update('usersInChat', (users) => users.delete(action.payload));
+        case 'SET_PROFILE_PICTURE':
+            return state.update('profilePictureURL', () =>  action.payload);
+        case 'SHOW_PROFILE_PICTURE':
+            return state.update('showProfilePicture', () =>  action.payload);
         default:
             return state;
     }
