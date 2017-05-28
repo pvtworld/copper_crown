@@ -10,8 +10,9 @@ import Toggle from 'material-ui/Toggle';
 import './ChatInput.css'
 import IconButton from 'material-ui/IconButton';
 import Close from 'material-ui/svg-icons/navigation/close';
-import { red500 } from 'material-ui/styles/colors';
-import { red900 } from 'material-ui/styles/colors'
+import { red500, red900, orange200 } from 'material-ui/styles/colors';
+import Avatar from 'material-ui/Avatar';
+import Chip from 'material-ui/Chip';
 import { setUserAuthID, addMessageToList, addHistoryToList, removeUserFromOnlineList, addUserToOnlineList, showProfilePicture, setProfilePicture } from './ChatActions'
 
 class ChatComponent extends React.Component{
@@ -112,6 +113,12 @@ class ChatComponent extends React.Component{
                                 style={{maxWidth: 200}}
                                 onToggle={this.handleToggleState}
                         />
+
+                        <Chip style={{marginTop: 10, marginBottom: 15}}
+                              backgroundColor={orange200}>
+                            <Avatar src={this.props.profilePictureURL} />
+                            {this.props.auth.uid}
+                        </Chip>
 
                     </Modal.Header>
 

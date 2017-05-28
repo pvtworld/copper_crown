@@ -1,12 +1,10 @@
 import React from 'react'
 import TextField from 'material-ui/TextField';
-import Avatar from 'material-ui/Avatar';
 import { connect } from 'react-redux'
 import { pathToJS } from 'react-redux-firebase'
-import Chip from 'material-ui/Chip';
 import './ChatInput.css'
 import RaisedButton from 'material-ui/RaisedButton';
-import { orange200, orange500 } from 'material-ui/styles/colors'
+import { orange500 } from 'material-ui/styles/colors'
 
 class ChatInputField extends React.Component {
 
@@ -93,12 +91,6 @@ class ChatInputField extends React.Component {
                     />
 
                 <p className='floating-right' style={{color: '#696969', marginRight: '5px'}}>{this.state.value.length}/100</p>
-
-                <Chip style={{marginTop: 10, marginBottom: 15}}
-                      backgroundColor={orange200}>
-                    <Avatar src={this.props.photoURL} />
-                        {this.props.auth.uid}
-                </Chip>
 
                 <div style={{clear: 'both'}}>
                 <RaisedButton label="Send"
