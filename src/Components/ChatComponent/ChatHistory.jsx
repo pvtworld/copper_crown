@@ -40,11 +40,13 @@ export default class ChatHistory extends React.Component {
                                           disabled={true}
                                           key={messageObject.When}
                                 >
-                                    <p style={{color: '#6f6f6f', fontSize: '13px'}}>{messageObject.authID}</p>
-                                    <p style={{color: '#3d3d3d', fontSize: '14px'}}>{messageObject.newMessage} <span
-                                        style={{color: '#6f6f6f', fontSize: '12px'}}>at {messageDateTime}</span></p>
+                                    <p style={{fontSize: '13px'}}>
+                                        <span style={{color: '#6f6f6f', fontWeight: '450'}}>{messageObject.authID}</span>
+                                        <span style={{color: '#222222', fontWeight: '350'}}>&nbsp; &nbsp;{messageObject.newMessage}</span>
+                                        <span style={{color: '#6f6f6f', fontWeight: '250', display: 'block', fontSize: '11px', opacity: '0.6'}}>{messageDateTime}</span>
+
+                                    </p>
                                 </ListItem>
-                                <Divider/>
                             </div>
                         );
                     })
