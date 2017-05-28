@@ -14,36 +14,31 @@
     float: right;
 }
 
-.modal-footer{
+.full-modal > .modal-footer{
     padding: 12px;
 }
 
-.modal-title {
+.full-modal > .modal-title {
     margin-top: 12px;
 }
 
 .collection {
-    height: 410px;
+    height: 350px;
     width: 100%;
     overflow: scroll;
     padding-left: 15px;
 }
 
-.modal-footer{
-    border-top: 0px;
-    padding: 30px;
-}
-
 
 @media screen and (max-width: 540px) {
     .collection{
-        height: 250px;
+        height: 200px;
         padding-left: 0;
     }
-    .modal-header{
+    .full-modal > .modal-header{
         padding: 0;
     }
-    .modal-footer{
+    .full-modal > .modal-footer{
         padding: 0;
     }
     .full-modal{
