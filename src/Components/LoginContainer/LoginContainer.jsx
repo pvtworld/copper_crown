@@ -15,7 +15,7 @@ class LoginContainer extends React.Component {
 
         return (
             <Loadable active={this.props.loadingUser} spinner>
-            <div className="fullscreen">
+                <div className="fullscreen">
                     <div>
                         <div id="center_text">
                             <h2>COPPER</h2>
@@ -23,7 +23,7 @@ class LoginContainer extends React.Component {
                         </div>
                         <Login/>
                     </div>
-            </div>
+                </div>
             </Loadable>
         );
     }
