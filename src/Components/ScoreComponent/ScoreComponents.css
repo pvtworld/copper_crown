@@ -1,7 +1,7 @@
 .topcorner{
-    background-color: rgba(0, 0, 0, 0.9);
-    background: rgba(0, 0, 0, 0.9);
-    color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.87);
+    background: rgba(0, 0, 0, 0.87);
+    color: rgba(0, 0, 0, 0.87);
     float: right;
     margin-top: 20px;
     margin-right: 20px;
@@ -10,6 +10,7 @@
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+    border: 2px solid #FFA000;
 }
 
 .stroke {
@@ -34,5 +35,6 @@
         background-color: rgba(0, 0, 0, 0);
         background: rgba(0, 0, 0, 0);
         color: rgba(0, 0, 0, 0);
+        border: 0px;
     }
 }

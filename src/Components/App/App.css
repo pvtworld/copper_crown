@@ -1,7 +1,11 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .App {
   text-align: center;
 }
-.map{
+.map {
   background-color:#ccc;
   position:fixed;
   width:100%;
