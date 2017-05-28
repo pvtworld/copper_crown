@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import { geoError, geoOptions} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
 import GameMap from "../GameMap/GameMap";
+import {connect} from 'react-redux';
+import {firebaseConnect, dataToJS} from 'react-redux-firebase'
+import { showUsernameModal } from '../../Redux/Actions/userActions';
 
 class CopperMap extends Component {
     constructor() {
@@ -67,6 +70,12 @@ class CopperMap extends Component {
         clearInterval(this.geoTimer);
     }
 
+    componentWillUpdate(){
+        if(this.props.userInfo && (this.props.userInfo.username === 'NOT_SET') && (this.props.showNewUserModal !== true)){
+            this.props.dispatch(showUsernameModal());
+        }
+    }
+
 
     render() {
         return (
@@ -96,4 +105,21 @@ class CopperMap extends Component {
     }
 }
 
-export default CopperMap;
+const mapStateToProps = (state, {auth}) => {
+    return {
+        userInfo: auth ? dataToJS(state.firebase, `users/${auth.uid}`) : undefined
+    }
+}
+
+const propsConnected = connect(mapStateToProps)(CopperMap)
+
+const wrappedPlayerInfo = firebaseConnect(
+    ({auth}) => ([auth ? `users/${auth.uid}` : '/']))(propsConnected);
+
+const authConnected = connect(
+    (state) => ({
+        showNewUserModal: state.showNewUserModal.show
+    })
+)(wrappedPlayerInfo)
+
+export default authConnected
