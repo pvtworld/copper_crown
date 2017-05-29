@@ -3,8 +3,18 @@
 }
 
 .navbar-inverse .navbar-header > a {
-    background-image: "public/images/icons/icon-72x72.png";
-  color : #ffeb3b;
+    color: #ffeb3b;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #ffeb3b;
+}
+
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover{
+    color: #ffeb3b;
+
+    /*background-image: "public/images/icons/icon-72x72.png";
+    color : #ffeb3b;*/
 }
 
 .navbar-inverse .navbar-nav > li > a {
@@ -22,5 +32,4 @@
    /* probably not needed anymore, but doesn't hurt */
    -o-object-fit: contain;
    object-fit: contain; 
-
 }
