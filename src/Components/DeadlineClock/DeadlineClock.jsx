@@ -54,7 +54,7 @@ class DeadlineClock extends React.Component{
     render(){
         return(
             <div className="center-text">
-                <div className="days">Days: {this.addZero(this.props.days)}</div>
+                <div className="days">{this.addZero(this.props.days)} days</div>
                 <p>
                 <div className="hours">{this.addZero(this.props.hours)}</div>
                 <div className="minutes">:{this.addZero(this.props.minutes)}</div>
