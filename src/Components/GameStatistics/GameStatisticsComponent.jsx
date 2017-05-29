@@ -86,7 +86,6 @@ render(){
                 <Modal.Body>
                     <h5>Game session ends in: </h5>
                     <DeadlineClock/>
-                    <br></br>
                     <h5>Total number of roofs:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {allRoofs}</span></h5>
                     <h5>Number of roofs left:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {this.numOfRoofsLeft(this.props)}</span></h5>
                     <h5>Percent of roofs left:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {this.percentOfRoofsLeft(this.props).toFixed(1) + "%"}</span></h5>

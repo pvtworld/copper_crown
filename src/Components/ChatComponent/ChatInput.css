@@ -23,11 +23,25 @@
 }
 
 .collection {
-    height: 350px;
+    height: 300px;
     width: 100%;
     overflow: scroll;
     padding-left: 15px;
 }
+
+
+@media only screen and (max-width : 1200px) {
+    .collection {
+        height: 300px;
+    }
+}
+
+@media screen and (max-width : 992px) {
+    .collection{
+        height: 250px;
+    }
+}
+
 
 
 @media screen and (max-width: 540px) {
@@ -52,4 +66,10 @@
         min-height: 100%;
         border-radius: 0;
  }
+
+    @media only screen and (max-width : 480px) {
+        .collection{
+            height: 180px;
+        }
+    }
 }
