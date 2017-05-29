@@ -13,6 +13,7 @@
 
 .fullscreen {
     height: 100vh;
+    overflow: auto;
 }
 
 h2 {

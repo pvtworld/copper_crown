@@ -8,7 +8,7 @@ import ToolTip from '../ToolTip/ToolTip'
 import { loadingUser, finishedLoadingUser, loadingError } from '../../Redux/Actions/copperMapActions'
 import { browserHistory } from 'react-router';
 
-const title = <h2>Sign in to play the game</h2>;
+const title = <h4>Sign in to play the game</h4>;
 
 const loginUser = (firebase, provider, dispatch) => {
     dispatch(loadingUser());

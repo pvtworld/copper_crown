@@ -5,8 +5,9 @@ import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import Leaderboard from '../Leaderboard/LeaderComponent';
-import GameInfo from '../GameInfoComponent/GameInfoComponent';
+import StolenRoofs from '../GameInfoComponent/GameInfoComponent';
 import Profile from '../Profile/ProfileComponent'
+import ChatComponent from '../ChatComponent/ChatComponent';
 import GameStatistics from '../GameStatistics/GameStatisticsComponent';
 
 class InfoContainer extends React.Component {
@@ -35,8 +36,10 @@ class InfoContainer extends React.Component {
                 return <Leaderboard/>
             case 'SHOW_PROFILE':
                 return <Profile/>
-            case 'SHOW_GAME_INFO':
-                return <GameInfo/>
+            case 'SHOW_STOLEN_ROOFS':
+                return <StolenRoofs/>
+            case 'SHOW_GAME_CHAT':
+                return <ChatComponent/>;
             case 'SHOW_STATISTICS':
                 return <GameStatistics/>
             default:
