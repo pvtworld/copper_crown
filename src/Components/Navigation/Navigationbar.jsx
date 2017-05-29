@@ -34,10 +34,15 @@ const Navigationbar = (props) => {
                     <NavItem onClick={() => props.dispatch(showStolenRoofs())}>Stolen Roofs</NavItem>
                     <NavItem onClick={()=> props.dispatch(showHelp())}>Help</NavItem>
                 </Nav>
+                
                 <Nav pullRight>
+                {!props.loadingUser ? 
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
                         <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
                     </NavDropdown>
+                :
+                <CircularProgress color={'#ffeb3b'}/>
+                }
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
