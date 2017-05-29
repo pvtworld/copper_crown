@@ -1,15 +1,7 @@
 [
-    
-  {
-    "elementType": "geometry.stroke",
-    "stylers": [
+        
       {
-        "color": "#ffeb3b"
-      }
-    ]
-  },
-  {
-      "featureType": "landscape", 
+    "featureType": "landscape.man_made",
     "elementType": "geometry.stroke",
     "stylers": [
       {
@@ -18,14 +10,10 @@
     ]
   },
     {
-      "featureType": "landscape", 
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
+    "featureType": "landscape.man_made", 
+    "elementType": "geometry.fill", 
+    "stylers": [ { "visibility": "on" }, { "hue": 0  }, { "saturation": 0 }, { "lightness": -75} ] },
+
   {
     "elementType": "labels.icon",
     "stylers": [
@@ -53,12 +41,7 @@
   {
     "featureType": "administrative",
     "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
+     "stylers": [ { "visibility": "on" }, { "hue": 0  }, { "saturation": 0 }, { "lightness": -45} ] },
   {
     "featureType": "administrative.country",
     "elementType": "labels.text.fill",
@@ -86,20 +69,27 @@
     ]
   },
   {
-    "featureType": "landscape.man_made",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#ffeb3b"
-      }
-    ]
-  },
-    {
-    "featureType": "landscape.man_made",
+    "featureType": "landscape.natural",
     "elementType": "geometry.fill",
     "stylers": [
       {
         "color": "#757575"
+      }
+    ]
+  },    {
+    "featureType": "landscape.natural.landcover",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },    {
+    "featureType": "landscape.natural.terrain",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#000080"
       }
     ]
   },
@@ -115,12 +105,7 @@
   {
     "featureType": "poi",
     "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
+    "stylers": [ { "visibility": "on" }, { "hue": 0  }, { "saturation": 0 }, { "lightness": -45} ] },
   {
     "featureType": "poi",
     "elementType": "labels.text.fill",
@@ -135,7 +120,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#181818"
+        "color": "#757575"
       }
     ]
   },
@@ -225,7 +210,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#000000"
+        "color": "#000080"
       }
     ]
   },
