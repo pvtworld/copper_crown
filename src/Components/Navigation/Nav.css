@@ -3,9 +3,13 @@
 }
 
 .navbar-inverse .navbar-header > a {
-  color : #ffeb3b;
+    color: #ffeb3b;
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color : #ffeb3b;
+    color: #ffeb3b;
+}
+
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover{
+    color: #ffeb3b;
 }
