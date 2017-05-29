@@ -78,14 +78,14 @@ render(){
                     <h5>Game session ends in: </h5>
                     <DeadlineClock/>
                     <br></br>
-                    <h5>Total number of roofs: {allRoofs}</h5>
-                    <h5>Number of roofs left: {this.numOfRoofsLeft(this.props)}</h5>
-                    <h5>Percent of roofs left: {this.percentOfRoofsLeft(this.props).toFixed(1) + "%"}</h5>
+                    <h5>Total number of roofs:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {allRoofs}</span></h5>
+                    <h5>Number of roofs left:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {this.numOfRoofsLeft(this.props)}</span></h5>
+                    <h5>Percent of roofs left:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {this.percentOfRoofsLeft(this.props).toFixed(1) + "%"}</span></h5>
                     <br></br>
-                    <h5>Current number of players: {this.numOfPlayers(this.props)}</h5>
-                    <h5>Current copper price: {this.countDailyCopperPrice(this.props).toFixed(2) + " kr/sqm"}</h5>
+                    <h5>Current number of players:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {this.numOfPlayers(this.props)}</span></h5>
+                    <h5>Current copper price:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {this.countDailyCopperPrice(this.props).toFixed(2) + " kr/sqm"}</span></h5>
                     <br></br>
-                    <p id="leftp">Roofs remaining: {this.numOfRoofsLeft(this.props)}</p><p id="rightp">Roofs taken:{allRoofs-this.numOfRoofsLeft(this.props)}</p>
+                    <p id="leftp">Roofs remaining: {this.numOfRoofsLeft(this.props)}</p><p id="rightp">Roofs taken: {allRoofs-this.numOfRoofsLeft(this.props)}</p>
                     <LinearProgress id="progressbar" mode="determinate" color={"#2CA484"} value={this.state.completed} />
                     <br></br>
                 </Modal.Body>
