@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap'
 import { resetModal } from '../../Redux/Actions/navigationActions'
 import { connect } from 'react-redux'
 import * as pubnub from 'pubnub'
-import { pathToJS } from 'react-redux-firebase'
+import { pathToJS, dataToJS, firebaseConnect } from 'react-redux-firebase'
 import Toggle from 'material-ui/Toggle';
 import './ChatInput.css'
 import IconButton from 'material-ui/IconButton';
@@ -116,7 +116,7 @@ class ChatComponent extends React.Component{
                         <Chip style={{marginTop: 10, marginBottom: 15}}
                               backgroundColor={orange200}>
                             <Avatar src={this.props.profilePictureURL} />
-                            {this.props.auth.uid}
+                            {this.props.userInfo.username}
                         </Chip>
 
                     </Modal.Header>
@@ -124,6 +124,7 @@ class ChatComponent extends React.Component{
                     <Modal.Body>
                         <ChatHistory fetchHistory={this.fetchHistory}
                                      history={this.props.history}
+
                         />
                     </Modal.Body>
 
@@ -131,6 +132,8 @@ class ChatComponent extends React.Component{
                         <ChatInputField photoURL={this.props.profilePictureURL}
                                         userID={this.props.userID}
                                         sendMessage={this.sendMessage}
+                                        username={this.props.userInfo.username}
+
                         />
                     </Modal.Footer>
                 </Modal.Dialog>
@@ -147,7 +150,8 @@ const mapStateToProps = (state, {auth}) => {
         lastMessageTimestamp: state.chat.get('lastMessageTimestamp'),
         usersInChat: state.chat.get('usersInChat').toJS(),
         profilePictureURL: state.chat.get('profilePictureURL'),
-        showProfilePicture: state.chat.get('showProfilePicture')
+        showProfilePicture: state.chat.get('showProfilePicture'),
+        userInfo: dataToJS(state.firebase, `users/${auth.uid}`)
     }
 }
 
@@ -164,6 +168,15 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatComponent)
+const propsConnected = connect(mapStateToProps, mapDispatchToProps)(ChatComponent);
 
+const wrappedPlayerInfo = firebaseConnect(
+    ({auth}) => ([auth ? `users/${auth.uid}` : '/']))(propsConnected);
 
+const authConnected = connect(
+    ({ firebase }) => ({
+        auth: pathToJS(firebase, 'auth') // gets auth from redux and sets as prop
+    })
+)(wrappedPlayerInfo);
+
+export default authConnected
