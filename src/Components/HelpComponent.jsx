@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import { resetModal } from '../Redux/Actions/navigationActions';
 
-export default class Help extends React.Component {
+class Help extends React.Component {
 
 render(){
     return (
@@ -29,4 +29,6 @@ render(){
 
             </Modal.Dialog>
         </div>
-    );}}
+);}}
+
+export default connect()(Help);

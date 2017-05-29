@@ -26,11 +26,11 @@ const Navigationbar = (props) => {
             </Navbar.Header>
             <Navbar.Collapse>
                 <Nav>
+                    <NavItem onClick={() => props.dispatch(showChat())}>Chat</NavItem>
+                    <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboard</NavItem>
+                    <NavItem onClick={()=> props.dispatch(showStatistics())}>Statistics</NavItem>
                     <NavItem onClick={() => props.dispatch(showProfile())}>Profile</NavItem>
                     <NavItem onClick={() => props.dispatch(showStolenRoofs())}>Stolen Roofs</NavItem>
-                    <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboards</NavItem>
-                    <NavItem onClick={() => props.dispatch(showChat())}>Chat</NavItem>
-                    <NavItem onClick={()=> props.dispatch(showStatistics())}>Game statistics</NavItem>
                     <NavItem onClick={()=> props.dispatch(showHelp())}>Help</NavItem>
                 </Nav>
                 <Nav pullRight>
