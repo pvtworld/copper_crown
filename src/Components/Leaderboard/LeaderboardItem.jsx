@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
-import {Row, Col} from 'react-bootstrap';
+import { ListItem } from 'material-ui';
+import PersonOutline from 'material-ui/svg-icons/social/person-outline';
 
 export default class LeaderboardItem extends Component {
     render(){
         var {pos, name, points} = this.props;
         return (
-            <Row>
-                <Col xs={1} sm={1} md={1}>{pos.toString()}</Col>
-                <Col xs={6} sm={4} md={2}>{name}</Col>
-                <Col xs={5} sm={7} md={9}>{points}</Col>
-            </Row>
+            <ListItem leftIcon={<PersonOutline/>}
+                primaryText={
+                <p>{pos.toString() + ". " + name}</p>}
+                secondaryText={"Points: " + points}>
+
+            </ListItem>
+
         );
     }
 }
