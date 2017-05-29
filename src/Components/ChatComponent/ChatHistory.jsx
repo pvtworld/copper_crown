@@ -40,7 +40,7 @@ export default class ChatHistory extends React.Component {
                                           key={messageObject.When}
                                 >
                                     <p style={{fontSize: '13px'}}>
-                                        <span style={{color: '#6f6f6f', fontWeight: '450'}}>{messageObject.authID}</span>
+                                        <span style={{color: '#6f6f6f', fontWeight: '450'}}>{messageObject.username}</span>
                                         <span style={{color: '#222222', fontWeight: '350'}}>&nbsp; &nbsp;{messageObject.newMessage}</span>
                                         <span style={{color: '#6f6f6f', fontWeight: '250', display: 'block', fontSize: '11px', opacity: '0.6'}}>{messageDateTime}</span>
 

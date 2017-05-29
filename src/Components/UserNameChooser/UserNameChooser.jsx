@@ -90,7 +90,6 @@ class UserNameChooser extends Component {
                         />
                         <p className='floating-right' style={{color: '#696969', marginRight: '5px'}}>{this.state.value.length}/30</p>
 
-
                     </Modal.Body>
 
                     <Modal.Footer>
@@ -100,6 +99,7 @@ class UserNameChooser extends Component {
                                       type="submit"
                                       primary={true}
                                       onTouchTap={this.onFormSubmit}
+
                         />
                     </Modal.Footer>
 
