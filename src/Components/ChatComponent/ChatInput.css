@@ -30,6 +30,14 @@
 }
 
 
+@media screen and (max-width : 992px) {
+    .collection{
+        height: 270px;
+    }
+}
+
+
+
 @media screen and (max-width: 540px) {
     .collection{
         height: 200px;
@@ -52,4 +60,10 @@
         min-height: 100%;
         border-radius: 0;
  }
+
+    @media only screen and (max-width : 480px) {
+        .collection{
+            height: 180px;
+        }
+    }
 }
