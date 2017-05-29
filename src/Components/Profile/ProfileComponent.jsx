@@ -49,7 +49,7 @@ const ProfileComponent = (props) => {
                         <ListItem 
                             leftAvatar={<Layers/>}
                             primaryText={'Area of roofs taken:'} 
-                            secondaryText={props.userInfo.areaOfCopper}/>
+                            secondaryText={props.userInfo.areaOfCopper ? props.userInfo.areaOfCopper : '0'}/>
 
                     </List>
                     
