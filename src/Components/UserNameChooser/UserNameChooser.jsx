@@ -77,10 +77,10 @@ class UserNameChooser extends Component {
 
                     <Modal.Body>
 
-                        <p style={{color: '#6f6f6f', fontSize: '13px', marginTop: '5px', marginBottom: '10px'}}>You only have <span style={{color: '#F44336', fontWeight: '500'}} > one chance </span> to chose username!</p>
+                        <p style={{color: '#6f6f6f', fontSize: '13px', marginTop: '5px', marginBottom: '10px'}}>Note that username <span style={{color: '#F44336', fontWeight: '500'}} > can't </span> be changed once chosen!</p>
 
                         <TextField
-                            hintText="Chose your desired username..."
+                            hintText="Choose your desired username..."
                             type="text"
                             value={this.state.value}
                             onChange={this.handleChange}

@@ -12,6 +12,8 @@ export var showModalReducer = (state = {showModalString: ''}, action) => {
             return {...state, showModalString: 'SHOW_GAME_CHAT'};
         case 'SHOW_STATISTICS':
         return {...state, showModalString: 'SHOW_STATISTICS'};
+        case 'SHOW_HELP':
+        return{...state,showModalString: 'SHOW_HELP'};
         default:
             return state;
     }

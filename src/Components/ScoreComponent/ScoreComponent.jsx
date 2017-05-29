@@ -6,7 +6,7 @@ import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase';
 const ScoreComponent = (props) => {
     return (
         <div className="topcorner">
-            <h1 className="stroke">User Score: {props.userInfo ? props.userInfo.points : ''}</h1>
+            <h1 className="stroke">Score: {props.userInfo ? props.userInfo.points : ''}</h1>
         </div>
     )
 }
