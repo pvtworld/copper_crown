@@ -3,7 +3,6 @@ import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import ReactDOM from 'react-dom'
 import './ChatInput.css'
-import Divider from 'material-ui/Divider';
 
 
 export default class ChatHistory extends React.Component {
