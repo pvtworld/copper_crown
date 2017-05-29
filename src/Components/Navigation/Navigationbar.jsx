@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
-import { showLeaderboard, showStolenRoofs, showStatistics, showProfile, resetModal, showChat } from '../../Redux/Actions/navigationActions';
+import { showLeaderboard, showStolenRoofs, showStatistics, showProfile, resetModal, showChat, showHelp } from '../../Redux/Actions/navigationActions';
 import './Nav.css'
 
 const Navigationbar = (props) => {
@@ -28,11 +28,12 @@ const Navigationbar = (props) => {
             </Navbar.Header>
             <Navbar.Collapse>
                 <Nav>
+                    <NavItem onClick={() => props.dispatch(showChat())}>Chat</NavItem>
+                    <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboard</NavItem>
+                    <NavItem onClick={()=> props.dispatch(showStatistics())}>Statistics</NavItem>
                     <NavItem onClick={() => props.dispatch(showProfile())}>Profile</NavItem>
                     <NavItem onClick={() => props.dispatch(showStolenRoofs())}>Stolen Roofs</NavItem>
-                    <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboards</NavItem>
-                    <NavItem onClick={() => props.dispatch(showChat())}>Chat</NavItem>
-                    <NavItem onClick={()=> props.dispatch(showStatistics())}>Game statistics</NavItem>
+                    <NavItem onClick={()=> props.dispatch(showHelp())}>Help</NavItem>
                 </Nav>
                 <Nav pullRight>
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
