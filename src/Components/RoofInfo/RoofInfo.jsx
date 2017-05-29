@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase'
 import {resetRoof} from '../../Redux/Actions/copperMapActions';
+import Close from 'material-ui/svg-icons/navigation/close';
+import { IconButton } from 'material-ui';
+import {red500, red900} from 'material-ui/styles/colors';
 import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import RoofInfoSnackbar from './RoofInfoSnackbar';
 
@@ -157,6 +160,12 @@ class RoofInfo extends React.Component {
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Header>
+                        <div className="floating-right">
+                        <IconButton onClick={this.leaveRoof}>
+                            <Close color={red500}
+                                   hoverColor={red900}/>
+                        </IconButton>
+                        </div>
                         <Modal.Title>Waiting for more thieves</Modal.Title>
                     </Modal.Header>
 
@@ -182,6 +191,12 @@ class RoofInfo extends React.Component {
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Header>
+                        <div className="floating-right">
+                        <IconButton onClick={() => this.props.dispatch(resetRoof())}>
+                            <Close color={red500}
+                                   hoverColor={red900}/>
+                        </IconButton>
+                        </div>
                         <Modal.Title>Roof Found</Modal.Title>
                     </Modal.Header>
 

@@ -2,7 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import './ProfileComponent.css';
-import { Button, Image, Modal } from 'react-bootstrap';
+import { Avatar, IconButton, List, ListItem } from 'material-ui';
+import { Modal } from 'react-bootstrap';
+import {red500, red900} from 'material-ui/styles/colors';
+import Close from 'material-ui/svg-icons/navigation/close';
+import Email from 'material-ui/svg-icons/communication/email';
+import Money from 'material-ui/svg-icons/editor/attach-money';
+import Home from 'material-ui/svg-icons/action/home';
+import Layers from 'material-ui/svg-icons/maps/layers';
 import { resetModal } from '../../Redux/Actions/navigationActions';
 
 const ProfileComponent = (props) => {
@@ -11,23 +18,43 @@ const ProfileComponent = (props) => {
         <div className="static-modal">
             <Modal.Dialog>
                 <Modal.Header>
-                    <Modal.Title>Profile Component</Modal.Title>
+                    <div className="floating-right">
+                        <IconButton onClick={() => props.dispatch(resetModal())}>
+                            <Close color={red500}
+                                   hoverColor={red900}/>
+                        </IconButton>
+                        </div>
+                    <Modal.Title>Profile</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <h1>My account</h1>
-                    <h4>Logged in as: {props.auth.displayName} </h4>
-                    <h5>Username: {props.userInfo.username}</h5>
-                    <h5>User ID:  {props.auth.uid}</h5>
-                    <Image id="picture" src={props.auth.photoURL} circle />
-                    <h5>Mail: {props.auth.email}</h5>
-                    <h5>Points: {props.userInfo.points}</h5>
-                    <h5>Number of roofs taken: {props.userInfo.roofsStolen ? props.userInfo.roofsStolen : '0'}</h5>
-                    <h5>Area of roofs taken:  {props.userInfo.areaOfCopper}</h5>
+                    <List>
+                        <ListItem 
+                            leftAvatar={<Avatar src={props.auth.photoURL}/>}
+                            primaryText={'Username: '}
+                            secondaryText={props.userInfo.username}
+                        />
+                        <ListItem 
+                            leftAvatar={<Email/>}
+                            primaryText={'Email: '} 
+                            secondaryText={props.auth.email}/>
+                        <ListItem 
+                            leftAvatar={<Money/>}
+                            primaryText={'Points: '} 
+                            secondaryText={props.userInfo.points ? props.userInfo.points : '0'}/>
+                        <ListItem 
+                            leftAvatar={<Home/>}
+                            primaryText={'Number of roofs taken:'} 
+                            secondaryText={props.userInfo.roofsStolen ? props.userInfo.roofsStolen : '0'}/>
+                        <ListItem 
+                            leftAvatar={<Layers/>}
+                            primaryText={'Area of roofs taken:'} 
+                            secondaryText={props.userInfo.areaOfCopper ? props.userInfo.areaOfCopper : '0'}/>
+
+                    </List>
+                    
+
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>OK</Button>
-                </Modal.Footer>
 
             </Modal.Dialog>
         </div>
