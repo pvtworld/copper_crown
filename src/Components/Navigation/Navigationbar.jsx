@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CircularProgress from 'material-ui/CircularProgress';
-
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import { showLeaderboard, showStolenRoofs, showStatistics, showProfile, resetModal, showChat, showHelp } from '../../Redux/Actions/navigationActions';
@@ -34,15 +32,10 @@ const Navigationbar = (props) => {
                     <NavItem onClick={() => props.dispatch(showStolenRoofs())}>Stolen Roofs</NavItem>
                     <NavItem onClick={()=> props.dispatch(showHelp())}>Help</NavItem>
                 </Nav>
-                
                 <Nav pullRight>
-                {!props.loadingUser ? 
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
                         <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
                     </NavDropdown>
-                :
-                <CircularProgress color={'#ffeb3b'}/>
-                }
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
@@ -53,7 +46,6 @@ const Navigationbar = (props) => {
 
 const mapStateToProps = ({firebase}, {auth}) => ({
     userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined,
-    loadingUser: auth ? pathToJS(firebase, `requesting/users/${auth.uid}`) : undefined
 })
 
 const propsConnected = connect(mapStateToProps)(Navigationbar)
