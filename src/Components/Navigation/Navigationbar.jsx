@@ -7,12 +7,11 @@ import './Nav.css'
 
 const Navigationbar = (props) => {
 
-    try {
-        var userName = props.auth.displayName;
-        if (!userName) userName = "Anonymous";
+    if(!props.userInfo){
+        var userName = "";
     }
-    catch(err) {
-
+    else{
+        userName = props.userInfo.username;
     }
 
     return(
@@ -21,8 +20,10 @@ const Navigationbar = (props) => {
                 {/*<a href="#" className="navbar-text visible-xs-inline-block">Example text</a>*/}
                 <Navbar.Brand>
                     <a onClick={() => props.dispatch(resetModal())}>CopperCrown</a>
+                    
                 </Navbar.Brand>
                 <Navbar.Toggle />
+               
             </Navbar.Header>
             <Navbar.Collapse>
                 <Nav>
@@ -33,6 +34,7 @@ const Navigationbar = (props) => {
                     <NavItem onClick={() => props.dispatch(showStolenRoofs())}>Stolen Roofs</NavItem>
                     <NavItem onClick={()=> props.dispatch(showHelp())}>Help</NavItem>
                 </Nav>
+                
                 <Nav pullRight>
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
                         <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
@@ -46,7 +48,7 @@ const Navigationbar = (props) => {
 
 
 const mapStateToProps = ({firebase}, {auth}) => ({
-    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined
+    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined,
 })
 
 const propsConnected = connect(mapStateToProps)(Navigationbar)

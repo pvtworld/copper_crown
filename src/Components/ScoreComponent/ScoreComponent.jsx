@@ -12,7 +12,7 @@ const ScoreComponent = (props) => {
 }
 
 const mapStateToProps = ({firebase}, {auth}) => ({
-    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined
+    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined,
 })
 
 const propsConnected = connect(mapStateToProps)(ScoreComponent);

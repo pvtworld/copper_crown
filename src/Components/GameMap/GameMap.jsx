@@ -26,6 +26,8 @@ const GameMap = withGoogleMap(props => (
             //minZoom: 18,
             //zoom: 18,
             styles: StyledGameMap,
+            disableDefaultUI: true,
+            
         }}
         
 
