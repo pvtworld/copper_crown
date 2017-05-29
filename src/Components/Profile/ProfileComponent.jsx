@@ -41,7 +41,7 @@ const mapStateToProps = ({firebase}, {auth}) => ({
 const propsConnected = connect(mapStateToProps)(ProfileComponent)
 
 const wrappedPlayerInfo = firebaseConnect(
-    ({auth}) => ([auth ? (`users/${auth.uid}`, '/teams'): ('/', '/teams')]))(propsConnected);
+    ({auth}) => ([auth ? (`users/${auth.uid}`): ('/')]))(propsConnected);
 
 const authConnected = connect(
  ({ firebase }) => ({

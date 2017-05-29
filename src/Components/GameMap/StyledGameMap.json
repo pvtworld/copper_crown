@@ -1,5 +1,4 @@
 [
-        
       {
     "featureType": "landscape.man_made",
     "elementType": "geometry.stroke",
@@ -12,7 +11,7 @@
     {
     "featureType": "landscape.man_made", 
     "elementType": "geometry.fill", 
-    "stylers": [ { "visibility": "on" }, { "hue": 0  }, { "saturation": 0 }, { "lightness": -75} ] },
+    "stylers": [ { "visibility": "on" }, { "color": "#757575"}, { "hue": 0 }, { "saturation": 0 }, { "lightness": -0.46} ] },
 
   {
     "elementType": "labels.icon",
@@ -41,7 +40,12 @@
   {
     "featureType": "administrative",
     "elementType": "geometry",
-     "stylers": [ { "visibility": "on" }, { "hue": 0  }, { "saturation": 0 }, { "lightness": -45} ] },
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
   {
     "featureType": "administrative.country",
     "elementType": "labels.text.fill",
@@ -89,7 +93,7 @@
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#000080"
+        "color": "#757575"
       }
     ]
   },
@@ -105,7 +109,12 @@
   {
     "featureType": "poi",
     "elementType": "geometry.fill",
-    "stylers": [ { "visibility": "on" }, { "hue": 0  }, { "saturation": 0 }, { "lightness": -45} ] },
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
   {
     "featureType": "poi",
     "elementType": "labels.text.fill",

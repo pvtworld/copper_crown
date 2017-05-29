@@ -25,9 +25,9 @@ const removeRoof = (roof, firebase, dispatch, userInfo, uid) => () => {
         dispatch({type: 'STOLEN_ROOFS_UPDATED'})
         return Promise.resolve();
     }).then( () =>  {
-    let newUserPoints = userInfo.points - roof.pointsPerUser;
-    let newUserArea = userInfo.areaOfCopper - roof.areaPerUser;
-    let newRoofsStolen = userInfo.roofsStolen - 1;
+    let newUserPoints = userInfo.points - parseInt(roof.points, 10) || parseInt(roof.points, 10) ;
+    let newUserArea = userInfo.areaOfCopper - parseInt(roof.area, 10) || parseInt(roof.area, 10) ;
+    let newRoofsStolen = userInfo.roofsStolen ? userInfo.roofsStolen -= 1 : 0;
 
     dispatch({type: 'UPDATING_USER_POINTS' })
     const newUserInfo = {...userInfo};
@@ -59,7 +59,7 @@ const PlayerInfo = (props) => {
                 {
                 createRoofs(props.stolenRoofs).map( roof => (<ListItem 
                                                             className="roof" key={roof.roofId} 
-                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.areaPerUser}, Points: ${roof.pointsPerUser}`}
+                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.area}, Points: ${roof.points}`} 
                                                             disabled={true} 
                                                             rightIcon={<DeleteForever 
                                                                         hoverColor={red500} 
@@ -101,6 +101,4 @@ const authConnected = connect(
 )(wrappedPlayerInfo)
 
 export default authConnected
-
-
 

@@ -1,7 +1,7 @@
 .topcorner{
-    background-color: rgba(0, 0, 0, 0.9);
-    background: rgba(0, 0, 0, 0.9);
-    color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.87);
+    background: rgba(0, 0, 0, 0.87);
+    color: rgba(0, 0, 0, 0.87);
     float: right;
     margin-top: 20px;
     margin-right: 20px;
@@ -10,6 +10,7 @@
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+    border: 2px solid #FFA000;
 }
 
 .stroke {
@@ -26,13 +27,14 @@
 @media screen and (max-width: 540px) {
     .topcorner{
         margin-top: 0px;
-        margin-right: 3px;
-        border-radius: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-        padding-bottom: 0px;
-        background-color: rgba(0, 0, 0, 0);
-        background: rgba(0, 0, 0, 0);
-        color: rgba(0, 0, 0, 0);
+        margin-right: 0px;
+        border-radius: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 6px;
+        background-color: rgba(0, 0, 0, 0.87);
+        background: rgba(0, 0, 0, 0.87);
+        color: rgba(0, 0, 0, 0.87);
+        border: 0px;
     }
 }

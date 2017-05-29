@@ -1,7 +1,11 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .App {
   text-align: center;
 }
-.map{
+.map {
   background-color:#ccc;
   position:fixed;
   width:100%;
@@ -19,10 +23,19 @@
 }
 
 .modal-body {
-    max-height: calc(100vh - 150px);
-    overflow-y: auto;
+  max-height: 500px;
+  overflow: hidden;
+  padding: 15px;
 }
+
 
 .center-text{
   text-align: center;
 }
+
+.loading-spinner{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+

@@ -3,20 +3,31 @@ import { connect } from 'react-redux';
 import RoofInfo from "../RoofInfo/RoofInfo";
 import RoofStolen from '../RoofInfo/RoofStolen';
 import RoofNotFound from '../RoofInfo/RoofNotFound';
-import Spinner from 'react-spinkit';
-
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 import Leaderboard from '../Leaderboard/LeaderComponent';
-import GameInfo from '../GameInfoComponent/GameInfoComponent';
+import StolenRoofs from '../GameInfoComponent/GameInfoComponent';
 import Profile from '../Profile/ProfileComponent'
+import ChatComponent from '../ChatComponent/ChatComponent';
 import GameStatistics from '../GameStatistics/GameStatisticsComponent';
 
 class InfoContainer extends React.Component {
-
     render() {
 
         if(this.props.searching){
             return(
-                <Spinner spinnerName="chasing-dots" noFadeIn />
+                <div className="loading-spinner">
+                    <RefreshIndicator
+                        size={60}
+                        left={-30}
+                        top={-30}
+                        loadingColor="#FF9800"
+                        status="loading"
+                        style={{
+                            display: 'inline-block',
+                            position: 'relative',
+                        }}
+                    />
+                </div>
             )
         }
 
@@ -25,8 +36,10 @@ class InfoContainer extends React.Component {
                 return <Leaderboard/>
             case 'SHOW_PROFILE':
                 return <Profile/>
-            case 'SHOW_GAME_INFO':
-                return <GameInfo/>
+            case 'SHOW_STOLEN_ROOFS':
+                return <StolenRoofs/>
+            case 'SHOW_GAME_CHAT':
+                return <ChatComponent/>;
             case 'SHOW_STATISTICS':
                 return <GameStatistics/>
             default:

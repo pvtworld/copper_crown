@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import { geoError, geoOptions} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
 import GameMap from "../GameMap/GameMap";
-//import _ from "lodash";
-
+import {connect} from 'react-redux';
+import {firebaseConnect, dataToJS, pathToJS} from 'react-redux-firebase'
+import { showUsernameModal } from '../../Redux/Actions/userActions';
 
 class CopperMap extends Component {
     constructor() {
@@ -20,32 +21,6 @@ class CopperMap extends Component {
     geoTimer = null;
 
     geoLocationWatcher = this.geoLocationWatcher.bind(this);
-
-// initColourMap() {
-//     var layer = new FusionTablesLayer({
-//           query: {
-//             select: 'geometry',
-//             from: '1ertEwm-1bMBhpEwHhtNYT47HQ9k2ki_6sRa-UQ'
-//           },
-//           styles: [{
-//             polygonOptions: {
-//               fillColor: '#00FF00',
-//               fillOpacity: 0.3
-//             }
-//           }, {
-//             where: 'birds > 300',
-//             polygonOptions: {
-//               fillColor: '#0000FF'
-//             }
-//           }, {
-//             where: 'population > 5',
-//             polygonOptions: {
-//               fillOpacity: 1.0
-//             }
-//           }]
-//         });
-//         layer.setMap(map);
-//       }
     
 
     geoLocationWatcher() {
@@ -54,7 +29,7 @@ class CopperMap extends Component {
             let watchPositionId;
 
             const geoSucess = (position) => {
-                console.log("Successssssss! Located user at: ");
+                console.log("Succeeeeessssssssssssssss! Located user at: ");
                 //console.log(position);
 
                 if(this.state.isMounted){
@@ -96,6 +71,12 @@ class CopperMap extends Component {
         clearInterval(this.geoTimer);
     }
 
+    componentWillUpdate(){
+        if(this.props.userInfo && (this.props.userInfo.username === 'NOT_SET') && (this.props.showNewUserModal !== true)){
+            this.props.dispatch(showUsernameModal());
+        }
+    }
+
 
     render() {
         return (
@@ -124,5 +105,22 @@ class CopperMap extends Component {
         );
     }
 }
+const mapStateToProps = (state, {auth}) => {
+    return {
+        userInfo: auth ? dataToJS(state.firebase, `users/${auth.uid}`) : undefined,
+        showNewUserModal: state.showNewUserModal.show
+    }
+}
 
-export default CopperMap;
+const propsConnected = connect(mapStateToProps)(CopperMap)
+
+const wrappedPlayerInfo = firebaseConnect(
+    ({auth}) => ([auth ? `users/${auth.uid}` : '/']))(propsConnected);
+
+const authConnected = connect(
+    (state) => ({
+        auth: pathToJS(state.firebase, 'auth')
+    })
+)(wrappedPlayerInfo)
+
+export default authConnected

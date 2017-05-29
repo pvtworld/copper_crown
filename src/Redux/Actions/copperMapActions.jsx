@@ -72,14 +72,3 @@ export const multiplierReturned = (item) => {
         multiplier: item
     }
 }
-
-export const checkForThieves = () => {
-    return {type: 'CHECKING_FOR_THIEVES'}
-}
-
-export const thievesReturned = (item) => {
-    return{
-        type: 'THIEVES_RETURNED',
-        thieves: item
-    }
-}

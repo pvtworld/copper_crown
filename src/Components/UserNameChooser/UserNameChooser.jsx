@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import {Modal, Button} from 'react-bootstrap';
+import {addNewUser} from '../../Redux/Actions/userActions';
 
-class TeamChooser extends Component {
+class UserNameChooser extends Component {
 
     constructor(){
         super();
@@ -11,24 +12,18 @@ class TeamChooser extends Component {
         this.handleNewUsername = this.handleNewUsername.bind(this);
     }
 
-    addUsername(firebase, uid, userInfo, dispatch, username) {
+    addUsername(firebase, uid, userInfo, username) {
     const newUserInfo = {...userInfo};
     newUserInfo.username = username;
-
-    dispatch({type: 'UPDATE_USERNAME'})
     firebase.set(`users/${uid}`, {...newUserInfo})
 }
 
     handleNewUsername() {
+        console.log('ny ver')
         var username = this.refs.newUserName.value;
-        this.addUsername(this.props.firebase, this.props.auth.uid, this.props.userInfo, this.props.dispatch, username);
-        this.props.onClose();
+        this.addUsername(this.props.firebase, this.props.auth.uid, this.props.userInfo, username);
+        this.props.dispatch(addNewUser());
     };
-
-    // const handleSchoolChange = (event) => {
-    //     school = event.target.value;
-    // }
-
 
     render (){
         return (
@@ -54,15 +49,14 @@ class TeamChooser extends Component {
 }
 
 const mapStateToProps = ({firebase}, {auth}) => ({
-    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined,
-    teams: dataToJS(firebase, '/teams')
+    userInfo: auth ? dataToJS(firebase, `users/${auth.uid}`) : undefined
 
 })
 
-const propsConnected = connect(mapStateToProps)(TeamChooser);
+const propsConnected = connect(mapStateToProps)(UserNameChooser);
 
 const wrappedPlayerInfo = firebaseConnect(
-    ({auth}) => ([auth ? `users/${auth.uid}` : '/',  '/teams']))(propsConnected);
+    ({auth}) => ([auth ? `users/${auth.uid}` : '/']))(propsConnected);
 
 const authConnected = connect(
     ({firebase}) => ({

@@ -2,7 +2,9 @@ import { combineReducers } from 'redux';
 import { firebaseStateReducer } from 'react-redux-firebase'
 import { showModalReducer } from './navigationReducers';
 import { deadlineClockReducer } from './clockReducer'
-import { copperSearchReducer, displayRoofReducer, loginReducer, copperPriceReducer, updatePriceMultiplierReducer, checkForThievesReducer} from './copperMapReducers';
+import { copperSearchReducer, displayRoofReducer, loginReducer, copperPriceReducer, updatePriceMultiplierReducer} from './copperMapReducers';
+import { showUserModalReducer } from './userReducers';
+import { chatReducer } from '../../Components/ChatComponent/ChatReducers';
 
 
 const reducers = combineReducers({
@@ -14,7 +16,8 @@ const reducers = combineReducers({
     copperPrice: copperPriceReducer,
     deadlineClock: deadlineClockReducer,
     copperMultiplier: updatePriceMultiplierReducer,
-    numberOfThieves: checkForThievesReducer
+    showNewUserModal: showUserModalReducer,
+    chat: chatReducer
 });
 
 export default reducers;

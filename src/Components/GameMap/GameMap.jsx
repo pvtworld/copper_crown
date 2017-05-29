@@ -42,7 +42,7 @@ const GameMap = withGoogleMap(props => (
             radius={100}
             options={{
                 fillColor: `green`,
-                fillOpacity: 0.10,
+                fillOpacity: 0.20,
                 strokeColor: `black`,
                 strokeOpacity: 0.50,
                 strokeWeight: 2,
