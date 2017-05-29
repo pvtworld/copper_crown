@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import { IconButton } from 'material-ui';
+import {red500, red900} from 'material-ui/styles/colors';
+import Close from 'material-ui/svg-icons/navigation/close';
 import { resetModal } from '../../Redux/Actions/navigationActions';
 import DeadlineClock from '../DeadlineClock/DeadlineClock'
 import LinearProgress from 'material-ui/LinearProgress';
@@ -71,13 +74,18 @@ render(){
         <div className="static-modal">
             <Modal.Dialog>
                 <Modal.Header>
+                     <div className="floating-right">
+                        <IconButton onClick={() => this.props.dispatch(resetModal())}>
+                            <Close color={red500}
+                                   hoverColor={red900}/>
+                        </IconButton>
+                        </div>
                     <Modal.Title>Game statistics</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
                     <h5>Game session ends in: </h5>
                     <DeadlineClock/>
-                    <br></br>
                     <h5>Total number of roofs:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {allRoofs}</span></h5>
                     <h5>Number of roofs left:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {this.numOfRoofsLeft(this.props)}</span></h5>
                     <h5>Percent of roofs left:<span style={{color: '#6f6f6f', fontWeight: '450'}}> {this.percentOfRoofsLeft(this.props).toFixed(1) + "%"}</span></h5>
@@ -89,9 +97,6 @@ render(){
                     <LinearProgress id="progressbar" mode="determinate" color={"#2CA484"} value={this.state.completed} />
                     <br></br>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button bsStyle="primary" onClick={() => this.props.dispatch(resetModal())}>OK</Button>
-                </Modal.Footer>
 
             </Modal.Dialog>
         </div>

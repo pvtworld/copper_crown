@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase';
-import { Button, Modal } from 'react-bootstrap';
-import { List, ListItem } from 'material-ui';
+import { Modal } from 'react-bootstrap';
+import Close from 'material-ui/svg-icons/navigation/close';
+import { IconButton, List, ListItem } from 'material-ui';
 import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
-import {red500} from 'material-ui/styles/colors';
+import {red500, red900} from 'material-ui/styles/colors';
 import { resetModal } from '../../Redux/Actions/navigationActions'
 
 const createRoofs = (roofs) => {
@@ -44,11 +45,19 @@ const removeRoof = (roof, firebase, dispatch, userInfo, uid) => () => {
 }
 
 const PlayerInfo = (props) => {
-    
+        if(props.requestingStoolenRoofs){
+            return <div/>
+        }
         return (
             <div>
-        <Modal.Dialog>
+        <Modal.Dialog dialogClassName="full-modal">
       <Modal.Header>
+            <div className="floating-right">
+                        <IconButton onClick={() => props.dispatch(resetModal())}>
+                            <Close color={red500}
+                                   hoverColor={red900}/>
+                        </IconButton>
+                        </div>
         <Modal.Title>Stolen Roofs</Modal.Title>
       </Modal.Header>
 
@@ -59,7 +68,7 @@ const PlayerInfo = (props) => {
                 {
                 createRoofs(props.stolenRoofs).map( roof => (<ListItem 
                                                             className="roof" key={roof.roofId} 
-                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.areaPerUser}, Points: ${roof.pointsPerUser}`}
+                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.areaPerUser}, Value: ${roof.pointsPerUser}`}
                                                             disabled={true} 
                                                             rightIcon={<DeleteForever 
                                                                         hoverColor={red500} 
@@ -72,10 +81,6 @@ const PlayerInfo = (props) => {
         </List>
       </Modal.Body>
 
-      <Modal.Footer>
-        <Button bsStyle="primary" onClick={() => props.dispatch(resetModal())}>Close</Button>
-      </Modal.Footer>
-
         </Modal.Dialog>
             </div>
         )
@@ -86,6 +91,7 @@ const mapStateToProps = (state, {auth}) => {
     return{
         userInfo: dataToJS(state.firebase, `users/${auth.uid}`),
         stolenRoofs: dataToJS(state.firebase, `stolenRoofs`),
+        requestingStoolenRoofs: pathToJS(state.firebase, 'requesting/stolenRoofs')
     }
 }
 
