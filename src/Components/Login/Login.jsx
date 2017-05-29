@@ -3,13 +3,14 @@ import {compose} from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase'
 import './Login.css'
-import {Button, Panel, Col} from 'react-bootstrap';
+import {Panel, Col} from 'react-bootstrap';
 import ToolTip from '../ToolTip/ToolTip'
 import { loadingUser, finishedLoadingUser, loadingError } from '../../Redux/Actions/copperMapActions'
 import { browserHistory } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
-import { blue700 } from 'material-ui/styles/colors'
-import FontIcon from 'material-ui/FontIcon';
+import GithubCircle from 'material-ui-community-icons/icons/github-circle';
+import FacebookBox from 'material-ui-community-icons/icons/facebook-box';
+import Google from 'material-ui-community-icons/icons/google';
 
 const title = <h4>Sign in to play the game</h4>;
 
@@ -40,7 +41,7 @@ const Login = (props) => {
                         secondary={true}
                         fullWidth={true}
                         style={{marginBottom: '10px'}}
-
+                        icon={<FacebookBox/>}
                     />
 
 
@@ -51,7 +52,7 @@ const Login = (props) => {
                         secondary={true}
                         fullWidth={true}
                         style={{marginBottom: '10px'}}
-
+                        icon={<GithubCircle/>}
                     />
 
                     <RaisedButton
@@ -61,14 +62,8 @@ const Login = (props) => {
                         secondary={true}
                         fullWidth={true}
                         style={{marginBottom: '10px'}}
-
+                        icon={<Google/>}
                     />
-
-
-
-        {/*            <Button bsStyle="primary" bsSize="large" block onClick={() => loginUser(props.firebase, 'facebook', props.dispatch)} >Log In with Facebook</Button>
-                    <Button bsStyle="default" bsSize="large" block onClick={() => loginUser(props.firebase, 'github', props.dispatch)}>Log In with Github</Button>
-                    <Button bsStyle="danger" bsSize="large" block onClick={() => loginUser(props.firebase, 'google', props.dispatch)} >Log In with Google</Button>*/}
 
                     <Col className="text-right">
                         <ToolTip delayShow={200} id="tooltip-bottom" placement="bottom" tooltip="Help text. Help text. Help text. Help text. Help text. Help text." >Help</ToolTip>
