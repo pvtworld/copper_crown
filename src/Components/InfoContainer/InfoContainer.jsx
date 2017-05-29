@@ -9,6 +9,7 @@ import StolenRoofs from '../GameInfoComponent/GameInfoComponent';
 import Profile from '../Profile/ProfileComponent'
 import ChatComponent from '../ChatComponent/ChatComponent';
 import GameStatistics from '../GameStatistics/GameStatisticsComponent';
+import HelpComponent from '../HelpComponent';
 
 class InfoContainer extends React.Component {
     render() {
@@ -42,6 +43,8 @@ class InfoContainer extends React.Component {
                 return <ChatComponent/>;
             case 'SHOW_STATISTICS':
                 return <GameStatistics/>
+            case 'SHOW_HELP':
+                return <HelpComponent/>
             default:
                 break;
         }
