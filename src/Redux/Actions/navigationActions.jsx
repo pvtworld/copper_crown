@@ -34,5 +34,11 @@ export const resetModal = () => {
     };
 };
 
+export const showHelp = () => {
+    return{
+        type: 'SHOW_HELP'
+    };
+};
+
 
 
