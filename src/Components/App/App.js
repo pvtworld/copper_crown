@@ -4,7 +4,7 @@ import {pathToJS} from 'react-redux-firebase'
 import GameContainer from '../GameContainer/GameContainer';
 import { browserHistory } from 'react-router'
 import { getPricePerSquareMeter, bindPriceMultiplier } from '../../Helpers/PointsHelpers';
-
+// import * as pubnub from 'pubnub';
 
 class App extends React.Component {
 
@@ -14,7 +14,6 @@ class App extends React.Component {
     }
 
     redirectIfAuth = (props) => {
-
         if (!props.auth) {
             console.log('User is not auth, redirecting to login /', props.auth);
             browserHistory.push('/')
@@ -26,9 +25,7 @@ class App extends React.Component {
 
     render() {
         this.redirectIfAuth(this.props);
-        // check if they are no logged in at all
         console.log('Creating GameContainer');
-
         return ( <div>
                 <GameContainer/>
             </div>

@@ -4,9 +4,9 @@ export const showLeaderboard = () => {
     };
 };
 
-export const showAbout = () => {
+export const showStolenRoofs = () => {
     return {
-        type: 'SHOW_GAME_INFO'
+        type: 'SHOW_STOLEN_ROOFS'
     };
 };
 
@@ -22,8 +22,17 @@ export const showStatistics = () => {
     };
 };
 
+export const showChat = () => {
+    return {
+        type: 'SHOW_GAME_CHAT'
+    };
+};
+
 export const resetModal = () => {
     return {
         type: 'RESET_MODAL'
     };
 };
+
+
+
