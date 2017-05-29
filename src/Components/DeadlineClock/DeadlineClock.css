@@ -3,6 +3,10 @@
     font-weight: bold;
 }
 
+.days {
+    display: block
+}
+
 .hours, .minutes, .seconds{
     display: inline;
     font-weight: bold;
