@@ -21,7 +21,7 @@ class CopperMap extends Component {
     geoTimer = null;
 
     geoLocationWatcher = this.geoLocationWatcher.bind(this);
-
+    
 
     geoLocationWatcher() {
         if (navigator.geolocation) {
@@ -38,6 +38,7 @@ class CopperMap extends Component {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
                         }
+                        
                     });
                 }
 
