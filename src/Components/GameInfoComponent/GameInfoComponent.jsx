@@ -45,7 +45,9 @@ const removeRoof = (roof, firebase, dispatch, userInfo, uid) => () => {
 }
 
 const PlayerInfo = (props) => {
-    
+        if(props.requestingStoolenRoofs){
+            return <div/>
+        }
         return (
             <div>
         <Modal.Dialog dialogClassName="full-modal">
@@ -89,6 +91,7 @@ const mapStateToProps = (state, {auth}) => {
     return{
         userInfo: dataToJS(state.firebase, `users/${auth.uid}`),
         stolenRoofs: dataToJS(state.firebase, `stolenRoofs`),
+        requestingStoolenRoofs: pathToJS(state.firebase, 'requesting/stolenRoofs')
     }
 }
 

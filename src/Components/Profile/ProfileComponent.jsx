@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
 import './ProfileComponent.css';
+import { Avatar, IconButton, List, ListItem } from 'material-ui';
 import { Modal } from 'react-bootstrap';
 import {red500, red900} from 'material-ui/styles/colors';
 import Close from 'material-ui/svg-icons/navigation/close';
@@ -9,7 +10,6 @@ import Email from 'material-ui/svg-icons/communication/email';
 import Money from 'material-ui/svg-icons/editor/attach-money';
 import Home from 'material-ui/svg-icons/action/home';
 import Layers from 'material-ui/svg-icons/maps/layers';
-import { Avatar, IconButton, List, ListItem } from 'material-ui';
 import { resetModal } from '../../Redux/Actions/navigationActions';
 
 const ProfileComponent = (props) => {
