@@ -41,7 +41,7 @@ const ProfileComponent = (props) => {
                         <ListItem 
                             leftAvatar={<Money/>}
                             primaryText={'Points: '} 
-                            secondaryText={props.userInfo.points}/>
+                            secondaryText={props.userInfo.points ? props.userInfo.points : '0'}/>
                         <ListItem 
                             leftAvatar={<Home/>}
                             primaryText={'Number of roofs taken:'} 
