@@ -75,10 +75,14 @@ class LeaderComponent extends Component{
                         <Modal.Body style={{maxHeight: 400, overflow: 'auto'}}>
                             <List>
                                 <LeaderboardList listItems={listItems} />
-                                <CurrentRank rank={myRank} />
+                                
                             </List>
                         </Modal.Body>
-
+                        <Modal.Footer>
+                            <div className="floating-left">
+                            <CurrentRank rank={myRank}/>
+                            </div>
+                        </Modal.Footer>
                     </Modal.Dialog>
                 </div>
         )
