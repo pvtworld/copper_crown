@@ -100,14 +100,13 @@ class ChatComponent extends React.Component{
                 <Modal.Dialog dialogClassName="full-modal">
                     <Modal.Header>
                         <div className="floating-right">
-                        <IconButton onTouchTap={this.props.resetModal}>
+                        <IconButton onClick={this.props.resetModal}>
                             <Close color={red500}
                                    hoverColor={red900}/>
                         </IconButton>
                         </div>
                         <Modal.Title>Chat <p style={{color: '#6f6f6f', fontSize: '13px', marginTop: '5px'}}>Users in chat: {this.props.usersInChat.length}</p> </Modal.Title>
-
-
+                        
                         <Toggle label="Profile picture visible"
                                 defaultToggled={this.props.showProfilePicture}
                                 style={{maxWidth: 200}}
