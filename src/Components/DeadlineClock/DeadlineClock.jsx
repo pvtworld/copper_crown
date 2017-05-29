@@ -54,11 +54,12 @@ class DeadlineClock extends React.Component{
     render(){
         return(
             <div className="center-text">
-                <div className="days">Days: {this.addZero(this.props.days)} </div>
-                <div className="hours">Hours: {this.addZero(this.props.hours)} </div>
-                <div className="minutes">Minutes: {this.addZero(this.props.minutes)} </div>
-                <div className="seconds">Seconds: {this.addZero(this.props.seconds)} </div>
-                <p>{this.props.showEndText ? 'CURRENT GAME SESSION HAS ENDED!' : ''}</p>
+                <div className="days">Days: {this.addZero(this.props.days)}</div>
+                <p>
+                <div className="hours">{this.addZero(this.props.hours)}</div>
+                <div className="minutes">:{this.addZero(this.props.minutes)}</div>
+                <div className="seconds">:{this.addZero(this.props.seconds)}</div> </p>
+                <p>{this.props.showEndText ? 'CURRENT GAME SESSION HAS ENDED!':''}</p>
             </div>
 
             )
