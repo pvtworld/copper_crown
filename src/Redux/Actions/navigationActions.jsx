@@ -4,9 +4,9 @@ export const showLeaderboard = () => {
     };
 };
 
-export const showAbout = () => {
+export const showStolenRoofs = () => {
     return {
-        type: 'SHOW_GAME_INFO'
+        type: 'SHOW_STOLEN_ROOFS'
     };
 };
 
