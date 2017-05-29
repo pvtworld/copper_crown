@@ -27,7 +27,7 @@ export var chatReducer = (state = initialState, action) => {
         case 'REMOVE_USER_FROM_LIST':
             console.log('REMOVING USER, UPDATING STATE')
             return state
-                .update('usersInChat', (users) => users.delete(action.payload));
+                .update('usersInChat', (users) => users.filter((element) => element !== action.payload ));
         case 'SET_PROFILE_PICTURE':
             return state.update('profilePictureURL', () =>  action.payload);
         case 'SHOW_PROFILE_PICTURE':
