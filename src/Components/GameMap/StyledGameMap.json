@@ -1,9 +1,28 @@
 [
+    
   {
-    "elementType": "geometry",
+    "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#212121"
+        "color": "#ffeb3b"
+      }
+    ]
+  },
+  {
+      "featureType": "landscape", 
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#ffeb3b"
+      }
+    ]
+  },
+    {
+      "featureType": "landscape", 
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#757575"
       }
     ]
   },
@@ -75,12 +94,30 @@
       }
     ]
   },
+    {
+    "featureType": "landscape.man_made",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
   {
     "featureType": "poi",
     "elementType": "geometry.stroke",
     "stylers": [
       {
         "color": "#ffeb3b"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#757575"
       }
     ]
   },
