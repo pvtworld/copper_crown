@@ -106,7 +106,7 @@ class ChatComponent extends React.Component{
                         </IconButton>
                         </div>
                         <Modal.Title>Chat <p style={{color: '#6f6f6f', fontSize: '13px', marginTop: '5px'}}>Users in chat: {this.props.usersInChat.length}</p> </Modal.Title>
-                        
+
                         <Toggle label="Profile picture visible"
                                 defaultToggled={this.props.showProfilePicture}
                                 style={{maxWidth: 200}}
