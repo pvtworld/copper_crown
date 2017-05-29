@@ -4,6 +4,7 @@ import { firebaseConnect, dataToJS, pathToJS } from 'react-redux-firebase';
 import { Modal } from 'react-bootstrap';
 import Close from 'material-ui/svg-icons/navigation/close';
 import { IconButton, List, ListItem } from 'material-ui';
+import Home from 'material-ui/svg-icons/action/home';
 import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
 import {red500, red900} from 'material-ui/styles/colors';
 import { resetModal } from '../../Redux/Actions/navigationActions'
@@ -68,6 +69,7 @@ const PlayerInfo = (props) => {
                 {
                 createRoofs(props.stolenRoofs).map( roof => (<ListItem 
                                                             className="roof" key={roof.roofId} 
+                                                            leftIcon={<Home/>}
                                                             primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.areaPerUser}, Value: ${roof.pointsPerUser}`}
                                                             disabled={true} 
                                                             rightIcon={<DeleteForever 
