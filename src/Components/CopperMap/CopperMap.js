@@ -21,6 +21,8 @@ class CopperMap extends Component {
     geoTimer = null;
 
     geoLocationWatcher = this.geoLocationWatcher.bind(this);
+    setMap = this.setMap.bind(this);
+    onDragEnd = this.onDragEnd.bind(this);
     
 
     geoLocationWatcher() {
@@ -77,6 +79,16 @@ class CopperMap extends Component {
         }
     }
 
+    setMap(map){
+        
+        this.map = map
+        console.log(this.map)
+    }
+
+    onDragEnd(){
+        this.map ? this.map.panTo(this.state.center) : console.log("No map");
+    }
+
 
     render() {
         return (
@@ -94,6 +106,8 @@ class CopperMap extends Component {
                             center={this.state.center}
                             content={this.state.content}
                             radius={this.state.radius}
+                            mapCallBack={this.setMap}
+                            onDragEnd={this.onDragEnd}
                         />
 
                     </div>
