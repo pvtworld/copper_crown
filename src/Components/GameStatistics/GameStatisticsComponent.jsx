@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, pathToJS, dataToJS} from 'react-redux-firebase';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import { IconButton } from 'material-ui';
+import {red500, red900} from 'material-ui/styles/colors';
+import Close from 'material-ui/svg-icons/navigation/close';
 import { resetModal } from '../../Redux/Actions/navigationActions';
 import DeadlineClock from '../DeadlineClock/DeadlineClock'
 import LinearProgress from 'material-ui/LinearProgress';
@@ -71,6 +74,12 @@ render(){
         <div className="static-modal">
             <Modal.Dialog>
                 <Modal.Header>
+                     <div className="floating-right">
+                        <IconButton onClick={() => this.props.dispatch(resetModal())}>
+                            <Close color={red500}
+                                   hoverColor={red900}/>
+                        </IconButton>
+                        </div>
                     <Modal.Title>Game statistics</Modal.Title>
                 </Modal.Header>
 
@@ -88,9 +97,6 @@ render(){
                     <LinearProgress id="progressbar" mode="determinate" color={"#2CA484"} value={this.state.completed} />
                     <br></br>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button bsStyle="primary" onClick={() => this.props.dispatch(resetModal())}>OK</Button>
-                </Modal.Footer>
 
             </Modal.Dialog>
         </div>
