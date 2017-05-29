@@ -25,8 +25,9 @@ body {
 .modal-body {
   max-height: 500px;
   overflow: hidden;
-  padding: 0;
+  padding: 15px;
 }
+
 
 .center-text{
   text-align: center;
