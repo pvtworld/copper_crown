@@ -3,7 +3,7 @@ import { geoError, geoOptions} from '../../Helpers/GeoHelpers';
 import InfoContainer from "../InfoContainer/InfoContainer";
 import GameMap from "../GameMap/GameMap";
 import {connect} from 'react-redux';
-import {firebaseConnect, dataToJS} from 'react-redux-firebase'
+import {firebaseConnect, dataToJS, pathToJS} from 'react-redux-firebase'
 import { showUsernameModal } from '../../Redux/Actions/userActions';
 
 class CopperMap extends Component {
@@ -29,7 +29,7 @@ class CopperMap extends Component {
             let watchPositionId;
 
             const geoSucess = (position) => {
-                console.log("Successssssss! Located user at: ");
+                console.log("Succeeeeessssssssssssssss! Located user at: ");
                 //console.log(position);
 
                 if(this.state.isMounted){
@@ -104,10 +104,10 @@ class CopperMap extends Component {
         );
     }
 }
-
 const mapStateToProps = (state, {auth}) => {
     return {
-        userInfo: auth ? dataToJS(state.firebase, `users/${auth.uid}`) : undefined
+        userInfo: auth ? dataToJS(state.firebase, `users/${auth.uid}`) : undefined,
+        showNewUserModal: state.showNewUserModal.show
     }
 }
 
@@ -118,7 +118,7 @@ const wrappedPlayerInfo = firebaseConnect(
 
 const authConnected = connect(
     (state) => ({
-        showNewUserModal: state.showNewUserModal.show
+        auth: pathToJS(state.firebase, 'auth')
     })
 )(wrappedPlayerInfo)
 
