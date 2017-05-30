@@ -31,11 +31,9 @@ class CopperMap extends Component {
             let watchPositionId;
 
             const geoSucess = (position) => {
-                console.log("Succeeeeessssssssssssssss! Located user at: ");
-                //console.log(position);
-
                 if(this.state.isMounted){
-                    this.map ? this.map.panTo(this.state.center) : console.log("No map");
+                    this.map ? this.map.panTo({lat: position.coords.latitude, lng: position.coords.longitude}) : console.log("No map");
+                    this.setState({center: {lat: position.coords.latitude, lng: position.coords.longitude}})
                 }
 
                 navigator.geolocation.clearWatch(watchPositionId);
@@ -45,7 +43,7 @@ class CopperMap extends Component {
 
             this.geoTimer = setInterval(function () {
                 watchPositionId = navigator.geolocation.watchPosition(geoSucess, geoError, geoOptions);
-            }, 10000);
+            }, 5000);
 
         } else {
             alert("Turn on GPS")
