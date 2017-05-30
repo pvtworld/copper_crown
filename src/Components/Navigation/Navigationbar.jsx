@@ -30,13 +30,13 @@ const Navigationbar = (props) => {
                     <NavItem onClick={() => props.dispatch(showChat())}>Chat</NavItem>
                     <NavItem onClick={() => props.dispatch(showLeaderboard())}>Leaderboard</NavItem>
                     <NavItem onClick={()=> props.dispatch(showStatistics())}>Statistics</NavItem>
-                    <NavItem onClick={() => props.dispatch(showProfile())}>Profile</NavItem>
-                    <NavItem onClick={() => props.dispatch(showStolenRoofs())}>Stolen Roofs</NavItem>
                     <NavItem onClick={()=> props.dispatch(showHelp())}>Help</NavItem>
                 </Nav>
                 
                 <Nav pullRight>
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
+                        <MenuItem onClick={() => props.dispatch(showProfile())}>Profile</MenuItem>
+                        <MenuItem onClick={() => props.dispatch(showStolenRoofs())}>Stolen Roofs</MenuItem>
                         <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
                     </NavDropdown>
                 </Nav>
