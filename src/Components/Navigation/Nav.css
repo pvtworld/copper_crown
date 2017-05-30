@@ -3,23 +3,18 @@
 }
 
 .navbar-inverse .navbar-header > a {
-    color: #ffeb3b;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-    color: #ffeb3b;
+    color: #dac833;
 }
 
 .navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover{
-    color: #ffeb3b;
+    color: #dac833;
 
     /*background-image: "public/images/icons/icon-72x72.png";
     color : #ffeb3b;*/
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color : #ffeb3b;
-  opacity: 0.8;
+  color : #7d7d7d;
 }
 
 .navbar-inverse .navbar-brand>img {
