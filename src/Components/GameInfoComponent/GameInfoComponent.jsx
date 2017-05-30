@@ -70,7 +70,7 @@ const PlayerInfo = (props) => {
                 createRoofs(props.stolenRoofs).map( roof => (<ListItem 
                                                             className="roof" key={roof.roofId} 
                                                             leftIcon={<Home/>}
-                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.areaPerUser}, Value: ${roof.pointsPerUser}`}
+                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.areaPerUser} sqm, Value: ${roof.pointsPerUser}`}
                                                             disabled={true} 
                                                             rightIcon={<DeleteForever 
                                                                         hoverColor={red500} 
