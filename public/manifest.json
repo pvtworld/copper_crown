@@ -1,8 +1,8 @@
 {
-  "name": "Copper Crown",
-  "short_name": "cc",
+  "name": "CopperCrown",
+  "short_name": "CopperCrown",
   "theme_color": "#21f3a7",
-  "background_color": "#ff00d6",
+  "background_color": "#ecf0f1",
   "display": "standalone",
   "Scope": "/",
   "start_url": "/",
