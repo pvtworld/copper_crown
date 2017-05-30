@@ -10,6 +10,9 @@ const GameMap = withGoogleMap(props => (
         center={props.center}
         defaultZoom={17}
         defaultCenter={props.center}
+        ref={(map) => map ? props.mapCallBack(map) : {}}
+        //onDragEnd={() => props.onDragEnd()}
+        onIdle={() => props.onDragEnd()}
         onClick={
             event => {
                 checkClickForCopper(event.latLng.lng(), event.latLng.lat(), props.dispatch);
@@ -18,7 +21,7 @@ const GameMap = withGoogleMap(props => (
             mapTypeControl: false,
             streetViewControl: false,
             clickableIcons: false,
-            // zoomControl: false,
+            //zoomControl: false,
             //draggable: false,
             //scrollwheel: false,
             //panControl: false,
