@@ -37,6 +37,7 @@ const Navigationbar = (props) => {
                     <NavDropdown title={`Signed in as: ${userName}`} id="basic-nav-dropdown">
                         <MenuItem onClick={() => props.dispatch(showProfile())}>Profile</MenuItem>
                         <MenuItem onClick={() => props.dispatch(showStolenRoofs())}>Stolen Roofs</MenuItem>
+                        <MenuItem divider />
                         <MenuItem onClick={() => props.firebase.logout()}>Logout</MenuItem>
                     </NavDropdown>
                 </Nav>
