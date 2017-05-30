@@ -13,27 +13,19 @@ const GameMap = withGoogleMap(props => (
         ref={(map) => map ? props.mapCallBack(map) : {}}
         //onDragEnd={() => props.onDragEnd()}
         onIdle={() => props.onDragEnd()}
-        onClick={
-            event => {
-                checkClickForCopper(event.latLng.lng(), event.latLng.lat(), props.dispatch);
-            }}
         options={{
             mapTypeControl: false,
             streetViewControl: false,
             clickableIcons: false,
-            //zoomControl: false,
-            //draggable: false,
-            //scrollwheel: false,
-            //panControl: false,
-            //maxZoom: 18,
-            //minZoom: 18,
-            //zoom: 18,
+            zoomControl: false,
+            draggable: true,
+            scrollwheel: false,
+            maxZoom: 17,
+            minZoom: 17,
+            zoom: 17,
             styles: StyledGameMap,
             disableDefaultUI: true,
-            
         }}
-        
-
     >
 
 
