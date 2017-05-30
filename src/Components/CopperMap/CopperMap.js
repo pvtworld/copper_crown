@@ -83,7 +83,6 @@ class CopperMap extends Component {
         if(this.map){
             
             this.map.panTo(this.state.center)
-            console.log(this.map)
         }
         else{
             console.log("No map")
