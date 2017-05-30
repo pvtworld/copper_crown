@@ -1,7 +1,7 @@
 .topcorner{
-    background-color: rgba(0, 0, 0, 0.87);
-    background: rgba(0, 0, 0, 0.87);
-    color: rgba(0, 0, 0, 0.87);
+    background-color: rgba(34, 34, 34, 1);
+    background: rgba(34, 34, 34, 1);
+    color: rgba(34, 34, 34, 1);
     float: right;
     margin-top: 20px;
     margin-right: 20px;
@@ -32,9 +32,9 @@
         padding-left: 5px;
         padding-right: 5px;
         padding-bottom: 6px;
-        background-color: rgba(0, 0, 0, 0.87);
-        background: rgba(0, 0, 0, 0.87);
-        color: rgba(0, 0, 0, 0.87);
+        background-color: rgba(34, 34, 34, 1);
+        background: rgba(34, 34, 34, 1);
+        color: rgba(34, 34, 34, 1);
         border: 0px;
     }
 }
