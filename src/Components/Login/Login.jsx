@@ -37,11 +37,12 @@ const Login = (props) => {
                     <RaisedButton
                         onTouchTap={() => loginUser(props.firebase, 'facebook', props.dispatch)}
                         label="Facebook Login"
-                        buttonStyle={{backgroundColor: '#1565C0'}}
+                        buttonStyle={{backgroundColor: '#1976D2'}}
                         secondary={true}
                         fullWidth={true}
                         style={{marginBottom: '10px'}}
                         icon={<FacebookBox/>}
+                        labelStyle={{letterSpacing: '1px'}}
                     />
 
 
@@ -53,16 +54,18 @@ const Login = (props) => {
                         fullWidth={true}
                         style={{marginBottom: '10px'}}
                         icon={<GithubCircle/>}
+                        labelStyle={{letterSpacing: '1px'}}
                     />
 
                     <RaisedButton
                         onTouchTap={() => loginUser(props.firebase, 'google', props.dispatch)}
                         label="Google Login"
-                        buttonStyle={{backgroundColor: '#F44336'}}
+                        buttonStyle={{backgroundColor: '#EF5350'}}
                         secondary={true}
                         fullWidth={true}
                         style={{marginBottom: '10px'}}
                         icon={<Google/>}
+                        labelStyle={{letterSpacing: '1px'}}
                     />
 
                     <Col className="text-right">
