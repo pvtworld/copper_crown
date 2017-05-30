@@ -97,7 +97,7 @@ class ChatComponent extends React.Component{
 
         return (
             <div className="static-modal">
-                <Modal.Dialog dialogClassName="full-modal">
+                <Modal.Dialog dialogClassName="full-modal" style={{overflow: 'auto'}}>
                     <Modal.Header>
                         <div className="floating-right">
                         <IconButton onClick={this.props.resetModal}>
