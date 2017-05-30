@@ -193,7 +193,9 @@ class RoofInfo extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        Price: {parseInt(this.props.price,10)} Area: {parseInt(this.props.area,10)} Thieves required: {this.state.numberOfThieves}
+                        <p>Value: {parseInt(this.props.price,10)}</p>
+                        <p>Area: {parseInt(this.props.area,10)} sqm</p>
+                        <p>Thieves required: {this.state.numberOfThieves}</p>
                     </Modal.Body>
 
                     <Modal.Footer>
