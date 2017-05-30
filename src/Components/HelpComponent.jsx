@@ -11,7 +11,7 @@ class Help extends React.Component {
 render(){
     return (
         <div className="static-modal">
-            <Modal.Dialog>
+            <Modal.Dialog style={{overflow: 'auto'}}>
                 <Modal.Header>
                         <div className="floating-right">
                         <IconButton onClick={() => this.props.dispatch(resetModal())}>
