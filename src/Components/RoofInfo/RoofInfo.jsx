@@ -5,7 +5,7 @@ import {resetRoof} from '../../Redux/Actions/copperMapActions';
 import Close from 'material-ui/svg-icons/navigation/close';
 import { IconButton } from 'material-ui';
 import {red500, red900} from 'material-ui/styles/colors';
-import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {Modal, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import RoofInfoSnackbar from './RoofInfoSnackbar';
 import RaisedButton from 'material-ui/RaisedButton';
 
