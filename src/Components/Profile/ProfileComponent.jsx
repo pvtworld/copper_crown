@@ -10,7 +10,7 @@ import Email from 'material-ui/svg-icons/communication/email';
 import Money from 'material-ui/svg-icons/editor/attach-money';
 import Home from 'material-ui/svg-icons/action/home';
 import Layers from 'material-ui/svg-icons/maps/layers';
-import RemoveUser from './RemoveUser'
+import RemoveUser from './removeUser'
 import { resetModal } from '../../Redux/Actions/navigationActions';
 
 const ProfileComponent = (props) => {
