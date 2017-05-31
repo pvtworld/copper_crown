@@ -13,10 +13,10 @@ const GameMap = withGoogleMap(props => (
         ref={(map) => map ? props.mapCallBack(map) : {}}
         //onDragEnd={() => props.onDragEnd()}
         onIdle={() => props.onDragEnd()}
-        onClick={
+/*        onClick={
             event => {
                 checkClickForCopper(event.latLng.lng(), event.latLng.lat(), props.dispatch);
-            }}
+            }}*/
         options={{
             mapTypeControl: false,
             streetViewControl: false,
