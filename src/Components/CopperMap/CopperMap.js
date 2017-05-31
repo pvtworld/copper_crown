@@ -32,7 +32,7 @@ class CopperMap extends Component {
 
             const geoSucess = (position) => {
                 if(this.state.isMounted){
-                    this.map ? this.map.panTo({lat: position.coords.latitude, lng: position.coords.longitude}) : console.log("No map");
+                    this.map ? this.map.panTo({lat: 59.32571, lng: 18.07107}) : console.log("No map");
                     //this.setState({center: {lat: position.coords.latitude, lng: position.coords.longitude}})
                 }
 
