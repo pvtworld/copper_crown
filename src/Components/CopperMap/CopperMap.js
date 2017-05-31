@@ -17,10 +17,12 @@ class CopperMap extends Component {
             },
         };
     }
-    
+
     geoTimer = null;
 
     geoLocationWatcher = this.geoLocationWatcher.bind(this);
+    setMap = this.setMap.bind(this);
+    onDragEnd = this.onDragEnd.bind(this);
     
 
     geoLocationWatcher() {
@@ -29,17 +31,9 @@ class CopperMap extends Component {
             let watchPositionId;
 
             const geoSucess = (position) => {
-                console.log("Succeeeeessssssssssssssss! Located user at: ");
-                //console.log(position);
-
                 if(this.state.isMounted){
-                    this.setState({
-                        center: {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
-                        }
-                        
-                    });
+                    this.map ? this.map.panTo({lat: position.coords.latitude, lng: position.coords.longitude}) : console.log("No map");
+                    this.setState({center: {lat: position.coords.latitude, lng: position.coords.longitude}})
                 }
 
                 navigator.geolocation.clearWatch(watchPositionId);
@@ -77,6 +71,22 @@ class CopperMap extends Component {
         }
     }
 
+    setMap(map){
+        
+        this.map = map
+        
+    }
+
+    onDragEnd(){
+        if(this.map){
+            
+            this.map.panTo(this.state.center)
+        }
+        else{
+            console.log("No map")
+        }
+    }
+
 
     render() {
         return (
@@ -94,6 +104,8 @@ class CopperMap extends Component {
                             center={this.state.center}
                             content={this.state.content}
                             radius={this.state.radius}
+                            mapCallBack={this.setMap}
+                            onDragEnd={this.onDragEnd}
                         />
 
                     </div>

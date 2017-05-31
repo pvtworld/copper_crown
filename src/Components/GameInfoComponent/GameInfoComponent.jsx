@@ -51,7 +51,7 @@ const PlayerInfo = (props) => {
         }
         return (
             <div>
-        <Modal.Dialog dialogClassName="full-modal">
+        <Modal.Dialog dialogClassName="full-modal" style={{overflow: 'auto'}}>
       <Modal.Header>
             <div className="floating-right">
                         <IconButton onClick={() => props.dispatch(resetModal())}>
@@ -62,7 +62,7 @@ const PlayerInfo = (props) => {
         <Modal.Title>Stolen Roofs</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>
+      <Modal.Body style={{overflow: 'auto'}}>
         <List>
             {props.stolenRoofs ? 
             <div> 
@@ -70,7 +70,7 @@ const PlayerInfo = (props) => {
                 createRoofs(props.stolenRoofs).map( roof => (<ListItem 
                                                             className="roof" key={roof.roofId} 
                                                             leftIcon={<Home/>}
-                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.areaPerUser}, Value: ${roof.pointsPerUser}`}
+                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.areaPerUser} sqm, Value: ${roof.pointsPerUser}`}
                                                             disabled={true} 
                                                             rightIcon={<DeleteForever 
                                                                         hoverColor={red500} 

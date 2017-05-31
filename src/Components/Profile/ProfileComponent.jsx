@@ -16,7 +16,7 @@ const ProfileComponent = (props) => {
 
     return (
         <div className="static-modal">
-            <Modal.Dialog>
+            <Modal.Dialog style={{overflow: 'auto'}}>
                 <Modal.Header>
                     <div className="floating-right">
                         <IconButton onClick={() => props.dispatch(resetModal())}>
@@ -49,7 +49,7 @@ const ProfileComponent = (props) => {
                         <ListItem 
                             leftAvatar={<Layers/>}
                             primaryText={'Area of roofs taken:'} 
-                            secondaryText={props.userInfo.areaOfCopper ? props.userInfo.areaOfCopper : '0'}/>
+                            secondaryText={(props.userInfo.areaOfCopper ? props.userInfo.areaOfCopper : '0') + ' sqm'}/>
 
                     </List>
                     

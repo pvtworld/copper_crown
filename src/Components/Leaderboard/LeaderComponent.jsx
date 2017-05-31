@@ -62,7 +62,7 @@ class LeaderComponent extends Component{
             this.props.requestingUsers ? <div></div> :
                 <div className="static-modal">
 
-                    <Modal.Dialog dialogClassName="full-modal">
+                    <Modal.Dialog dialogClassName="full-modal" style={{overflow: 'auto'}}>
                         <Modal.Header>
                         <div className="floating-right">
                         <IconButton onClick={() => this.props.dispatch(resetModal())}>

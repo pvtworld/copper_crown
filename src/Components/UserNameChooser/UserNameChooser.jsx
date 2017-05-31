@@ -29,12 +29,19 @@ class UserNameChooser extends Component {
     handleNewUsername() {
 
         let username = this.state.value;
+
+        console.log('this.state.value:', username.length);
+
         if (username.length === 0) {
             return;
-        } else if(username.length > 30){
-            alert('Characters between 1 - 30');
+        } else if (username.length > 20) {
+            alert('Characters between 0 - 20');
+            return;
+        } else if (username.length < 3) {
+            alert('Characters between 3 - 20');
             return;
         }
+
         this.addUsername(this.props.firebase, this.props.auth.uid, this.props.userInfo, username);
         this.props.dispatch(addNewUser());
     };
@@ -88,7 +95,7 @@ class UserNameChooser extends Component {
                             fullWidth={true}
                             underlineFocusStyle={{borderColor: orange500}}
                         />
-                        <p className='floating-right' style={{color: '#696969', marginRight: '5px'}}>{this.state.value.length}/30</p>
+                        <p className='floating-right' style={{color: '#696969', marginRight: '5px'}}>{this.state.value.length}/20</p>
 
                     </Modal.Body>
 

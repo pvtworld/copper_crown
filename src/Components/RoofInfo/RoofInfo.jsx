@@ -5,9 +5,9 @@ import {resetRoof} from '../../Redux/Actions/copperMapActions';
 import Close from 'material-ui/svg-icons/navigation/close';
 import { IconButton } from 'material-ui';
 import {red500, red900} from 'material-ui/styles/colors';
-import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {Modal, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import RoofInfoSnackbar from './RoofInfoSnackbar';
-
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 
@@ -40,22 +40,14 @@ class RoofInfo extends React.Component {
         const area = this.props.area;
         let thieves;
 
-        if (area < 150) {
+        if (area < 300) {
             thieves = 1;
-        } else if (area >= 150 && area < 300) {
-            thieves = 2;
         } else if (area >= 300 && area < 400) {
+            thieves = 2;
+        } else if (area >= 400 && area < 450) {
             thieves = 3;
-        } else if (area >= 400 && area < 500) {
-            thieves = 4;
-        } else if (area >= 500 && area < 600) {
-            thieves = 5;
-        } else if (area >= 600 && area < 700) {
-            thieves = 6;
-        } else if (area >= 700 && area < 800) {
-            thieves = 7;
         } else {
-            thieves = 8;
+            thieves = 4;
         }
 
         this.setState({numberOfThieves: thieves})
@@ -170,13 +162,21 @@ class RoofInfo extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        You need {this.state.numberOfThieves} thieves present
-                        Currently {this.props.roofInProgress.count} thieves at roof
+                        <p>You need {this.state.numberOfThieves} thieves present</p>
+                        <p>Currently {this.props.roofInProgress.count} thieves at roof</p>
                     </Modal.Body>
 
                     <Modal.Footer>
                         <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipLeave}>
-                            <Button bsStyle="danger" bsSize="large" block onClick={this.leaveRoof}>Leave</Button>
+                            <RaisedButton
+                                onClick={this.leaveRoof}
+                                label="Leave"
+                                buttonStyle={{backgroundColor: '#EF5350'}}
+                                secondary={true}
+                                fullWidth={true}
+                                style={{marginBottom: '10px'}}
+                                labelStyle={{letterSpacing: '1px'}}
+                            />
                         </OverlayTrigger>
                     </Modal.Footer>
 
@@ -201,21 +201,40 @@ class RoofInfo extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        Price: {parseInt(this.props.price,10)} Area: {parseInt(this.props.area,10)} Thieves required: {this.state.numberOfThieves}
+                        <p>Value: {parseInt(this.props.price,10)}</p>
+                        <p>Area: {parseInt(this.props.area,10)} sqm</p>
+                        <p>Thieves required: {this.state.numberOfThieves}</p>
                     </Modal.Body>
 
                     <Modal.Footer>
                             <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipLeave}>
-                                <Button bsStyle="danger" bsSize="large" block onClick={() => this.props.dispatch(resetRoof())}>Leave</Button>
+                                <RaisedButton
+                                    onClick={() => this.props.dispatch(resetRoof())}
+                                    label="Leave"
+                                    buttonStyle={{backgroundColor: '#EF5350'}}
+                                    secondary={true}
+                                    fullWidth={true}
+                                    style={{marginBottom: '10px'}}
+                                    labelStyle={{letterSpacing: '1px'}}
+                                />
+                                
                             </OverlayTrigger>
                             <OverlayTrigger placement="top" delayShow={1000} overlay={tooltipSteal}>
-                                <Button bsStyle="success" bsSize="large" block onClick={() => this.addRoof()}>Steal</Button>
+
+                                <RaisedButton
+                                    onClick={() => this.addRoof()}
+                                    label="Steal"
+                                    buttonStyle={{backgroundColor: '#4CAF50'}}
+                                    secondary={true}
+                                    fullWidth={true}
+                                    labelStyle={{letterSpacing: '1px'}}
+                                />
                             </OverlayTrigger>
                     </Modal.Footer>
 
                 </Modal.Dialog>
             </div>)
-    }   
+    }
 }
 
 const mapStateToProps = (state, {auth}) => {

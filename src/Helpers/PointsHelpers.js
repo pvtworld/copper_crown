@@ -64,7 +64,7 @@ export function bindPriceMultiplier(dispatch) {
 
         asArray: true,
         then(roofArray) {
-            dispatch(multiplierReturned(roofArray.length === 0 ? 0.01 : roofArray.length/100))
+            dispatch(multiplierReturned(roofArray.length === 0 ? 1 : 1 + roofArray.length/6000))
         }
     });
 }
