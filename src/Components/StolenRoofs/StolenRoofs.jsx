@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap';
 import Close from 'material-ui/svg-icons/navigation/close';
 import { IconButton, List, ListItem } from 'material-ui';
 import Home from 'material-ui/svg-icons/action/home';
-import DeleteForever from 'material-ui/svg-icons/action/delete-forever';
+import RemoveRoof from './RemoveRoof'
 import {red500, red900} from 'material-ui/styles/colors';
 import { resetModal } from '../../Redux/Actions/navigationActions'
 
@@ -46,47 +46,47 @@ const removeRoof = (roof, firebase, dispatch, userInfo, uid) => () => {
 }
 
 const PlayerInfo = (props) => {
-        if(props.requestingStoolenRoofs){
-            return <div/>
-        }
-        return (
-            <div>
-        <Modal.Dialog dialogClassName="full-modal" style={{overflow: 'auto'}}>
-      <Modal.Header>
-            <div className="floating-right">
+    if (props.requestingStoolenRoofs) {
+        return <div />
+    }
+    return (
+        <div>
+            <Modal.Dialog dialogClassName="full-modal" style={{ overflow: 'auto' }}>
+                <Modal.Header>
+                    <div className="floating-right">
                         <IconButton onClick={() => props.dispatch(resetModal())}>
                             <Close color={red500}
-                                   hoverColor={red900}/>
+                                hoverColor={red900} />
                         </IconButton>
-                        </div>
-        <Modal.Title>Stolen Roofs</Modal.Title>
-      </Modal.Header>
+                    </div>
+                    <Modal.Title>Stolen Roofs</Modal.Title>
+                </Modal.Header>
 
-      <Modal.Body style={{overflow: 'auto'}}>
-        <List>
-            {props.stolenRoofs ? 
-            <div> 
-                {
-                createRoofs(props.stolenRoofs).map( roof => (<ListItem 
-                                                            className="roof" key={roof.roofId} 
-                                                            leftIcon={<Home/>}
-                                                            primaryText={`ID: ${(String(roof.roofId)).substring(1,9)}, Area: ${roof.areaPerUser} sqm, Value: ${roof.pointsPerUser}`}
-                                                            disabled={true} 
-                                                            rightIcon={<DeleteForever 
-                                                                        hoverColor={red500} 
-                                                                        onClick={removeRoof(roof, props.firebase, props.dispatch, props.userInfo, props.auth.uid)}/>}> 
-                                                            </ListItem>)) 
-                }
-            </div> 
-                : <div> No roofs stolen </div>
-            }
-        </List>
-      </Modal.Body>
+                <Modal.Body style={{ overflow: 'auto' }}>
+                    <List>
+                        {props.stolenRoofs ?
+                            <div>
+                                {
+                                    createRoofs(props.stolenRoofs).map(roof => (<ListItem
+                                        className="roof" key={roof.roofId}
+                                        leftIcon={<Home />}
+                                        primaryText={`ID: ${(String(roof.roofId)).substring(1, 9)}, Area: ${roof.areaPerUser} sqm, Value: ${roof.pointsPerUser}`}
+                                        disabled={true}
+                                        rightIcon={<RemoveRoof 
+                                            removeRoofCallback={removeRoof(roof, props.firebase, props.dispatch, props.userInfo, props.auth.uid)}
+                                            />}>
+                                    </ListItem>))
+                                }
+                            </div>
+                            : <div> No roofs stolen </div>
+                        }
+                    </List>
+                </Modal.Body>
 
-        </Modal.Dialog>
-            </div>
-        )
-    }
+            </Modal.Dialog>
+        </div>
+    )
+}
 
 
 const mapStateToProps = (state, {auth}) => {
