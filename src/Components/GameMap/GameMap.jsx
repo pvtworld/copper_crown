@@ -21,7 +21,7 @@ const GameMap = withGoogleMap(props => (
             mapTypeControl: false,
             streetViewControl: false,
             clickableIcons: false,
-            //zoomControl: false,
+            zoomControl: false,
             draggable: true,
             scrollwheel: false,
             panControl: false,
@@ -30,7 +30,7 @@ const GameMap = withGoogleMap(props => (
             //zoom: 18,
             styles: StyledGameMap,
             disableDefaultUI: true,
-            
+            disableDoubleClickZoom: true,
             
         }}
         
