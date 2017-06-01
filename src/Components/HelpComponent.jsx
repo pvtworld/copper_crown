@@ -11,7 +11,7 @@ class Help extends React.Component {
 render(){
     return (
         <div className="static-modal">
-            <Modal.Dialog style={{overflow: 'auto'}}>
+            <Modal.Dialog dialogClassName='full-modal' style={{overflow: 'auto'}}>
                 <Modal.Header>
                         <div className="floating-right">
                         <IconButton onClick={() => this.props.dispatch(resetModal())}>
@@ -41,7 +41,7 @@ render(){
                                 showExpandableButton={true}
                         />
                         <CardText expandable={true}>
-                            You see your position centered on the map marked as a raccon. 
+                            You see your position centered on the map marked as a raccoon.
                             The circle around you indicates your range; if a roof is outside your radius you need to move to be able to steal it. 
                             Press a position on the map to check whether it contains a copper roof or not. 
                         </CardText>
@@ -66,7 +66,7 @@ render(){
                                 showExpandableButton={true}
                         />
                         <CardText expandable={true}>
-                            Some roofs are too big for one person alone to steal, to claim these roofs you will have to gather some teamates.
+                            Some roofs are too big for one person alone to steal, to claim these roofs you will have to gather some teammates.
                         </CardText>
                         </Card>
 
