@@ -17,7 +17,7 @@ const ProfileComponent = (props) => {
 
     return (
         <div className="static-modal">
-            <Modal.Dialog style={{overflow: 'auto'}}>
+            <Modal.Dialog dialogClassName='full-modal' style={{overflow: 'auto'}}>
                 <Modal.Header>
                     <div className="floating-right">
                         <IconButton onClick={() => props.dispatch(resetModal())}>
